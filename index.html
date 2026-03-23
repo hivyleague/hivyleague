@@ -1,79 +1,824 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" type="image/x-icon" href="favicon_simple.ico">
-  <title>Hypsis</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hypsis — AI-Native Operating Partners</title>
+<meta name="description" content="We deploy a proven, AI-infused methodology — so your best people never need us again.">
+<link rel="shortcut icon" type="image/x-icon" href="favicon_simple.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Cinzel:wght@400;500;600;700;800;900&family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #0a0e1a;
+    --deep-blue: #111833;
+    --chapel-blue: #1a2444;
+    --gold: #c9a84c;
+    --gold-light: #e8d48b;
+    --gold-dark: #8a6d2b;
+    --terracotta: #b85c38;
+    --cream: #f0e6d3;
+    --cream-dark: #d4c4a8;
+    --burgundy: #6b1d2a;
+    --warm-white: #faf5eb;
+  }
 
-  <!-- Google Font – a close match to your logo’s serif -->
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
-  <style>
-    /* Base reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+  body {
+    background: var(--midnight);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  .ornament {
+    display: block;
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--gold);
+    letter-spacing: 1rem;
+    opacity: 0.6;
+    margin: 2rem 0;
+    font-family: 'Cinzel Decorative', serif;
+  }
+
+  .divider {
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 3rem auto;
+  }
+
+  .divider-wide {
+    width: 60%;
+    max-width: 600px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dark), var(--gold), var(--gold-dark), transparent);
+    margin: 0 auto;
+  }
+
+  /* =========================================
+     HERO
+     ========================================= */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 20%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 80%, rgba(184,92,56,0.05) 0%, transparent 50%),
+      linear-gradient(180deg, var(--midnight) 0%, var(--deep-blue) 40%, var(--chapel-blue) 70%, var(--midnight) 100%);
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+
+  .hero-wordmark {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    letter-spacing: 0.8em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeIn 2s ease 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--cream);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeInUp 1.8s ease 0.6s forwards;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+    display: block;
+    font-weight: 600;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream-dark);
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeInUp 1.8s ease 1s forwards;
+  }
+
+  .hero-support {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    opacity: 0;
+    animation: fadeInUp 1.8s ease 1.4s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    opacity: 0;
+    animation: fadeIn 2s ease 2s forwards, float 3s ease-in-out infinite 2s;
+  }
+
+  .scroll-hint svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--gold-dark);
+    stroke-width: 1.5;
+    fill: none;
+  }
+
+  .stars {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    animation: twinkle var(--duration) ease-in-out infinite var(--delay);
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.6; }
+  }
+
+  /* =========================================
+     FRESCO BAND
+     ========================================= */
+  .fresco-band {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .fresco-band::before,
+  .fresco-band::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .fresco-band::before {
+    top: 0;
+    background: linear-gradient(180deg, var(--midnight), transparent);
+  }
+
+  .fresco-band::after {
+    bottom: 0;
+    background: linear-gradient(0deg, var(--midnight), transparent);
+  }
+
+  .fresco-border {
+    height: 6px;
+    background: linear-gradient(90deg, transparent 5%, var(--gold-dark) 20%, var(--gold) 50%, var(--gold-dark) 80%, transparent 95%);
+    opacity: 0.5;
+  }
+
+  .fresco-img-container {
+    width: 100%;
+    max-height: 450px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fresco-img-container img {
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    filter: sepia(0.12) contrast(1.1) brightness(0.95);
+  }
+
+  /* =========================================
+     METHODOLOGY
+     ========================================= */
+  .methodology {
+    padding: 7rem 2rem;
+    text-align: center;
+    background: linear-gradient(180deg, var(--midnight) 0%, var(--deep-blue) 50%, var(--midnight) 100%);
+    position: relative;
+  }
+
+  .methodology::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.03) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .methodology h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .methodology .lead {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--cream-dark);
+    max-width: 600px;
+    margin: 0 auto 4rem;
+    font-weight: 300;
+    position: relative;
+  }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .pillar {
+    padding: 3rem 2rem;
+    border: 1px solid rgba(201,168,76,0.15);
+    background: rgba(10,14,26,0.6);
+    backdrop-filter: blur(10px);
+    position: relative;
+    transition: all 0.5s ease;
+  }
+
+  .pillar:hover {
+    border-color: rgba(201,168,76,0.4);
+    background: rgba(17,24,51,0.8);
+    transform: translateY(-4px);
+  }
+
+  .pillar-number {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 3rem;
+    color: var(--gold);
+    opacity: 0.3;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .pillar h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--gold-light);
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+  }
+
+  .pillar p {
+    font-size: 1.05rem;
+    color: var(--cream-dark);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* =========================================
+     PROMISE
+     ========================================= */
+  .promise {
+    padding: 6rem 2rem;
+    text-align: center;
+    background: var(--midnight);
+    position: relative;
+  }
+
+  .promise-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+    position: relative;
+  }
+
+  .promise-quote::before {
+    content: '\201C';
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 6rem;
+    color: var(--gold);
+    opacity: 0.2;
+    position: absolute;
+    top: -2.5rem;
+    left: -1rem;
+    line-height: 1;
+  }
+
+  .promise-attribution {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+  }
+
+  /* =========================================
+     WHAT WE DELIVER
+     ========================================= */
+  .deliver {
+    padding: 7rem 2rem;
+    background: linear-gradient(180deg, var(--midnight) 0%, var(--deep-blue) 100%);
+    text-align: center;
+    position: relative;
+  }
+
+  .deliver h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .deliver .lead {
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--cream-dark);
+    max-width: 550px;
+    margin: 0 auto 3.5rem;
+    font-weight: 300;
+  }
+
+  .deliver-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .deliver-item {
+    padding: 2rem;
+    border-left: 2px solid var(--gold-dark);
+    transition: border-color 0.4s ease;
+  }
+
+  .deliver-item:hover {
+    border-left-color: var(--gold);
+  }
+
+  .deliver-item h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .deliver-item p {
+    font-size: 1.05rem;
+    color: var(--cream-dark);
+    font-weight: 300;
+  }
+
+  /* =========================================
+     ANTI-CONSULTING
+     ========================================= */
+  .anti-consulting {
+    padding: 5rem 2rem;
+    text-align: center;
+    background: var(--midnight);
+    position: relative;
+  }
+
+  .contrast-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    max-width: 800px;
+    margin: 3rem auto 0;
+    align-items: start;
+  }
+
+  .contrast-col {
+    padding: 2rem;
+  }
+
+  .contrast-col h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .contrast-col.them h3 { color: rgba(240,230,211,0.3); }
+  .contrast-col.us h3 { color: var(--gold); }
+
+  .contrast-col ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .contrast-col ul li {
+    font-size: 1.05rem;
+    font-weight: 300;
+    padding: 0.4rem 0;
+    line-height: 1.5;
+  }
+
+  .contrast-col.them ul li {
+    color: rgba(240,230,211,0.25);
+    text-decoration: line-through;
+    text-decoration-color: rgba(240,230,211,0.15);
+  }
+
+  .contrast-col.us ul li {
+    color: var(--cream-dark);
+  }
+
+  .contrast-divider {
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--gold-dark), transparent);
+    min-height: 200px;
+    align-self: stretch;
+  }
+
+  /* =========================================
+     CTA
+     ========================================= */
+  .cta {
+    padding: 8rem 2rem;
+    text-align: center;
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
+      var(--midnight);
+    position: relative;
+  }
+
+  .cta h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .cta p {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--cream-dark);
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .cta-button {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--midnight);
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    padding: 1.1rem 3.5rem;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201,168,76,0.3);
+  }
+
+  .cta-button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .cta-button:hover::after {
+    transform: translateX(100%);
+  }
+
+  /* =========================================
+     FOOTER
+     ========================================= */
+  footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    background: var(--midnight);
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  footer .wordmark {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.6em;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+  }
+
+  footer p {
+    font-size: 0.85rem;
+    color: rgba(240,230,211,0.3);
+    margin-top: 1rem;
+  }
+
+  footer a {
+    color: var(--gold-dark);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  footer a:hover {
+    color: var(--gold);
+  }
+
+  /* =========================================
+     ANIMATIONS
+     ========================================= */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+
+  /* =========================================
+     RESPONSIVE
+     ========================================= */
+  @media (max-width: 768px) {
+    .pillars { grid-template-columns: 1fr; }
+    .deliver-grid { grid-template-columns: 1fr; }
+    .pillar { padding: 2rem 1.5rem; }
+    .contrast-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
     }
-
-    html, body {
-      height: 100%;
-    }
-
-    body {
-      /* background sampled from logo: #FEFEF9 */
-      background-color: #FEFEF9;
-      /* serif to match your logotype */
-      font-family: 'Merriweather', serif;
-      /* text color sampled from your logotype: #162638 */
-      color: #162638;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      line-height: 1.5;
-      padding: 20px;
-    }
-
-    .container {
-      max-width: 400px;
-      width: 100%;
-    }
-
-    .logo {
-      width: 100%;
-      height: auto;
-      max-width: 300px;
+    .contrast-divider {
+      width: 60%;
+      min-height: 0;
+      height: 1px;
       margin: 0 auto;
-      display: block;
+      background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
     }
-
-    .contact {
-      margin-top: 1.5rem;
-      font-size: 1.2rem;
-    }
-
-    .contact a {
-      color: inherit;
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .contact a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
-  <div class="container">
-    <img src="hypsis_logo.png" alt="Hypsis logo" class="logo">
-    <p class="contact">
-      Contact us at  
-      <a href="mailto:hello@hypsis.ai">hello@hypsis.ai</a>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="stars" id="stars"></div>
+  <div class="hero-content">
+    <div class="hero-wordmark">Hypsis</div>
+    <h1>AI-Native<br><em>Operating Partners</em></h1>
+    <p class="hero-subtitle">
+      We deploy a proven, AI-infused methodology&thinsp;&mdash;&thinsp;so your best people never need us again.
     </p>
+    <p class="hero-support">Processes &nbsp;&middot;&nbsp; Ontology &nbsp;&middot;&nbsp; Tools &nbsp;&middot;&nbsp; Autonomy</p>
   </div>
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
 
+<!-- ============ FRESCO ============ -->
+<div class="fresco-band">
+  <div class="fresco-border"></div>
+  <div class="fresco-img-container">
+    <img src="assets/hero-fresco.png" alt="The Transfer of Knowledge — Fresco">
+  </div>
+  <div class="fresco-border"></div>
+</div>
+
+<!-- ============ METHODOLOGY ============ -->
+<section class="methodology">
+  <div class="reveal">
+    <p class="section-label">The Method</p>
+    <h2>A Proven, AI-Infused Methodology</h2>
+    <p class="lead">From operational knowledge to working software, structured for compounding value.</p>
+  </div>
+  <div class="divider"></div>
+  <div class="pillars">
+    <div class="pillar reveal reveal-delay-1">
+      <div class="pillar-number">I</div>
+      <h3>Processes</h3>
+      <p>We map how your teams actually work&thinsp;&mdash;&thinsp;the decisions, the flows, the friction. Not how the manual says it should work.</p>
+    </div>
+    <div class="pillar reveal reveal-delay-2">
+      <div class="pillar-number">II</div>
+      <h3>Ontology</h3>
+      <p>We structure your operational knowledge into a shared data backbone&thinsp;&mdash;&thinsp;a living model that every tool can read, extend, and compound.</p>
+    </div>
+    <div class="pillar reveal reveal-delay-3">
+      <div class="pillar-number">III</div>
+      <h3>Tools</h3>
+      <p>We deploy custom applications on your infrastructure, built with AI, owned by you. Each one faster and cheaper than the last.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROMISE ============ -->
+<section class="promise">
+  <div class="divider-wide"></div>
+  <div style="padding: 4rem 0;">
+    <div class="reveal">
+      <p class="promise-quote">
+        We don't build dependency.<br>We build autonomy.
+      </p>
+      <p class="promise-attribution">The Hypsis Commitment</p>
+    </div>
+  </div>
+  <div class="divider-wide"></div>
+</section>
+
+<!-- ============ 90 DAYS ============ -->
+<section class="deliver">
+  <div class="reveal">
+    <p class="section-label">What Changes</p>
+    <h2>In 90 Days</h2>
+    <p class="lead">Not a roadmap. Not a diagnosis. Tangible, measurable transformation.</p>
+  </div>
+  <div class="deliver-grid">
+    <div class="deliver-item reveal">
+      <h3>Working Software</h3>
+      <p>Custom tools deployed on your infrastructure. Not prototypes&thinsp;&mdash;&thinsp;production systems your teams use daily.</p>
+    </div>
+    <div class="deliver-item reveal">
+      <h3>Structured Knowledge</h3>
+      <p>Your operational data organized into a shared ontology that compounds with every new tool.</p>
+    </div>
+    <div class="deliver-item reveal">
+      <h3>Autonomous Teams</h3>
+      <p>Your brilliant people trained and equipped to build, extend, and govern their own tools.</p>
+    </div>
+    <div class="deliver-item reveal">
+      <h3>Full Ownership</h3>
+      <p>You own the code, the data, and the infrastructure. We hand you the keys and step back.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANTI-CONSULTING ============ -->
+<section class="anti-consulting">
+  <div class="reveal">
+    <p class="section-label">A Different Model</p>
+  </div>
+  <div class="contrast-grid reveal">
+    <div class="contrast-col them">
+      <h3>Traditional Consulting</h3>
+      <ul>
+        <li>6-month diagnostic</li>
+        <li>200-page slide deck</li>
+        <li>18-month IT project</li>
+        <li>Vendor lock-in</li>
+        <li>Teams wait</li>
+      </ul>
+    </div>
+    <div class="contrast-divider"></div>
+    <div class="contrast-col us">
+      <h3>Hypsis</h3>
+      <ul>
+        <li>Working software in weeks</li>
+        <li>Real tools, not decks</li>
+        <li>Deployed on your infrastructure</li>
+        <li>You own everything</li>
+        <li>Teams build</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="reveal">
+    <span class="ornament">&bull; &bull; &bull;</span>
+    <h2>No Slides. No Audits.<br>Working Software From Day One.</h2>
+    <p>Tell us about your portfolio company. We'll show you what 90 days looks like.</p>
+    <a href="mailto:hello@hypsis.ai" class="cta-button">Start a Conversation</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wordmark">Hypsis</div>
+  <p>AI-native operating partners &nbsp;&middot;&nbsp; <a href="mailto:hello@hypsis.ai">hello@hypsis.ai</a></p>
+</footer>
+
+<script>
+  const starsContainer = document.getElementById('stars');
+  for (let i = 0; i < 100; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.setProperty('--duration', (3 + Math.random() * 4) + 's');
+    star.style.setProperty('--delay', (Math.random() * 5) + 's');
+    if (Math.random() > 0.75) {
+      star.style.width = '3px';
+      star.style.height = '3px';
+    }
+    starsContainer.appendChild(star);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
