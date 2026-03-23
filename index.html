@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hypsis — AI-Native Operating Partners</title>
-<meta name="description" content="We deliver results with a proven AI methodology that makes your best people autonomous.">
+<meta name="description" content="We deliver results with a proven AI methodology and train your teams to build their own tools.">
 <link rel="shortcut icon" type="image/x-icon" href="favicon_simple.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Italiana&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Italiana&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #f8f6f1;
@@ -29,7 +29,7 @@
   body {
     background: var(--paper);
     color: var(--ink);
-    font-family: 'DM Sans', -apple-system, sans-serif;
+    font-family: 'Outfit', -apple-system, sans-serif;
     overflow-x: hidden;
     line-height: 1.6;
   }
@@ -42,63 +42,92 @@
   }
 
   /* =========================================
-     HERO
+     HERO — fresco as background
      ========================================= */
   .hero {
+    position: relative;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     text-align: center;
-    padding: 4rem 2rem;
+    padding: 2rem 2rem 4rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    filter: contrast(1.05) brightness(1.0);
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(248,246,241,0.15) 0%,
+      rgba(248,246,241,0.3) 35%,
+      rgba(248,246,241,0.75) 65%,
+      rgba(248,246,241,0.97) 85%,
+      var(--paper) 100%
+    );
+  }
+
+  .hero-content {
     position: relative;
+    z-index: 1;
+    max-width: 800px;
   }
 
   .hero-wordmark {
     font-family: 'Italiana', serif;
-    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-    letter-spacing: 0.7em;
+    font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+    letter-spacing: 0.6em;
     text-transform: uppercase;
     color: var(--bronze);
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     opacity: 0;
     animation: fadeIn 1.5s ease 0.2s forwards;
   }
 
   .hero h1 {
-    font-family: 'Bodoni Moda', serif;
-    font-size: clamp(2.8rem, 6.5vw, 5.5rem);
-    font-weight: 400;
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
     line-height: 1.1;
     color: var(--ink);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
     opacity: 0;
     animation: fadeInUp 1.5s ease 0.4s forwards;
   }
 
-  .hero h1 em {
-    font-style: italic;
-    font-weight: 700;
-    display: block;
-  }
-
   .hero-subtitle {
-    font-family: 'DM Sans', sans-serif;
-    font-size: clamp(1.15rem, 2vw, 1.5rem);
-    font-weight: 400;
+    font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+    font-weight: 300;
     color: var(--ink-soft);
-    max-width: 600px;
-    margin: 0 auto 2rem;
+    max-width: 580px;
+    margin: 0 auto 1.5rem;
     line-height: 1.7;
     opacity: 0;
     animation: fadeInUp 1.5s ease 0.7s forwards;
   }
 
   .hero-pillars {
-    font-family: 'Bodoni Moda', serif;
-    font-size: clamp(0.7rem, 1vw, 0.85rem);
-    letter-spacing: 0.35em;
+    font-size: clamp(0.7rem, 1vw, 0.8rem);
+    font-weight: 500;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--bronze-light);
     opacity: 0;
@@ -107,78 +136,53 @@
 
   .scroll-hint {
     position: absolute;
-    bottom: 2.5rem;
+    bottom: 1.5rem;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 1;
     opacity: 0;
     animation: fadeIn 1.5s ease 1.5s forwards, float 3s ease-in-out infinite 1.5s;
   }
 
   .scroll-hint svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     stroke: var(--stone);
     stroke-width: 1.5;
     fill: none;
   }
 
   /* =========================================
-     FRESCO
-     ========================================= */
-  .fresco-band {
-    position: relative;
-    width: 100%;
-    padding: 0 4vw;
-  }
-
-  .fresco-img-container {
-    width: 100%;
-    max-height: 480px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top: 1px solid var(--stone);
-    border-bottom: 1px solid var(--stone);
-  }
-
-  .fresco-img-container img {
-    width: 100%;
-    object-fit: cover;
-    filter: contrast(1.05) brightness(1.02);
-  }
-
-  /* =========================================
      METHOD
      ========================================= */
   .method {
-    padding: 6rem 2rem;
-    text-align: center;
+    padding: 5rem 2rem;
     max-width: 1100px;
     margin: 0 auto;
   }
 
   .method-header {
-    margin-bottom: 4rem;
+    text-align: center;
+    margin-bottom: 3.5rem;
   }
 
   .section-label {
-    font-family: 'Bodoni Moda', serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.5em;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
     text-transform: uppercase;
     color: var(--bronze);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .method h2 {
-    font-family: 'Bodoni Moda', serif;
-    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
-    font-weight: 400;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 600;
     color: var(--ink);
-    line-height: 1.3;
-    max-width: 650px;
+    line-height: 1.35;
+    max-width: 600px;
     margin: 0 auto;
+    letter-spacing: -0.01em;
   }
 
   .pillars {
@@ -190,136 +194,124 @@
   }
 
   .pillar {
-    padding: 3rem 2.5rem;
+    padding: 2.5rem 2rem;
     text-align: left;
     border-right: 1px solid var(--stone);
-    transition: background 0.4s ease;
+    transition: background 0.3s ease;
   }
 
-  .pillar:last-child {
-    border-right: none;
-  }
+  .pillar:last-child { border-right: none; }
 
-  .pillar:hover {
-    background: var(--paper-warm);
-  }
+  .pillar:hover { background: var(--paper-warm); }
 
   .pillar-number {
-    font-family: 'Bodoni Moda', serif;
-    font-size: 2.5rem;
-    font-weight: 900;
-    font-style: italic;
+    font-size: 2rem;
+    font-weight: 800;
     color: var(--stone);
     line-height: 1;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
   }
 
   .pillar h3 {
-    font-family: 'Bodoni Moda', serif;
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.05rem;
+    font-weight: 600;
     color: var(--ink);
-    margin-bottom: 0.75rem;
-    letter-spacing: 0.05em;
+    margin-bottom: 0.6rem;
   }
 
   .pillar p {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
+    font-weight: 300;
     color: var(--ink-soft);
-    line-height: 1.7;
-    font-weight: 400;
+    line-height: 1.65;
   }
 
   /* =========================================
      OUTCOME
      ========================================= */
   .outcome {
-    padding: 5rem 2rem;
+    padding: 4rem 2rem;
     text-align: center;
   }
 
   .outcome-text {
-    font-family: 'Bodoni Moda', serif;
-    font-size: clamp(1.4rem, 3vw, 2.2rem);
-    font-weight: 400;
-    font-style: italic;
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    font-weight: 300;
     color: var(--ink);
     max-width: 700px;
     margin: 0 auto;
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
   .outcome-text strong {
-    font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   /* =========================================
      CTA
      ========================================= */
   .cta {
-    padding: 5rem 2rem 7rem;
+    padding: 4rem 2rem 6rem;
     text-align: center;
   }
 
   .cta h2 {
-    font-family: 'Bodoni Moda', serif;
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    font-weight: 400;
+    font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+    font-weight: 600;
     color: var(--ink);
-    margin-bottom: 1rem;
-    line-height: 1.3;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
   }
 
   .cta p {
-    font-size: 1.15rem;
+    font-size: 1rem;
+    font-weight: 300;
     color: var(--ink-muted);
-    margin-bottom: 2.5rem;
-    font-weight: 400;
+    margin-bottom: 2rem;
   }
 
   .cta-button {
     display: inline-block;
-    font-family: 'Bodoni Moda', serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 0.8rem;
-    letter-spacing: 0.35em;
+    font-weight: 500;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--paper);
     background: var(--ink);
-    padding: 1rem 3rem;
+    padding: 0.9rem 2.5rem;
     text-decoration: none;
     transition: all 0.3s ease;
-    cursor: pointer;
-    border: none;
   }
 
   .cta-button:hover {
     background: var(--bronze-dark);
     transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(26,26,46,0.15);
+    box-shadow: 0 4px 20px rgba(26,26,46,0.12);
   }
 
   /* =========================================
      FOOTER
      ========================================= */
   footer {
-    padding: 3rem 2rem;
+    padding: 2.5rem 2rem;
     text-align: center;
     border-top: 1px solid var(--stone);
   }
 
   footer .wordmark {
     font-family: 'Italiana', serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.6em;
+    font-size: 0.8rem;
+    letter-spacing: 0.5em;
     color: var(--bronze);
     text-transform: uppercase;
   }
 
   footer p {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 300;
     color: var(--ink-muted);
-    margin-top: 0.75rem;
+    margin-top: 0.5rem;
   }
 
   footer a {
@@ -328,9 +320,7 @@
     transition: color 0.3s ease;
   }
 
-  footer a:hover {
-    color: var(--ink);
-  }
+  footer a:hover { color: var(--ink); }
 
   /* =========================================
      ANIMATIONS
@@ -347,13 +337,13 @@
 
   @keyframes float {
     0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(6px); }
+    50% { transform: translateX(-50%) translateY(5px); }
   }
 
   .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    transform: translateY(25px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
 
   .reveal.visible {
@@ -365,9 +355,6 @@
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.3s; }
 
-  /* =========================================
-     RESPONSIVE
-     ========================================= */
   @media (max-width: 768px) {
     .pillars {
       grid-template-columns: 1fr;
@@ -378,7 +365,10 @@
       border-bottom: 1px solid var(--stone);
       padding: 2rem 1.5rem;
     }
-    .fresco-band { padding: 0; }
+    .hero {
+      justify-content: center;
+      padding-bottom: 5rem;
+    }
   }
 </style>
 </head>
@@ -386,29 +376,27 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <div class="hero-wordmark">Hypsis</div>
-  <h1>AI-Native<br><em>Operating Partners</em></h1>
-  <p class="hero-subtitle">
-    We deliver results &mdash; with a proven methodology that makes your best people autonomous.
-  </p>
-  <p class="hero-pillars">Processes &nbsp;&middot;&nbsp; Ontology &nbsp;&middot;&nbsp; Tools &nbsp;&middot;&nbsp; Autonomy</p>
+  <div class="hero-bg">
+    <img src="assets/hero-fresco.png" alt="The Transfer of Knowledge">
+  </div>
+  <div class="hero-content">
+    <div class="hero-wordmark">Hypsis</div>
+    <h1>AI-Native<br>Operating Partners</h1>
+    <p class="hero-subtitle">
+      We deliver results with a proven AI methodology &mdash; then train your teams to build their own tools.
+    </p>
+    <p class="hero-pillars">Processes &nbsp;&middot;&nbsp; Ontology &nbsp;&middot;&nbsp; Tools &nbsp;&middot;&nbsp; Autonomy</p>
+  </div>
   <div class="scroll-hint">
     <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
   </div>
 </section>
 
-<!-- ============ FRESCO ============ -->
-<div class="fresco-band">
-  <div class="fresco-img-container">
-    <img src="assets/hero-fresco.png" alt="The Transfer of Knowledge">
-  </div>
-</div>
-
 <!-- ============ METHOD ============ -->
 <section class="method">
   <div class="method-header reveal">
     <p class="section-label">The Method</p>
-    <h2>A proven, AI-infused methodology that compounds with every engagement.</h2>
+    <h2>A proven methodology that compounds with every engagement.</h2>
   </div>
   <div class="pillars">
     <div class="pillar reveal reveal-delay-1">
@@ -424,7 +412,7 @@
     <div class="pillar reveal reveal-delay-3">
       <div class="pillar-number">03</div>
       <h3>Tools</h3>
-      <p>We deploy custom applications on your infrastructure, built with AI, owned by you.</p>
+      <p>We deploy custom apps on your infrastructure, built with AI, owned by you. Then we train your teams to build their own.</p>
     </div>
   </div>
 </section>
@@ -434,7 +422,7 @@
   <div class="divider"></div>
   <div class="reveal">
     <p class="outcome-text">
-      In 90 days, your teams have <strong>working software</strong>, <strong>structured knowledge</strong>, and the <strong>autonomy</strong> to keep building without us.
+      In 90 days, your teams have <strong>working software</strong>, <strong>structured knowledge</strong>, and the <strong>skills to keep building</strong> without us.
     </p>
   </div>
   <div class="divider"></div>
