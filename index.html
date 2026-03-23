@@ -78,11 +78,11 @@
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(248,246,241,0.15) 0%,
-      rgba(248,246,241,0.3) 35%,
-      rgba(248,246,241,0.75) 65%,
-      rgba(248,246,241,0.97) 85%,
-      var(--paper) 100%
+      rgba(248,246,241,0.1) 0%,
+      rgba(248,246,241,0.25) 25%,
+      rgba(248,246,241,0.7) 45%,
+      rgba(248,246,241,0.95) 60%,
+      var(--paper) 75%
     );
   }
 
@@ -368,8 +368,17 @@
       padding: 2rem 1.5rem;
     }
     .hero {
-      justify-content: center;
-      padding-bottom: 5rem;
+      justify-content: flex-end;
+      padding-bottom: 3rem;
+    }
+    .hero-bg::after {
+      background: linear-gradient(
+        180deg,
+        rgba(248,246,241,0.05) 0%,
+        rgba(248,246,241,0.4) 30%,
+        rgba(248,246,241,0.92) 48%,
+        var(--paper) 60%
+      );
     }
   }
 </style>
