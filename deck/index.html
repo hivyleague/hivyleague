@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hypsis — Investor Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Italiana&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f8f6f1;
+  --paper-warm: #f0ece3;
+  --ink: #1a1a2e;
+  --ink-soft: #3d3d54;
+  --ink-muted: #7a7a8c;
+  --bronze: #7a6840;
+  --bronze-light: #a89060;
+  --bronze-dark: #5c4e30;
+  --stone: #d4cfc5;
+  --stone-light: #e8e4db;
+  --accent: #7a6840;
+  --accent-faint: rgba(122,104,64,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Outfit', -apple-system, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════════════════════════════
+   SLIDE CONTAINER
+   ═══════════════════════════════════════════ */
+section.slide {
+  scroll-snap-align: start;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3.5rem 6vw;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   NAVIGATION DOTS
+   ═══════════════════════════════════════════ */
+.nav-dots {
+  position: fixed;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.nav-dots .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--stone);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  padding: 0;
+}
+.nav-dots .dot.active {
+  background: var(--bronze);
+  transform: scale(1.4);
+}
+
+/* ═══════════════════════════════════════════
+   SHARED TYPOGRAPHY
+   ═══════════════════════════════════════════ */
+.slide-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 0.8rem;
+}
+.slide-title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+}
+.slide-subtitle {
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  font-weight: 300;
+  color: var(--ink-soft);
+  max-width: 700px;
+  margin-bottom: 1.5rem;
+}
+.stat-big {
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.stat-unit {
+  font-size: 0.5em;
+  font-weight: 400;
+  color: var(--ink-muted);
+}
+.source {
+  font-size: 0.6rem;
+  font-weight: 300;
+  color: var(--ink-muted);
+  margin-top: 0.25rem;
+}
+.punchline {
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  font-weight: 300;
+  color: var(--ink-soft);
+  font-style: italic;
+  max-width: 700px;
+  line-height: 1.6;
+}
+.punchline strong { font-weight: 600; color: var(--ink); }
+
+/* ═══════════════════════════════════════════
+   SHARED COMPONENTS
+   ═══════════════════════════════════════════ */
+.card-grid {
+  display: grid;
+  gap: 1rem;
+}
+.card {
+  background: var(--paper-warm);
+  border-radius: 8px;
+  padding: 1.2rem 1.4rem;
+}
+.card h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+.card p, .card li {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.card-accent {
+  background: var(--accent-faint);
+  border-left: 3px solid var(--bronze);
+}
+.statement-box {
+  background: var(--paper-warm);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+.statement-box p {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+}
+.statement-box strong { font-weight: 600; color: var(--ink); }
+
+/* styled tables */
+.deck-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.72rem;
+}
+.deck-table th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 0.5rem 0.6rem;
+  border-bottom: 2px solid var(--stone);
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+}
+.deck-table td {
+  padding: 0.45rem 0.6rem;
+  border-bottom: 1px solid var(--stone-light);
+  color: var(--ink-soft);
+  font-weight: 300;
+  vertical-align: top;
+}
+.deck-table tr.highlight td {
+  background: var(--accent-faint);
+  color: var(--ink);
+  font-weight: 500;
+}
+.deck-table tr.total td {
+  font-weight: 600;
+  color: var(--ink);
+  border-top: 2px solid var(--stone);
+}
+.deck-table .muted { color: var(--ink-muted); font-style: italic; }
+
+.divider {
+  width: 80px;
+  height: 1px;
+  background: var(--stone);
+  margin: 1.5rem 0;
+}
+
+/* ═══════════════════════════════════════════
+   SLIDE 1 — TITLE
+   ═══════════════════════════════════════════ */
+.slide-title-page {
+  justify-content: flex-end;
+  padding-bottom: 4rem;
+  text-align: center;
+  align-items: center;
+}
+.slide-title-page .hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.slide-title-page .hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: contrast(1.05) brightness(1.0);
+}
+.slide-title-page .hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(248,246,241,0.08) 0%,
+    rgba(248,246,241,0.2) 20%,
+    rgba(248,246,241,0.65) 42%,
+    rgba(248,246,241,0.95) 58%,
+    var(--paper) 72%
+  );
+}
+.slide-title-page .content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+}
+.wordmark {
+  font-family: 'Italiana', serif;
+  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+  letter-spacing: 0.6em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 1.2rem;
+}
+.title-main {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.8rem, 6vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.08;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 1.2rem;
+}
+.title-sub {
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 300;
+  color: var(--ink-soft);
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+}
+.pillars-line {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--bronze-light);
+  margin-bottom: 1.5rem;
+}
+.raise-box {
+  display: inline-block;
+  background: var(--paper-warm);
+  border-radius: 6px;
+  padding: 0.6rem 1.6rem;
+  margin-bottom: 1.5rem;
+}
+.raise-box p {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.raise-box .small { font-size: 0.7rem; font-weight: 300; color: var(--ink-muted); }
+.title-footer {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--ink-muted);
+}
+.title-footer a {
+  color: var(--bronze);
+  text-decoration: none;
+}
+
+/* ═══════════════════════════════════════════
+   SLIDE 2 — 12 IS THE NEW 5
+   ═══════════════════════════════════════════ */
+.slide-problem {
+  background: var(--ink);
+  color: var(--paper);
+}
+.slide-problem .slide-label { color: var(--bronze-light); }
+.slide-problem .slide-title { color: var(--paper); }
+.slide-problem .slide-subtitle { color: rgba(248,246,241,0.7); }
+.slide-problem .stat-big { color: var(--paper); }
+.slide-problem .stat-unit { color: rgba(248,246,241,0.5); }
+.slide-problem .source { color: rgba(248,246,241,0.35); }
+.slide-problem .punchline { color: rgba(248,246,241,0.7); }
+.slide-problem .punchline strong { color: var(--paper); }
+.slide-problem .card {
+  background: rgba(248,246,241,0.06);
+  border: 1px solid rgba(248,246,241,0.08);
+}
+.slide-problem .card h3 { color: var(--bronze-light); }
+.slide-problem .card p { color: rgba(248,246,241,0.65); }
+.slide-problem .card strong { color: var(--paper); }
+.slide-problem .deck-table th {
+  color: rgba(248,246,241,0.5);
+  border-bottom-color: rgba(248,246,241,0.12);
+}
+.slide-problem .deck-table td {
+  color: rgba(248,246,241,0.55);
+  border-bottom-color: rgba(248,246,241,0.06);
+}
+.slide-problem .deck-table tr.highlight td {
+  background: rgba(168,144,96,0.12);
+  color: var(--paper);
+}
+
+/* ═══════════════════════════════════════════
+   SLIDE 3 — SOLUTION
+   ═══════════════════════════════════════════ */
+.timeline-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--stone);
+  border-bottom: 1px solid var(--stone);
+  margin: 1rem 0;
+}
+.timeline-item {
+  padding: 1.2rem 1.4rem;
+  border-right: 1px solid var(--stone);
+}
+.timeline-item:last-child { border-right: none; }
+.timeline-item .day {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--stone);
+  line-height: 1;
+  margin-bottom: 0.15rem;
+}
+.timeline-item .day-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 0.5rem;
+}
+.timeline-item h3 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+.timeline-item p {
+  font-size: 0.72rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+.diff-item {
+  font-size: 0.72rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  padding-left: 0.8rem;
+  border-left: 2px solid var(--stone-light);
+}
+.diff-item strong {
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 0.1rem;
+}
+
+/* ═══════════════════════════════════════════
+   SLIDE 4 — PLATFORM
+   ═══════════════════════════════════════════ */
+.flow-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 1.5rem 0;
+}
+.flow-box {
+  background: var(--paper-warm);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  min-width: 160px;
+  position: relative;
+}
+.flow-box.accent {
+  background: var(--accent-faint);
+  border: 1px solid rgba(122,104,64,0.2);
+}
+.flow-box h4 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+.flow-box p {
+  font-size: 0.65rem;
+  font-weight: 300;
+  color: var(--ink-muted);
+}
+.flow-arrow {
+  font-size: 1.4rem;
+  color: var(--stone);
+  padding: 0 0.8rem;
+  flex-shrink: 0;
+}
+.flow-satellite {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-bottom: 0.8rem;
+}
+.flow-sat-box {
+  background: var(--paper-warm);
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  text-align: center;
+}
+.flow-sat-box h5 {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--bronze);
+}
+.flow-sat-box p {
+  font-size: 0.6rem;
+  font-weight: 300;
+  color: var(--ink-muted);
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+/* ═══════════════════════════════════════════
+   SLIDE 5 — IMPACT
+   ═══════════════════════════════════════════ */
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.7rem;
+  margin: 0.8rem 0;
+}
+.impact-card {
+  background: var(--paper-warm);
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+}
+.impact-card .week {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 0.3rem;
+}
+.impact-card h4 {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+.impact-card .savings {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--bronze-dark);
+  margin-bottom: 0.15rem;
+}
+.impact-card p {
+  font-size: 0.65rem;
+  font-weight: 300;
+  color: var(--ink-muted);
+  line-height: 1.45;
+}
+.impact-card.wide {
+  grid-column: span 3;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.impact-summary {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 0.6rem;
+  padding: 0.8rem 1.2rem;
+  background: var(--accent-faint);
+  border-radius: 8px;
+  border-left: 3px solid var(--bronze);
+}
+.impact-summary .big {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.impact-summary .big .unit {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--ink-muted);
+}
+.impact-summary p {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+}
+
+/* ═══════════════════════════════════════════
+   SLIDE 6 — BUSINESS PLAN
+   ═══════════════════════════════════════════ */
+.dogfood-callout {
+  background: var(--accent-faint);
+  border-left: 3px solid var(--bronze);
+  border-radius: 0 8px 8px 0;
+  padding: 0.8rem 1.2rem;
+  margin-bottom: 1rem;
+}
+.dogfood-callout p {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.dogfood-callout strong { font-weight: 600; color: var(--ink); }
+.dogfood-callout a {
+  color: var(--bronze);
+  text-decoration: none;
+  font-weight: 500;
+}
+.screenshot-placeholder {
+  background: var(--paper-warm);
+  border: 1px dashed var(--stone);
+  border-radius: 8px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.8rem;
+}
+.screenshot-placeholder img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 6px;
+}
+.screenshot-placeholder span {
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  font-weight: 300;
+}
+
+/* ═══════════════════════════════════════════
+   SLIDE 7 — TEAM
+   ═══════════════════════════════════════════ */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+.team-card {
+  padding: 1.2rem 1.3rem;
+  background: var(--paper-warm);
+  border-radius: 8px;
+}
+.team-card.founder {
+  border-left: 3px solid var(--bronze);
+}
+.team-card.advisor {
+  border-left: 3px solid var(--stone);
+}
+.team-card h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.05rem;
+}
+.team-card .role {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--bronze);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+.team-card p {
+  font-size: 0.72rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════════
+   SLIDE 8 — FUNDING & CLOSE
+   ═══════════════════════════════════════════ */
+.funding-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 0.8rem 0;
+}
+.funding-card {
+  border-radius: 8px;
+  padding: 1.2rem 1.4rem;
+}
+.funding-card.equity {
+  background: var(--accent-faint);
+  border: 1px solid rgba(122,104,64,0.15);
+}
+.funding-card.debt {
+  background: var(--paper-warm);
+}
+.funding-card h4 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.funding-card .amount {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+.funding-card ul {
+  list-style: none;
+  padding: 0;
+}
+.funding-card li {
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  padding-left: 0.8rem;
+  position: relative;
+}
+.funding-card li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 4px;
+  height: 4px;
+  background: var(--bronze-light);
+  border-radius: 50%;
+}
+.return-row {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-top: 0.8rem;
+  padding: 0.8rem 1.2rem;
+  background: var(--paper-warm);
+  border-radius: 8px;
+}
+.return-metric {
+  text-align: center;
+}
+.return-metric .val {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.return-metric .lbl {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.dual-box {
+  background: var(--accent-faint);
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+  margin-top: 0.8rem;
+  border-left: 3px solid var(--bronze);
+}
+.dual-box p {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.dual-box strong { font-weight: 600; color: var(--ink); }
+
+.close-footer {
+  text-align: center;
+  margin-top: 1.2rem;
+}
+.close-footer .email {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--bronze);
+}
+.close-footer .meta {
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--ink-muted);
+  margin-top: 0.3rem;
+}
+.close-footer a { color: var(--bronze); text-decoration: none; }
+
+/* ═══════════════════════════════════════════
+   PRINT
+   ═══════════════════════════════════════════ */
+@media print {
+  html { scroll-snap-type: none; overflow: visible; }
+  section.slide {
+    height: auto;
+    min-height: 100vh;
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+  .nav-dots { display: none; }
+  .slide-title-page .hero-bg { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV DOTS ═══════════ -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SLIDE 1 — TITLE
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide slide-title-page" id="s1">
+  <div class="hero-bg">
+    <img src="../assets/hero-fresco.png" alt="">
+  </div>
+  <div class="content">
+    <div class="wordmark">Hypsis</div>
+    <h1 class="title-main">AI-Native<br>Operating Partners</h1>
+    <p class="title-sub">We deliver operational results with a proven AI methodology&mdash;then train your teams to build their own tools.</p>
+    <p class="pillars-line">Processes &nbsp;&middot;&nbsp; Ontology &nbsp;&middot;&nbsp; Tools &nbsp;&middot;&nbsp; Autonomy</p>
+    <div class="raise-box">
+      <p>Raising <strong>200&thinsp;k&euro;</strong> at <strong>1&thinsp;M&euro;</strong> pre-money valuation</p>
+      <p class="small">+ 200&thinsp;k&euro; bank loan (BPI / innovation)</p>
+    </div>
+    <p class="title-footer">William Le Ferrand &nbsp;&middot;&nbsp; <a href="mailto:william@hypsis.ai">william@hypsis.ai</a><br>TBS Education &mdash; MBA Company Creation &mdash; March 2026</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SLIDE 2 — "12 IS THE NEW 5"
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide slide-problem" id="s2">
+  <p class="slide-label">The problem</p>
+  <h2 class="slide-title" style="margin-bottom:0.1rem">&ldquo;12 is the new 5.&rdquo;</h2>
+  <p class="slide-subtitle">PE deals now require <strong style="color:var(--paper);font-weight:600">10-12% annual EBITDA growth</strong> to hit a 2.5x return&mdash;double what they needed a decade ago. The only lever left is operational execution. But the tools to execute fail two-thirds of the time.</p>
+
+  <div class="card-grid" style="grid-template-columns: repeat(3,1fr); margin-bottom:0.6rem">
+    <div class="card">
+      <h3>The market</h3>
+      <p><strong>France:</strong> &euro;36.9B invested in 2024. ~400 LBO/year. Industry = #1 sector.</p>
+      <p style="margin-top:0.3rem"><strong>Europe:</strong> &euro;87B in buyouts (+42% YoY), near all-time record.</p>
+      <p class="source">France Invest 2024 &middot; Invest Europe 2024</p>
+    </div>
+    <div class="card">
+      <h3>The new deal math</h3>
+      <p>2010s: <strong>5%</strong> EBITDA growth &rarr; 2.5x MOIC.<br>Today: the same return demands <strong>10-12%</strong>.</p>
+      <p style="margin-top:0.3rem">Ops-focused funds: <strong>+2-3 pp IRR</strong> vs. peers.</p>
+      <p class="source">Bain, Global PE Report Feb 2026 &middot; McKinsey Oct 2025</p>
+    </div>
+    <div class="card">
+      <h3>The execution gap</h3>
+      <p><strong>15-20%</strong> of 2019-21 deals expected to lose capital.<br><strong>5.7 yr</strong> median hold in Europe (up from 4.7).<br><strong>47%</strong> of PE pros postponed 2025 exits.</p>
+      <p class="source">AltamarCAM &middot; Gain.ai H1 2026 &middot; DealSuite 2026</p>
+    </div>
+  </div>
+
+  <p style="font-size:0.68rem;font-weight:500;color:rgba(248,246,241,0.45);margin-bottom:0.3rem;letter-spacing:0.05em">2/3 OF LARGE-SCALE TECH PROGRAMS FAIL ON TIME, BUDGET, OR SCOPE &mdash; BCG, 2024</p>
+
+  <table class="deck-table" style="max-width:700px; margin-bottom:0.8rem">
+    <thead><tr>
+      <th></th><th>Cost</th><th>Time to result</th><th>Data sovereignty</th><th>PE fit</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>IT project (ERP)</td><td>200-400 k&euro;</td><td>12-18 months</td><td>Vendor-dependent</td><td>No</td></tr>
+      <tr><td>SaaS / low-code</td><td>50-200 k&euro;/yr</td><td>3-6 months</td><td>Cloud (often US)</td><td>Partial</td></tr>
+      <tr><td>Internal hire</td><td>100 k&euro;+/yr</td><td>6-12 months</td><td>Possible</td><td>No</td></tr>
+      <tr class="highlight"><td><strong>Hypsis</strong></td><td><strong>50 k&euro; pilot</strong></td><td><strong>2-4 weeks</strong></td><td><strong>On-prem</strong></td><td><strong>90-day aligned</strong></td></tr>
+    </tbody>
+  </table>
+
+  <p class="punchline">The capital is there. The thesis is there. Operators are on the ground. But the last mile&mdash;from &ldquo;we know what we need&rdquo; to &ldquo;we have a tool that does it&rdquo;&mdash;takes <strong>a year instead of a week</strong>.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SLIDE 3 — SOLUTION: 100 DAYS
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="s3">
+  <p class="slide-label">The solution</p>
+  <h2 class="slide-title">From value creation plan to working tools in 100&nbsp;days.</h2>
+
+  <div class="timeline-row">
+    <div class="timeline-item">
+      <div class="day">14</div>
+      <div class="day-label">Day</div>
+      <h3>The transformation dashboard</h3>
+      <p>We ingest real company data and build a live dashboard mapping every initiative to its financial impact. Fund + exec team align on priorities from day one. No PowerPoint: a data product.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="day">90</div>
+      <div class="day-label">Day</div>
+      <h3>Build the tools, seed the knowledge</h3>
+      <p>Initiative owners build operational apps alongside us&mdash;scheduling, quality, procurement, maintenance. A natural-language description becomes a working application. 3-10 apps in production.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="day">100</div>
+      <div class="day-label">Day</div>
+      <h3>Autonomy</h3>
+      <p>We hand over the platform, the ontology, and the skills. Internal &ldquo;data champions&rdquo; keep building. The company becomes less dependent on Hypsis, not more.</p>
+    </div>
+  </div>
+
+  <div class="diff-grid">
+    <div class="diff-item">
+      <strong>Financial impact from day 14.</strong>
+      A live, data-backed view of the transformation aligned with the 90-day board cycle.
+    </div>
+    <div class="diff-item">
+      <strong>Domain experts build the tools.</strong>
+      Plain language &rarr; production app. No 200-page spec. No 6-month delivery.
+    </div>
+    <div class="diff-item">
+      <strong>Everything stays on-premise.</strong>
+      The Hypsis Box runs AI locally (35B params). No data leaves. ITAR, NIS2, GDPR compliant.
+    </div>
+    <div class="diff-item">
+      <strong>The method compounds.</strong>
+      Each tool enriches the ontology. Each engagement sharpens the playbook. Portfolio-replicable.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <p class="punchline">We don&rsquo;t sell software. We deliver results and leave behind the <strong>capability to keep going</strong>.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SLIDE 4 — THE PLATFORM
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="s4">
+  <p class="slide-label">The platform</p>
+  <h2 class="slide-title">Your team describes. AI builds. You own everything.</h2>
+
+  <div class="flow-satellite">
+    <div class="flow-sat-box">
+      <h5>Your operational data</h5>
+      <p>ERP, datalake, APIs, files</p>
+    </div>
+    <div class="flow-sat-box">
+      <h5>Engineering guardrails</h5>
+      <p>Automated tests, code review, CI/CD</p>
+    </div>
+  </div>
+
+  <div class="flow-diagram">
+    <div class="flow-box">
+      <h4>Your team</h4>
+      <p>Describes the need<br>in plain language</p>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-box accent">
+      <h4>AI Builder</h4>
+      <p>Generates the app,<br>enforces standards</p>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-box">
+      <h4>App in production</h4>
+      <p>On YOUR network,<br>your data stays</p>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card card-accent">
+      <h3>Empowerment, not dependency</h3>
+      <p>The person who knows the problem builds the solution. No spec handoff to a vendor. No 6-month dev cycle. The operational team iterates until the tool fits their work&mdash;then keeps iterating after we leave. A capability transfer, not a consulting engagement.</p>
+    </div>
+    <div class="card card-accent">
+      <h3>On-prem, zero ambiguity</h3>
+      <p>The Hypsis Box is a standalone appliance on the customer&rsquo;s network. AI inference runs locally&mdash;35B-parameter models on a single GPU. No data leaves the building. No inbound ports. IT provides: one cable, one IP, outbound HTTPS. Compliant with defense, ITAR, NIS2, GDPR from day&nbsp;one.</p>
+    </div>
+  </div>
+
+  <div class="statement-box" style="margin-top:1rem">
+    <p>No coding required. No external integrator. No data in the cloud.<br><strong>Your team builds, your infrastructure runs, your company owns.</strong></p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SLIDE 5 — EXPECTED IMPACT
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="s5">
+  <p class="slide-label">What you could expect</p>
+  <h2 class="slide-title">Concrete, measurable impact.</h2>
+  <p class="slide-subtitle">Illustrative example: an aerospace precision-machining company, &euro;120M revenue, 450&nbsp;employees.</p>
+
+  <div class="impact-grid">
+    <div class="impact-card">
+      <div class="week">Week 2</div>
+      <h4>Transformation dashboard</h4>
+      <p>Live P&amp;L impact tracker for all initiatives, by owner, by domain. The alignment tool from day&nbsp;14.</p>
+    </div>
+    <div class="impact-card">
+      <div class="week">Week 3</div>
+      <h4>Procurement optimization</h4>
+      <div class="savings">&euro;180K<span style="font-size:0.65rem;font-weight:400">/year</span></div>
+      <p>6% reduction in indirect procurement spend (&euro;3M baseline)</p>
+    </div>
+    <div class="impact-card">
+      <div class="week">Week 5</div>
+      <h4>Non-quality reduction</h4>
+      <div class="savings">&euro;250K<span style="font-size:0.65rem;font-weight:400">/year</span></div>
+      <p>15% reduction in non-conformance costs (&euro;1.7M baseline)</p>
+    </div>
+    <div class="impact-card">
+      <div class="week">Week 6</div>
+      <h4>Production scheduling</h4>
+      <div class="savings">&euro;120K<span style="font-size:0.65rem;font-weight:400">/year</span></div>
+      <p>8% reduction in overtime (&euro;1.5M baseline) + 2h/week recovered per shift lead</p>
+    </div>
+    <div class="impact-card">
+      <div class="week">Week 9</div>
+      <h4>Maintenance planning</h4>
+      <div class="savings">&euro;90K<span style="font-size:0.65rem;font-weight:400">/year</span></div>
+      <p>12% reduction in unplanned downtime on 3 critical CNC cells</p>
+    </div>
+    <div class="impact-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+      <div style="font-size:0.65rem;font-weight:300;color:var(--ink-muted);margin-bottom:0.2rem;">By month 18</div>
+      <div style="font-size:1.4rem;font-weight:700;color:var(--ink);">10-15 apps</div>
+      <p>built autonomously by the team</p>
+    </div>
+  </div>
+
+  <div class="impact-summary">
+    <div class="big">&euro;640K<span class="unit">/year saved</span></div>
+    <div class="big" style="color:var(--ink-muted);font-weight:300;">/</div>
+    <div class="big">&euro;300K<span class="unit"> engagement cost</span></div>
+    <div class="big" style="color:var(--ink-muted);font-weight:300;">=</div>
+    <div class="big" style="color:var(--bronze-dark);">&lt;6 mo<span class="unit"> payback</span></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SLIDE 6 — BUSINESS PLAN
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="s6">
+  <p class="slide-label">Business plan</p>
+  <h2 class="slide-title">Built with Hypsis.</h2>
+
+  <div class="dogfood-callout">
+    <p>This business plan is a <strong>live application</strong> running on the Hypsis platform&mdash;the same one we deploy to customers. Interactive model: <a href="https://biz.hypsis.ai" target="_blank">biz.hypsis.ai</a> (scenario: &ldquo;MBA&nbsp;TBS&rdquo;). We eat our own cooking.</p>
+  </div>
+
+  <table class="deck-table">
+    <thead><tr>
+      <th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th>
+    </tr></thead>
+    <tbody>
+      <tr><td><strong>Clients (cumul.)</strong></td><td>4</td><td>7</td><td>10+</td></tr>
+      <tr><td><strong>Team (FTE)</strong></td><td>5 &rarr; 8</td><td>10</td><td>12-15</td></tr>
+      <tr><td>Rev &mdash; Consulting</td><td>800-1,000 k&euro;</td><td>500-700 k&euro;</td><td>400-600 k&euro;</td></tr>
+      <tr><td>Rev &mdash; Platform</td><td>100-200 k&euro;</td><td>400-600 k&euro;</td><td>700-1,000 k&euro;</td></tr>
+      <tr><td>Rev &mdash; Hardware</td><td>60-90 k&euro;</td><td>60-90 k&euro;</td><td>90-120 k&euro;</td></tr>
+      <tr class="total"><td><strong>Total Revenue</strong></td><td><strong>960-1,290 k&euro;</strong></td><td><strong>960-1,390 k&euro;</strong></td><td><strong>1,190-1,720 k&euro;</strong></td></tr>
+      <tr><td>COGS</td><td>(400-600 k&euro;)</td><td>(350-500 k&euro;)</td><td>(400-550 k&euro;)</td></tr>
+      <tr class="total"><td><strong>Gross Profit</strong></td><td><strong>480-690 k&euro;</strong></td><td><strong>610-890 k&euro;</strong></td><td><strong>790-1,170 k&euro;</strong></td></tr>
+      <tr><td class="muted">Gross Margin</td><td class="muted">50-55%</td><td class="muted">60-65%</td><td class="muted">65-70%</td></tr>
+      <tr><td>OpEx</td><td>(400-500 k&euro;)</td><td>(500-650 k&euro;)</td><td>(550-700 k&euro;)</td></tr>
+      <tr class="highlight"><td><strong>EBITDA</strong></td><td><strong>0-190 k&euro;</strong></td><td><strong>110-240 k&euro;</strong></td><td><strong>240-470 k&euro;</strong></td></tr>
+      <tr><td class="muted">EBITDA Margin</td><td class="muted">0-15%</td><td class="muted">10-18%</td><td class="muted">20-27%</td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:0.68rem;font-weight:300;color:var(--ink-muted);margin-top:0.4rem;">Revenue mix shifts from consulting-heavy (Y1) to recurring platform subscriptions (Y3). Gross margin improves as the ratio inverts.</p>
+
+  <div class="screenshot-placeholder">
+    <img src="assets/biz-screenshot.png" alt="Business simulator screenshot"
+         onerror="this.style.display='none';this.parentElement.querySelector('span').style.display='block'">
+    <span style="display:none">Screenshot: biz.hypsis.ai &mdash; MBA TBS scenario</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SLIDE 7 — THE TEAM
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="s7">
+  <p class="slide-label">The team</p>
+  <h2 class="slide-title">Builder DNA meets PE fluency.</h2>
+
+  <div class="team-grid">
+    <div class="team-card founder">
+      <h4>William Le Ferrand</h4>
+      <div class="role">Founder &amp; CTO</div>
+      <p>15 years in software, 7 in Silicon Valley. Ex-CEO Wyca Robotics. Ex-CTO Sogeclair (1,200&nbsp;emp., aerospace). Builds the platform and delivers on-site.</p>
+    </div>
+    <div class="team-card founder">
+      <h4>Anthony Perrier</h4>
+      <div class="role">Co-founder &amp; CEO</div>
+      <p>Serial entrepreneur. P&amp;L leadership and consulting firm management. Runs the business.</p>
+    </div>
+    <div class="team-card advisor">
+      <h4>Philippe Robert</h4>
+      <div class="role">Advisor</div>
+      <p>Ex-Partner at Permira (8&nbsp;years). Ex-MD Credit Suisse. Harvard AMP. Founding Partner, OceanBridge. Our PE bridge.</p>
+    </div>
+    <div class="team-card">
+      <h4>Guillaume Roug&eacute;</h4>
+      <div class="role">Business development</div>
+      <p>Profit center management, team leadership, CSR. Opens doors.</p>
+    </div>
+    <div class="team-card">
+      <h4>Boris Bessala</h4>
+      <div class="role">International development</div>
+      <p>Cross-border BD across Africa and Europe. Expands the footprint.</p>
+    </div>
+    <div class="team-card">
+      <h4>Louis Espie</h4>
+      <div class="role">Project management</div>
+      <p>Delivery and client operations.</p>
+    </div>
+  </div>
+
+  <div class="statement-box" style="margin-top:1.2rem">
+    <p>A <strong>builder</strong> who has run digital transformation at 1,200-person scale, a <strong>PE insider</strong> from Permira, and a team that delivers.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SLIDE 8 — FUNDING & CLOSE
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="slide" id="s8">
+  <p class="slide-label">The ask</p>
+  <h2 class="slide-title">&euro;400K to launch 7 clients in 18&nbsp;months.</h2>
+
+  <div class="funding-cols">
+    <div class="funding-card equity">
+      <h4>Equity &mdash; 200&thinsp;k&euro;</h4>
+      <ul>
+        <li>Pre-money: 1&thinsp;M&euro;. Post-money: 1.2&thinsp;M&euro;</li>
+        <li>Investor ownership: ~16.7%</li>
+        <li>Use: first hires, sales, working capital</li>
+        <li>Cap table: 3 founders (50/25/15) + 10% ESOP</li>
+      </ul>
+    </div>
+    <div class="funding-card debt">
+      <h4>Debt &mdash; 200&thinsp;k&euro;</h4>
+      <ul>
+        <li>BPI / innovation loan</li>
+        <li>5% interest, 48-month term (~&euro;4,600/mo)</li>
+        <li>Use: hardware inventory, infrastructure</li>
+        <li>Collateral: customer contracts + hardware</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="return-row">
+    <div class="return-metric">
+      <div class="val">5.8-8.4x</div>
+      <div class="lbl">Gross MOIC</div>
+    </div>
+    <div class="return-metric">
+      <div class="val">~80-100%</div>
+      <div class="lbl">IRR (3-year)</div>
+    </div>
+    <div class="return-metric">
+      <div class="val">1.2-1.7M&euro;</div>
+      <div class="lbl">Investor share at exit</div>
+    </div>
+    <div style="flex:1;font-size:0.68rem;font-weight:300;color:var(--ink-muted);line-height:1.5;padding-left:1rem;border-left:1px solid var(--stone-light);">
+      Based on 10x ARR exit multiple (conservative for B2B SaaS). Y3 ARR: 700K-1M&euro;. Platform built and running&mdash;this is a go-to-market raise, not product development.
+    </div>
+  </div>
+
+  <div class="dual-box">
+    <p><strong>The dual opportunity.</strong> You&rsquo;re not just investing in Hypsis. If you manage a portfolio of industrial SMEs, the method deploys across your holdings&mdash;and your equity in Hypsis appreciates as the platform scales. That alignment is rare.</p>
+  </div>
+
+  <div class="close-footer">
+    <div class="divider" style="margin:0.8rem auto"></div>
+    <p class="email"><a href="mailto:william@hypsis.ai">william@hypsis.ai</a></p>
+    <p class="meta">40+ apps deployed &nbsp;&middot;&nbsp; On-prem AI (35B params) &nbsp;&middot;&nbsp; 7 deals in pipeline &nbsp;&middot;&nbsp; Breakeven Y1</p>
+    <p class="meta"><a href="https://biz.hypsis.ai" target="_blank">biz.hypsis.ai</a> &nbsp;&middot;&nbsp; <a href="https://demo.hypsis.ai" target="_blank">demo.hypsis.ai</a></p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     NAVIGATION JS
+     ═══════════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  const slides = document.querySelectorAll('section.slide');
+  const dotsContainer = document.getElementById('navDots');
+  let current = 0;
+
+  slides.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'dot' + (i === 0 ? ' active' : '');
+    btn.setAttribute('aria-label', 'Slide ' + (i + 1));
+    btn.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(btn);
+  });
+
+  function goTo(idx) {
+    if (idx < 0 || idx >= slides.length) return;
+    slides[idx].scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function updateDots() {
+    const dots = dotsContainer.querySelectorAll('.dot');
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const vh = window.innerHeight;
+    const newCurrent = Math.round(scrollTop / vh);
+    if (newCurrent !== current && newCurrent >= 0 && newCurrent < slides.length) {
+      current = newCurrent;
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+  }
+
+  window.addEventListener('scroll', updateDots, { passive: true });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      goTo(current + 1);
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      goTo(current - 1);
+    }
+  });
+})();
+</script>
+</body>
+</html>
