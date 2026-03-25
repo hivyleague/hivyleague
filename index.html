@@ -222,6 +222,37 @@
     color: var(--ink);
   }
 
+  .founder-timeline {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .founder-timeline li {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    padding: 0.45rem 0 0.45rem 1.2rem;
+    position: relative;
+  }
+
+  .founder-timeline li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.85rem;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--stone);
+  }
+
+  .founder-timeline li strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
   .founder-links {
     display: flex;
     gap: 1.5rem;
@@ -928,11 +959,14 @@
     <div class="founder-info">
       <h2>William Le Ferrand</h2>
       <p class="founder-role">Founder &amp; Operating Partner</p>
-      <p class="founder-bio">
-        I&rsquo;ve been writing software since I was&nbsp;10. After <strong>&Eacute;cole Polytechnique</strong>, I spent <strong>7&nbsp;years in Silicon Valley</strong> shipping products and scaling engineering teams across continents. Then I came back to build &mdash; first as the CEO of an industrial robotics startup, then as <strong>Chief Transformation Officer of a &euro;160M industrial group</strong> in Toulouse, where I ran the P&amp;L, led the digital strategy, and learned what really blocks execution when capital is on the line.
-      </p>
+      <ul class="founder-timeline">
+        <li><strong>Writing software since age&nbsp;10.</strong> &Eacute;cole Polytechnique graduate.</li>
+        <li><strong>7&nbsp;years in Silicon Valley</strong> &mdash; shipping products and building engineering teams across three continents.</li>
+        <li><strong>CEO of an industrial robotics startup</strong> &mdash; fundraising, customers, product, the lot.</li>
+        <li><strong>2&nbsp;years as Chief Transformation Officer</strong> of a &euro;160M industrial group (1,200&nbsp;people, aerospace). Wrote the digital transformation plan around processes and data rather than tools. Deployed a company-wide ontology on a datalake, helped IT set up data governance and migrate to the cloud, built an internal operating handbook, started tech lunches to spread the culture &mdash; and hired a team of&nbsp;12 to carry it forward.</li>
+      </ul>
       <p class="founder-bio" style="font-size:0.9rem; color:var(--ink-muted);">
-        I still write code every day. Hypsis exists because I kept seeing the same gap &mdash; between what a board expects and what the tools on the ground can deliver.
+        I still write code every day. Hypsis exists because I kept seeing the same gap &mdash; between what a board expects and what the ground can actually deliver.
       </p>
       <div class="founder-links">
         <a href="mailto:william@hypsis.ai">william@hypsis.ai</a>
