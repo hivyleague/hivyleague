@@ -623,79 +623,36 @@
 
   .box-feature:last-child { border-right: none; }
 
-  .box-feature-icon {
-    font-size: 1.6rem;
-    margin-bottom: 0.8rem;
-    line-height: 1;
-  }
-
   .box-feature h3 {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--paper);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
   }
 
-  .box-feature p {
+  .box-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .box-list li {
     font-size: 0.85rem;
     font-weight: 300;
     color: rgba(248,246,241,0.6);
-    line-height: 1.65;
+    line-height: 1.55;
+    padding: 0.3rem 0 0.3rem 1rem;
+    position: relative;
   }
 
-  .box-specs {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    background: rgba(248,246,241,0.04);
-    border-radius: 6px;
-    margin-bottom: 2rem;
-  }
-
-  .box-spec {
-    padding: 1.2rem 1.4rem;
-    border-right: 1px solid rgba(248,246,241,0.06);
-    text-align: center;
-  }
-
-  .box-spec:last-child { border-right: none; }
-
-  .box-spec .spec-val {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--paper);
-    margin-bottom: 0.2rem;
-  }
-
-  .box-spec .spec-label {
-    font-size: 0.7rem;
-    font-weight: 300;
-    color: rgba(248,246,241,0.45);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  .box-compliance {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .box-badge {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: rgba(248,246,241,0.55);
-  }
-
-  .box-badge-dot {
-    width: 6px;
-    height: 6px;
+  .box-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7rem;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
     background: var(--bronze-light);
-    flex-shrink: 0;
   }
 
   /* =========================================
@@ -926,13 +883,6 @@
       border-bottom: 1px solid rgba(248,246,241,0.1);
     }
     .box-feature:last-child { border-bottom: none; }
-    .box-specs {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .box-spec:nth-child(2) { border-right: none; }
-    .box-compliance {
-      gap: 1rem;
-    }
   }
 </style>
 </head>
@@ -1126,54 +1076,40 @@
   <div class="box-inner">
     <div class="reveal">
       <p class="section-label">The Hypsis Box</p>
-      <h2>A physical server. Your data. Your tools. Your property.</h2>
+      <h2>A physical server that stays in the building.</h2>
       <p class="box-lead">
-        Every engagement ships with a <strong>dedicated on-premise appliance</strong> that stays in your portfolio company&rsquo;s building. It holds the ontology, runs AI inference, and hosts every app we build together. When the engagement ends, the box stays &mdash; <strong>your hardware, your data, your tools</strong>. A subscription keeps the platform current: new models, new techniques, hardware refresh.
+        Every engagement ships with a dedicated appliance installed on-site. It runs the AI, hosts every app, and stores the company&rsquo;s operational knowledge. The box is <strong>their property</strong>. A subscription keeps the platform current as the technology evolves.
       </p>
     </div>
 
     <div class="box-grid reveal">
       <div class="box-feature">
-        <div class="box-feature-icon">&curren;</div>
-        <h3>The ontology lives here</h3>
-        <p>The structured knowledge model of the business &mdash; processes, entities, relationships &mdash; is stored and served from this machine. It&rsquo;s the data backbone every app reads from and writes to.</p>
+        <h3>It works</h3>
+        <ul class="box-list">
+          <li>Operational from day one &mdash; no lengthy IT project to get started</li>
+          <li>All tools built during the engagement run on it in production</li>
+          <li>Subscription includes model upgrades, security patches, and hardware refresh</li>
+          <li>The company keeps building on it after we leave</li>
+        </ul>
       </div>
       <div class="box-feature">
-        <div class="box-feature-icon">&loz;</div>
-        <h3>AI runs locally</h3>
-        <p>35B-parameter language models run on a single GPU inside the box. No API calls to external providers. No data ever leaves the network. Code generation, analysis, chat &mdash; all on-site.</p>
+        <h3>It&rsquo;s compliant</h3>
+        <ul class="box-list">
+          <li>No data leaves the company&rsquo;s network &mdash; ever</li>
+          <li>No inbound ports, no cloud dependency</li>
+          <li>GDPR, NIS2, and ITAR compatible out of the box</li>
+          <li>IT keeps full visibility and control</li>
+        </ul>
       </div>
       <div class="box-feature">
-        <div class="box-feature-icon">&rArr;</div>
-        <h3>Apps deploy to it</h3>
-        <p>Every tool built during the engagement runs on this infrastructure. Kubernetes orchestration, monitoring, backups &mdash; production-grade from day one, owned and operated by the company.</p>
+        <h3>It&rsquo;s easy to bring in</h3>
+        <ul class="box-list">
+          <li>One network cable, one IP address &mdash; that&rsquo;s all IT provides</li>
+          <li>No software to install on existing machines</li>
+          <li>IT managers get admin access and monitoring from day one</li>
+          <li>We work with them, not around them</li>
+        </ul>
       </div>
-    </div>
-
-    <div class="box-specs reveal">
-      <div class="box-spec">
-        <div class="spec-val">1 GPU</div>
-        <div class="spec-label">Inference</div>
-      </div>
-      <div class="box-spec">
-        <div class="spec-val">35B</div>
-        <div class="spec-label">Parameters</div>
-      </div>
-      <div class="box-spec">
-        <div class="spec-val">1 cable</div>
-        <div class="spec-label">IT requirement</div>
-      </div>
-      <div class="box-spec">
-        <div class="spec-val">0 ports</div>
-        <div class="spec-label">Inbound</div>
-      </div>
-    </div>
-
-    <div class="box-compliance reveal">
-      <div class="box-badge"><span class="box-badge-dot"></span>GDPR by design</div>
-      <div class="box-badge"><span class="box-badge-dot"></span>NIS2 compliant</div>
-      <div class="box-badge"><span class="box-badge-dot"></span>Defense &amp; ITAR ready</div>
-      <div class="box-badge"><span class="box-badge-dot"></span>No third-party data processing</div>
     </div>
   </div>
 </section>
