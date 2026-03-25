@@ -175,13 +175,13 @@
     display: grid;
     grid-template-columns: 280px 1fr;
     gap: 3rem;
-    align-items: center;
+    align-items: stretch;
   }
 
   .founder-photo-wrapper {
     position: relative;
     width: 280px;
-    height: 340px;
+    min-height: 280px;
     overflow: hidden;
   }
 
@@ -190,7 +190,6 @@
     height: 100%;
     object-fit: cover;
     object-position: center 15%;
-    filter: grayscale(0.15) contrast(1.05);
   }
 
   .founder-info h2 {
@@ -538,86 +537,133 @@
   }
 
   /* =========================================
-     SOVEREIGNTY
+     THE BOX
      ========================================= */
-  .sovereignty {
-    padding: 4rem 2rem;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .sovereignty-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border: 1px solid var(--stone);
-  }
-
-  .sovereignty-left {
-    padding: 2.5rem;
+  .box-section {
+    padding: 5rem 2rem;
     background: var(--ink);
     color: var(--paper);
   }
 
-  .sovereignty-left h3 {
-    font-size: 1.3rem;
+  .box-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .box-section .section-label { color: var(--bronze-light); }
+
+  .box-section h2 {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
     font-weight: 600;
-    margin-bottom: 0.8rem;
+    color: var(--paper);
+    line-height: 1.35;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
   }
 
-  .sovereignty-left p {
-    font-size: 0.95rem;
+  .box-lead {
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
     font-weight: 300;
-    color: rgba(248,246,241,0.7);
+    color: rgba(248,246,241,0.65);
+    max-width: 700px;
     line-height: 1.7;
+    margin-bottom: 2.5rem;
   }
 
-  .sovereignty-left strong {
+  .box-lead strong {
     font-weight: 500;
     color: var(--paper);
   }
 
-  .sovereignty-right {
-    padding: 2.5rem;
-    background: var(--paper);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
+  .box-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(248,246,241,0.1);
+    border-bottom: 1px solid rgba(248,246,241,0.1);
+    margin-bottom: 2rem;
   }
 
-  .sov-item {
-    display: flex;
-    gap: 0.8rem;
-    align-items: flex-start;
+  .box-feature {
+    padding: 2rem 1.8rem;
+    border-right: 1px solid rgba(248,246,241,0.1);
   }
 
-  .sov-icon {
-    flex-shrink: 0;
-    width: 32px;
-    height: 32px;
-    background: var(--paper-warm);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.85rem;
-    color: var(--bronze);
+  .box-feature:last-child { border-right: none; }
+
+  .box-feature-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
+    line-height: 1;
+  }
+
+  .box-feature h3 {
+    font-size: 0.95rem;
     font-weight: 600;
+    color: var(--paper);
+    margin-bottom: 0.5rem;
   }
 
-  .sov-text {
+  .box-feature p {
     font-size: 0.85rem;
     font-weight: 300;
-    color: var(--ink-soft);
-    line-height: 1.5;
+    color: rgba(248,246,241,0.6);
+    line-height: 1.65;
   }
 
-  .sov-text strong {
-    font-weight: 500;
-    color: var(--ink);
-    display: block;
-    margin-bottom: 0.1rem;
+  .box-specs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: rgba(248,246,241,0.04);
+    border-radius: 6px;
+    margin-bottom: 2rem;
+  }
+
+  .box-spec {
+    padding: 1.2rem 1.4rem;
+    border-right: 1px solid rgba(248,246,241,0.06);
+    text-align: center;
+  }
+
+  .box-spec:last-child { border-right: none; }
+
+  .box-spec .spec-val {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 0.2rem;
+  }
+
+  .box-spec .spec-label {
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: rgba(248,246,241,0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .box-compliance {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .box-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: rgba(248,246,241,0.55);
+  }
+
+  .box-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--bronze-light);
+    flex-shrink: 0;
   }
 
   /* =========================================
@@ -835,8 +881,20 @@
     .comparison-table { font-size: 0.8rem; }
     .comparison-table th,
     .comparison-table td { padding: 0.6rem 0.5rem; }
-    .sovereignty-card {
+    .box-grid {
       grid-template-columns: 1fr;
+    }
+    .box-feature {
+      border-right: none;
+      border-bottom: 1px solid rgba(248,246,241,0.1);
+    }
+    .box-feature:last-child { border-bottom: none; }
+    .box-specs {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .box-spec:nth-child(2) { border-right: none; }
+    .box-compliance {
+      gap: 1rem;
     }
   }
 </style>
@@ -865,7 +923,7 @@
 <section class="founder">
   <div class="founder-card reveal">
     <div class="founder-photo-wrapper">
-      <img src="assets/221117_OrangeLab_5570.jpg" alt="William Le Ferrand speaking at a conference">
+      <img src="assets/william_orange.png" alt="William Le Ferrand speaking at a conference">
     </div>
     <div class="founder-info">
       <h2>William Le Ferrand</h2>
@@ -917,7 +975,7 @@
     </div>
 
     <p class="problem-bottom">
-      The capital is there. The thesis is there. Operators are on the ground. But the last mile &mdash; from &ldquo;we know what we need&rdquo; to &ldquo;we have a tool that does&nbsp;it&rdquo; &mdash; takes <strong>a year instead of a week</strong>.
+      The capital is there. The thesis is there. Operators are on the ground. But the last mile&thinsp;&mdash;&thinsp;from &ldquo;we know what we need&rdquo; to &ldquo;we have a tool that does&nbsp;it&rdquo;&thinsp;&mdash;&thinsp;takes&nbsp;<strong>a year instead of a week</strong>.
     </p>
   </div>
 </section>
@@ -956,26 +1014,22 @@
     </div>
     <div class="results-grid reveal">
       <div class="result-item">
-        <div class="result-number">40<span class="unit">+</span></div>
-        <div class="result-label">Apps deployed on a single industrial engagement</div>
+        <div class="result-number">Dozens</div>
+        <div class="result-label">of apps deployed per engagement, built alongside domain experts</div>
       </div>
       <div class="result-item">
-        <div class="result-number">&euro;640K</div>
-        <div class="result-label">Annual savings identified and tooled in 90&nbsp;days</div>
+        <div class="result-number">2&ndash;4<span class="unit"> wk</span></div>
+        <div class="result-label">From kickoff to first tool in production</div>
       </div>
       <div class="result-item">
         <div class="result-number">&lt;6<span class="unit"> mo</span></div>
-        <div class="result-label">Payback on a &euro;300K engagement</div>
+        <div class="result-label">Typical payback on the full engagement</div>
       </div>
       <div class="result-item">
-        <div class="result-number">14<span class="unit"> days</span></div>
-        <div class="result-label">To a live transformation dashboard linked to P&amp;L</div>
+        <div class="result-number">Day 14</div>
+        <div class="result-label">Live transformation dashboard linked to P&amp;L impact</div>
       </div>
     </div>
-    <p class="results-context reveal">
-      Illustrative: aerospace precision-machining, &euro;120M revenue, 450&nbsp;employees.<br>
-      Procurement, quality, scheduling, maintenance &mdash; each initiative tooled and measured against EBITDA.
-    </p>
   </div>
 </section>
 
@@ -1028,28 +1082,59 @@
   </table>
 </section>
 
-<!-- ============ SOVEREIGNTY ============ -->
-<section class="sovereignty">
-  <div class="sovereignty-card reveal">
-    <div class="sovereignty-left">
-      <h3>Everything stays on-premise.</h3>
-      <p>
-        The Hypsis Box is a standalone appliance on the customer&rsquo;s network. AI inference runs locally &mdash; <strong>35B-parameter models on a single GPU</strong>. No data leaves the building. No inbound ports. IT provides one cable, one IP, outbound HTTPS.
+<!-- ============ THE BOX ============ -->
+<section class="box-section">
+  <div class="box-inner">
+    <div class="reveal">
+      <p class="section-label">The Hypsis Box</p>
+      <h2>A physical server. Your data. Your tools. Your property.</h2>
+      <p class="box-lead">
+        Every engagement ships with a <strong>dedicated on-premise appliance</strong> that stays in your portfolio company&rsquo;s building. It holds the ontology, runs AI inference, and hosts every app we build together. When the engagement ends, the box stays. <strong>No subscription. No cloud dependency. Full ownership.</strong>
       </p>
     </div>
-    <div class="sovereignty-right">
-      <div class="sov-item">
-        <div class="sov-icon">D</div>
-        <div class="sov-text"><strong>Defense &amp; ITAR ready</strong>No classified data exposure risk</div>
+
+    <div class="box-grid reveal">
+      <div class="box-feature">
+        <div class="box-feature-icon">&curren;</div>
+        <h3>The ontology lives here</h3>
+        <p>The structured knowledge model of the business &mdash; processes, entities, relationships &mdash; is stored and served from this machine. It&rsquo;s the data backbone every app reads from and writes to.</p>
       </div>
-      <div class="sov-item">
-        <div class="sov-icon">E</div>
-        <div class="sov-text"><strong>NIS2 compliant</strong>No third-party data processing</div>
+      <div class="box-feature">
+        <div class="box-feature-icon">&loz;</div>
+        <h3>AI runs locally</h3>
+        <p>35B-parameter language models run on a single GPU inside the box. No API calls to external providers. No data ever leaves the network. Code generation, analysis, chat &mdash; all on-site.</p>
       </div>
-      <div class="sov-item">
-        <div class="sov-icon">G</div>
-        <div class="sov-text"><strong>GDPR by design</strong>Data residency is a non-question</div>
+      <div class="box-feature">
+        <div class="box-feature-icon">&rArr;</div>
+        <h3>Apps deploy to it</h3>
+        <p>Every tool built during the engagement runs on this infrastructure. Kubernetes orchestration, monitoring, backups &mdash; production-grade from day one, owned and operated by the company.</p>
       </div>
+    </div>
+
+    <div class="box-specs reveal">
+      <div class="box-spec">
+        <div class="spec-val">1 GPU</div>
+        <div class="spec-label">Inference</div>
+      </div>
+      <div class="box-spec">
+        <div class="spec-val">35B</div>
+        <div class="spec-label">Parameters</div>
+      </div>
+      <div class="box-spec">
+        <div class="spec-val">1 cable</div>
+        <div class="spec-label">IT requirement</div>
+      </div>
+      <div class="box-spec">
+        <div class="spec-val">0 ports</div>
+        <div class="spec-label">Inbound</div>
+      </div>
+    </div>
+
+    <div class="box-compliance reveal">
+      <div class="box-badge"><span class="box-badge-dot"></span>GDPR by design</div>
+      <div class="box-badge"><span class="box-badge-dot"></span>NIS2 compliant</div>
+      <div class="box-badge"><span class="box-badge-dot"></span>Defense &amp; ITAR ready</div>
+      <div class="box-badge"><span class="box-badge-dot"></span>No third-party data processing</div>
     </div>
   </div>
 </section>
