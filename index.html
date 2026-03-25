@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hypsis — AI-Native Operating Partners</title>
-<meta name="description" content="We deliver results with a proven AI methodology and train your teams to build their own tools.">
+<title>Hypsis — AI-Native Operating Partners for Investment Funds</title>
+<meta name="description" content="The operating partner your portfolio companies need. Proven AI methodology that delivers measurable EBITDA impact in 90 days — then leaves the capability behind.">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -43,8 +43,17 @@
     margin: 3rem auto;
   }
 
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 1rem;
+  }
+
   /* =========================================
-     HERO — fresco as background
+     HERO
      ========================================= */
   .hero {
     position: relative;
@@ -119,7 +128,7 @@
     font-size: clamp(1.05rem, 1.8vw, 1.3rem);
     font-weight: 300;
     color: var(--ink-soft);
-    max-width: 580px;
+    max-width: 620px;
     margin: 0 auto 1.5rem;
     line-height: 1.7;
     opacity: 0;
@@ -155,6 +164,185 @@
   }
 
   /* =========================================
+     FOUNDER
+     ========================================= */
+  .founder {
+    padding: 5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .founder-card {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .founder-photo-wrapper {
+    position: relative;
+    width: 280px;
+    height: 340px;
+    overflow: hidden;
+  }
+
+  .founder-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+    filter: grayscale(0.15) contrast(1.05);
+  }
+
+  .founder-info h2 {
+    font-size: clamp(1.6rem, 2.8vw, 2rem);
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+    letter-spacing: -0.01em;
+  }
+
+  .founder-role {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 1.2rem;
+  }
+
+  .founder-bio {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+
+  .founder-bio strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .founder-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .founder-links a {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--bronze);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .founder-links a:hover { color: var(--ink); }
+
+  .founder-links svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  /* =========================================
+     PROBLEM
+     ========================================= */
+  .problem {
+    padding: 5rem 2rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .problem-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .problem .section-label { color: var(--bronze-light); }
+
+  .problem h2 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    color: var(--paper);
+    line-height: 1.25;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .problem-lead {
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    font-weight: 300;
+    color: rgba(248,246,241,0.7);
+    max-width: 700px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .problem-lead strong {
+    font-weight: 600;
+    color: var(--paper);
+  }
+
+  .problem-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(248,246,241,0.1);
+    border-bottom: 1px solid rgba(248,246,241,0.1);
+    margin-bottom: 2.5rem;
+  }
+
+  .problem-stat {
+    padding: 1.8rem 1.5rem;
+    border-right: 1px solid rgba(248,246,241,0.1);
+  }
+
+  .problem-stat:last-child { border-right: none; }
+
+  .problem-stat .number {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    color: var(--paper);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.03em;
+  }
+
+  .problem-stat .label {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(248,246,241,0.6);
+    line-height: 1.5;
+  }
+
+  .problem-stat .source {
+    font-size: 0.65rem;
+    font-weight: 300;
+    color: rgba(248,246,241,0.3);
+    margin-top: 0.3rem;
+  }
+
+  .problem-bottom {
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    font-weight: 300;
+    color: rgba(248,246,241,0.65);
+    font-style: italic;
+    line-height: 1.65;
+  }
+
+  .problem-bottom strong {
+    font-weight: 600;
+    color: var(--paper);
+    font-style: normal;
+  }
+
+  /* =========================================
      METHOD
      ========================================= */
   .method {
@@ -166,15 +354,6 @@
   .method-header {
     text-align: center;
     margin-bottom: 3.5rem;
-  }
-
-  .section-label {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--bronze);
-    margin-bottom: 1rem;
   }
 
   .method h2 {
@@ -203,7 +382,6 @@
   }
 
   .pillar:last-child { border-right: none; }
-
   .pillar:hover { background: var(--paper-warm); }
 
   .pillar-number {
@@ -229,6 +407,221 @@
   }
 
   /* =========================================
+     RESULTS
+     ========================================= */
+  .results {
+    padding: 5rem 2rem;
+    background: var(--paper-warm);
+  }
+
+  .results-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .results-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .results h2 {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.35;
+    max-width: 600px;
+    margin: 0 auto;
+    letter-spacing: -0.01em;
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--stone);
+    border-bottom: 1px solid var(--stone);
+    background: var(--paper);
+  }
+
+  .result-item {
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--stone);
+    text-align: center;
+  }
+
+  .result-item:last-child { border-right: none; }
+
+  .result-number {
+    font-size: clamp(2rem, 3.5vw, 2.6rem);
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.03em;
+  }
+
+  .result-number .unit {
+    font-size: 0.45em;
+    font-weight: 400;
+    color: var(--ink-muted);
+  }
+
+  .result-label {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  .results-context {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+
+  /* =========================================
+     COMPARISON
+     ========================================= */
+  .comparison {
+    padding: 5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .comparison-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .comparison h2 {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.35;
+    max-width: 600px;
+    margin: 0 auto;
+    letter-spacing: -0.01em;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .comparison-table th {
+    text-align: left;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding: 0.8rem 1rem;
+    border-bottom: 2px solid var(--stone);
+  }
+
+  .comparison-table td {
+    padding: 0.9rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--stone-light);
+    vertical-align: top;
+  }
+
+  .comparison-table tr.highlight td {
+    background: rgba(122,104,64,0.06);
+    color: var(--ink);
+    font-weight: 500;
+    border-bottom: 2px solid var(--bronze);
+  }
+
+  /* =========================================
+     SOVEREIGNTY
+     ========================================= */
+  .sovereignty {
+    padding: 4rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .sovereignty-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--stone);
+  }
+
+  .sovereignty-left {
+    padding: 2.5rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .sovereignty-left h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+
+  .sovereignty-left p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: rgba(248,246,241,0.7);
+    line-height: 1.7;
+  }
+
+  .sovereignty-left strong {
+    font-weight: 500;
+    color: var(--paper);
+  }
+
+  .sovereignty-right {
+    padding: 2.5rem;
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .sov-item {
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+
+  .sov-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: var(--paper-warm);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    color: var(--bronze);
+    font-weight: 600;
+  }
+
+  .sov-text {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  .sov-text strong {
+    font-weight: 500;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+
+  /* =========================================
      OUTCOME
      ========================================= */
   .outcome {
@@ -240,14 +633,12 @@
     font-size: clamp(1.2rem, 2.5vw, 1.7rem);
     font-weight: 300;
     color: var(--ink);
-    max-width: 700px;
+    max-width: 750px;
     margin: 0 auto;
     line-height: 1.6;
   }
 
-  .outcome-text strong {
-    font-weight: 600;
-  }
+  .outcome-text strong { font-weight: 600; }
 
   /* =========================================
      CTA
@@ -272,6 +663,14 @@
     margin-bottom: 2rem;
   }
 
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
   .cta-button {
     display: inline-block;
     font-family: 'Outfit', sans-serif;
@@ -290,6 +689,29 @@
     background: var(--bronze-dark);
     transform: translateY(-1px);
     box-shadow: 0 4px 20px rgba(26,26,46,0.12);
+  }
+
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    text-decoration: none;
+    padding: 0.9rem 1.5rem;
+    transition: color 0.3s ease;
+  }
+
+  .cta-link:hover { color: var(--ink); }
+
+  .cta-link svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
   }
 
   /* =========================================
@@ -357,6 +779,9 @@
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.3s; }
 
+  /* =========================================
+     RESPONSIVE
+     ========================================= */
   @media (max-width: 768px) {
     .pillars {
       grid-template-columns: 1fr;
@@ -380,6 +805,40 @@
         var(--paper) 60%
       );
     }
+    .founder-card {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      text-align: center;
+    }
+    .founder-photo-wrapper {
+      width: 200px;
+      height: 240px;
+      margin: 0 auto;
+    }
+    .founder-links {
+      justify-content: center;
+    }
+    .problem-stats {
+      grid-template-columns: 1fr;
+    }
+    .problem-stat {
+      border-right: none;
+      border-bottom: 1px solid rgba(248,246,241,0.1);
+      padding: 1.2rem 1.5rem;
+    }
+    .problem-stat:last-child { border-bottom: none; }
+    .results-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .result-item:nth-child(2) { border-right: none; }
+    .result-item:nth-child(2) { border-bottom: 1px solid var(--stone); }
+    .result-item:nth-child(1) { border-bottom: 1px solid var(--stone); }
+    .comparison-table { font-size: 0.8rem; }
+    .comparison-table th,
+    .comparison-table td { padding: 0.6rem 0.5rem; }
+    .sovereignty-card {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 </head>
@@ -392,9 +851,9 @@
   </div>
   <div class="hero-content">
     <div class="hero-wordmark">Hypsis</div>
-    <h1>AI-Native<br>Operating Partners</h1>
+    <h1>The Operating Partner<br>Your Portfolio Needs</h1>
     <p class="hero-subtitle">
-      We deliver results with a proven AI methodology &mdash; then train your teams to build their own tools.
+      I deliver measurable EBITDA impact with a proven AI methodology in 90&nbsp;days &mdash; then leave the capability behind so your companies keep building without me.
     </p>
     <p class="hero-pillars">Processes &nbsp;&middot;&nbsp; Ontology &nbsp;&middot;&nbsp; Tools &nbsp;&middot;&nbsp; Autonomy</p>
   </div>
@@ -403,27 +862,195 @@
   </div>
 </section>
 
+<!-- ============ FOUNDER ============ -->
+<section class="founder">
+  <div class="founder-card reveal">
+    <div class="founder-photo-wrapper">
+      <img src="assets/221117_OrangeLab_5570.jpg" alt="William Le Ferrand speaking at a conference">
+    </div>
+    <div class="founder-info">
+      <h2>William Le Ferrand</h2>
+      <p class="founder-role">Founder &amp; Operating Partner</p>
+      <p class="founder-bio">
+        Writing software since age&nbsp;10. <strong>&Eacute;cole Polytechnique</strong> graduate. <strong>7&nbsp;years in Silicon Valley</strong> building products and international engineering teams. Ran an industrial robotics startup, then spent <strong>2&nbsp;years as Chief Transformation Officer</strong> of a &euro;160M industrial ETI in Toulouse &mdash; where I learned that the gap between knowing what to build and actually having it in production is the single biggest value destroyer in PE-backed companies.
+      </p>
+      <p class="founder-bio" style="font-size:0.9rem; color:var(--ink-muted);">
+        Hypsis is the methodology and toolset I wish I&rsquo;d had as a CTO. I built it so your portfolio companies can go from value creation plan to working tools in weeks, not years.
+      </p>
+      <div class="founder-links">
+        <a href="mailto:william@hypsis.ai">william@hypsis.ai</a>
+        <a href="https://linkedin.com/in/williamleferrand" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ PROBLEM ============ -->
+<section class="problem">
+  <div class="problem-inner reveal">
+    <p class="section-label">The reality</p>
+    <h2>&ldquo;12 is the new 5.&rdquo;</h2>
+    <p class="problem-lead">
+      PE deals now require <strong>10&ndash;12% annual EBITDA growth</strong> to hit a 2.5x return &mdash; double what they needed a decade ago. The only lever left is operational execution. But the tools to execute <strong>fail two-thirds of the time</strong>.
+    </p>
+
+    <div class="problem-stats">
+      <div class="problem-stat">
+        <div class="number">5.7<span style="font-size:0.5em; font-weight:400; color:rgba(248,246,241,0.5)"> yr</span></div>
+        <div class="label">Median hold in Europe, up from 4.7</div>
+        <div class="source">Gain.ai H1 2026</div>
+      </div>
+      <div class="problem-stat">
+        <div class="number">2/3</div>
+        <div class="label">Large-scale tech programs fail on time, budget, or scope</div>
+        <div class="source">BCG, 2024</div>
+      </div>
+      <div class="problem-stat">
+        <div class="number">47<span style="font-size:0.5em; font-weight:400; color:rgba(248,246,241,0.5)">%</span></div>
+        <div class="label">PE professionals postponed 2025 exits</div>
+        <div class="source">DealSuite 2026</div>
+      </div>
+    </div>
+
+    <p class="problem-bottom">
+      The capital is there. The thesis is there. Operators are on the ground. But the last mile &mdash; from &ldquo;we know what we need&rdquo; to &ldquo;we have a tool that does&nbsp;it&rdquo; &mdash; takes <strong>a year instead of a week</strong>.
+    </p>
+  </div>
+</section>
+
 <!-- ============ METHOD ============ -->
 <section class="method">
   <div class="method-header reveal">
-    <p class="section-label">The Method</p>
-    <h2>A proven methodology that compounds with every engagement.</h2>
+    <p class="section-label">The method</p>
+    <h2>From value creation plan to working tools in 90&nbsp;days.</h2>
   </div>
   <div class="pillars">
     <div class="pillar reveal reveal-delay-1">
       <div class="pillar-number">01</div>
       <h3>Processes</h3>
-      <p>We map how your teams actually work &mdash; the decisions, the flows, the friction.</p>
+      <p>I map how your portfolio companies actually work &mdash; the decisions, the flows, the friction &mdash; aligned with the value creation plan from day one.</p>
     </div>
     <div class="pillar reveal reveal-delay-2">
       <div class="pillar-number">02</div>
       <h3>Ontology</h3>
-      <p>We structure your operational knowledge into a shared data backbone that every tool compounds on.</p>
+      <p>I structure operational knowledge into a shared data backbone that every tool compounds on. A living model of the business, not a static document.</p>
     </div>
     <div class="pillar reveal reveal-delay-3">
       <div class="pillar-number">03</div>
-      <h3>Tools</h3>
-      <p>We deploy custom apps on your infrastructure, built with AI, owned by you. Then we train your teams to build their own.</p>
+      <h3>Tools &amp; Autonomy</h3>
+      <p>I deploy custom apps on their infrastructure, built with AI. Then I train their teams to keep building. When I leave, the capability stays.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESULTS ============ -->
+<section class="results">
+  <div class="results-inner">
+    <div class="results-header reveal">
+      <p class="section-label">Track record</p>
+      <h2>What a 90-day engagement delivers.</h2>
+    </div>
+    <div class="results-grid reveal">
+      <div class="result-item">
+        <div class="result-number">40<span class="unit">+</span></div>
+        <div class="result-label">Apps deployed on a single industrial engagement</div>
+      </div>
+      <div class="result-item">
+        <div class="result-number">&euro;640K</div>
+        <div class="result-label">Annual savings identified and tooled in 90&nbsp;days</div>
+      </div>
+      <div class="result-item">
+        <div class="result-number">&lt;6<span class="unit"> mo</span></div>
+        <div class="result-label">Payback on a &euro;300K engagement</div>
+      </div>
+      <div class="result-item">
+        <div class="result-number">14<span class="unit"> days</span></div>
+        <div class="result-label">To a live transformation dashboard linked to P&amp;L</div>
+      </div>
+    </div>
+    <p class="results-context reveal">
+      Illustrative: aerospace precision-machining, &euro;120M revenue, 450&nbsp;employees.<br>
+      Procurement, quality, scheduling, maintenance &mdash; each initiative tooled and measured against EBITDA.
+    </p>
+  </div>
+</section>
+
+<!-- ============ COMPARISON ============ -->
+<section class="comparison">
+  <div class="comparison-header reveal">
+    <p class="section-label">Why not the usual options</p>
+    <h2>Speed and sovereignty at a fraction of the cost.</h2>
+  </div>
+  <table class="comparison-table reveal">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Cost</th>
+        <th>Time to result</th>
+        <th>Data sovereignty</th>
+        <th>PE-aligned</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ERP / IT project</td>
+        <td>&euro;200&ndash;400K</td>
+        <td>12&ndash;18 months</td>
+        <td>Vendor-dependent</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>SaaS / low-code</td>
+        <td>&euro;50&ndash;200K/yr</td>
+        <td>3&ndash;6 months</td>
+        <td>Cloud (often US)</td>
+        <td>Partial</td>
+      </tr>
+      <tr>
+        <td>Internal hire</td>
+        <td>&euro;100K+/yr</td>
+        <td>6&ndash;12 months</td>
+        <td>Possible</td>
+        <td>No</td>
+      </tr>
+      <tr class="highlight">
+        <td><strong>Hypsis</strong></td>
+        <td><strong>&euro;50K pilot</strong></td>
+        <td><strong>2&ndash;4 weeks</strong></td>
+        <td><strong>On-premise</strong></td>
+        <td><strong>90-day cycles</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ SOVEREIGNTY ============ -->
+<section class="sovereignty">
+  <div class="sovereignty-card reveal">
+    <div class="sovereignty-left">
+      <h3>Everything stays on-premise.</h3>
+      <p>
+        The Hypsis Box is a standalone appliance on the customer&rsquo;s network. AI inference runs locally &mdash; <strong>35B-parameter models on a single GPU</strong>. No data leaves the building. No inbound ports. IT provides one cable, one IP, outbound HTTPS.
+      </p>
+    </div>
+    <div class="sovereignty-right">
+      <div class="sov-item">
+        <div class="sov-icon">D</div>
+        <div class="sov-text"><strong>Defense &amp; ITAR ready</strong>No classified data exposure risk</div>
+      </div>
+      <div class="sov-item">
+        <div class="sov-icon">E</div>
+        <div class="sov-text"><strong>NIS2 compliant</strong>No third-party data processing</div>
+      </div>
+      <div class="sov-item">
+        <div class="sov-icon">G</div>
+        <div class="sov-text"><strong>GDPR by design</strong>Data residency is a non-question</div>
+      </div>
     </div>
   </div>
 </section>
@@ -433,7 +1060,7 @@
   <div class="divider"></div>
   <div class="reveal">
     <p class="outcome-text">
-      In 90 days, your teams have <strong>working software</strong>, <strong>structured knowledge</strong>, and the <strong>skills to keep building</strong> without us.
+      In 90&nbsp;days, your portfolio company has <strong>working software</strong>, <strong>structured knowledge</strong>, and the <strong>skills to keep building</strong> without me. The method replicates across your fund.
     </p>
   </div>
   <div class="divider"></div>
@@ -442,16 +1069,22 @@
 <!-- ============ CTA ============ -->
 <section class="cta">
   <div class="reveal">
-    <h2>Let's talk about your next 90 days.</h2>
-    <p>No slides. No audits. Just results.</p>
-    <a href="mailto:hello@hypsis.ai" class="cta-button">Start a Conversation</a>
+    <h2>Let&rsquo;s talk about your next 90&nbsp;days.</h2>
+    <p>One portfolio company. One pilot. Measurable results before the next board.</p>
+    <div class="cta-buttons">
+      <a href="mailto:william@hypsis.ai" class="cta-button">Start a Conversation</a>
+      <a href="https://linkedin.com/in/williamleferrand" target="_blank" rel="noopener" class="cta-link">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
   </div>
 </section>
 
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wordmark">Hypsis</div>
-  <p>AI-native operating partners &nbsp;&middot;&nbsp; <a href="mailto:hello@hypsis.ai">hello@hypsis.ai</a></p>
+  <p>AI-native operating partner for investment funds &nbsp;&middot;&nbsp; <a href="mailto:william@hypsis.ai">william@hypsis.ai</a></p>
 </footer>
 
 <script>
