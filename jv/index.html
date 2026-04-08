@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hypsis &mdash; Sovereign AI for Industry</title>
+<meta name="description" content="Build and operate your own AI tools, on your own infrastructure, with your own data. 10 years of production-grade machine learning. On-premises. No vendor lock-in.">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Italiana&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f8f6f1;
+  --paper-warm: #f0ece3;
+  --ink: #1a1a2e;
+  --ink-soft: #3d3d54;
+  --ink-muted: #7a7a8c;
+  --bronze: #7a6840;
+  --bronze-light: #a89060;
+  --bronze-dark: #5c4e30;
+  --stone: #d4cfc5;
+  --stone-light: #e8e4db;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Outfit', -apple-system, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+.divider {
+  width: 120px;
+  height: 1px;
+  background: var(--stone);
+  margin: 3rem auto;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 1rem;
+}
+
+/* =========================================
+   HERO
+   ========================================= */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: center;
+  padding: 2rem 2rem 4rem;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: contrast(1.05) brightness(1.0);
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(248,246,241,0.1) 0%,
+    rgba(248,246,241,0.25) 25%,
+    rgba(248,246,241,0.7) 45%,
+    rgba(248,246,241,0.95) 60%,
+    var(--paper) 75%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+}
+
+.hero-wordmark {
+  font-family: 'Italiana', serif;
+  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+  letter-spacing: 0.6em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeIn 1.5s ease 0.2s forwards;
+}
+
+.hero h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.08;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+  opacity: 0;
+  animation: fadeInUp 1.5s ease 0.4s forwards;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+  font-weight: 300;
+  color: var(--ink-soft);
+  max-width: 650px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeInUp 1.5s ease 0.7s forwards;
+}
+
+.hero-subtitle strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  opacity: 0;
+  animation: fadeInUp 1.5s ease 1s forwards;
+}
+
+.hero-stat {
+  text-align: center;
+}
+
+.hero-stat .val {
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hero-stat .val .unit {
+  font-size: 0.45em;
+  font-weight: 400;
+  color: var(--ink-muted);
+}
+
+.hero-stat .lbl {
+  font-size: 0.72rem;
+  font-weight: 300;
+  color: var(--ink-muted);
+  margin-top: 0.3rem;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  opacity: 0;
+  animation: fadeIn 1.5s ease 1.5s forwards, float 3s ease-in-out infinite 1.5s;
+}
+
+.scroll-hint svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--stone);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+/* =========================================
+   PROBLEM
+   ========================================= */
+.problem {
+  padding: 5rem 2rem;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.problem-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.problem .section-label { color: var(--bronze-light); }
+
+.problem h2 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--paper);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.problem-lead {
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  font-weight: 300;
+  color: rgba(248,246,241,0.7);
+  max-width: 720px;
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+
+.problem-lead strong {
+  font-weight: 600;
+  color: var(--paper);
+}
+
+.constraint-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(248,246,241,0.1);
+  border-bottom: 1px solid rgba(248,246,241,0.1);
+}
+
+.constraint {
+  padding: 2rem 2rem;
+  border-bottom: 1px solid rgba(248,246,241,0.08);
+}
+
+.constraint:nth-child(odd) {
+  border-right: 1px solid rgba(248,246,241,0.08);
+}
+
+.constraint:nth-child(n+3) {
+  border-bottom: none;
+}
+
+.constraint h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--paper);
+  margin-bottom: 0.4rem;
+}
+
+.constraint p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: rgba(248,246,241,0.6);
+  line-height: 1.6;
+}
+
+/* =========================================
+   ANSWER / CONVICTIONS
+   ========================================= */
+.answer {
+  padding: 5rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.answer-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.answer h2 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+  max-width: 650px;
+  margin: 0 auto;
+  letter-spacing: -0.01em;
+}
+
+.answer-lead {
+  font-size: clamp(1rem, 1.4vw, 1.05rem);
+  font-weight: 300;
+  color: var(--ink-soft);
+  max-width: 650px;
+  margin: 0.8rem auto 0;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.convictions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--stone);
+  border-bottom: 1px solid var(--stone);
+}
+
+.conviction {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid var(--stone);
+  transition: background 0.3s ease;
+}
+
+.conviction:last-child { border-right: none; }
+.conviction:hover { background: var(--paper-warm); }
+
+.conviction-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--stone);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.conviction h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.conviction p {
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+
+.conviction p strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* =========================================
+   TECHNOLOGY
+   ========================================= */
+.technology {
+  padding: 5rem 2rem;
+  background: var(--paper-warm);
+}
+
+.technology-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.technology-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.technology h2 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+  max-width: 650px;
+  margin: 0 auto;
+  letter-spacing: -0.01em;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--stone);
+  background: var(--paper);
+  margin-bottom: 2rem;
+}
+
+.tech-card {
+  padding: 2rem 1.6rem;
+  border-right: 1px solid var(--stone);
+  transition: background 0.3s ease;
+}
+
+.tech-card:last-child { border-right: none; }
+.tech-card:hover { background: var(--paper-warm); }
+
+.tech-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.15rem;
+}
+
+.tech-badge {
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 0.7rem;
+  display: block;
+}
+
+.tech-card p {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.tech-use-cases {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+
+.platform-row {
+  background: var(--paper);
+  border: 1px solid var(--stone);
+  padding: 2.5rem 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.platform-text h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.6rem;
+}
+
+.platform-text p {
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.platform-text strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.platform-specs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+}
+
+.spec {
+  text-align: center;
+  padding: 1rem;
+  background: var(--paper-warm);
+  border: 1px solid var(--stone-light);
+}
+
+.spec .val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.spec .lbl {
+  font-size: 0.68rem;
+  font-weight: 300;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* =========================================
+   INDUSTRIES
+   ========================================= */
+.industries {
+  padding: 5rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.industries-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.industries h2 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+  max-width: 600px;
+  margin: 0 auto;
+  letter-spacing: -0.01em;
+}
+
+.industries-subtitle {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--ink-muted);
+  margin-top: 0.6rem;
+}
+
+.industry-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--stone);
+  background: var(--paper);
+}
+
+.industry-card {
+  padding: 2rem 1.8rem;
+  border-right: 1px solid var(--stone);
+  border-bottom: 1px solid var(--stone);
+  transition: background 0.3s ease;
+}
+
+.industry-card:nth-child(3n) { border-right: none; }
+.industry-card:nth-child(n+4) { border-bottom: none; }
+
+.industry-card:hover { background: var(--paper-warm); }
+
+.industry-card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.industry-card p {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.industry-card .ref {
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: var(--bronze);
+  margin-top: 0.5rem;
+  display: block;
+}
+
+.trust-bar {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.trust-bar p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+.trust-bar strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* =========================================
+   HOW IT WORKS
+   ========================================= */
+.how {
+  padding: 5rem 2rem;
+  background: var(--paper-warm);
+}
+
+.how-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.how-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.how h2 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+  max-width: 600px;
+  margin: 0 auto;
+  letter-spacing: -0.01em;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 3rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0.75rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--stone);
+}
+
+.timeline-step {
+  position: relative;
+  padding-bottom: 2.5rem;
+}
+
+.timeline-step:last-child { padding-bottom: 0; }
+
+.timeline-dot {
+  position: absolute;
+  left: -2.4rem;
+  top: 0.2rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bronze);
+  border: 2px solid var(--paper-warm);
+  box-shadow: 0 0 0 3px var(--stone);
+}
+
+.timeline-step h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+
+.timeline-meta {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 0.4rem;
+}
+
+.timeline-step p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  max-width: 600px;
+}
+
+/* =========================================
+   THE BOX
+   ========================================= */
+.box-section {
+  padding: 5rem 2rem;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.box-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.box-section .section-label { color: var(--bronze-light); }
+
+.box-section h2 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 600;
+  color: var(--paper);
+  line-height: 1.35;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.01em;
+}
+
+.box-lead {
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  font-weight: 300;
+  color: rgba(248,246,241,0.65);
+  max-width: 700px;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.box-lead strong {
+  font-weight: 500;
+  color: var(--paper);
+}
+
+.box-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(248,246,241,0.1);
+  border-bottom: 1px solid rgba(248,246,241,0.1);
+}
+
+.box-feature {
+  padding: 2rem 1.8rem;
+  border-right: 1px solid rgba(248,246,241,0.1);
+}
+
+.box-feature:last-child { border-right: none; }
+
+.box-feature h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--paper);
+  margin-bottom: 0.8rem;
+}
+
+.box-list {
+  list-style: none;
+  padding: 0;
+}
+
+.box-list li {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: rgba(248,246,241,0.6);
+  line-height: 1.55;
+  padding: 0.3rem 0 0.3rem 1rem;
+  position: relative;
+}
+
+.box-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7rem;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--bronze-light);
+}
+
+/* =========================================
+   TEAM
+   ========================================= */
+.team {
+  padding: 5rem 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.team-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.team h2 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+  max-width: 600px;
+  margin: 0 auto;
+  letter-spacing: -0.01em;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.team-card {
+  padding: 2.5rem 2rem;
+  background: var(--paper-warm);
+  border-left: 3px solid var(--bronze);
+}
+
+.team-card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.15rem;
+}
+
+.team-role {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 0.8rem;
+}
+
+.team-card p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  margin-bottom: 0.6rem;
+}
+
+.team-card .highlight-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.8rem;
+}
+
+.team-card .highlight-list li {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  padding: 0.25rem 0 0.25rem 0.9rem;
+  position: relative;
+}
+
+.team-card .highlight-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65rem;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--stone);
+}
+
+.team-card .highlight-list li strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.team-statement {
+  text-align: center;
+  margin-top: 2.5rem;
+  padding: 1.5rem 2rem;
+  background: var(--paper-warm);
+  border-left: 3px solid var(--bronze);
+}
+
+.team-statement p {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.team-statement strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* =========================================
+   OPEN SOURCE
+   ========================================= */
+.oss {
+  padding: 4rem 2rem;
+  background: var(--paper-warm);
+}
+
+.oss-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.oss h2 {
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.8rem;
+}
+
+.oss p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  max-width: 650px;
+  margin: 0 auto 1.5rem;
+}
+
+.oss-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.oss-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  background: var(--paper);
+  border: 1px solid var(--stone);
+  transition: all 0.3s ease;
+}
+
+.oss-link:hover {
+  border-color: var(--bronze);
+  color: var(--bronze-dark);
+}
+
+.oss-link svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* =========================================
+   CTA
+   ========================================= */
+.cta {
+  padding: 5rem 2rem 6rem;
+  text-align: center;
+}
+
+.cta h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.cta .lead {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  margin-bottom: 0.3rem;
+}
+
+.cta .sub {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--ink-muted);
+  margin-bottom: 2.5rem;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  display: inline-block;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--ink);
+  padding: 0.95rem 2.5rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background: var(--bronze-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(26,26,46,0.12);
+}
+
+.cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  text-decoration: none;
+  padding: 0.9rem 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.cta-link:hover { color: var(--ink); }
+
+.cta-link svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+footer {
+  padding: 2.5rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--stone);
+}
+
+footer .wordmark {
+  font-family: 'Italiana', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.5em;
+  color: var(--bronze);
+  text-transform: uppercase;
+}
+
+footer p {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--ink-muted);
+  margin-top: 0.4rem;
+}
+
+footer a {
+  color: var(--bronze);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover { color: var(--ink); }
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.footer-links a {
+  font-size: 0.72rem;
+  font-weight: 400;
+}
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(5px); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 768px) {
+  .hero {
+    justify-content: flex-end;
+    padding-bottom: 3rem;
+  }
+  .hero-bg::after {
+    background: linear-gradient(
+      180deg,
+      rgba(248,246,241,0.05) 0%,
+      rgba(248,246,241,0.4) 30%,
+      rgba(248,246,241,0.92) 48%,
+      var(--paper) 60%
+    );
+  }
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .hero-stat { min-width: 100px; }
+  .constraint-grid {
+    grid-template-columns: 1fr;
+  }
+  .constraint { border-right: none !important; border-bottom: 1px solid rgba(248,246,241,0.08) !important; }
+  .constraint:last-child { border-bottom: none !important; }
+  .convictions {
+    grid-template-columns: 1fr;
+    border-bottom: none;
+  }
+  .conviction {
+    border-right: none;
+    border-bottom: 1px solid var(--stone);
+    padding: 2rem 1.5rem;
+  }
+  .conviction:last-child { border-bottom: none; }
+  .tech-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tech-card:nth-child(2n) { border-right: none; }
+  .tech-card:nth-child(1), .tech-card:nth-child(2) { border-bottom: 1px solid var(--stone); }
+  .platform-row {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .industry-grid {
+    grid-template-columns: 1fr;
+  }
+  .industry-card { border-right: none !important; border-bottom: 1px solid var(--stone) !important; }
+  .industry-card:last-child { border-bottom: none !important; }
+  .box-grid {
+    grid-template-columns: 1fr;
+  }
+  .box-feature {
+    border-right: none;
+    border-bottom: 1px solid rgba(248,246,241,0.1);
+  }
+  .box-feature:last-child { border-bottom: none; }
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+  .oss-links {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="../assets/hero-fresco.png" alt="The Transfer of Knowledge">
+  </div>
+  <div class="hero-content">
+    <div class="hero-wordmark">Hypsis</div>
+    <h1>Your AI. Your Data.<br>Your Infrastructure.</h1>
+    <p class="hero-subtitle">
+      <strong>10 years of production-grade machine learning</strong> meets a platform that lets your teams build their own AI tools &mdash; on your premises, with your data, under your control.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="val">100<span class="unit">+</span></div>
+        <div class="lbl">Projects delivered</div>
+      </div>
+      <div class="hero-stat">
+        <div class="val">10<span class="unit"> yr</span></div>
+        <div class="lbl">In production</div>
+      </div>
+      <div class="hero-stat">
+        <div class="val">50<span class="unit">+</span></div>
+        <div class="lbl">GPUs self-hosted</div>
+      </div>
+      <div class="hero-stat">
+        <div class="val">4</div>
+        <div class="lbl">Open-source products</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section class="problem">
+  <div class="problem-inner reveal">
+    <p class="section-label">The reality</p>
+    <h2>Every organization must integrate AI.<br>Four constraints block adoption.</h2>
+    <p class="problem-lead">
+      No amount of vendor marketing can wish these away. They are structural &mdash; and they require a <strong>structural answer</strong>.
+    </p>
+
+    <div class="constraint-grid">
+      <div class="constraint">
+        <h3>Sensitive data</h3>
+        <p>Industrial processes, patient records, defense programs, financial positions &mdash; this data cannot leave the building, let alone the country.</p>
+      </div>
+      <div class="constraint">
+        <h3>Complex, specific systems</h3>
+        <p>No two factories, hospitals, or procurement chains work the same way. Generic SaaS doesn&rsquo;t fit; customization by consultants creates dependency.</p>
+      </div>
+      <div class="constraint">
+        <h3>External dependency is a strategic risk</h3>
+        <p>When the AI that runs your operations belongs to someone else &mdash; their cloud, their models, their pricing &mdash; you&rsquo;ve traded one dependency for another.</p>
+      </div>
+      <div class="constraint">
+        <h3>Strict accountability obligations</h3>
+        <p>GDPR, NIS2, DORA, defense classifications, contractual NDAs, fiduciary liability for AI decisions. Compliance cannot be delegated to a vendor&rsquo;s terms of service.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANSWER ============ -->
+<section class="answer">
+  <div class="answer-header reveal">
+    <p class="section-label">Our answer</p>
+    <h2>Build and operate your own AI &mdash; without external dependency, and fast.</h2>
+    <p class="answer-lead">
+      Hypsis lets organizations create and operate their own AI tools, on their own infrastructure, with their own data, in full compliance with their obligations.
+    </p>
+  </div>
+
+  <div class="convictions reveal">
+    <div class="conviction">
+      <div class="conviction-number">01</div>
+      <h3>Sovereignty</h3>
+      <p>Whoever controls the data controls the company. The platform runs <strong>on-premises</strong> &mdash; no data leaves, no foreign cloud dependency, no vendor lock-in. Control stays with the organization.</p>
+    </div>
+    <div class="conviction">
+      <div class="conviction-number">02</div>
+      <h3>Autonomy</h3>
+      <p><strong>Operational teams build their own tools</strong>, at their own pace, on their own data. No consultants standing between users and their solutions. No software engineering degree required.</p>
+    </div>
+    <div class="conviction">
+      <div class="conviction-number">03</div>
+      <h3>Scientific strength</h3>
+      <p>We build our own AI models &mdash; <strong>open-source, peer-reviewed, production-hardened</strong>. Not a wrapper around third-party APIs. ML has error rates; we encapsulate them honestly.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ TECHNOLOGY ============ -->
+<section class="technology">
+  <div class="technology-inner">
+    <div class="technology-header reveal">
+      <p class="section-label">The technology</p>
+      <h2>Research-grade AI. Production-hardened. Open source.</h2>
+    </div>
+
+    <div class="tech-grid reveal">
+      <div class="tech-card">
+        <div class="tech-name">DeepDetect</div>
+        <div class="tech-badge">Open Source</div>
+        <p>Visual inspection, anomaly detection, object recognition. Full deep learning server with REST API &mdash; training and inference on GPU, CPU, and embedded devices.</p>
+        <span class="tech-use-cases">Quality control &middot; Visual search &middot; Security</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-name">Colette</div>
+        <div class="tech-badge">Document AI</div>
+        <p>Reads, classifies and extracts structured data from any document &mdash; invoices, technical drawings, contracts, compliance filings.</p>
+        <span class="tech-use-cases">Procurement &middot; Legal &middot; Compliance &middot; Finance</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-name">Wheatley</div>
+        <div class="tech-badge">Open Source</div>
+        <p>Next-generation scheduling based on GNNs and reinforcement learning. The first system to handle real-world uncertainty in production scheduling.</p>
+        <span class="tech-use-cases">Production planning &middot; Supply chain &middot; Maintenance</span>
+      </div>
+      <div class="tech-card">
+        <div class="tech-name">joliGEN</div>
+        <div class="tech-badge">Open Source</div>
+        <p>Generative AI for images. Synthetic training data, dataset augmentation, and domain-specific generative models.</p>
+        <span class="tech-use-cases">Synthetic data &middot; AR/VR &middot; Virtual try-on</span>
+      </div>
+    </div>
+
+    <div class="platform-row reveal">
+      <div class="platform-text">
+        <h3>The Hypsis Platform</h3>
+        <p>An AI Builder that generates <strong>full-stack business applications from natural language</strong>. Backed by an industrial ontology and deployed on Kubernetes. Your operational teams describe what they need; the platform builds, tests, and deploys it &mdash; on your infrastructure.</p>
+        <p style="margin-top:0.6rem">25+ app templates already built and deployed: maintenance, procurement, HR, strategy, finance, scheduling, quality control.</p>
+      </div>
+      <div class="platform-specs">
+        <div class="spec">
+          <div class="val">43</div>
+          <div class="lbl">Entity types</div>
+        </div>
+        <div class="spec">
+          <div class="val">25+</div>
+          <div class="lbl">App templates</div>
+        </div>
+        <div class="spec">
+          <div class="val">35B</div>
+          <div class="lbl">Param models, local</div>
+        </div>
+        <div class="spec">
+          <div class="val">&lt;48h</div>
+          <div class="lbl">Deploy time</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INDUSTRIES ============ -->
+<section class="industries">
+  <div class="industries-header reveal">
+    <p class="section-label">Industries we serve</p>
+    <h2>Our software runs where the standards are highest.</h2>
+    <p class="industries-subtitle">From aerospace leaders to art institutions &mdash; production-grade AI for organizations that accept nothing less.</p>
+  </div>
+
+  <div class="industry-grid reveal">
+    <div class="industry-card">
+      <h3>Aerospace &amp; Transport</h3>
+      <p>Custom ML systems deployed in planes, trains, and cars. Scheduling under uncertainty for aerospace suppliers. Production optimization for precision machining.</p>
+      <span class="ref">Deployed at major aerospace corporations</span>
+    </div>
+    <div class="industry-card">
+      <h3>Defense &amp; Space</h3>
+      <p>Challenging optimizations for Earth and space applications. Military-grade infrastructure with SecNum-compatible GPU+CPU compute. ITAR-compliant deployments.</p>
+      <span class="ref">Classified programs, on-premises only</span>
+    </div>
+    <div class="industry-card">
+      <h3>Manufacturing &amp; Supply Chain</h3>
+      <p>Reinforcement-learning-based scheduling that handles real-world uncertainty. Visual quality inspection. Predictive maintenance on critical production lines.</p>
+      <span class="ref">Production-grade at industrial suppliers</span>
+    </div>
+    <div class="industry-card">
+      <h3>Cybersecurity</h3>
+      <p>Deep learning for malware detection and anomaly identification in logs. Running at some of the world&rsquo;s largest security-conscious corporations.</p>
+      <span class="ref">Deployed at global scale</span>
+    </div>
+    <div class="industry-card">
+      <h3>Fashion &amp; Luxury</h3>
+      <p>Custom-trained augmented reality and virtual try-on models for web and in-boutique experiences at world-class fashion houses.</p>
+      <span class="ref">In production at luxury brands</span>
+    </div>
+    <div class="industry-card">
+      <h3>Art &amp; Culture</h3>
+      <p>The Tate Recognition exhibit runs our code. Data visualization, big-data exploration through web technologies, VR, and installations.</p>
+      <span class="ref">Tate Gallery, London</span>
+    </div>
+  </div>
+
+  <div class="trust-bar reveal">
+    <p><strong>100+ projects</strong> delivered to large corporations, scale-ups, and startups across Europe and beyond. Battle-tested methodology since 2016.</p>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="how">
+  <div class="how-inner">
+    <div class="how-header reveal">
+      <p class="section-label">How it works</p>
+      <h2>From first contact to autonomous operations.</h2>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="timeline-step">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">Week 1&ndash;2</div>
+        <h3>Understand your operations</h3>
+        <p>We map how your organization actually works &mdash; the decisions, the data flows, the friction points. We re-formulate operational challenges as machine learning problems that fit your constraints.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">Week 2&ndash;4</div>
+        <h3>Deploy the platform</h3>
+        <p>A physical server arrives on-site, running AI inference, hosting apps, and storing your operational knowledge. One network cable, one IP address. First apps go live.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">Month 2&ndash;3</div>
+        <h3>Build the tools alongside your teams</h3>
+        <p>Domain experts describe what they need in plain language. The AI Builder generates production applications. 3&ndash;10 apps deployed: scheduling, quality control, procurement, maintenance. Your people build what they know best.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">Day 90+</div>
+        <h3>Autonomy</h3>
+        <p>We hand over the platform, the knowledge base, and the skills. Internal teams keep building. The company becomes less dependent on us, not more.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE BOX ============ -->
+<section class="box-section">
+  <div class="box-inner">
+    <div class="reveal">
+      <p class="section-label">On-premises infrastructure</p>
+      <h2>A physical server that stays in the building.</h2>
+      <p class="box-lead">
+        Every deployment ships with a dedicated appliance installed on-site. It runs the AI, hosts every app, and stores your operational knowledge. <strong>~1 PFlop of self-hosted compute. 50+ GPUs. No cloud dependency.</strong>
+      </p>
+    </div>
+
+    <div class="box-grid reveal">
+      <div class="box-feature">
+        <h3>It works</h3>
+        <ul class="box-list">
+          <li>Operational from day one &mdash; no lengthy IT project</li>
+          <li>35B-parameter models running locally on a single GPU</li>
+          <li>All tools built during the engagement run in production</li>
+          <li>Subscription includes model upgrades and security patches</li>
+        </ul>
+      </div>
+      <div class="box-feature">
+        <h3>It&rsquo;s compliant</h3>
+        <ul class="box-list">
+          <li>No data leaves your network &mdash; ever</li>
+          <li>No inbound ports, no cloud dependency</li>
+          <li>GDPR, NIS2, DORA, and ITAR compatible</li>
+          <li>IT keeps full visibility and control</li>
+        </ul>
+      </div>
+      <div class="box-feature">
+        <h3>It&rsquo;s yours</h3>
+        <ul class="box-list">
+          <li>Source code, data, and tools belong to you</li>
+          <li>No call-home, no kill switch</li>
+          <li>If we part ways, everything keeps running</li>
+          <li>You choose what to upgrade and when</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEAM ============ -->
+<section class="team">
+  <div class="team-header reveal">
+    <p class="section-label">The team</p>
+    <h2>A decade of production AI meets industrial transformation.</h2>
+  </div>
+
+  <div class="team-grid reveal">
+    <div class="team-card">
+      <h3>Emmanuel Benazera</h3>
+      <div class="team-role">Chief Scientist</div>
+      <p>AI researcher and engineer. 10 years building and deploying production-grade machine learning across aerospace, defense, cybersecurity, fashion, and art.</p>
+      <ul class="highlight-list">
+        <li><strong>100+ projects</strong> shipped to production</li>
+        <li><strong>50+ GPUs</strong> (~1 PFlop), entirely self-hosted</li>
+        <li><strong>Open-source</strong> creator &mdash; DeepDetect, joliGEN, Wheatley</li>
+        <li>Team of <strong>7&ndash;10 engineers</strong> and researchers in Toulouse</li>
+      </ul>
+    </div>
+    <div class="team-card">
+      <h3>William Le Ferrand</h3>
+      <div class="team-role">Chief Executive Officer</div>
+      <p>Software engineer and industrial operator. 15 years in software, 7 in Silicon Valley. Led digital transformation as CTO of a &euro;160M aerospace group, 1,200 employees.</p>
+      <ul class="highlight-list">
+        <li><strong>AI Builder</strong> &mdash; generates full-stack apps from natural language</li>
+        <li><strong>Industrial ontology</strong> &mdash; 43 entity types, 10 domains</li>
+        <li><strong>25+ app templates</strong> built and deployed</li>
+        <li><strong>On-prem appliance</strong> &mdash; Kubernetes-native, GPU-ready</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="team-statement reveal">
+    <p><strong>World-class AI research</strong> combined with a <strong>platform that transforms how companies adopt AI</strong>. Science, platform, infrastructure &mdash; a complete stack, ready for market.</p>
+  </div>
+</section>
+
+<!-- ============ OPEN SOURCE ============ -->
+<section class="oss">
+  <div class="oss-inner reveal">
+    <h2>Open source. Peer-reviewed. No black boxes.</h2>
+    <p>Bulletproof software is open source. We publish, contribute, and share. You can audit every model, inspect every algorithm, and fork anything.</p>
+    <div class="oss-links">
+      <a href="https://github.com/jolibrain/deepdetect" target="_blank" rel="noopener" class="oss-link">
+        <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        DeepDetect
+      </a>
+      <a href="https://github.com/jolibrain/joligen" target="_blank" rel="noopener" class="oss-link">
+        <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        joliGEN
+      </a>
+      <a href="https://github.com/jolibrain/wheatley" target="_blank" rel="noopener" class="oss-link">
+        <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        Wheatley
+      </a>
+      <a href="https://www.deepdetect.com" target="_blank" rel="noopener" class="oss-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        deepdetect.com
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="divider"></div>
+  <div class="reveal">
+    <h2>Let&rsquo;s build your AI capability.</h2>
+    <p class="lead">Sovereign. Autonomous. Scientifically rigorous.</p>
+    <p class="sub">We deploy on your premises in under 48 hours. Your data never leaves. Your team keeps building after we leave.</p>
+    <div class="cta-buttons">
+      <a href="mailto:william@hypsis.ai" class="cta-button">Start a Conversation</a>
+      <a href="https://linkedin.com/in/williamleferrand" target="_blank" rel="noopener" class="cta-link">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+  <div class="divider"></div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wordmark">Hypsis</div>
+  <p>Sovereign AI for industry &nbsp;&middot;&nbsp; Toulouse, France</p>
+  <div class="footer-links">
+    <a href="mailto:william@hypsis.ai">william@hypsis.ai</a>
+    <a href="https://hypsis.ai">hypsis.ai</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
