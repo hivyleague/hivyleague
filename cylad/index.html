@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'IA dans la transformation industrielle — William Le Ferrand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Italiana&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f8f6f1;
+  --paper-warm: #f0ece3;
+  --ink: #1a1a2e;
+  --ink-soft: #3d3d54;
+  --ink-muted: #7a7a8c;
+  --bronze: #7a6840;
+  --bronze-light: #a89060;
+  --bronze-dark: #5c4e30;
+  --stone: #d4cfc5;
+  --stone-light: #e8e4db;
+  --accent-faint: rgba(122,104,64,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Outfit', -apple-system, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+section.slide {
+  scroll-snap-align: start;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3.5rem 6vw;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ??? NAV DOTS ??? */
+.nav-dots {
+  position: fixed;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.nav-dots .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--stone); cursor: pointer;
+  transition: all 0.3s ease; border: none; padding: 0;
+}
+.nav-dots .dot.active {
+  background: var(--bronze); transform: scale(1.4);
+}
+
+/* ??? SLIDE NUMBER ??? */
+.slide-num {
+  position: absolute;
+  bottom: 1.2rem;
+  right: 2rem;
+  font-size: 0.65rem;
+  font-weight: 300;
+  color: var(--ink-muted);
+  letter-spacing: 0.05em;
+}
+.slide-dark .slide-num { color: rgba(248,246,241,0.3); }
+
+/* ??? TYPOGRAPHY ??? */
+.slide-label {
+  font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--bronze); margin-bottom: 0.8rem;
+}
+.slide-title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700; color: var(--ink);
+  line-height: 1.2; letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+}
+.slide-subtitle {
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  font-weight: 300; color: var(--ink-soft);
+  max-width: 750px; margin-bottom: 1.5rem; line-height: 1.7;
+}
+.punchline {
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  font-weight: 300; color: var(--ink-soft);
+  font-style: italic; max-width: 750px; line-height: 1.6;
+}
+.punchline strong { font-weight: 600; color: var(--ink); font-style: normal; }
+
+/* ??? COMPONENTS ??? */
+.card-grid { display: grid; gap: 1rem; }
+.card {
+  background: var(--paper-warm); border-radius: 8px;
+  padding: 1.2rem 1.4rem;
+}
+.card h3 {
+  font-size: 0.85rem; font-weight: 600;
+  color: var(--ink); margin-bottom: 0.3rem;
+}
+.card p, .card li {
+  font-size: 0.78rem; font-weight: 300;
+  color: var(--ink-soft); line-height: 1.55;
+}
+.card ul { list-style: none; padding: 0; }
+.card li { padding: 0.15rem 0 0.15rem 0.9rem; position: relative; }
+.card li::before {
+  content: ''; position: absolute; left: 0; top: 0.55em;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--bronze-light);
+}
+.card-accent {
+  background: var(--accent-faint);
+  border-left: 3px solid var(--bronze);
+}
+.statement-box {
+  background: var(--paper-warm); border-radius: 8px;
+  padding: 1rem 1.5rem; text-align: center; margin: 1rem 0;
+}
+.statement-box p {
+  font-size: 0.85rem; font-weight: 300; color: var(--ink-soft);
+}
+.statement-box strong { font-weight: 600; color: var(--ink); }
+.divider {
+  width: 80px; height: 1px; background: var(--stone); margin: 1.5rem 0;
+}
+
+.deck-table {
+  width: 100%; border-collapse: collapse; font-size: 0.78rem;
+}
+.deck-table th {
+  text-align: left; font-weight: 600; color: var(--ink);
+  padding: 0.55rem 0.7rem; border-bottom: 2px solid var(--stone);
+  font-size: 0.72rem; letter-spacing: 0.03em;
+}
+.deck-table td {
+  padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--stone-light);
+  color: var(--ink-soft); font-weight: 300; vertical-align: top;
+}
+.deck-table tr.highlight td {
+  background: var(--accent-faint); color: var(--ink); font-weight: 500;
+}
+
+.quote-block {
+  border-left: 3px solid var(--bronze);
+  padding: 0.8rem 1.2rem; margin: 0.8rem 0;
+  background: var(--accent-faint); border-radius: 0 8px 8px 0;
+}
+.quote-block p {
+  font-size: 0.88rem; font-weight: 300; color: var(--ink-soft);
+  line-height: 1.65; font-style: italic;
+}
+.quote-block .attr {
+  font-size: 0.7rem; font-weight: 500; color: var(--bronze);
+  font-style: normal; margin-top: 0.3rem;
+}
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+
+.cascade-list { list-style: none; padding: 0; }
+.cascade-list li {
+  display: flex; align-items: baseline; gap: 0.6rem;
+  padding: 0.35rem 0; font-size: 0.82rem; font-weight: 300;
+  color: var(--ink-soft); line-height: 1.5;
+}
+.cascade-list li strong { font-weight: 600; color: var(--ink); }
+.cascade-arrow {
+  font-size: 0.7rem; color: var(--bronze); flex-shrink: 0;
+}
+
+/* ??? DARK SLIDES ??? */
+.slide-dark { background: var(--ink); color: var(--paper); }
+.slide-dark .slide-label { color: var(--bronze-light); }
+.slide-dark .slide-title { color: var(--paper); }
+.slide-dark .slide-subtitle { color: rgba(248,246,241,0.7); }
+.slide-dark .punchline { color: rgba(248,246,241,0.7); }
+.slide-dark .punchline strong { color: var(--paper); }
+.slide-dark .card {
+  background: rgba(248,246,241,0.06);
+  border: 1px solid rgba(248,246,241,0.08);
+}
+.slide-dark .card h3 { color: var(--bronze-light); }
+.slide-dark .card p, .slide-dark .card li { color: rgba(248,246,241,0.65); }
+.slide-dark .card strong { color: var(--paper); }
+.slide-dark .quote-block {
+  background: rgba(248,246,241,0.05);
+  border-left-color: var(--bronze-light);
+}
+.slide-dark .quote-block p { color: rgba(248,246,241,0.7); }
+.slide-dark .statement-box {
+  background: rgba(248,246,241,0.06);
+  border: 1px solid rgba(248,246,241,0.08);
+}
+.slide-dark .statement-box p { color: rgba(248,246,241,0.7); }
+.slide-dark .statement-box strong { color: var(--paper); }
+
+/* ??? TITLE SLIDE ??? */
+.slide-title-page {
+  justify-content: flex-end; padding-bottom: 4rem;
+  text-align: center; align-items: center;
+}
+.slide-title-page .hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+}
+.slide-title-page .hero-bg img {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: center 30%; filter: contrast(1.05) brightness(1.0);
+}
+.slide-title-page .hero-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    rgba(248,246,241,0.08) 0%, rgba(248,246,241,0.2) 20%,
+    rgba(248,246,241,0.65) 42%, rgba(248,246,241,0.95) 58%,
+    var(--paper) 72%);
+}
+.slide-title-page .content {
+  position: relative; z-index: 1; max-width: 750px;
+}
+.wordmark {
+  font-family: 'Italiana', serif;
+  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+  letter-spacing: 0.6em; text-transform: uppercase;
+  color: var(--bronze); margin-bottom: 1.2rem;
+}
+.title-main {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 700; line-height: 1.08; color: var(--ink);
+  letter-spacing: -0.02em; margin-bottom: 1rem;
+}
+.title-sub {
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 300; color: var(--ink-soft);
+  margin-bottom: 1.2rem; line-height: 1.6;
+}
+.title-footer {
+  font-size: 0.75rem; font-weight: 300; color: var(--ink-muted);
+}
+.title-footer strong {
+  font-weight: 500; color: var(--ink-soft);
+}
+
+/* ??? TIMELINE ??? */
+.timeline-row {
+  display: grid; gap: 0;
+  border-top: 1px solid var(--stone);
+  border-bottom: 1px solid var(--stone);
+  margin: 1rem 0;
+}
+.timeline-item {
+  padding: 1.2rem 1.4rem; border-right: 1px solid var(--stone);
+}
+.timeline-item:last-child { border-right: none; }
+.timeline-item .num {
+  font-size: 1.6rem; font-weight: 800; color: var(--stone);
+  line-height: 1; margin-bottom: 0.4rem;
+}
+.timeline-item h3 {
+  font-size: 0.82rem; font-weight: 600; color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+.timeline-item p {
+  font-size: 0.72rem; font-weight: 300; color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* ??? STAT GRID ??? */
+.stat-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; border-top: 1px solid var(--stone);
+  border-bottom: 1px solid var(--stone); margin: 1rem 0;
+}
+.stat-item {
+  padding: 1.2rem 1.4rem; border-right: 1px solid var(--stone);
+  text-align: center;
+}
+.stat-item:last-child { border-right: none; }
+.stat-big {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800; color: var(--ink); line-height: 1;
+  letter-spacing: -0.03em; margin-bottom: 0.3rem;
+}
+.stat-unit { font-size: 0.5em; font-weight: 400; color: var(--ink-muted); }
+.stat-label {
+  font-size: 0.75rem; font-weight: 300; color: var(--ink-soft); line-height: 1.45;
+}
+.stat-source {
+  font-size: 0.6rem; font-weight: 300; color: var(--ink-muted); margin-top: 0.2rem;
+}
+
+/* ??? RESPONSIVE ??? */
+@media (max-width: 768px) {
+  section.slide { padding: 2rem 1.5rem; }
+  .two-col, .three-col, .stat-row { grid-template-columns: 1fr; }
+  .timeline-row { grid-template-columns: 1fr; }
+  .timeline-item { border-right: none; border-bottom: 1px solid var(--stone); }
+  .timeline-item:last-child { border-bottom: none; }
+  .stat-item { border-right: none; border-bottom: 1px solid var(--stone); }
+  .stat-item:last-child { border-bottom: none; }
+}
+
+/* ??? PRINT ??? */
+@media print {
+  html { scroll-snap-type: none; overflow: visible; }
+  section.slide {
+    height: auto; min-height: 100vh;
+    page-break-after: always; page-break-inside: avoid;
+  }
+  .nav-dots { display: none; }
+  .slide-title-page .hero-bg { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- ???????????????????????????????????????????
+     SLIDE 1 — TITRE
+     ??????????????????????????????????????????? -->
+<section class="slide slide-title-page" id="s1">
+  <div class="hero-bg">
+    <img src="../assets/hero-fresco.png" alt="">
+  </div>
+  <div class="content">
+    <div class="wordmark">Hypsis</div>
+    <h1 class="title-main">L&rsquo;IA dans la<br>transformation industrielle</h1>
+    <p class="title-sub">Le dernier kilom&egrave;tre de la transformation&thinsp;: de la recommandation &agrave; l&rsquo;outil op&eacute;rationnel.</p>
+    <p class="title-footer"><strong>William Le Ferrand</strong> &mdash; CTO, SOGECLAIR<br>Cylad Consulting &mdash; 13 mai 2026</p>
+  </div>
+</section>
+
+<!-- ???????????????????????????????????????????
+     SLIDE 2 — PROGRAMMER AVEC DES DONNÉES
+     ??????????????????????????????????????????? -->
+<section class="slide" id="s2">
+  <span class="slide-num">2 / 11</span>
+  <p class="slide-label">Panorama IA</p>
+  <h2 class="slide-title">Programmer avec des donn&eacute;es.</h2>
+  <p class="slide-subtitle">Le Deep Learning n&rsquo;est pas de la programmation classique. On ne code pas des r&egrave;gles&thinsp;: on montre des exemples et le mod&egrave;le apprend les patterns.</p>
+
+  <div class="quote-block">
+    <p>&laquo;&thinsp;General methods that leverage computation are ultimately the most effective, and by a large margin.&thinsp;&raquo;</p>
+    <p class="attr">Richard Sutton, The Bitter Lesson</p>
+  </div>
+
+  <div class="stat-row" style="margin-top:1.5rem">
+    <div class="stat-item">
+      <div class="stat-big">+</div>
+      <div class="stat-label">Plus de donn&eacute;es + plus de calcul<br>= plus d&rsquo;automatisation</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-big">&asymp;</div>
+      <div class="stat-label">Plafond&thinsp;: pr&eacute;cision l&eacute;g&egrave;rement en dessous<br>ou au dessus de l&rsquo;humain</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-big">&times;</div>
+      <div class="stat-label">L&rsquo;IA ne remplace pas l&rsquo;expertise m&eacute;tier,<br>elle <strong>amplifie</strong> la capacit&eacute; d&rsquo;analyse</div>
+    </div>
+  </div>
+
+  <p class="punchline" style="margin-top:1rem">Deux r&egrave;gles. Pas de magie. Le mod&egrave;le apprend ce qu&rsquo;on lui montre &mdash; ni plus, ni moins.</p>
+</section>
+
+<!-- ???????????????????????????????????????????
+     SLIDE 3 — SYSTEM 1 / 2 / 2++
+     ??????????????????????????????????????????? -->
+<section class="slide" id="s3">
+  <span class="slide-num">3 / 11</span>
+  <p class="slide-label">Panorama IA</p>
+  <h2 class="slide-title">Trois formes d&rsquo;intelligence artificielle.</h2>
+  <p class="slide-subtitle">Une grille simple pour comprendre ce que l&rsquo;IA sait faire et o&ugrave; elle cr&eacute;e de la valeur dans l&rsquo;industrie.</p>
+
+  <div class="three-col" style="margin-bottom:1rem">
+    <div class="card">
+      <h3>System 1 &mdash; R&eacute;flexe</h3>
+      <p style="font-size:0.7rem; color:var(--bronze); font-weight:500; margin-bottom:0.3rem">< 3 secondes</p>
+      <p>D&eacute;tection, classification, OCR. Tout ce qu&rsquo;un humain fait en un coup d&rsquo;&oelig;il.</p>
+      <ul>
+        <li>D&eacute;fauts qualit&eacute; sur pi&egrave;ces</li>
+        <li>Lecture automatique de documents</li>
+        <li>Segmentation d&rsquo;images satellite</li>
+      </ul>
+    </div>
+    <div class="card card-accent">
+      <h3>System 2 &mdash; Raisonnement</h3>
+      <p style="font-size:0.7rem; color:var(--bronze); font-weight:500; margin-bottom:0.3rem">Texte, compr&eacute;hension, g&eacute;n&eacute;ration</p>
+      <p>Synth&egrave;se, analyse, code, diagnostic. C&rsquo;est la r&eacute;volution des LLMs.</p>
+      <ul>
+        <li>G&eacute;n&eacute;ration d&rsquo;applications</li>
+        <li>Analyse de documents techniques</li>
+        <li>Diagnostic et aide &agrave; la d&eacute;cision</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>System 2++ &mdash; Au-del&agrave;</h3>
+      <p style="font-size:0.7rem; color:var(--bronze); font-weight:500; margin-bottom:0.3rem">Ce que l&rsquo;humain fait mal</p>
+      <p>Optimisation, planification, simulation sous incertitude.</p>
+      <ul>
+        <li>Planning de production</li>
+        <li>Scheduling satellite</li>
+        <li>Optimisation supply chain</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="statement-box">
+    <p>Le vrai changement&thinsp;: les LLMs ont rendu le <strong>System 2 accessible &agrave; tous</strong>. La majorit&eacute; des besoins industriels rel&egrave;vent du System 1 + System 2.</p>
+  </div>
+</section>
+
+<!-- ???????????????????????????????????????????
+     SLIDE 4 — FOUNDATION MODELS + OPEN SOURCE + COÛT
+     ??????????????????????????????????????????? -->
+<section class="slide" id="s4">
+  <span class="slide-num">4 / 11</span>
+  <p class="slide-label">Panorama IA</p>
+  <h2 class="slide-title">Le co&ucirc;t d&rsquo;entr&eacute;e a &eacute;t&eacute; divis&eacute; par 100.</h2>
+
+  <div class="two-col" style="margin-bottom:1.2rem">
+    <div class="card">
+      <h3>Foundation Models</h3>
+      <p><strong>Avant&thinsp;:</strong> un mod&egrave;le custom par t&acirc;che. Co&ucirc;teux, lent, data scientists requis.</p>
+      <p style="margin-top:0.4rem"><strong>Maintenant&thinsp;:</strong> des mod&egrave;les pr&eacute;-entra&icirc;n&eacute;s qu&rsquo;on adapte par&thinsp;:</p>
+      <ul>
+        <li><strong>Prompting</strong>&thinsp;: d&eacute;crire ce qu&rsquo;on veut en fran&ccedil;ais (co&ucirc;t ~0)</li>
+        <li><strong>Fine-tuning</strong>&thinsp;: sp&eacute;cialiser avec ses propres donn&eacute;es</li>
+        <li><strong>RAG</strong>&thinsp;: connecter le mod&egrave;le &agrave; ses documents</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Open Source vs. Propri&eacute;taire</h3>
+      <p><strong>Propri&eacute;taire</strong> (GPT, Claude)&thinsp;: via API, donn&eacute;es dans le cloud.</p>
+      <p style="margin-top:0.4rem"><strong>Open-weight</strong> (Llama, Qwen, Mistral)&thinsp;: t&eacute;l&eacute;chargeables, ex&eacute;cutables en local.</p>
+      <p style="margin-top:0.4rem; font-style:italic; color:var(--bronze)">&laquo;&thinsp;Pytorch is your new Linux.&thinsp;&raquo;</p>
+      <p style="margin-top:0.3rem">750 publications CS/jour. 225 nouveaux repos/jour.</p>
+    </div>
+  </div>
+
+  <table class="deck-table" style="max-width:700px; margin-bottom:1rem">
+    <thead><tr><th>Ce qui co&ucirc;te cher</th><th>Ce qui ne co&ucirc;te plus cher</th></tr></thead>
+    <tbody>
+      <tr><td>Entra&icirc;ner un foundation model (500K-xM$)</td><td>Utiliser un foundation model en local (quelques &euro;/jour)</td></tr>
+      <tr><td>Constituer un dataset massif</td><td>Adapter un mod&egrave;le existant &agrave; son domaine</td></tr>
+      <tr><td>Recruter des data scientists senior</td><td>D&eacute;ployer une inf&eacute;rence locale (GPU 5-10K&euro;)</td></tr>
+    </tbody>
+  </table>
+
+  <p class="punchline">Les mod&egrave;les open-weight rendent l&rsquo;IA <strong>on-premise viable</strong>. J&rsquo;ai amen&eacute; une machine qui fait tourner tout &ccedil;a &mdash; on la verra tout &agrave; l&rsquo;heure.</p>
+</section>
+
+<!-- ???????????????????????????????????????????
+     SLIDE 5 — BITTER LESSON APPLIQUÉE
+     ??????????????????????????????????????????? -->
+<section class="slide slide-dark" id="s5">
+  <span class="slide-num">5 / 11</span>
+  <p class="slide-label">Le pont</p>
+  <h2 class="slide-title">La Bitter Lesson appliqu&eacute;e &agrave; l&rsquo;entreprise.</h2>
+  <p class="slide-subtitle">Pendant 30 ans, le logiciel d&rsquo;entreprise a essay&eacute; d&rsquo;encoder la mani&egrave;re dont les entreprises <em>devraient</em> fonctionner&thinsp;: workflows rigides, r&egrave;gles m&eacute;tier cod&eacute;es en dur, cahiers des charges de 200 pages.</p>
+
+  <div class="card-grid three-col" style="margin-bottom:1.2rem">
+    <div class="card">
+      <h3>L&rsquo;ancienne approche</h3>
+      <p>L&rsquo;ERP qui encode &laquo;&thinsp;comment on devrait travailler&thinsp;&raquo;</p>
+    </div>
+    <div class="card">
+      <h3>vs.</h3>
+      <p>Le cahier des charges fig&eacute; que personne ne relit</p>
+    </div>
+    <div class="card">
+      <h3>vs.</h3>
+      <p>Le projet IT de 18 mois dont on ne voit jamais la fin</p>
+    </div>
+  </div>
+
+  <div class="card-grid three-col" style="margin-bottom:1.2rem">
+    <div class="card card-accent" style="border-left-color: var(--bronze-light);">
+      <h3 style="color:var(--paper)">La nouvelle approche</h3>
+      <p>L&rsquo;ontologie qui capture &laquo;&thinsp;comment on travaille vraiment&thinsp;&raquo;</p>
+    </div>
+    <div class="card card-accent" style="border-left-color: var(--bronze-light);">
+      <h3 style="color:var(--paper)">Avec</h3>
+      <p>L&rsquo;app construite en it&eacute;ration avec l&rsquo;utilisateur</p>
+    </div>
+    <div class="card card-accent" style="border-left-color: var(--bronze-light);">
+      <h3 style="color:var(--paper)">Avec</h3>
+      <p>L&rsquo;outil qui apprend et s&rsquo;adapte en continu</p>
+    </div>
+  </div>
+
+  <p class="punchline">Les syst&egrave;mes qui apprennent de la donn&eacute;e et de l&rsquo;usage battent les syst&egrave;mes con&ccedil;us par des experts. <strong>&Agrave; chaque fois.</strong></p>
+</section>
+
+<!-- ???????????????????????????????????????????
+     SLIDE 6 — SOGECLAIR : LE POINT DE DÉPART
+     ??????????????????????????????????????????? -->
+<section class="slide" id="s6">
+  <span class="slide-num">6 / 11</span>
+  <p class="slide-label">Retour d&rsquo;exp&eacute;rience</p>
+  <h2 class="slide-title">Un groupe qui a grandi plus vite que ses outils.</h2>
+  <p class="slide-subtitle">SOGECLAIR&thinsp;: groupe familial cot&eacute; en bourse, deux BUs (engineering et solutions), 1&thinsp;300 personnes. Forte croissance entre 2000 et 2020.</p>
+
+  <div class="card-grid" style="grid-template-columns: 1fr 1fr; margin-bottom:1rem">
+    <div class="card">
+      <h3>L&rsquo;outillage n&rsquo;avait pas suivi</h3>
+      <ul>
+        <li>ERP maison Gestaff, con&ccedil;u pour du T&amp;M <em>(en francs)</em>, &eacute;tendu &agrave; la cr&eacute;ation de produits</li>
+        <li>Sage X3 d&eacute;ploy&eacute; en 2017 sur deux sites &mdash; deux syst&egrave;mes qui ne se parlent pas</li>
+        <li>Beaucoup de papier, pas de culture de l&rsquo;&eacute;crit</li>
+        <li>8 syst&egrave;mes qualit&eacute; diff&eacute;rents selon les filiales</li>
+        <li>Des outils groupes achet&eacute;s en 2023 dont le d&eacute;ploiement patine</li>
+      </ul>
+    </div>
+    <div class="card card-accent">
+      <h3>Le plan &laquo;&thinsp;ONE SOGECLAIR&thinsp;&raquo;</h3>
+      <p>L&rsquo;ambition de faire travailler les filiales ensemble. Les outils n&rsquo;&eacute;taient pas au rendez-vous.</p>
+      <p style="margin-top:0.6rem"><strong>J&rsquo;arrive et je mets en place deux initiatives&thinsp;:</strong></p>
+      <ul>
+        <li><strong>Cartographie des processus</strong> &mdash; comprendre comment les gens travaillent vraiment</li>
+        <li><strong>Datalake pour l&rsquo;ontologie groupe</strong> &mdash; structurer ce que l&rsquo;entreprise sait sur elle-m&ecirc;me</li>
+      </ul>
+      <p style="margin-top:0.6rem; font-style:italic; color:var(--bronze)">Ce n&rsquo;est pas un projet IT. C&rsquo;est un projet de connaissance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ???????????????????????????????????????????
+     SLIDE 7 — DIMENSION HUMAINE + EFFET DATA
+     ??????????????????????????????????????????? -->
+<section class="slide" id="s7">
+  <span class="slide-num">7 / 11</span>
+  <p class="slide-label">Retour d&rsquo;exp&eacute;rience</p>
+  <h2 class="slide-title">Sortir la transformation de la DSI.</h2>
+  <p class="slide-subtitle">Le travail a une dimension technique (une &eacute;quipe d&eacute;di&eacute;e de 10 personnes). Mais il a surtout une dimension humaine.</p>
+
+  <div class="two-col" style="margin-bottom:1.2rem">
+    <div class="card">
+      <h3>D&eacute;cision structurante</h3>
+      <p>La transformation a &eacute;t&eacute; <strong>sortie de la DSI</strong>. Pas contre la DSI &mdash; pour lui donner toute libert&eacute; de man&oelig;uvre.</p>
+      <ul>
+        <li>La DSI g&egrave;re l&rsquo;infra et les applications</li>
+        <li>La transformation g&egrave;re le changement, les processus, la donn&eacute;e</li>
+        <li>J&rsquo;ai rejoint le COMEX pour porter le sujet au bon niveau</li>
+      </ul>
+    </div>
+    <div class="card card-accent">
+      <h3>L&rsquo;effet data&thinsp;: le r&eacute;f&eacute;rentiel collaborateur</h3>
+      <p>Un seul effort de structuration, <strong>cinq projets d&eacute;bloqu&eacute;s</strong>&thinsp;:</p>
+      <ul class="cascade-list">
+        <li><span class="cascade-arrow">&rarr;</span> D&eacute;ploiement de <strong>Neobrain</strong> (comp&eacute;tences)</li>
+        <li><span class="cascade-arrow">&rarr;</span> Cr&eacute;ation automatique des <strong>comptes intranet</strong></li>
+        <li><span class="cascade-arrow">&rarr;</span> D&eacute;ploiement d&rsquo;<strong>Horoquartz</strong> (gestion des temps)</li>
+        <li><span class="cascade-arrow">&rarr;</span> <strong>Organigramme groupe</strong> en temps r&eacute;el</li>
+        <li><span class="cascade-arrow">&rarr;</span> <strong>Reporting RH</strong>, salaires inclus</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="statement-box">
+    <p>C&rsquo;est l&rsquo;effet compounding de l&rsquo;ontologie&thinsp;: chaque donn&eacute;e bien structur&eacute;e <strong>rend la suivante moins ch&egrave;re &agrave; exploiter</strong>.</p>
+  </div>
+</section>
+
+<!-- ???????????????????????????????????????????
+     SLIDE 8 — AUTONOMIE
+     ??????????????????????????????????????????? -->
+<section class="slide" id="s8">
+  <span class="slide-num">8 / 11</span>
+  <p class="slide-label">Retour d&rsquo;exp&eacute;rience</p>
+  <h2 class="slide-title">De l&rsquo;agence Power BI &agrave; la communaut&eacute;.</h2>
+  <p class="slide-subtitle">Le r&eacute;flexe classique&thinsp;: cr&eacute;er une &laquo;&thinsp;agence&thinsp;&raquo; centralis&eacute;e qui produit les rapports pour le groupe. L&rsquo;agence devient un goulot d&rsquo;&eacute;tranglement.</p>
+
+  <div class="two-col" style="margin-bottom:1rem">
+    <div class="card">
+      <h3>Ce qu&rsquo;on fournit</h3>
+      <ul>
+        <li>L&rsquo;acc&egrave;s &agrave; l&rsquo;ontologie (donn&eacute;es structur&eacute;es, pr&ecirc;tes &agrave; l&rsquo;emploi)</li>
+        <li>La formation en pr&eacute;sentiel (pas un MOOC)</li>
+        <li>L&rsquo;environnement pour d&eacute;velopper et d&eacute;ployer</li>
+        <li>Un regard centralis&eacute; pour le reuse</li>
+      </ul>
+    </div>
+    <div class="card card-accent">
+      <h3>Ce qu&rsquo;on ne fournit pas</h3>
+      <p>Les rapports eux-m&ecirc;mes. Les m&eacute;tiers les construisent.</p>
+      <p style="margin-top:0.6rem; font-size:0.85rem; font-weight:400; color:var(--ink)">Le principe&thinsp;: <em>&laquo;&thinsp;aide-toi et la digit t&rsquo;aidera.&thinsp;&raquo;</em></p>
+    </div>
+  </div>
+
+  <p class="punchline">La digit donne les rails, <strong>les m&eacute;tiers font rouler les trains</strong>.</p>
+</section>
+
+<!-- ???????????????????????????????????????????
+     SLIDE 9 — L'IA POUR DE VRAI
+     ??????????????????????????????????????????? -->
+<section class="slide slide-dark" id="s9">
+  <span class="slide-num">9 / 11</span>
+  <p class="slide-label">Retour d&rsquo;exp&eacute;rience</p>
+  <h2 class="slide-title">L&rsquo;IA pour de vrai&thinsp;: les non-conformit&eacute;s Dassault.</h2>
+  <p class="slide-subtitle">M&ecirc;me m&eacute;thodologie que pour les fonctions transverses. Chercher les petites op&eacute;rations qui prennent <strong style="color:var(--paper)">moins de 3 secondes</strong> mais qui sont r&eacute;p&eacute;t&eacute;es des centaines de fois. Les automatiser.</p>
+
+  <div class="two-col" style="margin-bottom:1rem">
+    <div class="card">
+      <h3>Le probl&egrave;me</h3>
+      <p>Des rapports de non-conformit&eacute; Dassault en PDF, re&ccedil;us en volume. Il faut en extraire les donn&eacute;es pour les indexer et permettre la <strong>recherche d&rsquo;ant&eacute;c&eacute;dents</strong> &mdash; un enjeu qualit&eacute; majeur en a&eacute;ronautique.</p>
+    </div>
+    <div class="card card-accent" style="border-left-color: var(--bronze-light);">
+      <h3 style="color:var(--paper)">La solution</h3>
+      <p><strong>Fine-tuning d&rsquo;un mod&egrave;le fondationnel visuel</strong> pour extraire les donn&eacute;es de ces documents. C&rsquo;est du System&nbsp;1&thinsp;: le r&eacute;flexe, la d&eacute;tection, l&rsquo;extraction.</p>
+    </div>
+  </div>
+
+  <div class="statement-box">
+    <p>Pas un chatbot. Pas un assistant. Un <strong>outil de production</strong> qui fait une chose bien, de mani&egrave;re fiable et mesurable. C&rsquo;est &ccedil;a, la &laquo;&thinsp;boring AI&thinsp;&raquo;. Et &ccedil;a marche.</p>
+  </div>
+</section>
+
+<!-- ???????????????????????????????????????????
+     SLIDE 10 — BUSINESS MODEL
+     ??????????????????????????????????????????? -->
+<section class="slide" id="s10">
+  <span class="slide-num">10 / 11</span>
+  <p class="slide-label">Retour d&rsquo;exp&eacute;rience</p>
+  <h2 class="slide-title">La question que personne ne veut poser.</h2>
+  <p class="slide-subtitle">Techniquement, tout marche. Mais &ccedil;a a r&eacute;v&eacute;l&eacute; une difficult&eacute; bien plus profonde que la technologie.</p>
+
+  <div class="quote-block" style="margin-bottom:1.2rem">
+    <p>La digit et l&rsquo;IA <strong style="font-style:normal">d&eacute;couplent le lien entre temps et valeur</strong>. Or dans une soci&eacute;t&eacute; d&rsquo;ing&eacute;nierie, ce lien est le fondement absolu du mod&egrave;le d&rsquo;affaire&thinsp;: on vend des heures.</p>
+  </div>
+
+  <div class="two-col" style="margin-bottom:1rem">
+    <div class="card">
+      <h3>Le paradoxe</h3>
+      <p>L&rsquo;automatisation r&eacute;duit le temps pass&eacute; sur les t&acirc;ches. Si ce qu&rsquo;on facture est li&eacute; au temps, alors avec l&rsquo;automatisation <strong>on facture moins</strong>.</p>
+      <p style="margin-top:0.5rem">Introduire l&rsquo;IA sans repenser la mani&egrave;re de vendre, c&rsquo;est contre-productif.</p>
+    </div>
+    <div class="card card-accent">
+      <h3>La cons&eacute;quence</h3>
+      <p>C&rsquo;est le refus de prendre ce virage qui est la raison de mon d&eacute;part de SOGECLAIR.</p>
+      <p style="margin-top:0.5rem">Et c&rsquo;est ce qui m&rsquo;a pouss&eacute; &agrave; cr&eacute;er <strong>Hypsis</strong>&thinsp;: une structure dont le mod&egrave;le &eacute;conomique est nativement align&eacute; avec la valeur produite, pas avec le temps pass&eacute;.</p>
+    </div>
+  </div>
+
+  <div class="statement-box">
+    <p>Cette question du business model va se poser pour chacun de vos clients industriels.<br><strong>Elle se pose peut-&ecirc;tre d&eacute;j&agrave; pour vous.</strong></p>
+  </div>
+</section>
+
+<!-- ???????????????????????????????????????????
+     SLIDE 11 — DÉMO + ÉCHANGE
+     ??????????????????????????????????????????? -->
+<section class="slide slide-dark" id="s11">
+  <span class="slide-num">11 / 11</span>
+  <p class="slide-label">D&eacute;mo &amp; &eacute;change</p>
+  <h2 class="slide-title">Passons aux travaux pratiques.</h2>
+  <p class="slide-subtitle">La Hypsis Box est sur la table. Tout ce que je vais montrer tourne dessus, en local, sans cloud.</p>
+
+  <div class="timeline-row" style="grid-template-columns: repeat(3, 1fr); margin-bottom:1.5rem">
+    <div class="timeline-item">
+      <div class="num">01</div>
+      <h3>Les apps existantes</h3>
+      <p>~30 applications en production chez un client industriel. Pas un POC&thinsp;: du r&eacute;el.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="num">02</div>
+      <h3>L&rsquo;ontologie</h3>
+      <p>Comment les donn&eacute;es de l&rsquo;entreprise sont structur&eacute;es. L&rsquo;effet compounding en action.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="num">03</div>
+      <h3>Construction live</h3>
+      <p>Un use case propos&eacute; par vous. De la description en fran&ccedil;ais au d&eacute;ploiement.</p>
+    </div>
+  </div>
+
+  <div class="divider" style="background:rgba(248,246,241,0.15); margin: 0.8rem 0"></div>
+
+  <p style="font-size:0.85rem; font-weight:300; color:rgba(248,246,241,0.7); margin-bottom:0.6rem"><strong style="color:var(--paper)">Question pour lancer l&rsquo;&eacute;change&thinsp;:</strong></p>
+
+  <div class="quote-block">
+    <p>&laquo;&thinsp;Quand vous faites un diagnostic chez un client industriel, combien de vos recommandations deviennent des outils op&eacute;rationnels dans les 6 mois&thinsp;?&thinsp;&raquo;</p>
+  </div>
+
+  <div style="text-align:center; margin-top:1.5rem">
+    <p style="font-size:0.85rem; font-weight:300; color:rgba(248,246,241,0.5)">William Le Ferrand &nbsp;&middot;&nbsp; william@hypsis.ai &nbsp;&middot;&nbsp; hypsis.ai</p>
+  </div>
+</section>
+
+<script>
+(function() {
+  const slides = document.querySelectorAll('section.slide');
+  const dotsContainer = document.getElementById('navDots');
+  let current = 0;
+
+  slides.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'dot' + (i === 0 ? ' active' : '');
+    btn.setAttribute('aria-label', 'Slide ' + (i + 1));
+    btn.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(btn);
+  });
+
+  function goTo(idx) {
+    if (idx < 0 || idx >= slides.length) return;
+    slides[idx].scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function updateDots() {
+    const dots = dotsContainer.querySelectorAll('.dot');
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const vh = window.innerHeight;
+    const newCurrent = Math.round(scrollTop / vh);
+    if (newCurrent !== current && newCurrent >= 0 && newCurrent < slides.length) {
+      current = newCurrent;
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+  }
+
+  window.addEventListener('scroll', updateDots, { passive: true });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault(); goTo(current + 1);
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+      e.preventDefault(); goTo(current - 1);
+    }
+  });
+})();
+</script>
+</body>
+</html>
