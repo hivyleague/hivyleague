@@ -259,44 +259,56 @@ section.slide {
   </div>
 </section>
 
-<!-- ???????????????????????????????????????????
-     2  DEEP LEARNING: LE CONTEXTE
-     ??????????????????????????????????????????? -->
-<section class="slide" id="s2">
-  <span class="slide-num">2 / 14</span>
-  <p class="slide-label">Panorama IA &mdash; Fondamentaux</p>
-  <h2 class="slide-title">Programmer avec des donn&eacute;es.</h2>
-  <p class="slide-subtitle">Le DL est un sous-domaine de l&rsquo;IA. Il ne repose pas sur des r&egrave;gles programm&eacute;es par des experts mais sur l&rsquo;apprentissage &agrave; partir de donn&eacute;es brutes. Sa renaissance est due &agrave; trois facteurs.</p>
+<!-- ====== 2  LA BITTER LESSON ====== -->
+<section class="slide slide-dark" id="s2">
+  <span class="slide-num">2 / 15</span>
+  <p class="slide-label">Le cadre</p>
+  <h2 class="slide-title">La seule r&egrave;gle qui compte.</h2>
+  <p class="slide-subtitle">En 2019, Richard Sutton &mdash; un des p&egrave;res de l&rsquo;apprentissage par renforcement &mdash; a r&eacute;sum&eacute; 70 ans de recherche en intelligence artificielle en une le&ccedil;on. Il l&rsquo;a qualifi&eacute;e d&rsquo;&laquo;&thinsp;am&egrave;re&thinsp;&raquo;.</p>
 
-  <div class="three-col" style="margin-bottom:0.8rem">
-    <div class="card">
-      <h3>1. Le Compute</h3>
-      <p>Les GPUs modernes permettent d&rsquo;entra&icirc;ner des r&eacute;seaux &agrave; des milliards de param&egrave;tres. Le co&ucirc;t d&rsquo;un PFLOP/s est pass&eacute; de 10M$ (2010) &agrave; ~1K$ (2025).</p>
-    </div>
-    <div class="card">
-      <h3>2. La disponibilit&eacute; des donn&eacute;es</h3>
-      <p>Internet, capteurs industriels, ERP, IoT. Le volume de donn&eacute;es disponibles a explos&eacute;. Les datasets publics (ImageNet, Common Crawl) ont servi de catalyseur.</p>
-    </div>
-    <div class="card">
-      <h3>3. Quelques astuces math&eacute;matiques</h3>
-      <p>BatchNorm, Dropout, Attention, Transformers. Des innovations architecturales qui ont d&eacute;bloqu&eacute; l&rsquo;entra&icirc;nement de r&eacute;seaux profonds.</p>
-    </div>
-  </div>
-
-  <div class="quote-block">
+  <div class="quote-block" style="margin-bottom:1rem">
     <p>&laquo;&thinsp;The biggest lesson that can be read from 70 years of AI research is that general methods that leverage computation are ultimately the most effective, and by a large margin.&thinsp;&raquo;</p>
     <p class="attr">Richard Sutton, The Bitter Lesson (2019)</p>
   </div>
 
-  <div class="two-col" style="margin-top:0.6rem">
+  <div class="two-col">
     <div class="card card-accent">
-      <h3>R&egrave;gle n&deg;1</h3>
-      <p><strong>Plus de donn&eacute;es + plus de calcul = plus d&rsquo;automatisation</strong> (et de pr&eacute;cision). C&rsquo;est une loi empirique v&eacute;rifi&eacute;e depuis 15 ans sur toutes les t&acirc;ches &mdash; vision, texte, audio, code.</p>
+      <h3 style="color:var(--paper)">R&egrave;gle n&deg;1</h3>
+      <p><strong>Plus de donn&eacute;es + plus de calcul = plus d&rsquo;automatisation</strong> (et de pr&eacute;cision). Loi empirique v&eacute;rifi&eacute;e depuis 15 ans sur toutes les t&acirc;ches &mdash; vision, texte, audio, code.</p>
     </div>
     <div class="card card-accent">
-      <h3>R&egrave;gle n&deg;2</h3>
-      <p><strong>Plafond : pr&eacute;cision l&eacute;g&egrave;rement en dessous ou au-dessus de l&rsquo;humain.</strong> Le DL ne fait pas de miracles. Il automatise ce que l&rsquo;humain fait d&eacute;j&agrave;, &agrave; l&rsquo;&eacute;chelle et &agrave; la vitesse de la machine.</p>
+      <h3 style="color:var(--paper)">R&egrave;gle n&deg;2</h3>
+      <p><strong>Plafond&thinsp;: pr&eacute;cision l&eacute;g&egrave;rement en dessous ou au-dessus de l&rsquo;humain.</strong> L&rsquo;IA ne fait pas de miracles. Elle automatise ce que l&rsquo;humain fait d&eacute;j&agrave;, &agrave; l&rsquo;&eacute;chelle et &agrave; la vitesse de la machine.</p>
     </div>
+  </div>
+
+  <p class="punchline" style="margin-top:0.8rem">Autrement dit&thinsp;: les approches qui essaient d&rsquo;<strong>encoder</strong> la connaissance &agrave; la main perdent toujours face aux approches qui <strong>apprennent</strong> &agrave; partir des donn&eacute;es. C&rsquo;est le fil rouge de toute la pr&eacute;sentation.</p>
+</section>
+
+<!-- ====== 3  DEEP LEARNING : LE CONTEXTE ====== -->
+<section class="slide" id="s3">
+  <span class="slide-num">3 / 15</span>
+  <p class="slide-label">Panorama IA &mdash; Fondamentaux</p>
+  <h2 class="slide-title">Programmer avec des donn&eacute;es.</h2>
+  <p class="slide-subtitle">Le deep learning est un sous-domaine de l&rsquo;IA. Il ne repose pas sur des r&egrave;gles programm&eacute;es par des experts mais sur l&rsquo;apprentissage &agrave; partir de donn&eacute;es brutes. Sa renaissance est due &agrave; trois facteurs &mdash; trois manifestations directes de la Bitter Lesson.</p>
+
+  <div class="three-col" style="margin-bottom:0.8rem">
+    <div class="card">
+      <h3>1. La puissance de calcul</h3>
+      <p>Les GPUs modernes permettent d&rsquo;entra&icirc;ner des r&eacute;seaux &agrave; des milliards de param&egrave;tres. Le co&ucirc;t d&rsquo;un PFLOP/s est pass&eacute; de 10M$ (2010) &agrave; ~1K$ (2025).</p>
+    </div>
+    <div class="card">
+      <h3>2. La disponibilit&eacute; des donn&eacute;es</h3>
+      <p>Internet, capteurs industriels, ERP, IoT. Le volume de donn&eacute;es disponibles a explos&eacute;. Les jeux de donn&eacute;es publics (ImageNet, Common Crawl) ont servi de catalyseur.</p>
+    </div>
+    <div class="card">
+      <h3>3. Quelques astuces math&eacute;matiques</h3>
+      <p>Des innovations dans l&rsquo;architecture des r&eacute;seaux de neurones (Attention, Transformers) qui ont d&eacute;bloqu&eacute; l&rsquo;entra&icirc;nement &agrave; tr&egrave;s grande &eacute;chelle.</p>
+    </div>
+  </div>
+
+  <div class="statement-box">
+    <p>Ces trois facteurs s&rsquo;acc&eacute;l&egrave;rent mutuellement. <strong>C&rsquo;est la m&eacute;canique de fond</strong> de tout ce qu&rsquo;on va voir ensuite.</p>
   </div>
 
   <p class="source-line">Source : E. Benazera, Jolibrain (oct. 2025) &mdash; adapt&eacute; avec autorisation</p>
@@ -305,29 +317,29 @@ section.slide {
 <!-- ???????????????????????????????????????????
      3  MODLES GNRATIFS
      ??????????????????????????????????????????? -->
-<section class="slide" id="s3">
-  <span class="slide-num">3 / 14</span>
+<section class="slide" id="s4">
+  <span class="slide-num">4 / 15</span>
   <p class="slide-label">Panorama IA &mdash; Mod&egrave;les g&eacute;n&eacute;ratifs</p>
   <h2 class="slide-title">D&eacute;crire la t&acirc;che suffit.</h2>
-  <p class="slide-subtitle">Un mod&egrave;le g&eacute;n&eacute;ratif capture l&rsquo;empreinte de la distribution r&eacute;elle des donn&eacute;es. Il &laquo;&thinsp;interpole&thinsp;&raquo; entre les exemples vus pour g&eacute;n&eacute;rer des points plausibles mais jamais observ&eacute;s.</p>
+  <p class="slide-subtitle">Un mod&egrave;le g&eacute;n&eacute;ratif apprend &agrave; partir d&rsquo;exemples existants, puis produit de nouveaux contenus plausibles &mdash; texte, image, code &mdash; qu&rsquo;il n&rsquo;a jamais vus. Il &laquo;&thinsp;interpole&thinsp;&raquo; entre ce qu&rsquo;il conna&icirc;t.</p>
 
   <div class="two-col" style="margin-bottom:0.8rem">
     <div class="card">
       <h3>Ce qu&rsquo;il fait</h3>
       <ul>
-        <li>Capture les &laquo;&thinsp;modes&thinsp;&raquo; de la distribution r&eacute;elle en haute dimension</li>
-        <li>G&eacute;n&eacute;ralise bien autour des points connus</li>
-        <li>Produit (&laquo;&thinsp;r&eacute;cite&thinsp;&raquo;) des donn&eacute;es qui suivent la distribution apprise</li>
-        <li>S&rsquo;entra&icirc;ne sur de grands volumes de donn&eacute;es (mais pas toujours)</li>
+        <li>Apprend les r&eacute;gularit&eacute;s d&rsquo;un tr&egrave;s grand volume de donn&eacute;es</li>
+        <li>G&eacute;n&eacute;ralise&thinsp;: produit des r&eacute;sultats coh&eacute;rents m&ecirc;me sur des cas nouveaux</li>
+        <li>G&eacute;n&egrave;re du contenu (texte, image, code) qui suit les m&ecirc;mes r&egrave;gles</li>
+        <li>Plus il a vu de donn&eacute;es, meilleur il est (Bitter Lesson, r&egrave;gle n&deg;1)</li>
       </ul>
     </div>
     <div class="card card-accent">
-      <h3>Tendance NLP : GPT et au-del&agrave;</h3>
+      <h3>Traitement du langage&thinsp;: GPT et au-del&agrave;</h3>
       <ul>
         <li><strong>GPT-3 (2020)</strong> : 175 milliards de param&egrave;tres, 20x le mod&egrave;le pr&eacute;c&eacute;dent</li>
         <li>Papier fondateur : &laquo;&thinsp;Language Models are Few-Shot Learners&thinsp;&raquo;</li>
         <li>Les t&acirc;ches sont maintenant <strong>donn&eacute;es telles quelles au mod&egrave;le</strong> &mdash; plus besoin de coder chaque t&acirc;che</li>
-        <li>Capacit&eacute; croissante = meilleurs r&eacute;sultats (scaling laws)</li>
+        <li>Plus le mod&egrave;le est gros, meilleur il est &mdash; sans limite claire</li>
       </ul>
     </div>
   </div>
@@ -342,8 +354,8 @@ section.slide {
 <!-- ???????????????????????????????????????????
      4  PARADIGME DE L'INTELLIGENCE (SYSTEM 1/2/2++)
      ??????????????????????????????????????????? -->
-<section class="slide slide-dark" id="s4">
-  <span class="slide-num">4 / 14</span>
+<section class="slide slide-dark" id="s5">
+  <span class="slide-num">5 / 15</span>
   <p class="slide-label">Panorama IA &mdash; Cartographie</p>
   <h2 class="slide-title">Trois types d&rsquo;intelligence. Un seul a chang&eacute; la donne.</h2>
   <p class="slide-subtitle">La plupart des besoins industriels tiennent dans les deux premi&egrave;res colonnes.</p>
@@ -357,7 +369,7 @@ section.slide {
         <span class="bubble" style="background:rgba(8,145,178,0.2); color:#67e8f9">Segmentation d&rsquo;images</span>
         <span class="bubble" style="background:rgba(8,145,178,0.2); color:#67e8f9">OCR</span>
         <span class="bubble" style="background:rgba(8,145,178,0.2); color:#67e8f9">Super-r&eacute;solution</span>
-        <span class="bubble" style="background:rgba(8,145,178,0.2); color:#67e8f9">Vision LLM</span>
+        <span class="bubble" style="background:rgba(8,145,178,0.2); color:#67e8f9">Vision + langage</span>
         <span class="bubble" style="background:rgba(8,145,178,0.2); color:#67e8f9">Changements locaux</span>
         <span class="bubble" style="background:rgba(8,145,178,0.2); color:#67e8f9">Maint. pr&eacute;dictive</span>
         <span class="bubble" style="background:rgba(8,145,178,0.2); color:#67e8f9">S&eacute;ries temporelles</span>
@@ -369,8 +381,8 @@ section.slide {
       <h4 style="color:#c4b5fd">System 2 &mdash; Raisonnement</h4>
       <p style="font-size:0.85rem; color:rgba(248,246,241,0.5); margin-bottom:0.4rem">Raisonnement &gt; 3 secondes, principalement textuel</p>
       <div class="bubble-grid">
-        <span class="bubble" style="background:rgba(124,58,237,0.2); color:#c4b5fd">LLM</span>
-        <span class="bubble" style="background:rgba(124,58,237,0.2); color:#c4b5fd">LLM + reasoning</span>
+        <span class="bubble" style="background:rgba(124,58,237,0.2); color:#c4b5fd">Grands mod. langage</span>
+        <span class="bubble" style="background:rgba(124,58,237,0.2); color:#c4b5fd">Raisonnement IA</span>
         <span class="bubble" style="background:rgba(124,58,237,0.2); color:#c4b5fd">Coding</span>
         <span class="bubble" style="background:rgba(124,58,237,0.2); color:#c4b5fd">Maths</span>
         <span class="bubble" style="background:rgba(124,58,237,0.2); color:#c4b5fd">Drawing</span>
@@ -399,7 +411,7 @@ section.slide {
   </div>
 
   <div class="statement-box">
-    <p>La majorit&eacute; des besoins industriels rel&egrave;vent du <strong>System 1 + System 2</strong>. Le System 2++ est passionnant mais reste de niche. Les LLMs ont rendu le System 2 <strong>accessible &agrave; tous</strong> &mdash; c&rsquo;est &ccedil;a le vrai changement.</p>
+    <p>La majorit&eacute; des besoins industriels rel&egrave;vent du <strong>System 1 + System 2</strong>. Le System 2++ est passionnant mais reste de niche. Les grands mod&egrave;les de langage ont rendu le System 2 <strong>accessible &agrave; tous</strong> &mdash; c&rsquo;est &ccedil;a le vrai changement.</p>
   </div>
 
   <p class="source-line" style="color:rgba(248,246,241,0.3)">Source : E. Benazera, Jolibrain &mdash; &laquo;&thinsp;Current intelligence paradigm&thinsp;&raquo; (oct. 2025) &mdash; adapt&eacute; avec autorisation</p>
@@ -408,25 +420,25 @@ section.slide {
 <!-- ???????????????????????????????????????????
      5  FOUNDATION MODELS + OPEN SOURCE + COT
      ??????????????????????????????????????????? -->
-<section class="slide" id="s5">
-  <span class="slide-num">5 / 14</span>
+<section class="slide" id="s6">
+  <span class="slide-num">6 / 15</span>
   <p class="slide-label">Panorama IA &mdash; Nouveau paradigme</p>
   <h2 class="slide-title">Un mod&egrave;le pour tout. Le reste est adaptation.</h2>
 
   <div class="two-col" style="margin-bottom:0.6rem">
     <div class="card">
       <h3>Avant (2020)</h3>
-      <p>Un mod&egrave;le custom par t&acirc;che. Entra&icirc;nement sur un dataset sp&eacute;cifique (~1M samples, ImageNet). <strong>1-8 GPUs</strong>. Propri&eacute;taire. N&eacute;cessite des data scientists.</p>
-      <p style="margin-top:0.3rem; font-size:0.88rem; color:var(--ink-muted)">Task 1 &rarr; Custom model &middot; Task 2 &rarr; Custom model &middot; Task 3 &rarr; Custom model</p>
+      <p>Un mod&egrave;le custom par t&acirc;che. Entra&icirc;nement sur un dataset sp&eacute;cifique (~1M exemples). <strong>1-8 GPUs</strong>. Propri&eacute;taire. N&eacute;cessite des data scientists.</p>
+      <p style="margin-top:0.3rem; font-size:0.88rem; color:var(--ink-muted)">T&acirc;che 1 &rarr; mod&egrave;le d&eacute;di&eacute; &middot; T&acirc;che 2 &rarr; mod&egrave;le d&eacute;di&eacute; &middot; T&acirc;che 3 &rarr; mod&egrave;le d&eacute;di&eacute;</p>
     </div>
     <div class="card card-accent">
       <h3>Maintenant</h3>
-      <p>Un <strong>Foundation Model</strong> pr&eacute;-entra&icirc;n&eacute; sur donn&eacute;es Internet-scale (~5B+ samples). <strong>4&thinsp;000 GPUs, 4B &agrave; 200B params, 500K$ &agrave; xM$ par mod&egrave;le</strong>. On l&rsquo;adapte par&thinsp;:</p>
+      <p>Un <strong>mod&egrave;le fondationnel</strong> pr&eacute;-entra&icirc;n&eacute; sur donn&eacute;es Internet-scale (~5B+ samples). <strong>4&thinsp;000 GPUs, 4 &agrave; 200 milliards de param&egrave;tres, 500K$ &agrave; plusieurs millions par mod&egrave;le</strong>. On l&rsquo;adapte par&thinsp;:</p>
       <ul>
-        <li><strong>Prompting / few-shot</strong> : d&eacute;crire la t&acirc;che en langage naturel (co&ucirc;t ~0)</li>
+        <li><strong>Prompting</strong>&thinsp;: d&eacute;crire la t&acirc;che en fran&ccedil;ais, le mod&egrave;le s&rsquo;adapte (co&ucirc;t ~0)</li>
         <li><strong>Fine-tuning</strong> : sp&eacute;cialiser avec 1-8 GPUs et ses propres donn&eacute;es</li>
         <li><strong>Compression</strong> : r&eacute;duire le mod&egrave;le pour l&rsquo;embarqu&eacute; / on-prem</li>
-        <li><strong>RAG</strong> : connecter le mod&egrave;le &agrave; ses documents d&rsquo;entreprise</li>
+        <li><strong>RAG</strong> (Retrieval Augmented Generation)&thinsp;: connecter le mod&egrave;le &agrave; ses documents internes</li>
       </ul>
     </div>
   </div>
@@ -449,9 +461,9 @@ section.slide {
       <table class="deck-table" style="font-size:0.88rem">
         <thead><tr><th>Ce qui co&ucirc;te cher</th><th>Ce qui ne co&ucirc;te plus cher</th></tr></thead>
         <tbody>
-          <tr><td>Entra&icirc;ner un FM (500K-xM$)</td><td>Utiliser un FM en local (~EUR/jour)</td></tr>
+          <tr><td>Entra&icirc;ner un mod&egrave;le fondationnel (500K-xM$)</td><td>Utiliser un mod&egrave;le en local (~EUR/jour)</td></tr>
           <tr><td>Constituer un dataset massif</td><td>Adapter un mod&egrave;le &agrave; son domaine</td></tr>
-          <tr><td>Recruter des DS senior</td><td>Inf&eacute;rence locale (GPU 5-10K&euro;)</td></tr>
+          <tr><td>Recruter des data scientists senior</td><td>Inf&eacute;rence locale (GPU 5-10K&euro;)</td></tr>
         </tbody>
       </table>
       <p style="margin-top:0.3rem; font-size:0.88rem; color:var(--ink-muted)"><strong>Paradoxe</strong> : tout le monde investit dans l&rsquo;IA, presque personne n&rsquo;en tire de l&rsquo;argent. La donn&eacute;e est toujours unique, l&rsquo;onboarding est lent.</p>
@@ -464,31 +476,31 @@ section.slide {
 <!-- ???????????????????????????????????????????
      6  RYTHME DE LA RECHERCHE + EXEMPLES INDUSTRIELS
      ??????????????????????????????????????????? -->
-<section class="slide" id="s6">
-  <span class="slide-num">6 / 14</span>
+<section class="slide" id="s7">
+  <span class="slide-num">7 / 15</span>
   <p class="slide-label">Panorama IA &mdash; Rythme &amp; applications</p>
   <h2 class="slide-title">750 papiers par jour. Et des trains qui roulent.</h2>
 
   <div class="stat-row" style="grid-template-columns: repeat(4,1fr); margin-bottom:0.8rem">
     <div class="stat-item">
       <div class="stat-big">22&thinsp;500</div>
-      <div class="stat-label">soumissions CS / mois sur arxiv (sept. 2025)</div>
+      <div class="stat-label">articles soumis / mois sur arxiv, la plateforme de r&eacute;f&eacute;rence</div>
       <div class="stat-source">vs. 7&thinsp;314 en oct. 2022</div>
     </div>
     <div class="stat-item">
       <div class="stat-big">750<span class="stat-unit">/j</span></div>
-      <div class="stat-label">publications CS par jour</div>
-      <div class="stat-source">dont ~60% ML</div>
+      <div class="stat-label">publications par jour en informatique</div>
+      <div class="stat-source">dont ~60% en IA</div>
     </div>
     <div class="stat-item">
       <div class="stat-big">225<span class="stat-unit">/j</span></div>
-      <div class="stat-label">nouveaux repos de code par jour</div>
+      <div class="stat-label">nouveaux projets de code ouverts par jour</div>
       <div class="stat-source">30% de disponibilit&eacute; code</div>
     </div>
     <div class="stat-item">
       <div class="stat-big">1.77<span class="stat-unit">M</span></div>
       <div class="stat-label">mod&egrave;les sur Hugging Face</div>
-      <div class="stat-source">pour 413K datasets &mdash; ratio 4.2</div>
+      <div class="stat-source">4x plus de mod&egrave;les que de jeux de donn&eacute;es</div>
     </div>
   </div>
 
@@ -500,20 +512,20 @@ section.slide {
         <li><strong>D&eacute;tection de fissures peinture avion</strong> &mdash; en production depuis 2023</li>
         <li><strong>Monitoring cat&eacute;naire SNCF</strong> &mdash; 2020-2025, d&eacute;tection d&rsquo;anomalies temps r&eacute;el</li>
         <li><strong>Super-r&eacute;solution satellite</strong> &mdash; am&eacute;lioration de la r&eacute;solution d&rsquo;images d&rsquo;observation terrestre</li>
-        <li><strong>D&eacute;tection d&rsquo;anomalies satellite</strong> &mdash; dense TM, imagerie thermique</li>
-        <li><strong>G&eacute;n&eacute;ration de corner cases</strong> &mdash; voiture autonome, tests et sc&eacute;narios rares</li>
+        <li><strong>D&eacute;tection d&rsquo;anomalies satellite</strong> &mdash; imagerie thermique multispectrale</li>
+        <li><strong>G&eacute;n&eacute;ration de sc&eacute;narios rares</strong> &mdash; voiture autonome, g&eacute;n&eacute;ration de cas limites pour tests</li>
       </ul>
     </div>
     <div class="card">
       <h4>Planification &amp; d&eacute;cision sous incertitude</h4>
       <ul>
-        <li><strong>Scheduling ligne puls&eacute;e Airbus</strong> &mdash; optimisation supply chain fournisseurs (Wheatley, 2022-2024)</li>
-        <li><strong>Scheduling observation Terre</strong> &mdash; CNES, planification satellite (2023-2024)</li>
+        <li><strong>Planification ligne puls&eacute;e Airbus</strong> &mdash; optimisation supply chain fournisseurs (Wheatley, 2022-2024)</li>
+        <li><strong>Planification observation Terre</strong> &mdash; CNES, planification satellite (2023-2024)</li>
       </ul>
-      <h4 style="margin-top:0.4rem">Knowledge Management &amp; LLMs</h4>
+      <h4 style="margin-top:0.4rem">Gestion des connaissances &amp; grands mod&egrave;les de langage</h4>
       <ul>
-        <li><strong>KM documents techniques Airbus</strong> &mdash; RAG multimodal (texte, figures, tableaux)</li>
-        <li><strong>KM CNES</strong> &mdash; 2024-2025, documents spatiaux</li>
+        <li><strong>Documents techniques Airbus</strong> &mdash; recherche augment&eacute;e multimodale (texte, figures, tableaux)</li>
+        <li><strong>Documents spatiaux CNES</strong> &mdash; 2024-2025</li>
         <li>Logiciel : <strong>Colette</strong> (open source)</li>
       </ul>
     </div>
@@ -525,14 +537,14 @@ section.slide {
 <!-- ???????????????????????????????????????????
      7  LA BITTER LESSON APPLIQUE  L'ENTREPRISE
      ??????????????????????????????????????????? -->
-<section class="slide slide-dark" id="s7">
-  <span class="slide-num">7 / 14</span>
+<section class="slide slide-dark" id="s8">
+  <span class="slide-num">8 / 15</span>
   <p class="slide-label">Le pont</p>
   <h2 class="slide-title">La Bitter Lesson appliqu&eacute;e &agrave; l&rsquo;entreprise.</h2>
-  <p class="slide-subtitle">Pendant 30 ans, le logiciel d&rsquo;entreprise a essay&eacute; d&rsquo;encoder la mani&egrave;re dont les entreprises <em>devraient</em> fonctionner&thinsp;: workflows rigides, r&egrave;gles m&eacute;tier cod&eacute;es en dur, cahiers des charges de 200 pages. La Bitter Lesson nous dit que cette approche <strong style="color:var(--paper)">perd toujours</strong>.</p>
+  <p class="slide-subtitle">Pendant 30 ans, le logiciel d&rsquo;entreprise a essay&eacute; d&rsquo;<strong style="color:var(--paper)">encoder</strong> la mani&egrave;re dont les entreprises <em>devraient</em> fonctionner&thinsp;: workflows rigides, r&egrave;gles m&eacute;tier cod&eacute;es en dur, cahiers des charges de 200 pages. On a vu pourquoi cette approche <strong style="color:var(--paper)">perd toujours</strong>.</p>
 
   <div class="deck-table" style="margin-bottom:0.8rem">
-    <table class="deck-table" style="max-width:800px">
+    <table class="deck-table" style="max-width:100%">
       <thead><tr><th style="width:35%">L&rsquo;ancienne approche (encode)</th><th style="width:5%"></th><th style="width:35%">La nouvelle approche (apprend)</th></tr></thead>
       <tbody>
         <tr><td>L&rsquo;ERP qui encode &laquo;&thinsp;comment on devrait travailler&thinsp;&raquo;</td><td style="text-align:center; color:var(--bronze-light)">vs.</td><td>L&rsquo;ontologie qui capture &laquo;&thinsp;comment on travaille vraiment&thinsp;&raquo;</td></tr>
@@ -547,7 +559,7 @@ section.slide {
     <div class="card card-accent">
       <h3 style="color:var(--paper)">Ce qui a chang&eacute;</h3>
       <ul>
-        <li>Les Foundation Models comprennent le contexte m&eacute;tier</li>
+        <li>Les mod&egrave;les fondationnels comprennent le contexte m&eacute;tier</li>
         <li>L&rsquo;inf&eacute;rence tourne en local (GPU 5-10K&euro;)</li>
         <li>On g&eacute;n&egrave;re des applications compl&egrave;tes en langage naturel</li>
         <li>La boucle &laquo;&thinsp;besoin &rarr; outil&thinsp;&raquo; passe de 12 mois &agrave; quelques jours</li>
@@ -571,11 +583,11 @@ section.slide {
 <!-- ???????????????????????????????????????????
      8  SOGECLAIR : LE POINT DE DPART
      ??????????????????????????????????????????? -->
-<section class="slide" id="s8">
-  <span class="slide-num">8 / 14</span>
+<section class="slide" id="s9">
+  <span class="slide-num">9 / 15</span>
   <p class="slide-label">Retour d&rsquo;exp&eacute;rience &mdash; SOGECLAIR</p>
   <h2 class="slide-title">Un groupe qui a grandi plus vite que ses outils.</h2>
-  <p class="slide-subtitle">SOGECLAIR&thinsp;: groupe familial cot&eacute; en bourse. Deux BUs (engineering &amp; solutions), 1&thinsp;300 personnes. Forte croissance 2000-2020. Plan strat&eacute;gique &laquo;&thinsp;ONE SOGECLAIR&thinsp;&raquo; pour faire travailler les filiales ensemble.</p>
+  <p class="slide-subtitle">SOGECLAIR&thinsp;: groupe familial cot&eacute; en bourse. Deux branches (engineering &amp; solutions), 1&thinsp;300 personnes. Forte croissance 2000-2020. Plan strat&eacute;gique &laquo;&thinsp;ONE SOGECLAIR&thinsp;&raquo; pour faire travailler les filiales ensemble.</p>
 
   <div class="two-col" style="margin-bottom:0.6rem">
     <div class="card">
@@ -607,8 +619,8 @@ section.slide {
 <!-- ???????????????????????????????????????????
      9  DIMENSION HUMAINE + EFFET DATA
      ??????????????????????????????????????????? -->
-<section class="slide" id="s9">
-  <span class="slide-num">9 / 14</span>
+<section class="slide" id="s10">
+  <span class="slide-num">10 / 15</span>
   <p class="slide-label">Retour d&rsquo;exp&eacute;rience &mdash; SOGECLAIR</p>
   <h2 class="slide-title">Pas contre la DSI. &Agrave; c&ocirc;t&eacute;.</h2>
   <p class="slide-subtitle">Et ce qui se passe quand une seule donn&eacute;e bien structur&eacute;e en d&eacute;bloque cinq.</p>
@@ -647,8 +659,8 @@ section.slide {
 <!-- ???????????????????????????????????????????
      10  AUTONOMIE : POWER BI
      ??????????????????????????????????????????? -->
-<section class="slide" id="s10">
-  <span class="slide-num">10 / 14</span>
+<section class="slide" id="s11">
+  <span class="slide-num">11 / 15</span>
   <p class="slide-label">Retour d&rsquo;exp&eacute;rience &mdash; SOGECLAIR</p>
   <h2 class="slide-title">Donner les rails. Laisser les m&eacute;tiers faire rouler les trains.</h2>
   <p class="slide-subtitle">Le r&eacute;flexe classique&thinsp;: une &laquo;&thinsp;agence&thinsp;&raquo; centralis&eacute;e qui produit les rapports BI. R&eacute;sultat&thinsp;: un goulot d&rsquo;&eacute;tranglement. Le virage&thinsp;: la transformer en <strong>communaut&eacute;</strong>.</p>
@@ -680,8 +692,8 @@ section.slide {
 <!-- ???????????????????????????????????????????
      11  L'IA POUR DE VRAI
      ??????????????????????????????????????????? -->
-<section class="slide slide-dark" id="s11">
-  <span class="slide-num">11 / 14</span>
+<section class="slide slide-dark" id="s12">
+  <span class="slide-num">12 / 15</span>
   <p class="slide-label">Retour d&rsquo;exp&eacute;rience &mdash; SOGECLAIR</p>
   <h2 class="slide-title">Boring AI. L&rsquo;IA qui marche.</h2>
   <p class="slide-subtitle">Chercher les op&eacute;rations &agrave; <strong style="color:var(--paper)">moins de 3 secondes</strong>, r&eacute;p&eacute;t&eacute;es des centaines de fois. C&rsquo;est du <strong style="color:#67e8f9">System 1</strong>. Les automatiser. Mesurer.</p>
@@ -712,8 +724,8 @@ section.slide {
 <!-- ???????????????????????????????????????????
      12  LA QUESTION DU BUSINESS MODEL
      ??????????????????????????????????????????? -->
-<section class="slide" id="s12">
-  <span class="slide-num">12 / 14</span>
+<section class="slide" id="s13">
+  <span class="slide-num">13 / 15</span>
   <p class="slide-label">Retour d&rsquo;exp&eacute;rience &mdash; Le tournant</p>
   <h2 class="slide-title">La question que personne ne veut poser.</h2>
   <p class="slide-subtitle">Techniquement, tout marche. Mais &ccedil;a a r&eacute;v&eacute;l&eacute; une difficult&eacute; bien plus profonde que la technologie.</p>
@@ -730,8 +742,8 @@ section.slide {
     </div>
     <div class="card card-accent">
       <h3>La cons&eacute;quence</h3>
-      <p>C&rsquo;est le refus de prendre ce virage qui est la raison de <strong>mon d&eacute;part de SOGECLAIR</strong>.</p>
-      <p style="margin-top:0.3rem">Et c&rsquo;est ce qui m&rsquo;a pouss&eacute; &agrave; cr&eacute;er <strong>Hypsis</strong>&thinsp;: une structure dont le mod&egrave;le &eacute;conomique est nativement align&eacute; avec la <strong>valeur produite</strong>, pas avec le temps pass&eacute;.</p>
+      <p>J&rsquo;avais la conviction que ce virage &eacute;tait in&eacute;vitable. L&rsquo;entreprise n&rsquo;&eacute;tait pas pr&ecirc;te &agrave; le prendre. <strong>J&rsquo;ai choisi de partir.</strong></p>
+      <p style="margin-top:0.3rem">Et j&rsquo;ai cr&eacute;&eacute; <strong>Hypsis</strong>&thinsp;: une structure dont le mod&egrave;le &eacute;conomique est nativement align&eacute; avec la <strong>valeur produite</strong>, pas avec le temps pass&eacute;.</p>
       <p style="margin-top:0.3rem; font-size:0.88rem; color:var(--ink-muted)">On ne facture pas des jours. On facture des outils op&eacute;rationnels et un transfert de comp&eacute;tences.</p>
     </div>
   </div>
@@ -744,8 +756,8 @@ section.slide {
 <!-- ???????????????????????????????????????????
      13  TROIS CONVICTIONS
      ??????????????????????????????????????????? -->
-<section class="slide slide-dark" id="s13">
-  <span class="slide-num">13 / 14</span>
+<section class="slide slide-dark" id="s14">
+  <span class="slide-num">14 / 15</span>
   <p class="slide-label">Synth&egrave;se</p>
   <h2 class="slide-title">Deux ans sur le terrain. Trois choses que je sais.</h2>
 
@@ -770,8 +782,8 @@ section.slide {
 <!-- ???????????????????????????????????????????
      14  DMO + CHANGE
      ??????????????????????????????????????????? -->
-<section class="slide slide-dark" id="s14">
-  <span class="slide-num">14 / 14</span>
+<section class="slide slide-dark" id="s15">
+  <span class="slide-num">15 / 15</span>
   <p class="slide-label">D&eacute;mo &amp; &eacute;change</p>
   <h2 class="slide-title">Pas de slides. Du r&eacute;el.</h2>
   <p class="slide-subtitle">La Hypsis Box est sur la table. Tout ce que je vais montrer tourne dessus, en local, sans cloud. Un serveur physique avec un GPU, Kubernetes, et une trentaine d&rsquo;applications en production.</p>
