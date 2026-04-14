@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hypsis — La plateforme de transformation IA des organisations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Italiana&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f8f6f1;
+  --paper-warm: #f0ece3;
+  --ink: #1a1a2e;
+  --ink-deep: #0f0f1e;
+  --ink-soft: #3d3d54;
+  --ink-muted: #7a7a8c;
+  --bronze: #7a6840;
+  --bronze-light: #a89060;
+  --bronze-dark: #5c4e30;
+  --stone: #d4cfc5;
+  --stone-light: #e8e4db;
+  --accent-faint: rgba(122,104,64,0.08);
+  --gold: #c9a84c;
+  --gold-glow: rgba(201,168,76,0.15);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll; overflow-x: hidden;
+}
+body {
+  background: var(--ink); color: var(--paper);
+  font-family: 'Outfit', -apple-system, sans-serif;
+  line-height: 1.6; -webkit-font-smoothing: antialiased;
+}
+section.slide {
+  scroll-snap-align: start;
+  min-height: 100vh; width: 100vw;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 3rem 6vw 2.5rem;
+  position: relative; overflow: hidden;
+}
+.nav-dots {
+  position: fixed; right: 1.2rem; top: 50%;
+  transform: translateY(-50%); z-index: 100;
+  display: flex; flex-direction: column; gap: 0.45rem;
+}
+.nav-dots .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(248,246,241,0.15); cursor: pointer;
+  transition: all 0.3s ease; border: none; padding: 0;
+}
+.nav-dots .dot.active { background: var(--gold); transform: scale(1.6); }
+.nav-dots .dot:hover { background: rgba(248,246,241,0.4); }
+.slide-num {
+  position: absolute; bottom: 1rem; right: 2rem;
+  font-size: 0.72rem; font-weight: 300; color: rgba(248,246,241,0.2);
+  font-family: 'JetBrains Mono', monospace;
+}
+.act-label {
+  font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.5em; text-transform: uppercase;
+  color: var(--gold); opacity: 0.5;
+  margin-bottom: 0.2rem;
+}
+.slide-label {
+  font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--bronze-light); margin-bottom: 0.6rem;
+}
+.slide-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700; color: var(--paper); line-height: 1.15;
+  letter-spacing: -0.02em; margin-bottom: 0.4rem;
+}
+.slide-subtitle {
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 300; color: rgba(248,246,241,0.65);
+  max-width: 900px; margin-bottom: 1.2rem; line-height: 1.7;
+}
+.punchline {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  font-weight: 300; color: rgba(248,246,241,0.65);
+  font-style: italic; max-width: 900px; line-height: 1.65;
+}
+.punchline strong { font-weight: 600; color: var(--paper); font-style: normal; }
+.card {
+  background: rgba(248,246,241,0.04); border: 1px solid rgba(248,246,241,0.07);
+  border-radius: 8px; padding: 1.2rem 1.4rem;
+}
+.card h3 { font-size: 1rem; font-weight: 600; color: var(--paper); margin-bottom: 0.3rem; }
+.card h4 { font-size: 0.9rem; font-weight: 600; color: var(--bronze-light); margin-bottom: 0.25rem; }
+.card p, .card li { font-size: 0.92rem; font-weight: 300; color: rgba(248,246,241,0.6); line-height: 1.55; }
+.card ul { list-style: none; padding: 0; }
+.card li { padding: 0.18rem 0 0.18rem 1rem; position: relative; }
+.card li::before {
+  content: ''; position: absolute; left: 0; top: 0.55em;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--bronze-light);
+}
+.card strong { font-weight: 600; color: var(--paper); }
+.card-accent { border-left: 4px solid var(--gold); background: rgba(201,168,76,0.06); }
+.statement-box {
+  background: rgba(248,246,241,0.04); border: 1px solid rgba(248,246,241,0.08);
+  border-radius: 8px; padding: 1rem 1.5rem; text-align: center; margin: 0.8rem 0;
+}
+.statement-box p { font-size: 1rem; font-weight: 300; color: rgba(248,246,241,0.65); line-height: 1.6; }
+.statement-box strong { font-weight: 600; color: var(--paper); }
+.quote-block {
+  border-left: 4px solid var(--gold); padding: 1rem 1.4rem;
+  margin: 0.6rem 0; background: var(--gold-glow); border-radius: 0 8px 8px 0;
+}
+.quote-block p { font-size: 1.05rem; font-weight: 300; color: rgba(248,246,241,0.7); line-height: 1.65; font-style: italic; }
+.quote-block .attr { font-size: 0.82rem; font-weight: 500; color: var(--gold); font-style: normal; margin-top: 0.3rem; }
+.deck-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.deck-table th {
+  text-align: left; font-weight: 600; color: rgba(248,246,241,0.5);
+  padding: 0.55rem 0.8rem; border-bottom: 2px solid rgba(248,246,241,0.12);
+  font-size: 0.85rem; letter-spacing: 0.03em;
+}
+.deck-table td {
+  padding: 0.5rem 0.8rem; border-bottom: 1px solid rgba(248,246,241,0.06);
+  color: rgba(248,246,241,0.55); font-weight: 300; vertical-align: top;
+}
+.deck-table tr.highlight td { background: rgba(201,168,76,0.1); color: var(--paper); font-weight: 500; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+.four-col { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.8rem; }
+.divider { width: 80px; height: 1px; background: rgba(248,246,241,0.1); margin: 1rem 0; }
+
+.stat-row { display: grid; gap: 0; border-top: 1px solid rgba(248,246,241,0.1); border-bottom: 1px solid rgba(248,246,241,0.1); margin: 0.8rem 0; }
+.stat-item { padding: 1rem 1.2rem; border-right: 1px solid rgba(248,246,241,0.1); text-align: center; }
+.stat-item:last-child { border-right: none; }
+.stat-big { font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 800; color: var(--paper); line-height: 1; letter-spacing: -0.03em; }
+.stat-big .stat-highlight { color: var(--gold); }
+.stat-unit { font-size: 0.45em; font-weight: 400; color: var(--ink-muted); }
+.stat-label { font-size: 0.88rem; font-weight: 300; color: rgba(248,246,241,0.55); line-height: 1.45; margin-top: 0.25rem; }
+.stat-source { font-size: 0.72rem; font-weight: 300; color: rgba(248,246,241,0.25); margin-top: 0.2rem; }
+
+.timeline-row { display: grid; gap: 0; border-top: 1px solid rgba(248,246,241,0.1); border-bottom: 1px solid rgba(248,246,241,0.1); margin: 0.8rem 0; }
+.timeline-item { padding: 1.1rem 1.3rem; border-right: 1px solid rgba(248,246,241,0.1); }
+.timeline-item:last-child { border-right: none; }
+.timeline-item .num { font-size: 1.8rem; font-weight: 800; color: rgba(248,246,241,0.12); line-height: 1; margin-bottom: 0.3rem; }
+.timeline-item h3 { font-size: 1rem; font-weight: 600; color: var(--paper); margin-bottom: 0.2rem; }
+.timeline-item p { font-size: 0.9rem; font-weight: 300; color: rgba(248,246,241,0.55); line-height: 1.5; }
+
+.flow-row { display: flex; align-items: center; justify-content: center; gap: 0; margin: 0.6rem 0; flex-wrap: wrap; }
+.flow-box { background: rgba(248,246,241,0.05); border: 1px solid rgba(248,246,241,0.08); border-radius: 8px; padding: 0.8rem 1.1rem; text-align: center; min-width: 140px; }
+.flow-box.accent { background: var(--gold-glow); border: 1px solid rgba(201,168,76,0.3); }
+.flow-box h4 { font-size: 0.95rem; font-weight: 600; color: var(--paper); }
+.flow-box p { font-size: 0.82rem; font-weight: 300; color: rgba(248,246,241,0.45); }
+.flow-arrow { font-size: 1.4rem; color: rgba(248,246,241,0.15); padding: 0 0.5rem; flex-shrink: 0; }
+
+.cascade-list { list-style: none; padding: 0; }
+.cascade-list li { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.25rem 0; font-size: 0.95rem; font-weight: 300; color: rgba(248,246,241,0.6); }
+.cascade-list li strong { font-weight: 600; color: var(--paper); }
+.cascade-arrow { font-size: 0.82rem; color: var(--gold); flex-shrink: 0; }
+
+.source-line {
+  font-size: 0.72rem; font-weight: 300; color: rgba(248,246,241,0.2);
+  margin-top: 0.5rem;
+}
+
+/* light slides */
+.slide-light { background: var(--paper); color: var(--ink); }
+.slide-light .slide-num { color: var(--ink-muted); }
+.slide-light .act-label { color: var(--bronze-dark); }
+.slide-light .slide-label { color: var(--bronze); }
+.slide-light .slide-title { color: var(--ink); }
+.slide-light .slide-subtitle { color: var(--ink-soft); }
+.slide-light .punchline { color: var(--ink-soft); }
+.slide-light .punchline strong { color: var(--ink); }
+.slide-light .card { background: var(--paper-warm); border: none; }
+.slide-light .card h3 { color: var(--ink); }
+.slide-light .card p, .slide-light .card li { color: var(--ink-soft); }
+.slide-light .card strong { color: var(--ink); }
+.slide-light .card-accent { background: var(--accent-faint); border-left-color: var(--bronze); }
+.slide-light .statement-box { background: var(--paper-warm); border: none; }
+.slide-light .statement-box p { color: var(--ink-soft); }
+.slide-light .statement-box strong { color: var(--ink); }
+.slide-light .quote-block { background: var(--accent-faint); border-left-color: var(--bronze); }
+.slide-light .quote-block p { color: var(--ink-soft); }
+.slide-light .quote-block .attr { color: var(--bronze); }
+.slide-light .deck-table th { color: var(--ink); border-bottom-color: var(--stone); }
+.slide-light .deck-table td { color: var(--ink-soft); border-bottom-color: var(--stone-light); }
+.slide-light .deck-table tr.highlight td { background: var(--accent-faint); color: var(--ink); }
+.slide-light .stat-row { border-color: var(--stone); }
+.slide-light .stat-item { border-color: var(--stone); }
+.slide-light .stat-big { color: var(--ink); }
+.slide-light .stat-big .stat-highlight { color: var(--bronze); }
+.slide-light .stat-label { color: var(--ink-soft); }
+.slide-light .stat-source { color: var(--ink-muted); }
+.slide-light .timeline-row { border-color: var(--stone); }
+.slide-light .timeline-item { border-color: var(--stone); }
+.slide-light .timeline-item .num { color: var(--stone); }
+.slide-light .timeline-item h3 { color: var(--ink); }
+.slide-light .timeline-item p { color: var(--ink-soft); }
+.slide-light .flow-box { background: var(--paper-warm); border: none; }
+.slide-light .flow-box.accent { background: var(--accent-faint); border: 1px solid rgba(122,104,64,0.2); }
+.slide-light .flow-box h4 { color: var(--ink); }
+.slide-light .flow-box p { color: var(--ink-muted); }
+.slide-light .flow-arrow { color: var(--stone); }
+.slide-light .source-line { color: var(--ink-muted); }
+.slide-light .cascade-list li { color: var(--ink-soft); }
+.slide-light .cascade-list li strong { color: var(--ink); }
+.slide-light .cascade-arrow { color: var(--bronze); }
+.slide-light .divider { background: var(--stone); }
+
+/* title slide */
+.slide-cover { justify-content: flex-end; padding-bottom: 3.5rem; text-align: center; align-items: center; }
+.slide-cover .hero-bg { position: absolute; inset: 0; z-index: 0; }
+.slide-cover .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; filter: brightness(0.35) saturate(0.7); }
+.slide-cover .hero-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(26,26,46,0.3) 0%, rgba(26,26,46,0.5) 30%, rgba(26,26,46,0.85) 55%, var(--ink) 75%);
+}
+.slide-cover .content { position: relative; z-index: 1; max-width: 900px; }
+.wordmark { font-family: 'Italiana', serif; font-size: 1.2rem; letter-spacing: 0.6em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+.title-main { font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 700; line-height: 1.08; color: var(--paper); letter-spacing: -0.02em; margin-bottom: 1rem; }
+.title-tagline {
+  font-size: clamp(1rem, 1.5vw, 1.15rem); font-weight: 300;
+  color: var(--gold); font-style: italic; margin-bottom: 1.2rem; line-height: 1.6;
+}
+.title-sub { font-size: clamp(0.95rem, 1.4vw, 1.1rem); font-weight: 300; color: rgba(248,246,241,0.55); margin-bottom: 1rem; line-height: 1.65; max-width: 750px; margin-left: auto; margin-right: auto; }
+.title-footer { font-size: 0.88rem; font-weight: 300; color: rgba(248,246,241,0.35); }
+.title-footer strong { font-weight: 500; color: rgba(248,246,241,0.5); }
+
+.placeholder {
+  display: inline-block; background: rgba(201,168,76,0.15); border: 1px dashed rgba(201,168,76,0.3);
+  border-radius: 4px; padding: 0.1rem 0.5rem; font-size: 0.85rem; color: var(--gold); font-style: italic;
+}
+.slide-light .placeholder {
+  background: rgba(122,104,64,0.08); border-color: rgba(122,104,64,0.25); color: var(--bronze);
+}
+
+/* diamond diagram */
+.diamond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; max-width: 500px; margin: 0.8rem auto; }
+.diamond-cell {
+  padding: 0.8rem 1rem; border-radius: 8px; text-align: center;
+  border: 1px solid rgba(248,246,241,0.1); background: rgba(248,246,241,0.03);
+}
+.diamond-cell.active { border-color: var(--gold); background: var(--gold-glow); }
+.diamond-cell h4 { font-size: 0.9rem; font-weight: 600; color: var(--paper); margin-bottom: 0.15rem; }
+.diamond-cell p { font-size: 0.78rem; font-weight: 300; color: rgba(248,246,241,0.5); }
+.diamond-cell.active p { color: rgba(248,246,241,0.7); }
+.slide-light .diamond-cell { border-color: var(--stone); background: var(--paper-warm); }
+.slide-light .diamond-cell.active { border-color: var(--bronze); background: var(--accent-faint); }
+.slide-light .diamond-cell h4 { color: var(--ink); }
+.slide-light .diamond-cell p { color: var(--ink-muted); }
+
+/* risk grid */
+.risk-card { border-left: 3px solid var(--gold); }
+.risk-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--gold); margin-bottom: 0.2rem; }
+
+/* ticket cards */
+.ticket-card { position: relative; overflow: hidden; }
+.ticket-amount { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 0.3rem; }
+.ticket-name { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,246,241,0.4); margin-bottom: 0.5rem; }
+
+@media (max-width: 768px) {
+  section.slide { padding: 1.5rem 1.2rem 1.5rem; }
+  .two-col, .three-col, .four-col { grid-template-columns: 1fr; }
+  .diamond-grid { grid-template-columns: 1fr; }
+  .stat-row { grid-template-columns: 1fr; }
+  .stat-item { border-right: none; border-bottom: 1px solid rgba(248,246,241,0.1); }
+  .stat-item:last-child { border-bottom: none; }
+  .timeline-row { grid-template-columns: 1fr; }
+  .timeline-item { border-right: none; border-bottom: 1px solid rgba(248,246,241,0.1); }
+  .timeline-item:last-child { border-bottom: none; }
+}
+@media print {
+  html { scroll-snap-type: none; overflow: visible; }
+  section.slide { height: auto; min-height: 100vh; page-break-after: always; page-break-inside: avoid; }
+  .nav-dots { display: none; }
+  .slide-cover .hero-bg { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- ???????????????????????????????????????????
+     ACTE I — LA THÈSE · Slides 01–03
+     ??????????????????????????????????????????? -->
+
+<!-- S1 — COUVERTURE + THÈSE -->
+<section class="slide slide-cover" id="s1">
+  <div class="hero-bg"><img src="../assets/hero-fresco.png" alt=""></div>
+  <div class="content">
+    <div class="wordmark">Hypsis</div>
+    <h1 class="title-main">La plateforme de transformation IA des organisations</h1>
+    <p class="title-tagline">Le conseil est le produit d&rsquo;entr&eacute;e. Les r&eacute;currents op&eacute;r&eacute;s sont l&rsquo;actif de sortie.</p>
+    <p class="title-sub">Le premier groupe capable d&rsquo;orchestrer simultan&eacute;ment les 4 dimensions de la transformation IA &mdash; Processus, &Eacute;quipes, Outils, Structure &mdash; l&agrave; o&ugrave; tous les acteurs existants n&rsquo;en adressent qu&rsquo;une ou deux.</p>
+    <div class="divider" style="background:rgba(201,168,76,0.3); margin: 0.8rem auto; width: 60px;"></div>
+    <p class="title-footer"><strong>Ticket cible&thinsp;: 3&ndash;30&thinsp;M&euro;</strong> &mdash; <em>Faber est quisque fortunae suae.</em></p>
+  </div>
+</section>
+
+<!-- S2 — LA RUPTURE QUI CRÉE LE MARCHÉ -->
+<section class="slide" id="s2">
+  <span class="slide-num">02 / 20</span>
+  <p class="act-label">Acte I</p>
+  <p class="slide-label">La th&egrave;se</p>
+  <h2 class="slide-title">L&rsquo;IA externalise ce que les entreprises de services ont historiquement vendu comme expertise.</h2>
+  <p class="slide-subtitle">Quatri&egrave;me r&eacute;volution anthropologique. Apr&egrave;s l&rsquo;&eacute;criture, l&rsquo;imprimerie, le num&eacute;rique &mdash; la cognition. <em>(Michel Serres)</em></p>
+
+  <div class="three-col" style="margin-bottom:0.8rem">
+    <div class="card">
+      <h3>Le mod&egrave;le &agrave; l&rsquo;heure est mort</h3>
+      <p>60&ndash;70% du temps d&rsquo;une mission cognitive est consacr&eacute; &agrave; la production documentaire brute. Les LLMs de 2024&ndash;2026 peuvent absorber cette part. Le mod&egrave;le &agrave; l&rsquo;heure est <strong>structurellement obsol&egrave;te</strong>.</p>
+    </div>
+    <div class="card">
+      <h3>Le Great Decoupling</h3>
+      <p>Productivit&eacute; et masse salariale se d&eacute;couplent. La prochaine d&eacute;cennie appartient &agrave; ceux qui factureront <strong>l&rsquo;impact &mdash; pas le temps</strong>.</p>
+      <p class="source-line" style="margin-top:0.3rem">WEF &middot; Goldman Sachs</p>
+    </div>
+    <div class="card card-accent">
+      <h3>Le pi&egrave;ge du legacy</h3>
+      <p>Les acteurs &eacute;tablis (ESN, cabinets, &eacute;diteurs) ont un legacy qui les emp&ecirc;che de pivoter. Automatiser une mission client <strong>d&eacute;truit leur prochaine mission</strong> de 200 jours. Kodak a invent&eacute; le capteur num&eacute;rique en 1975. Il a attendu trop longtemps.</p>
+    </div>
+  </div>
+
+  <p class="punchline"><strong>Pourquoi maintenant&thinsp;?</strong> Parce que la fen&ecirc;tre est ouverte pr&eacute;cis&eacute;ment parce que les incumbents ne peuvent pas la traverser.</p>
+</section>
+
+<!-- S3 — LE PARADOXE QUI DÉFINIT LE MARCHÉ -->
+<section class="slide" id="s3">
+  <span class="slide-num">03 / 20</span>
+  <p class="act-label">Acte I</p>
+  <p class="slide-label">Le paradoxe</p>
+  <h2 class="slide-title">88% d&eacute;ploient l&rsquo;IA. 6% transforment leur performance.</h2>
+  <p class="slide-subtitle">L&rsquo;&eacute;cart n&rsquo;est pas technologique &mdash; il est organisationnel. <em>(McKinsey, 2024)</em></p>
+
+  <div class="stat-row" style="grid-template-columns: repeat(3, 1fr); margin-bottom:0.8rem">
+    <div class="stat-item">
+      <div class="stat-big"><span class="stat-highlight">88</span><span class="stat-unit">%</span></div>
+      <div class="stat-label">des entreprises d&eacute;ploient l&rsquo;IA</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-big"><span class="stat-highlight">6</span><span class="stat-unit">%</span></div>
+      <div class="stat-label">transforment r&eacute;ellement leur performance</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-big"><span class="stat-highlight">82</span><span class="stat-unit">%</span></div>
+      <div class="stat-label">des ETIs fran&ccedil;aises ont investi sans r&eacute;sultat d&eacute;fendable</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <h3>L&rsquo;&eacute;chec est syst&eacute;mique</h3>
+      <p>Les outils sont d&eacute;ploy&eacute;s en silo, les &eacute;quipes non recompos&eacute;es, les processus inchang&eacute;s, la gouvernance absente. <strong>Quatre dimensions touch&eacute;es, z&eacute;ro adress&eacute;es simultan&eacute;ment.</strong></p>
+    </div>
+    <div class="card card-accent">
+      <h3>Le march&eacute;</h3>
+      <ul>
+        <li><strong>6&thinsp;500&ndash;7&thinsp;500</strong> ETIs en France (INSEE)</li>
+        <li><strong>58%</strong> voient l&rsquo;IA comme enjeu de survie</li>
+        <li>SG&amp;A = <strong>20&ndash;35%</strong> de leurs co&ucirc;ts totaux</li>
+        <li>TAM : fraction de la masse salariale mondiale</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ???????????????????????????????????????????
+     ACTE II — LA SOLUTION · Slides 04–07
+     ??????????????????????????????????????????? -->
+
+<!-- S4 — CE QUE HYPSIS EST -->
+<section class="slide slide-light" id="s4">
+  <span class="slide-num">04 / 20</span>
+  <p class="act-label">Acte II</p>
+  <p class="slide-label">La solution</p>
+  <h2 class="slide-title">Deux actifs fondateurs. La seule proposition &agrave; 4 dimensions.</h2>
+  <p class="slide-subtitle">Hypsis Craft orchestre. Hypsis Ops ex&eacute;cute et op&egrave;re. L&rsquo;un sans l&rsquo;autre ne d&eacute;livre pas la promesse.</p>
+
+  <div class="two-col" style="margin-bottom:0.8rem">
+    <div class="card">
+      <h3>Hypsis Craft</h3>
+      <p>Framework de co-transformation simultan&eacute;e des <strong>4 dimensions du Diamond de Leavitt &times; 4 stades de maturit&eacute; IA</strong> (L0&rarr;L3).</p>
+      <ul>
+        <li><strong>Comp&eacute;tences</strong> &mdash; diagnostic et recomposition des &eacute;quipes</li>
+        <li><strong>Acc&eacute;l&eacute;rateurs</strong> &mdash; PIM, WIM, Mod&egrave;le de Performance</li>
+        <li><strong>Solutions SaS</strong> &mdash; logiciels livr&eacute;s, pas de slides</li>
+      </ul>
+    </div>
+    <div class="card card-accent">
+      <h3>Hypsis Ops</h3>
+      <p>Plateforme d&rsquo;ex&eacute;cution. DSL versionn&eacute; + Workflow Engine + Agents &amp; Observabilit&eacute;.</p>
+      <ul>
+        <li><strong>Mode IMPACT</strong> &mdash; transformation born&eacute;e, upfront jalons</li>
+        <li><strong>Mode VALOR</strong> &mdash; op&eacute;rations continues, facturation &agrave; la valeur produite</li>
+      </ul>
+      <p style="margin-top:0.4rem; font-style:italic; color:var(--bronze)">Ce que McKinsey laisse dans un rapport, Hypsis le laisse dans un syst&egrave;me qui tourne.</p>
+    </div>
+  </div>
+
+  <div class="diamond-grid">
+    <div class="diamond-cell active"><h4>Processus</h4><p>BPMN &times; IA</p></div>
+    <div class="diamond-cell active"><h4>&Eacute;quipes</h4><p>Comp&eacute;tences &times; IA</p></div>
+    <div class="diamond-cell active"><h4>Outils</h4><p>Plateforme &times; Agents</p></div>
+    <div class="diamond-cell active"><h4>Structure</h4><p>Gouvernance &times; Data</p></div>
+  </div>
+</section>
+
+<!-- S5 — LA PREUVE PAR L'EXEMPLE -->
+<section class="slide slide-light" id="s5">
+  <span class="slide-num">05 / 20</span>
+  <p class="act-label">Acte II</p>
+  <p class="slide-label">Preuves</p>
+  <h2 class="slide-title">Des ROI mesur&eacute;s, contractualisables avant d&eacute;marrage.</h2>
+  <p class="slide-subtitle">La baseline est contractuelle. Le gain est audit&eacute;. Le success fee suit.</p>
+
+  <div class="two-col" style="margin-bottom:0.8rem">
+    <div class="card">
+      <h4>Contr&ocirc;le avant-paie (ETI 280 sal.)</h4>
+      <div class="stat-row" style="grid-template-columns: repeat(3,1fr); margin:0.5rem 0">
+        <div class="stat-item" style="padding:0.6rem">
+          <div class="stat-big" style="font-size:1.6rem">48&rarr;28<span class="stat-unit">h</span></div>
+          <div class="stat-label" style="font-size:0.78rem">traitement mensuel</div>
+        </div>
+        <div class="stat-item" style="padding:0.6rem">
+          <div class="stat-big" style="font-size:1.6rem">2.1&rarr;0.9<span class="stat-unit">%</span></div>
+          <div class="stat-label" style="font-size:0.78rem">taux d&rsquo;erreurs</div>
+        </div>
+        <div class="stat-item" style="padding:0.6rem">
+          <div class="stat-big" style="font-size:1.6rem">2&thinsp;100<span class="stat-unit">&euro;/m</span></div>
+          <div class="stat-label" style="font-size:0.78rem">&eacute;conomie mensuelle</div>
+        </div>
+      </div>
+      <p>D&eacute;ployable rapidement.</p>
+    </div>
+    <div class="card">
+      <h4>Planification MRP augment&eacute;e (ETI a&eacute;ro)</h4>
+      <div class="stat-row" style="grid-template-columns: repeat(3,1fr); margin:0.5rem 0">
+        <div class="stat-item" style="padding:0.6rem">
+          <div class="stat-big" style="font-size:1.6rem">&minus;73<span class="stat-unit">%</span></div>
+          <div class="stat-label" style="font-size:0.78rem">exceptions / semaine</div>
+        </div>
+        <div class="stat-item" style="padding:0.6rem">
+          <div class="stat-big" style="font-size:1.6rem">+12-18<span class="stat-unit">pts</span></div>
+          <div class="stat-label" style="font-size:0.78rem">OTD</div>
+        </div>
+        <div class="stat-item" style="padding:0.6rem">
+          <div class="stat-big" style="font-size:1.6rem">&darr;</div>
+          <div class="stat-label" style="font-size:0.78rem">p&eacute;nalit&eacute;s &eacute;vit&eacute;es</div>
+        </div>
+      </div>
+      <p>P&eacute;nalit&eacute;s contractuelles &eacute;vit&eacute;es calculables &agrave; la signature.</p>
+    </div>
+  </div>
+
+  <div class="statement-box">
+    <p><strong>Matrice ROI selon profondeur&thinsp;:</strong> Reskilling seul (1/4 dimensions) &times;1.4 &rarr; Full 4D stade L3 <strong>&times;5.1</strong>. 72% de la valeur est laiss&eacute;e sur la table si on n&rsquo;active qu&rsquo;une dimension.</p>
+  </div>
+</section>
+
+<!-- S6 — POURQUOI PERSONNE D'AUTRE NE PEUT LE FAIRE -->
+<section class="slide slide-light" id="s6">
+  <span class="slide-num">06 / 20</span>
+  <p class="act-label">Acte II</p>
+  <p class="slide-label">La moat</p>
+  <h2 class="slide-title">La moat est structurelle &mdash; pas technologique.</h2>
+  <p class="slide-subtitle">Cinq couches de d&eacute;fense qui se renforcent &agrave; chaque mission.</p>
+
+  <div class="three-col" style="margin-bottom:0.8rem">
+    <div class="card card-accent">
+      <h3>Simultan&eacute;it&eacute; des 4D</h3>
+      <p>McKinsey adresse Processus + Structure. Les ESN adressent Outils. Les RH adressent &Eacute;quipes. <strong>Hypsis adresse les 4.</strong> Reproduire cette profondeur n&eacute;cessite de coordonner 4 cat&eacute;gories d&rsquo;acteurs &mdash; ou de se cannibaliser.</p>
+    </div>
+    <div class="card">
+      <h3>Corpus sectoriel cumulatif</h3>
+      <p>Chaque mission enrichit les agents. La 50&egrave;me ETI transform&eacute;e b&eacute;n&eacute;ficie des 49 premi&egrave;res. <strong>Ce corpus ne s&rsquo;ach&egrave;te pas</strong> &mdash; il se forge mission apr&egrave;s mission.</p>
+    </div>
+    <div class="card">
+      <h3>Switching cost structurel</h3>
+      <p>Un client avec des agents VALOR en production op&egrave;re ses processus via Hypsis Ops. <strong>Migrer = reconstruire tous ses workflows.</strong> Continuit&eacute; choisie, pas d&eacute;pendance impos&eacute;e.</p>
+    </div>
+  </div>
+
+  <p class="punchline" style="text-align:center">La moat se creuse &agrave; chaque mission. <strong>Le temps joue pour nous.</strong></p>
+</section>
+
+<!-- S7 — LE MODÈLE RÉCURSIF -->
+<section class="slide slide-light" id="s7">
+  <span class="slide-num">07 / 20</span>
+  <p class="act-label">Acte II</p>
+  <p class="slide-label">Scalabilit&eacute;</p>
+  <h2 class="slide-title">Le groupe est son propre premier client.</h2>
+  <p class="slide-subtitle">Chaque entit&eacute; forg&eacute;e est une d&eacute;monstration vivante. Chaque client transform&eacute; peut devenir distributeur.</p>
+
+  <div class="flow-row" style="margin-bottom:0.8rem">
+    <div class="flow-box">
+      <h4>N1 &mdash; Interne</h4>
+      <p>Hypsis Ops d&eacute;ploy&eacute; dans chaque entit&eacute; acquise</p>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-box accent">
+      <h4>N2 &mdash; Client direct</h4>
+      <p>La mission se termine par le d&eacute;ploiement d&rsquo;Hypsis Ops chez le client</p>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-box">
+      <h4>N3 &mdash; Propagation</h4>
+      <p>Le client transform&eacute; transforme ses propres clients</p>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <h3>N1 &mdash; Forge interne</h3>
+      <p>Hypsis Ops est d&eacute;ploy&eacute; dans chaque entit&eacute; acquise. Elle produit mieux, plus vite, avec moins. Son corpus alimente la plateforme.</p>
+    </div>
+    <div class="card">
+      <h3>N2 &amp; N3 &mdash; Viralité par le service</h3>
+      <p>Le client devient op&eacute;rateur de sa propre instance. Il peut &agrave; son tour transformer ses propres clients. <strong>La croissance est virale par le service &mdash; pas par le marketing.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ???????????????????????????????????????????
+     ACTE III — LE MODÈLE ÉCONOMIQUE · Slides 08–11
+     ??????????????????????????????????????????? -->
+
+<!-- S8 — LES TROIS FLUX DE VALEUR -->
+<section class="slide" id="s8">
+  <span class="slide-num">08 / 20</span>
+  <p class="act-label">Acte III</p>
+  <p class="slide-label">Mod&egrave;le &eacute;conomique</p>
+  <h2 class="slide-title">Trois flux, une trajectoire. Cash &rarr; R&eacute;current &rarr; Actif.</h2>
+  <p class="slide-subtitle">Le conseil g&eacute;n&egrave;re le cash. Le r&eacute;sultat cr&eacute;e la confiance. La plateforme construit l&rsquo;actif.</p>
+
+  <div class="timeline-row" style="grid-template-columns: repeat(3, 1fr); margin-bottom:0.8rem">
+    <div class="timeline-item">
+      <div class="num">&#9312;</div>
+      <h3>Forge du groupe</h3>
+      <p>M&amp;A entit&eacute;s sous-optimis&eacute;es (multiple bas) + d&eacute;ploiement Hypsis Ops &rarr; entit&eacute;s plus rentables, scalables, porteuses d&rsquo;un corpus. <strong>Multiple conseil entr&eacute;e &rarr; multiple SaaS sortie.</strong></p>
+    </div>
+    <div class="timeline-item">
+      <div class="num">&#9313;</div>
+      <h3>Missions IMPACT</h3>
+      <p>Upfront sur jalons contractualis&eacute;s + success fee 30% des gains mesur&eacute;s. <strong>Cash flow imm&eacute;diat.</strong> R&eacute;sidu = d&eacute;monstration auditable pour le prospect suivant.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="num">&#9314;</div>
+      <h3>Op&eacute;rations VALOR + BPO</h3>
+      <p>Agents op&egrave;rent apr&egrave;s la mission. Facturation &agrave; la valeur produite. S&rsquo;accumule sans co&ucirc;t de vente suppl&eacute;mentaire. <strong>LTV triple &agrave; chaque palier.</strong></p>
+    </div>
+  </div>
+
+  <div class="statement-box">
+    <p>Le conseil g&eacute;n&egrave;re le cash. Le r&eacute;sultat cr&eacute;e la confiance. La plateforme construit l&rsquo;actif. <strong>Trois flux, un seul cap.</strong></p>
+  </div>
+</section>
+
+<!-- S9 — L'UNITÉ ÉCONOMIQUE D'UNE MISSION -->
+<section class="slide" id="s9">
+  <span class="slide-num">09 / 20</span>
+  <p class="act-label">Acte III</p>
+  <p class="slide-label">Unit economics</p>
+  <h2 class="slide-title">Un client, trois paliers de valeur.</h2>
+  <p class="slide-subtitle">Co&ucirc;t d&rsquo;acquisition constant. LTV structurellement croissante.</p>
+
+  <div class="two-col" style="margin-bottom:0.8rem">
+    <div class="card">
+      <h3>Exemple&thinsp;: contr&ocirc;le de paie</h3>
+      <ul>
+        <li>Upfront mission = <span class="placeholder">&agrave; qualifier</span></li>
+        <li>VALOR ann&eacute;e 1 = <strong>23k&euro;</strong> (30% de 78k&euro; gains)</li>
+        <li>BPO augment&eacute; potentiel = <span class="placeholder">en cours</span></li>
+        <li>Net client&thinsp;: <strong>+55k&euro;/an</strong></li>
+        <li>Net Hypsis&thinsp;: r&eacute;current croissant sans co&ucirc;t de revente</li>
+      </ul>
+    </div>
+    <div class="card card-accent">
+      <h3>NRR &mdash; la m&eacute;trique cl&eacute;</h3>
+      <p>Un client en Mode VALOR qui monte en puissance g&eacute;n&egrave;re plus l&rsquo;ann&eacute;e 2 que l&rsquo;ann&eacute;e 1 &mdash; <strong>m&ecirc;me en l&rsquo;absence de nouvelle mission</strong>.</p>
+      <div class="divider"></div>
+      <p><strong>France 2030 IA Booster</strong> (25&thinsp;M&euro;, jusqu&rsquo;&agrave; 80% de prise en charge pour les ETIs)&thinsp;: r&eacute;duit le risque commercial sur les premi&egrave;res missions. Acc&eacute;l&egrave;re la d&eacute;cision d&rsquo;achat.</p>
+    </div>
+  </div>
+</section>
+
+<!-- S10 — LA LOGIQUE DE VALORISATION -->
+<section class="slide" id="s10">
+  <span class="slide-num">10 / 20</span>
+  <p class="act-label">Acte III</p>
+  <p class="slide-label">Valorisation</p>
+  <h2 class="slide-title">Multiple SaaS sur la plateforme. Multiple EBITDA sur le conseil.</h2>
+  <p class="slide-subtitle">La part r&eacute;currente op&eacute;r&eacute;e d&eacute;termine le multiple de sortie &mdash; pas la part conseil.</p>
+
+  <div class="two-col" style="margin-bottom:0.8rem">
+    <div class="card">
+      <h3>Structure holding</h3>
+      <table class="deck-table">
+        <thead><tr><th>Composante</th><th>Multiple</th></tr></thead>
+        <tbody>
+          <tr><td>Filiales conseil (EBITDA stable)</td><td><strong>6&ndash;8&times;</strong></td></tr>
+          <tr class="highlight"><td>Entit&eacute; plateforme Hypsis Ops (ARR r&eacute;current)</td><td><strong>10&ndash;20&times;</strong></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:0.4rem">La d&eacute;cote conseil est absorb&eacute;e par la prime tech d&egrave;s que les Valors en production d&eacute;passent <strong>30% du CA</strong>.</p>
+    </div>
+    <div class="card card-accent">
+      <h3>Cr&eacute;ation de valeur</h3>
+      <p>&Agrave; 8&times; EBITDA&thinsp;:</p>
+      <ul>
+        <li>1&thinsp;M&euro; d&rsquo;&eacute;conomies g&eacute;n&eacute;r&eacute;es chez un client = <strong>8&thinsp;M&euro; de valeur d&rsquo;entreprise</strong> pour ce client</li>
+        <li>Le groupe capture 30% de cet impact = <strong>300k&euro;/client/an</strong> r&eacute;currents</li>
+      </ul>
+      <div class="divider"></div>
+      <h4>Sc&eacute;narios de sortie</h4>
+      <ul>
+        <li>Cession partielle &agrave; un ESN ou &eacute;diteur strat&eacute;gique</li>
+        <li>Introduction en bourse avec actif SaaS valoris&eacute;</li>
+        <li>Continuation en plateforme ind&eacute;pendante</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- S11 — TRAJECTOIRE FINANCIÈRE -->
+<section class="slide slide-light" id="s11">
+  <span class="slide-num">11 / 20</span>
+  <p class="act-label">Acte III</p>
+  <p class="slide-label">Trajectoire</p>
+  <h2 class="slide-title">ARR &middot; R&eacute;current / Total &middot; NRR &mdash; trois indicateurs qui prouvent la nature SaaS.</h2>
+  <p class="slide-subtitle">Les jalons sont contractualis&eacute;s. Les m&eacute;triques sont natives dans Hypsis Ops.</p>
+
+  <div class="two-col" style="margin-bottom:0.8rem">
+    <div class="card">
+      <h3>KPIs cl&eacute;s</h3>
+      <ul>
+        <li><strong>ARR</strong> &mdash; r&eacute;currents op&eacute;r&eacute;s</li>
+        <li><strong>% r&eacute;current sur CA total</strong></li>
+        <li><strong>NRR</strong> &mdash; Net Revenue Retention</li>
+        <li><strong>CAC / LTV</strong></li>
+        <li><strong>Marge op&eacute;rationnelle</strong> par flux</li>
+      </ul>
+    </div>
+    <div class="card card-accent">
+      <h3>Trajectoire indicative 36 mois</h3>
+      <ul>
+        <li><strong>M0&ndash;M12</strong>&thinsp;: construction corpus, 1&ndash;3 clients VALOR</li>
+        <li><strong>M12&ndash;M24</strong>&thinsp;: 3&ndash;5 clients r&eacute;currents, ARR positif</li>
+        <li><strong>M24&ndash;M36</strong>&thinsp;: premier vertical SaaS en production, ARR cible</li>
+      </ul>
+      <p style="margin-top:0.4rem">Point d&rsquo;&eacute;quilibre et marge cible&thinsp;: <span class="placeholder">&agrave; construire</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ???????????????????????????????????????????
+     ACTE IV — LA STRATÉGIE M&A · Slides 12–14
+     ??????????????????????????????????????????? -->
+
+<!-- S12 — LA LOGIQUE M&A -->
+<section class="slide slide-light" id="s12">
+  <span class="slide-num">12 / 20</span>
+  <p class="act-label">Acte IV</p>
+  <p class="slide-label">Strat&eacute;gie M&amp;A</p>
+  <h2 class="slide-title">Acqu&eacute;rir des entreprises artisanales. Les forger. Les valoriser comme des entit&eacute;s technologiques.</h2>
+  <p class="slide-subtitle">Multiple conseil &agrave; l&rsquo;entr&eacute;e. Multiple SaaS &agrave; la sortie. La diff&eacute;rence est Hypsis Ops.</p>
+
+  <div class="three-col" style="margin-bottom:0.8rem">
+    <div class="card card-accent">
+      <h3>Cash flow imm&eacute;diat</h3>
+      <p>CA existant de la cible, cycles de vente &eacute;court&eacute;s par la base clients &eacute;tablie.</p>
+    </div>
+    <div class="card">
+      <h3>Corpus sectoriel initial</h3>
+      <p>Donn&eacute;es d&rsquo;entra&icirc;nement pour les agents. La cible apporte les missions, le contexte, les documents.</p>
+    </div>
+    <div class="card">
+      <h3>D&eacute;monstration vivante</h3>
+      <p>Post-acquisition&thinsp;: Hypsis Ops d&eacute;ploy&eacute; &rarr; l&rsquo;entit&eacute; produit mieux &rarr; ses clients sont les premiers prospects VALOR.</p>
+    </div>
+  </div>
+
+  <div class="statement-box">
+    <p>Track record&thinsp;: <strong>500&thinsp;M&euro; de transactions buy-and-build</strong> orchestr&eacute;es par l&rsquo;associ&eacute; fondateur. La discipline M&amp;A est op&eacute;rationnelle &mdash; pas th&eacute;orique.</p>
+  </div>
+</section>
+
+<!-- S13 — LA CARTE DES ACQUISITIONS -->
+<section class="slide slide-light" id="s13">
+  <span class="slide-num">13 / 20</span>
+  <p class="act-label">Acte IV</p>
+  <p class="slide-label">Carte d&rsquo;acquisitions</p>
+  <h2 class="slide-title">Trois vagues. Quatre dimensions. Une carte de construction du groupe.</h2>
+  <p class="slide-subtitle">Chaque vague r&eacute;pond &agrave; un besoin de capacit&eacute; manquante &mdash; pas &agrave; une logique d&rsquo;arbitrage.</p>
+
+  <div class="three-col" style="margin-bottom:0.8rem">
+    <div class="card card-accent">
+      <h3>V1 &mdash; Fondation</h3>
+      <p style="font-size:0.82rem; color:var(--ink-muted); margin-bottom:0.3rem">Capacit&eacute;s manquantes</p>
+      <ul>
+        <li>4 cibles couvrant les 4 dimensions du Diamond</li>
+        <li>Cabinets <strong>0,8&ndash;3&thinsp;M&euro; CA</strong>, plafond de croissance atteint</li>
+        <li>R&eacute;seau ETI &eacute;tabli</li>
+        <li>Tickets M&amp;A&thinsp;: <strong>1&ndash;5&thinsp;M&euro;</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>V2 &mdash; D&eacute;ploiement</h3>
+      <p style="font-size:0.82rem; color:var(--ink-muted); margin-bottom:0.3rem">ARR et base clients</p>
+      <ul>
+        <li>&Eacute;diteurs SaaS ETI (ARR r&eacute;current)</li>
+        <li>Int&eacute;grateurs sectoriels (base clients large)</li>
+        <li>Tickets M&amp;A&thinsp;: <strong>3&ndash;18&thinsp;M&euro;</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>V3 &mdash; Expansion</h3>
+      <p style="font-size:0.82rem; color:var(--ink-muted); margin-bottom:0.3rem">Expertise non reproductible</p>
+      <ul>
+        <li>Expertise sectorielle profonde (a&eacute;ro, pharma, industrie, finance)</li>
+        <li>R&eacute;seau C-suite ETI</li>
+        <li>Marque sectorielle publiable</li>
+        <li>Tickets M&amp;A&thinsp;: <span class="placeholder">selon opportunit&eacute;</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- S14 — L'INTÉGRATION POST-ACQUISITION -->
+<section class="slide slide-light" id="s14">
+  <span class="slide-num">14 / 20</span>
+  <p class="act-label">Acte IV</p>
+  <p class="slide-label">Int&eacute;gration</p>
+  <h2 class="slide-title">L&rsquo;int&eacute;gration est une mission Hypsis Craft. Elle est m&eacute;thodis&eacute;e.</h2>
+  <p class="slide-subtitle">M&ecirc;me framework, m&ecirc;me plateforme, m&ecirc;mes OKRs. La cible devient une entit&eacute; du groupe &mdash; pas un satellite.</p>
+
+  <div class="two-col" style="margin-bottom:0.8rem">
+    <div class="card">
+      <h3>M&eacute;thodologie structur&eacute;e</h3>
+      <p>4 dimensions Diamond appliqu&eacute;es &agrave; la cible&thinsp;:</p>
+      <div class="flow-row" style="margin:0.5rem 0; justify-content:flex-start">
+        <div class="flow-box" style="min-width:auto; padding:0.4rem 0.8rem"><h4 style="font-size:0.82rem">Processus</h4></div>
+        <div class="flow-arrow" style="font-size:1rem">&rarr;</div>
+        <div class="flow-box" style="min-width:auto; padding:0.4rem 0.8rem"><h4 style="font-size:0.82rem">&Eacute;quipes</h4></div>
+        <div class="flow-arrow" style="font-size:1rem">&rarr;</div>
+        <div class="flow-box" style="min-width:auto; padding:0.4rem 0.8rem"><h4 style="font-size:0.82rem">Outils</h4></div>
+        <div class="flow-arrow" style="font-size:1rem">&rarr;</div>
+        <div class="flow-box" style="min-width:auto; padding:0.4rem 0.8rem"><h4 style="font-size:0.82rem">Gouvernance</h4></div>
+      </div>
+      <ul>
+        <li>Hypsis Ops d&eacute;ploy&eacute; en <strong>M+3</strong></li>
+        <li>OKRs align&eacute;s sur le BP groupe d&egrave;s l&rsquo;accord sign&eacute;</li>
+      </ul>
+    </div>
+    <div class="card card-accent">
+      <h3>Risque cl&eacute; identifi&eacute;</h3>
+      <p><strong>Concentration du r&eacute;seau client sur le fondateur de la cible.</strong></p>
+      <p style="margin-top:0.3rem">Mitigation&thinsp;:</p>
+      <ul>
+        <li>Earn-out long (<strong>3&ndash;5 ans</strong>)</li>
+        <li>Clause de non-comp&eacute;tition</li>
+        <li>Transfert actif vers la plateforme d&egrave;s <strong>M+6</strong></li>
+      </ul>
+      <p style="margin-top:0.3rem">La cible devient imm&eacute;diatement terrain de validation du corpus. Ses missions alimentent les agents. Ses r&eacute;sultats deviennent les premi&egrave;res r&eacute;f&eacute;rences commerciales.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ???????????????????????????????????????????
+     ACTE V — L'ÉQUIPE ET L'EXÉCUTION · Slides 15–17
+     ??????????????????????????????????????????? -->
+
+<!-- S15 — LA CONVERGENCE RARE -->
+<section class="slide" id="s15">
+  <span class="slide-num">15 / 20</span>
+  <p class="act-label">Acte V</p>
+  <p class="slide-label">&Eacute;quipe</p>
+  <h2 class="slide-title">Trois domaines rarement r&eacute;unis. Une &eacute;quipe qui les incarne.</h2>
+  <p class="slide-subtitle">Expertise m&eacute;tier de transformation &middot; Discipline M&amp;A op&eacute;rationnelle &middot; Ma&icirc;trise technique IA-native.</p>
+
+  <div class="three-col" style="margin-bottom:0.8rem">
+    <div class="card card-accent">
+      <h3>M&eacute;tier</h3>
+      <p>Sans expertise m&eacute;tier, on ne peut pas <strong>vendre aux DG d&rsquo;ETIs</strong>. Le diagnostic reste g&eacute;n&eacute;rique. La transformation ne prend pas.</p>
+    </div>
+    <div class="card card-accent">
+      <h3>M&amp;A</h3>
+      <p>Sans discipline M&amp;A, on ne peut pas <strong>int&eacute;grer post-acquisition</strong>. Le groupe reste un agr&eacute;gat. La valeur ne compose pas.</p>
+    </div>
+    <div class="card card-accent">
+      <h3>Tech IA-native</h3>
+      <p>Sans ma&icirc;trise technique, on ne peut pas <strong>d&eacute;ployer Hypsis Ops</strong>. La promesse reste un slide deck. Le r&eacute;current ne se construit pas.</p>
+    </div>
+  </div>
+
+  <div class="statement-box">
+    <p>Actif de cr&eacute;dibilit&eacute; &eacute;tabli&thinsp;: <strong>500&thinsp;M&euro; de transactions buy-and-build</strong> &middot; r&eacute;seau DAF/DRH/DG ETIs constitu&eacute; &middot; Hypsis Ops et Smart-GTA d&eacute;j&agrave; en production sur l&rsquo;API Anthropic.</p>
+  </div>
+
+  <p class="source-line"><span class="placeholder">&Agrave; compl&eacute;ter&thinsp;: bios fondateurs + profil CTO cibl&eacute;</span></p>
+</section>
+
+<!-- S16 — LES PREUVES D'EXÉCUTION -->
+<section class="slide slide-light" id="s16">
+  <span class="slide-num">16 / 20</span>
+  <p class="act-label">Acte V</p>
+  <p class="slide-label">Preuves d&rsquo;ex&eacute;cution</p>
+  <h2 class="slide-title">Ce qui existe aujourd&rsquo;hui &mdash; pas des maquettes, des actifs.</h2>
+  <p class="slide-subtitle">Smart-GTA en production. PIM et WIM op&eacute;rationnels. Corpus sectoriel initial constitu&eacute;.</p>
+
+  <div class="three-col" style="margin-bottom:0.8rem">
+    <div class="card card-accent">
+      <h3>Smart-GTA v4.1</h3>
+      <p>Application de conformit&eacute; GTA/paie fran&ccedil;aise, int&eacute;gr&eacute;e API Anthropic, <strong>d&eacute;ployable en 3&ndash;4 semaines</strong> sur n&rsquo;importe quelle ETI avec SIRH. Premier actif SaS d&eacute;montrable et auditable.</p>
+    </div>
+    <div class="card">
+      <h3>PIM v0.7 + WIM v0.4</h3>
+      <p>Outils propri&eacute;taires de diagnostic (APQC PCF v7.3 &times; E/S/J pour les processus, O*NET &times; E/S/J pour les m&eacute;tiers). <strong>ROI estimable avant la premi&egrave;re mission</strong> &mdash; argument contractuel.</p>
+    </div>
+    <div class="card">
+      <h3>Rencontre fondatrice</h3>
+      <p>Co-fondateurs potentiels align&eacute;s sur la vision, dossier investisseur en pr&eacute;paration, <strong>premiers design partners identifi&eacute;s</strong>.</p>
+      <p class="source-line">Paris, 25 mars 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- S17 — LA GOUVERNANCE ET LES RISQUES -->
+<section class="slide" id="s17">
+  <span class="slide-num">17 / 20</span>
+  <p class="act-label">Acte V</p>
+  <p class="slide-label">Risques</p>
+  <h2 class="slide-title">Quatre risques identifi&eacute;s. Quatre mitigations actives.</h2>
+  <p class="slide-subtitle">Lucides sur les risques. Pr&eacute;cis sur les r&eacute;ponses.</p>
+
+  <div class="four-col" style="margin-bottom:0.8rem">
+    <div class="card risk-card">
+      <h4>Adoption interne</h4>
+      <p>Consultants acquis : positionnement comme acc&eacute;l&eacute;rateur de carri&egrave;re &middot; formation &middot; champions internes &middot; earn-out align&eacute; sur la r&eacute;ussite Hypsis Ops.</p>
+    </div>
+    <div class="card risk-card">
+      <h4>Mesure de l&rsquo;impact</h4>
+      <p>Baseline sign&eacute;e avant d&eacute;marrage &middot; KPIs natifs dans Hypsis Ops &middot; observabilit&eacute; temps r&eacute;el &middot; audit tiers si litige.</p>
+    </div>
+    <div class="card risk-card">
+      <h4>Model collapse</h4>
+      <p>Comit&eacute; de validation &middot; seuil N&ge;5 missions &middot; tests de non-r&eacute;gression &middot; versionning s&eacute;mantique &middot; rollback.</p>
+    </div>
+    <div class="card risk-card">
+      <h4>Concentration M&amp;A</h4>
+      <p>Earn-out 3&ndash;5 ans &middot; clause non-comp&eacute;tition &middot; transfert r&eacute;seau vers plateforme d&egrave;s M+6 &middot; multi-acquisitions pour diluer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ???????????????????????????????????????????
+     ACTE VI — LE DEAL · Slides 18–20
+     ??????????????????????????????????????????? -->
+
+<!-- S18 — LES TROIS SCÉNARIOS DE TICKET -->
+<section class="slide" id="s18">
+  <span class="slide-num">18 / 20</span>
+  <p class="act-label">Acte VI</p>
+  <p class="slide-label">Le deal</p>
+  <h2 class="slide-title">Trois tickets. Trois vitesses. Un m&ecirc;me cap.</h2>
+  <p class="slide-subtitle">Chaque euro finance un jalon mesurable. L&rsquo;allocation varie selon le sc&eacute;nario &mdash; pas la direction.</p>
+
+  <div class="three-col" style="margin-bottom:0.8rem">
+    <div class="card ticket-card">
+      <div class="ticket-amount">3&thinsp;M&euro;</div>
+      <div class="ticket-name">Fondation</div>
+      <ul>
+        <li>Hypsis Ops MVP (DSL + 3 types d&rsquo;impacts)</li>
+        <li>Recrutement CTO</li>
+        <li>1&ndash;2 acquisitions V1</li>
+        <li>3&ndash;5 pilotes clients ETI</li>
+      </ul>
+      <p style="margin-top:0.4rem; font-style:italic; font-size:0.85rem; color:var(--gold)">Objectif 18 mois&thinsp;: premi&egrave;res preuves de r&eacute;current VALOR.</p>
+    </div>
+    <div class="card ticket-card card-accent">
+      <div class="ticket-amount">15&thinsp;M&euro;</div>
+      <div class="ticket-name">Acc&eacute;l&eacute;ration</div>
+      <ul>
+        <li>Hypsis Ops complet (IMPACT + VALOR + BPO)</li>
+        <li>4 acquisitions V1 (couverture 4D Diamond)</li>
+        <li>10+ clients</li>
+        <li>Premier vertical SaaS en production</li>
+      </ul>
+      <p style="margin-top:0.4rem; font-style:italic; font-size:0.85rem; color:var(--gold)">Objectif 18 mois&thinsp;: ARR significatif, moat corpus visible.</p>
+    </div>
+    <div class="card ticket-card">
+      <div class="ticket-amount">30&thinsp;M&euro;</div>
+      <div class="ticket-name">D&eacute;ploiement</div>
+      <ul>
+        <li>Sc&eacute;nario 15&thinsp;M&euro; + acquisitions V2</li>
+        <li>&Eacute;cosyst&egrave;me partenaires</li>
+        <li>Expansion sectorielle</li>
+        <li>ARR r&eacute;currents, base clients large</li>
+      </ul>
+      <p style="margin-top:0.4rem; font-style:italic; font-size:0.85rem; color:var(--gold)">Objectif 18 mois&thinsp;: leader segment ETI fran&ccedil;ais.</p>
+    </div>
+  </div>
+</section>
+
+<!-- S19 — LA ROADMAP DES 18 MOIS -->
+<section class="slide" id="s19">
+  <span class="slide-num">19 / 20</span>
+  <p class="act-label">Acte VI</p>
+  <p class="slide-label">Roadmap</p>
+  <h2 class="slide-title">Six jalons. Trois &agrave; v&eacute;rifier &agrave; M6. Trois &agrave; v&eacute;rifier &agrave; M18.</h2>
+  <p class="slide-subtitle">Les preuves sont dans les m&eacute;triques &mdash; natives dans Hypsis Ops, pas d&eacute;clar&eacute;es.</p>
+
+  <div class="two-col" style="margin-bottom:0.8rem">
+    <div class="card">
+      <h3>M6</h3>
+      <ul>
+        <li>CTO recrut&eacute;</li>
+        <li>Hypsis Ops MVP en production interne</li>
+        <li>1&ndash;2 acquisitions V1 sign&eacute;es</li>
+        <li>1 pilote client avec ROI mesur&eacute; et audit&eacute;</li>
+        <li>Smart-GTA en production chez 2 clients</li>
+      </ul>
+    </div>
+    <div class="card card-accent">
+      <h3>M18</h3>
+      <ul>
+        <li>3&ndash;5 clients en Mode VALOR actif</li>
+        <li>Premier ARR r&eacute;current positif</li>
+        <li>Corpus sectoriel initial constitu&eacute; sur 2 secteurs</li>
+        <li>4 dimensions Diamond couvertes par les entit&eacute;s du groupe</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="statement-box">
+    <p><strong>KPIs de suivi&thinsp;:</strong> ARR VALOR &middot; NRR &middot; nombre de missions avec baseline contractualis&eacute;e &middot; % CA r&eacute;current / CA total &middot; corpus missions alimentant les agents.</p>
+  </div>
+</section>
+
+<!-- S20 — L'INVITATION -->
+<section class="slide" id="s20">
+  <span class="slide-num">20 / 20</span>
+  <p class="act-label">Acte VI</p>
+  <p class="slide-label">Prochaine &eacute;tape</p>
+  <h2 class="slide-title" style="font-size:clamp(2rem, 4vw, 3.2rem); margin-bottom:0.6rem">La fen&ecirc;tre est ouverte.<br>Elle ne le restera pas.</h2>
+  <p class="slide-subtitle" style="max-width:750px">Celui qui occupe cette place en premier dispose d&rsquo;un avantage de donn&eacute;es, de m&eacute;thode et de r&eacute;seau que ses successeurs ne rattraperont pas.</p>
+
+  <div class="three-col" style="margin-bottom:1rem">
+    <div class="card">
+      <h3>Pourquoi maintenant</h3>
+      <p>Les acteurs &eacute;tablis connaissent l&rsquo;IA agentique. Ils ne peuvent pas la d&eacute;ployer sans se cannibaliser. <strong>La fen&ecirc;tre est ouverte pr&eacute;cis&eacute;ment parce que Hypsis n&rsquo;a pas de legacy &agrave; prot&eacute;ger.</strong></p>
+    </div>
+    <div class="card">
+      <h3>Ce que nous cherchons</h3>
+      <p>Exp&eacute;rience des services professionnels ou de la tech &middot; R&eacute;seau ETI / C-suite &middot; Accompagnement M&amp;A op&eacute;rationnel. <strong>Pas uniquement du capital.</strong></p>
+    </div>
+    <div class="card card-accent">
+      <h3>Prochaine &eacute;tape</h3>
+      <ul>
+        <li>Due diligence sur <strong>Smart-GTA</strong> (actif auditable)</li>
+        <li>Acc&egrave;s aux <strong>PIM / WIM</strong> (d&eacute;montrables)</li>
+        <li>Rencontre &eacute;quipe fondatrice</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider" style="background:rgba(248,246,241,0.1); margin: 0.6rem 0"></div>
+
+  <div style="text-align:center">
+    <div class="wordmark" style="margin-bottom:0.6rem">Hypsis</div>
+    <p style="font-size:1.1rem; font-weight:500; color:var(--gold)">william@hypsis.ai</p>
+    <p style="font-size:0.92rem; color:rgba(248,246,241,0.35); margin-top:0.3rem">hypsis.ai</p>
+  </div>
+</section>
+
+<script>
+(function() {
+  const slides = document.querySelectorAll('section.slide');
+  const dotsContainer = document.getElementById('navDots');
+  let current = 0;
+  slides.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'dot' + (i === 0 ? ' active' : '');
+    btn.setAttribute('aria-label', 'Slide ' + (i + 1));
+    btn.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(btn);
+  });
+  function goTo(idx) {
+    if (idx < 0 || idx >= slides.length) return;
+    slides[idx].scrollIntoView({ behavior: 'smooth' });
+  }
+  function updateDots() {
+    const dots = dotsContainer.querySelectorAll('.dot');
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const vh = window.innerHeight;
+    const newCurrent = Math.round(scrollTop / vh);
+    if (newCurrent !== current && newCurrent >= 0 && newCurrent < slides.length) {
+      current = newCurrent;
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+  }
+  window.addEventListener('scroll', updateDots, { passive: true });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault(); goTo(current + 1);
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+      e.preventDefault(); goTo(current - 1);
+    }
+  });
+})();
+</script>
+</body>
+</html>
