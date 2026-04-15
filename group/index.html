@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hypsis � La plateforme de transformation IA des organisations</title>
+<title>Groupe Hypsis — Transformation IA de bout en bout</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Italiana&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -127,6 +127,7 @@ section.slide {
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
 .four-col { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.8rem; }
+.five-col { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 0.7rem; }
 .divider { width: 80px; height: 1px; background: rgba(248,246,241,0.1); margin: 1rem 0; }
 
 .stat-row { display: grid; gap: 0; border-top: 1px solid rgba(248,246,241,0.1); border-bottom: 1px solid rgba(248,246,241,0.1); margin: 0.8rem 0; }
@@ -136,7 +137,6 @@ section.slide {
 .stat-big .stat-highlight { color: var(--gold); }
 .stat-unit { font-size: 0.45em; font-weight: 400; color: var(--ink-muted); }
 .stat-label { font-size: 0.88rem; font-weight: 300; color: rgba(248,246,241,0.55); line-height: 1.45; margin-top: 0.25rem; }
-.stat-source { font-size: 0.72rem; font-weight: 300; color: rgba(248,246,241,0.25); margin-top: 0.2rem; }
 
 .timeline-row { display: grid; gap: 0; border-top: 1px solid rgba(248,246,241,0.1); border-bottom: 1px solid rgba(248,246,241,0.1); margin: 0.8rem 0; }
 .timeline-item { padding: 1.1rem 1.3rem; border-right: 1px solid rgba(248,246,241,0.1); }
@@ -152,17 +152,8 @@ section.slide {
 .flow-box p { font-size: 0.82rem; font-weight: 300; color: rgba(248,246,241,0.45); }
 .flow-arrow { font-size: 1.4rem; color: rgba(248,246,241,0.15); padding: 0 0.5rem; flex-shrink: 0; }
 
-.cascade-list { list-style: none; padding: 0; }
-.cascade-list li { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.25rem 0; font-size: 0.95rem; font-weight: 300; color: rgba(248,246,241,0.6); }
-.cascade-list li strong { font-weight: 600; color: var(--paper); }
-.cascade-arrow { font-size: 0.82rem; color: var(--gold); flex-shrink: 0; }
+.source-line { font-size: 0.72rem; font-weight: 300; color: rgba(248,246,241,0.2); margin-top: 0.5rem; }
 
-.source-line {
-  font-size: 0.72rem; font-weight: 300; color: rgba(248,246,241,0.2);
-  margin-top: 0.5rem;
-}
-
-/* light slides */
 .slide-light { background: var(--paper); color: var(--ink); }
 .slide-light .slide-num { color: var(--ink-muted); }
 .slide-light .act-label { color: var(--bronze-dark); }
@@ -173,6 +164,7 @@ section.slide {
 .slide-light .punchline strong { color: var(--ink); }
 .slide-light .card { background: var(--paper-warm); border: none; }
 .slide-light .card h3 { color: var(--ink); }
+.slide-light .card h4 { color: var(--bronze); }
 .slide-light .card p, .slide-light .card li { color: var(--ink-soft); }
 .slide-light .card strong { color: var(--ink); }
 .slide-light .card-accent { background: var(--accent-faint); border-left-color: var(--bronze); }
@@ -190,7 +182,6 @@ section.slide {
 .slide-light .stat-big { color: var(--ink); }
 .slide-light .stat-big .stat-highlight { color: var(--bronze); }
 .slide-light .stat-label { color: var(--ink-soft); }
-.slide-light .stat-source { color: var(--ink-muted); }
 .slide-light .timeline-row { border-color: var(--stone); }
 .slide-light .timeline-item { border-color: var(--stone); }
 .slide-light .timeline-item .num { color: var(--stone); }
@@ -202,12 +193,8 @@ section.slide {
 .slide-light .flow-box p { color: var(--ink-muted); }
 .slide-light .flow-arrow { color: var(--stone); }
 .slide-light .source-line { color: var(--ink-muted); }
-.slide-light .cascade-list li { color: var(--ink-soft); }
-.slide-light .cascade-list li strong { color: var(--ink); }
-.slide-light .cascade-arrow { color: var(--bronze); }
 .slide-light .divider { background: var(--stone); }
 
-/* title slide */
 .slide-cover { justify-content: flex-end; padding-bottom: 3.5rem; text-align: center; align-items: center; }
 .slide-cover .hero-bg { position: absolute; inset: 0; z-index: 0; }
 .slide-cover .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; filter: brightness(0.35) saturate(0.7); }
@@ -226,42 +213,14 @@ section.slide {
 .title-footer { font-size: 0.88rem; font-weight: 300; color: rgba(248,246,241,0.35); }
 .title-footer strong { font-weight: 500; color: rgba(248,246,241,0.5); }
 
-.placeholder {
-  display: inline-block; background: rgba(201,168,76,0.15); border: 1px dashed rgba(201,168,76,0.3);
-  border-radius: 4px; padding: 0.1rem 0.5rem; font-size: 0.85rem; color: var(--gold); font-style: italic;
-}
-.slide-light .placeholder {
-  background: rgba(122,104,64,0.08); border-color: rgba(122,104,64,0.25); color: var(--bronze);
-}
-
-/* diamond diagram */
-.diamond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; max-width: 500px; margin: 0.8rem auto; }
-.diamond-cell {
-  padding: 0.8rem 1rem; border-radius: 8px; text-align: center;
-  border: 1px solid rgba(248,246,241,0.1); background: rgba(248,246,241,0.03);
-}
-.diamond-cell.active { border-color: var(--gold); background: var(--gold-glow); }
-.diamond-cell h4 { font-size: 0.9rem; font-weight: 600; color: var(--paper); margin-bottom: 0.15rem; }
-.diamond-cell p { font-size: 0.78rem; font-weight: 300; color: rgba(248,246,241,0.5); }
-.diamond-cell.active p { color: rgba(248,246,241,0.7); }
-.slide-light .diamond-cell { border-color: var(--stone); background: var(--paper-warm); }
-.slide-light .diamond-cell.active { border-color: var(--bronze); background: var(--accent-faint); }
-.slide-light .diamond-cell h4 { color: var(--ink); }
-.slide-light .diamond-cell p { color: var(--ink-muted); }
-
-/* risk grid */
-.risk-card { border-left: 3px solid var(--gold); }
-.risk-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--gold); margin-bottom: 0.2rem; }
-
-/* ticket cards */
-.ticket-card { position: relative; overflow: hidden; }
-.ticket-amount { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 0.3rem; }
-.ticket-name { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,246,241,0.4); margin-bottom: 0.5rem; }
+.conv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.conv-card { padding: 1rem 1.2rem; border-radius: 8px; border: 1px solid rgba(248,246,241,0.08); background: rgba(248,246,241,0.03); }
+.conv-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--gold); margin-bottom: 0.25rem; letter-spacing: 0.05em; }
+.conv-card p { font-size: 0.88rem; font-weight: 300; color: rgba(248,246,241,0.55); line-height: 1.5; }
 
 @media (max-width: 768px) {
   section.slide { padding: 1.5rem 1.2rem 1.5rem; }
-  .two-col, .three-col, .four-col { grid-template-columns: 1fr; }
-  .diamond-grid { grid-template-columns: 1fr; }
+  .two-col, .three-col, .four-col, .five-col, .conv-grid { grid-template-columns: 1fr; }
   .stat-row { grid-template-columns: 1fr; }
   .stat-item { border-right: none; border-bottom: 1px solid rgba(248,246,241,0.1); }
   .stat-item:last-child { border-bottom: none; }
@@ -281,693 +240,519 @@ section.slide {
 
 <nav class="nav-dots" id="navDots"></nav>
 
-<!-- ???????????????????????????????????????????
-     ACTE I � LA TH�SE � Slides 01�03
-     ??????????????????????????????????????????? -->
-
-<!-- S1 � COUVERTURE + TH�SE -->
+<!-- S1 — COUVERTURE -->
 <section class="slide slide-cover" id="s1">
   <div class="hero-bg"><img src="../assets/hero-fresco.png" alt=""></div>
   <div class="content">
-    <div class="wordmark">Hypsis</div>
-    <h1 class="title-main">La plateforme de transformation IA des organisations</h1>
-    <p class="title-tagline">Le conseil est le produit d&rsquo;entr&eacute;e. Les r&eacute;currents op&eacute;r&eacute;s sont l&rsquo;actif de sortie.</p>
-    <p class="title-sub">Le premier groupe capable d&rsquo;orchestrer simultan&eacute;ment les 4 dimensions de la transformation IA &mdash; Processus, &Eacute;quipes, Outils, Structure &mdash; l&agrave; o&ugrave; tous les acteurs existants n&rsquo;en adressent qu&rsquo;une ou deux.</p>
+    <div class="wordmark">Groupe Hypsis</div>
+    <h1 class="title-main">La transformation IA<br>de bout en bout</h1>
+    <p class="title-tagline">Stratégie · Données · IA · Infrastructure souveraine · Humain</p>
+    <p class="title-sub">Le premier groupe capable d'accompagner une organisation du diagnostic stratégique au déploiement en production — et de laisser le client propriétaire et autonome.</p>
     <div class="divider" style="background:rgba(201,168,76,0.3); margin: 0.8rem auto; width: 60px;"></div>
-    <p class="title-footer"><strong>Ticket cible&thinsp;: 3&ndash;30&thinsp;M&euro;</strong> &mdash; <em>Faber est quisque fortunae suae.</em></p>
+    <p class="title-footer"><strong>Confidentiel</strong> — Avril 2026</p>
   </div>
 </section>
 
-<!-- S2 � LA RUPTURE QUI CR�E LE MARCH� -->
+<!-- S2 — LE PROBLÈME -->
 <section class="slide" id="s2">
-  <span class="slide-num">02 / 20</span>
+  <span class="slide-num">02 / 15</span>
   <p class="act-label">Acte I</p>
-  <p class="slide-label">La th&egrave;se</p>
-  <h2 class="slide-title">L&rsquo;IA externalise ce que les entreprises de services ont historiquement vendu comme expertise.</h2>
-  <p class="slide-subtitle">Quatri&egrave;me r&eacute;volution anthropologique. Apr&egrave;s l&rsquo;&eacute;criture, l&rsquo;imprimerie, le num&eacute;rique &mdash; la cognition. <em>(Michel Serres)</em></p>
+  <p class="slide-label">Le problème</p>
+  <h2 class="slide-title">Trois options sur le marché. Toutes insatisfaisantes.</h2>
+  <p class="slide-subtitle">Les organisations veulent se transformer. Le marché ne leur offre que des fragments.</p>
 
   <div class="three-col" style="margin-bottom:0.8rem">
     <div class="card">
-      <h3>Le mod&egrave;le &agrave; l&rsquo;heure est mort</h3>
-      <p>60&ndash;70% du temps d&rsquo;une mission cognitive est consacr&eacute; &agrave; la production documentaire brute. Les LLMs de 2024&ndash;2026 peuvent absorber cette part. Le mod&egrave;le &agrave; l&rsquo;heure est <strong>structurellement obsol&egrave;te</strong>.</p>
+      <h3>Les ESN et intégrateurs</h3>
+      <p>Ils vendent du temps-homme et des POC qui ne passent jamais en production. Le client reste dépendant. Les données partent dans le cloud. <strong>Personne ne s'occupe des équipes.</strong></p>
     </div>
     <div class="card">
-      <h3>Le Great Decoupling</h3>
-      <p>Productivit&eacute; et masse salariale se d&eacute;couplent. La prochaine d&eacute;cennie appartient &agrave; ceux qui factureront <strong>l&rsquo;impact &mdash; pas le temps</strong>.</p>
-      <p class="source-line" style="margin-top:0.3rem">WEF &middot; Goldman Sachs</p>
+      <h3>Les éditeurs SaaS</h3>
+      <p>Lock-in maximal, données hors de contrôle, personnalisation limitée. Le client loue une solution <strong>qu'il ne comprend pas et ne possède pas.</strong></p>
     </div>
-    <div class="card card-accent">
-      <h3>Le pi&egrave;ge du legacy</h3>
-      <p>Les acteurs &eacute;tablis (ESN, cabinets, &eacute;diteurs) ont un legacy qui les emp&ecirc;che de pivoter. Automatiser une mission client <strong>d&eacute;truit leur prochaine mission</strong> de 200 jours. Kodak a invent&eacute; le capteur num&eacute;rique en 1975. Il a attendu trop longtemps.</p>
+    <div class="card">
+      <h3>Les cabinets de conseil</h3>
+      <p>Ils livrent des slides et partent. <strong>Pas de déploiement, pas d'infra, pas de suivi.</strong> Le plan reste dans un tiroir.</p>
     </div>
   </div>
 
-  <p class="punchline"><strong>Pourquoi maintenant&thinsp;?</strong> Parce que la fen&ecirc;tre est ouverte pr&eacute;cis&eacute;ment parce que les incumbents ne peuvent pas la traverser.</p>
+  <div class="stat-row" style="grid-template-columns: repeat(3, 1fr)">
+    <div class="stat-item">
+      <div class="stat-big"><span class="stat-highlight">80</span><span class="stat-unit">%+</span></div>
+      <div class="stat-label">des projets IA échouent</div>
+      <div class="source-line">RAND Corporation, 2024</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-big"><span class="stat-highlight">85</span><span class="stat-unit">%</span></div>
+      <div class="stat-label">des modèles IA n'atteignent pas la production</div>
+      <div class="source-line">Gartner</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-big"><span class="stat-highlight">8</span><span class="stat-unit">%</span></div>
+      <div class="stat-label">des grandes entreprises ont déployé l'IA à l'échelle</div>
+      <div class="source-line">McKinsey / Institut de l'Entreprise, 2025</div>
+    </div>
+  </div>
 </section>
 
-<!-- S3 � LE PARADOXE QUI D�FINIT LE MARCH� -->
+<!-- S3 — NOTRE RÉPONSE -->
 <section class="slide" id="s3">
-  <span class="slide-num">03 / 20</span>
+  <span class="slide-num">03 / 15</span>
   <p class="act-label">Acte I</p>
-  <p class="slide-label">Le paradoxe</p>
-  <h2 class="slide-title">88% d&eacute;ploient l&rsquo;IA. 6% transforment leur performance.</h2>
-  <p class="slide-subtitle">L&rsquo;&eacute;cart n&rsquo;est pas technologique &mdash; il est organisationnel. <em>(McKinsey, 2024)</em></p>
+  <p class="slide-label">Notre réponse</p>
+  <h2 class="slide-title">Un seul interlocuteur. La transformation complète.</h2>
+  <p class="slide-subtitle">Du diagnostic stratégique au déploiement en production, en passant par la structuration des données et l'accompagnement des équipes.</p>
 
-  <div class="stat-row" style="grid-template-columns: repeat(3, 1fr); margin-bottom:0.8rem">
-    <div class="stat-item">
-      <div class="stat-big"><span class="stat-highlight">88</span><span class="stat-unit">%</span></div>
-      <div class="stat-label">des entreprises d&eacute;ploient l&rsquo;IA</div>
+  <div class="flow-row" style="margin-bottom:1.2rem">
+    <div class="flow-box">
+      <h4>Découverte</h4>
+      <p>Modèle cible de l'entreprise</p>
     </div>
-    <div class="stat-item">
-      <div class="stat-big"><span class="stat-highlight">6</span><span class="stat-unit">%</span></div>
-      <div class="stat-label">transforment r&eacute;ellement leur performance</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box accent">
+      <h4>Implémentation</h4>
+      <p>Données & outils du quotidien</p>
     </div>
-    <div class="stat-item">
-      <div class="stat-big"><span class="stat-highlight">82</span><span class="stat-unit">%</span></div>
-      <div class="stat-label">des ETIs fran&ccedil;aises ont investi sans r&eacute;sultat d&eacute;fendable</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">
+      <h4>Impact humain</h4>
+      <p>Formation, reskilling, transitions</p>
     </div>
   </div>
 
-  <div class="two-col">
-    <div class="card">
-      <h3>L&rsquo;&eacute;chec est syst&eacute;mique</h3>
-      <p>Les outils sont d&eacute;ploy&eacute;s en silo, les &eacute;quipes non recompos&eacute;es, les processus inchang&eacute;s, la gouvernance absente. <strong>Quatre dimensions touch&eacute;es, z&eacute;ro adress&eacute;es simultan&eacute;ment.</strong></p>
+  <div class="conv-grid">
+    <div class="conv-card">
+      <h4>Souveraine</h4>
+      <p>Les données restent chez le client. Pas de dépendance cloud, pas de juridiction étrangère. EU AI Act, NIS2, réglementations sectorielles.</p>
     </div>
-    <div class="card card-accent">
-      <h3>Le march&eacute;</h3>
-      <ul>
-        <li><strong>6&thinsp;500&ndash;7&thinsp;500</strong> ETIs en France (INSEE)</li>
-        <li><strong>58%</strong> voient l&rsquo;IA comme enjeu de survie</li>
-        <li>SG&amp;A = <strong>20&ndash;35%</strong> de leurs co&ucirc;ts totaux</li>
-        <li>TAM : fraction de la masse salariale mondiale</li>
-      </ul>
+    <div class="conv-card">
+      <h4>Émancipatrice</h4>
+      <p>Le client est propriétaire de tout — données, modèles, apps, code. La plateforme reste chez lui pour les mises à jour et le support.</p>
+    </div>
+    <div class="conv-card">
+      <h4>Scientifiquement rigoureuse</h4>
+      <p>Nos propres modèles IA, open source, évalués par les pairs, éprouvés en production. 10 ans de R&D. Pas de boîtes noires.</p>
+    </div>
+    <div class="conv-card">
+      <h4>Humaine</h4>
+      <p>Chaque déploiement inclut un plan humain. Formation, reskilling, coaching. Personne n'est laissé de côté.</p>
     </div>
   </div>
 </section>
 
-<!-- ???????????????????????????????????????????
-     ACTE II � LA SOLUTION � Slides 04�07
-     ??????????????????????????????????????????? -->
-
-<!-- S4 � CE QUE HYPSIS EST -->
+<!-- S4 — PHASE 1 : DISCOVERY -->
 <section class="slide slide-light" id="s4">
-  <span class="slide-num">04 / 20</span>
+  <span class="slide-num">04 / 15</span>
   <p class="act-label">Acte II</p>
-  <p class="slide-label">La solution</p>
-  <h2 class="slide-title">Deux actifs fondateurs. La seule proposition &agrave; 4 dimensions.</h2>
-  <p class="slide-subtitle">Hypsis Craft orchestre. Hypsis Ops ex&eacute;cute et op&egrave;re. L&rsquo;un sans l&rsquo;autre ne d&eacute;livre pas la promesse.</p>
+  <p class="slide-label">Phase 1 — Discovery</p>
+  <h2 class="slide-title">Construire la tour de contrôle de la transformation.</h2>
+  <p class="slide-subtitle">L'engagement commence au niveau du comité exécutif. Le plan qu'on construit est directement outillable par la plateforme du groupe.</p>
 
   <div class="two-col" style="margin-bottom:0.8rem">
     <div class="card">
-      <h3>Hypsis Craft</h3>
-      <p>Framework de co-transformation simultan&eacute;e des <strong>4 dimensions du Diamond de Leavitt &times; 4 stades de maturit&eacute; IA</strong> (L0&rarr;L3).</p>
+      <h3>Ce que nous faisons</h3>
       <ul>
-        <li><strong>Comp&eacute;tences</strong> &mdash; diagnostic et recomposition des &eacute;quipes</li>
-        <li><strong>Acc&eacute;l&eacute;rateurs</strong> &mdash; PIM, WIM, Mod&egrave;le de Performance</li>
-        <li><strong>Solutions SaS</strong> &mdash; logiciels livr&eacute;s, pas de slides</li>
+        <li><strong>Acculturation des dirigeants</strong> — lecture stratégique de ce que l'IA change dans leur modèle d'affaires, leur chaîne de valeur, leur structure de coûts</li>
+        <li><strong>Cartographie des opportunités</strong> — cas d'usage par fonction, performance attendue, impact business et humain quantifié</li>
+        <li><strong>Feuille de route budgétée</strong> — plan priorisé avec business cases, séquencement réaliste, analyse make-or-buy</li>
+        <li><strong>Fondations de l'ontologie</strong> — premier modèle de données structuré à partir des processus et flux du client</li>
       </ul>
     </div>
     <div class="card card-accent">
-      <h3>Hypsis Ops</h3>
-      <p>Plateforme d&rsquo;ex&eacute;cution. DSL versionn&eacute; + Workflow Engine + Agents &amp; Observabilit&eacute;.</p>
-      <ul>
-        <li><strong>Mode IMPACT</strong> &mdash; transformation born&eacute;e, upfront jalons</li>
-        <li><strong>Mode VALOR</strong> &mdash; op&eacute;rations continues, facturation &agrave; la valeur produite</li>
-      </ul>
-      <p style="margin-top:0.4rem; font-style:italic; color:var(--bronze)">Ce que McKinsey laisse dans un rapport, Hypsis le laisse dans un syst&egrave;me qui tourne.</p>
+      <h3>Ce qui rend cette phase différente</h3>
+      <p>Elle n'est pas déconnectée de l'exécution. Il n'y a pas de « passation » à un intégrateur tiers — <strong>les mêmes personnes qui diagnostiquent sont celles qui accompagnent le déploiement.</strong></p>
+      <div class="divider"></div>
+      <h4>Briques activées</h4>
+      <p>Conseil stratégique Data & IA · Ontologie & données</p>
+      <div style="margin-top:0.5rem">
+        <h4>Revenu</h4>
+        <p>One-shot · <strong>100–300K</strong> par programme</p>
+      </div>
     </div>
-  </div>
-
-  <div class="diamond-grid">
-    <div class="diamond-cell active"><h4>Processus</h4><p>BPMN &times; IA</p></div>
-    <div class="diamond-cell active"><h4>&Eacute;quipes</h4><p>Comp&eacute;tences &times; IA</p></div>
-    <div class="diamond-cell active"><h4>Outils</h4><p>Plateforme &times; Agents</p></div>
-    <div class="diamond-cell active"><h4>Structure</h4><p>Gouvernance &times; Data</p></div>
   </div>
 </section>
 
-<!-- S5 � LA PREUVE PAR L'EXEMPLE -->
+<!-- S5 — PHASE 2 : BUILD -->
 <section class="slide slide-light" id="s5">
-  <span class="slide-num">05 / 20</span>
+  <span class="slide-num">05 / 15</span>
   <p class="act-label">Acte II</p>
-  <p class="slide-label">Preuves</p>
-  <h2 class="slide-title">Des ROI mesur&eacute;s, contractualisables avant d&eacute;marrage.</h2>
-  <p class="slide-subtitle">La baseline est contractuelle. Le gain est audit&eacute;. Le success fee suit.</p>
+  <p class="slide-label">Phase 2 — Build</p>
+  <h2 class="slide-title">Mettre en place le plan de création de valeur. Outiller l'organisation.</h2>
+  <p class="slide-subtitle">Le conseil et le build ne sont pas séquentiels — ils sont intégrés. Résultats tangibles en semaines.</p>
 
-  <div class="two-col" style="margin-bottom:0.8rem">
+  <div class="four-col" style="margin-bottom:0.8rem">
     <div class="card">
-      <h4>Contr&ocirc;le avant-paie (ETI 280 sal.)</h4>
-      <div class="stat-row" style="grid-template-columns: repeat(3,1fr); margin:0.5rem 0">
-        <div class="stat-item" style="padding:0.6rem">
-          <div class="stat-big" style="font-size:1.6rem">48&rarr;28<span class="stat-unit">h</span></div>
-          <div class="stat-label" style="font-size:0.78rem">traitement mensuel</div>
-        </div>
-        <div class="stat-item" style="padding:0.6rem">
-          <div class="stat-big" style="font-size:1.6rem">2.1&rarr;0.9<span class="stat-unit">%</span></div>
-          <div class="stat-label" style="font-size:0.78rem">taux d&rsquo;erreurs</div>
-        </div>
-        <div class="stat-item" style="padding:0.6rem">
-          <div class="stat-big" style="font-size:1.6rem">2&thinsp;100<span class="stat-unit">&euro;/m</span></div>
-          <div class="stat-label" style="font-size:0.78rem">&eacute;conomie mensuelle</div>
-        </div>
-      </div>
-      <p>D&eacute;ployable rapidement.</p>
+      <h3>Infrastructure</h3>
+      <p>Co-construction avec le DSI. Plateforme Hypsis installée on-prem. Pipelines de données connectés. Ontologie structurée.</p>
     </div>
     <div class="card">
-      <h4>Planification MRP augment&eacute;e (ETI a&eacute;ro)</h4>
-      <div class="stat-row" style="grid-template-columns: repeat(3,1fr); margin:0.5rem 0">
-        <div class="stat-item" style="padding:0.6rem">
-          <div class="stat-big" style="font-size:1.6rem">&minus;73<span class="stat-unit">%</span></div>
-          <div class="stat-label" style="font-size:0.78rem">exceptions / semaine</div>
-        </div>
-        <div class="stat-item" style="padding:0.6rem">
-          <div class="stat-big" style="font-size:1.6rem">+12-18<span class="stat-unit">pts</span></div>
-          <div class="stat-label" style="font-size:0.78rem">OTD</div>
-        </div>
-        <div class="stat-item" style="padding:0.6rem">
-          <div class="stat-big" style="font-size:1.6rem">&darr;</div>
-          <div class="stat-label" style="font-size:0.78rem">p&eacute;nalit&eacute;s &eacute;vit&eacute;es</div>
-        </div>
-      </div>
-      <p>P&eacute;nalit&eacute;s contractuelles &eacute;vit&eacute;es calculables &agrave; la signature.</p>
+      <h3>Applications métier</h3>
+      <p>Chaque cas d'usage devient un outil en production. Pas des POC — des outils utilisés au quotidien, alimentés par l'ontologie et les modèles IA.</p>
+    </div>
+    <div class="card">
+      <h3>Acculturation DSI</h3>
+      <p>Le DSI est un allié. On construit avec lui, on lui transfère la compétence. Il devient le gardien de l'écosystème IA.</p>
+    </div>
+    <div class="card card-accent">
+      <h3>Formation & reskilling</h3>
+      <p>Plan humain en parallèle dès le premier jour. Formation, reconversion, coaching des managers, conduite du changement.</p>
     </div>
   </div>
 
   <div class="statement-box">
-    <p><strong>Matrice ROI selon profondeur&thinsp;:</strong> Reskilling seul (1/4 dimensions) &times;1.4 &rarr; Full 4D stade L3 <strong>&times;5.1</strong>. 72% de la valeur est laiss&eacute;e sur la table si on n&rsquo;active qu&rsquo;une dimension.</p>
+    <p>Toutes les briques du groupe sont activées. Conseil · Ontologie · Infrastructure · IA · Humain. <strong>Revenu : one-shot · 100–500K.</strong></p>
   </div>
 </section>
 
-<!-- S6 � POURQUOI PERSONNE D'AUTRE NE PEUT LE FAIRE -->
-<section class="slide slide-light" id="s6">
-  <span class="slide-num">06 / 20</span>
+<!-- S6 — PHASE 3 : RUN -->
+<section class="slide" id="s6">
+  <span class="slide-num">06 / 15</span>
   <p class="act-label">Acte II</p>
-  <p class="slide-label">La moat</p>
-  <h2 class="slide-title">La moat est structurelle &mdash; pas technologique.</h2>
-  <p class="slide-subtitle">Cinq couches de d&eacute;fense qui se renforcent &agrave; chaque mission.</p>
+  <p class="slide-label">Phase 3 — Run</p>
+  <h2 class="slide-title">Le client est autonome. Le produit reste chez lui.</h2>
+  <p class="slide-subtitle">Le client peut partir avec tout ce qui a été construit. C'est précisément parce qu'il peut partir qu'il choisit de rester.</p>
 
   <div class="three-col" style="margin-bottom:0.8rem">
+    <div class="card">
+      <h3>Plateforme en place</h3>
+      <p>Hypsis reste déployée chez le client. Les équipes internes construisent de nouvelles apps, adaptent les existantes — <strong>sans dépendre de nous.</strong></p>
+    </div>
+    <div class="card">
+      <h3>Intelligence pérenne</h3>
+      <p>Modèles IA, algorithmes d'optimisation, briques documentaires restent embarqués. Chaque mise à jour amène de nouvelles capacités — <strong>sans projet de réintégration.</strong></p>
+    </div>
     <div class="card card-accent">
-      <h3>Simultan&eacute;it&eacute; des 4D</h3>
-      <p>McKinsey adresse Processus + Structure. Les ESN adressent Outils. Les RH adressent &Eacute;quipes. <strong>Hypsis adresse les 4.</strong> Reproduire cette profondeur n&eacute;cessite de coordonner 4 cat&eacute;gories d&rsquo;acteurs &mdash; ou de se cannibaliser.</p>
-    </div>
-    <div class="card">
-      <h3>Corpus sectoriel cumulatif</h3>
-      <p>Chaque mission enrichit les agents. La 50&egrave;me ETI transform&eacute;e b&eacute;n&eacute;ficie des 49 premi&egrave;res. <strong>Ce corpus ne s&rsquo;ach&egrave;te pas</strong> &mdash; il se forge mission apr&egrave;s mission.</p>
-    </div>
-    <div class="card">
-      <h3>Switching cost structurel</h3>
-      <p>Un client avec des agents VALOR en production op&egrave;re ses processus via Hypsis Ops. <strong>Migrer = reconstruire tous ses workflows.</strong> Continuit&eacute; choisie, pas d&eacute;pendance impos&eacute;e.</p>
+      <h3>Propriété totale</h3>
+      <p>Données, modèles, applications, code — <strong>tout appartient au client.</strong> Rien n'est piégé dans un cloud ou derrière une API propriétaire.</p>
     </div>
   </div>
 
-  <p class="punchline" style="text-align:center">La moat se creuse &agrave; chaque mission. <strong>Le temps joue pour nous.</strong></p>
+  <div class="statement-box">
+    <p><strong>Ce qui génère du revenu récurrent :</strong> plateforme Hypsis (hébergement, support, mises à jour) + licences d'usage des modèles IA et algorithmes embarqués. <strong>3–15K/mois par client.</strong></p>
+  </div>
 </section>
 
-<!-- S7 � LE MOD�LE R�CURSIF -->
+<!-- S7 — LES 5 BRIQUES -->
 <section class="slide slide-light" id="s7">
-  <span class="slide-num">07 / 20</span>
-  <p class="act-label">Acte II</p>
-  <p class="slide-label">Scalabilit&eacute;</p>
-  <h2 class="slide-title">Le groupe est son propre premier client.</h2>
-  <p class="slide-subtitle">Chaque entit&eacute; forg&eacute;e est une d&eacute;monstration vivante. Chaque client transform&eacute; peut devenir distributeur.</p>
+  <span class="slide-num">07 / 15</span>
+  <p class="act-label">Acte III</p>
+  <p class="slide-label">Le groupe</p>
+  <h2 class="slide-title">Cinq briques. Un groupe intégré.</h2>
+  <p class="slide-subtitle">Chaque capacité est portée par une entité avec son propre CEO, son propre P&L, et sa propre identité.</p>
 
-  <div class="flow-row" style="margin-bottom:0.8rem">
-    <div class="flow-box">
-      <h4>N1 &mdash; Interne</h4>
-      <p>Hypsis Ops d&eacute;ploy&eacute; dans chaque entit&eacute; acquise</p>
+  <div class="five-col" style="margin-bottom:0.8rem">
+    <div class="card card-accent">
+      <h3>Conseil stratégique Data & IA</h3>
+      <p>Acculturation COMEX, Master Plan, CDO Office, déploiement, changement à l'échelle</p>
+      <p style="margin-top:0.4rem"><strong>Discovery + Build</strong></p>
     </div>
-    <div class="flow-arrow">&rarr;</div>
-    <div class="flow-box accent">
-      <h4>N2 &mdash; Client direct</h4>
-      <p>La mission se termine par le d&eacute;ploiement d&rsquo;Hypsis Ops chez le client</p>
+    <div class="card">
+      <h3>Ontologie & données</h3>
+      <p>Cartographie des entités, processus, flux. Ingénierie des données, intégration legacy</p>
+      <p style="margin-top:0.4rem"><strong>Discovery + Build</strong></p>
+      <p class="source-line">AI&D · 30 consultants · 6M CA</p>
     </div>
-    <div class="flow-arrow">&rarr;</div>
-    <div class="flow-box">
-      <h4>N3 &mdash; Propagation</h4>
-      <p>Le client transform&eacute; transforme ses propres clients</p>
+    <div class="card">
+      <h3>Infrastructure souveraine</h3>
+      <p>Plateforme on-prem, AI Builder, templates d'apps, inférence locale</p>
+      <p style="margin-top:0.4rem"><strong>Build + Run</strong></p>
+      <p class="source-line">Hypsis · 25+ apps · Ontologie</p>
+    </div>
+    <div class="card">
+      <h3>Excellence scientifique</h3>
+      <p>Vision, documents, planification, données synthétiques. Open source, évalué.</p>
+      <p style="margin-top:0.4rem"><strong>Build + Run</strong></p>
+      <p class="source-line">Jolibrain · 5 PhDs · 50+ GPUs</p>
+    </div>
+    <div class="card">
+      <h3>Transformation humaine</h3>
+      <p>Formation, reskilling, coaching, conduite du changement</p>
+      <p style="margin-top:0.4rem"><strong>Build</strong></p>
+      <p class="source-line">Horizon début 2027</p>
     </div>
   </div>
 
-  <div class="two-col">
-    <div class="card">
-      <h3>N1 &mdash; Forge interne</h3>
-      <p>Hypsis Ops est d&eacute;ploy&eacute; dans chaque entit&eacute; acquise. Elle produit mieux, plus vite, avec moins. Son corpus alimente la plateforme.</p>
+  <p class="punchline" style="text-align:center"><strong>Aucune brique seule ne suffit.</strong> Le conseil sans déploiement, c'est du PowerPoint. Le déploiement sans accompagnement humain est rejeté. La valeur est dans la combinaison.</p>
+</section>
+
+<!-- S8 — LA BRIQUE À RENFORCER -->
+<section class="slide" id="s8">
+  <span class="slide-num">08 / 15</span>
+  <p class="act-label">Acte III</p>
+  <p class="slide-label">Le chaînon manquant</p>
+  <h2 class="slide-title">La brique stratégique qui transforme le groupe.</h2>
+  <p class="slide-subtitle">La phase de Discovery est le point d'entrée de toute la chaîne de valeur. C'est elle qui convainc le COMEX et génère le pipeline.</p>
+
+  <div class="two-col" style="margin-bottom:0.8rem">
+    <div class="card card-accent">
+      <h3>Le profil idéal</h3>
+      <ul>
+        <li>Cabinet français, <strong>indépendant</strong>, entièrement dédié à la stratégie Data & IA</li>
+        <li>Positionné en amont — auprès des <strong>DG, CDO, responsables métier</strong></li>
+        <li>Cycle de vie complet formalisé : de l'acculturation à l'autonomie des BU</li>
+        <li>Culture de rigueur stratégique (<strong>70% advisory / 30% build</strong>)</li>
+        <li><strong>30+ grands comptes</strong>, taux de renouvellement élevé</li>
+        <li>Écosystème propriétaire : université interne, veille tech, capitalisation des connaissances</li>
+      </ul>
     </div>
     <div class="card">
-      <h3>N2 &amp; N3 &mdash; Viralit� par le service</h3>
-      <p>Le client devient op&eacute;rateur de sa propre instance. Il peut &agrave; son tour transformer ses propres clients. <strong>La croissance est virale par le service &mdash; pas par le marketing.</strong></p>
+      <h3>La synergie</h3>
+      <div class="quote-block" style="margin-bottom:0.6rem">
+        <p>Demain, le conseil stratégique ne pourra plus se contenter de recommander — il devra déployer. Pour déployer, il faut une plateforme, des modèles, et une infrastructure.</p>
+      </div>
+      <h4>Ce que le groupe apporte</h4>
+      <p>Modèles IA propriétaires, plateforme souveraine, infrastructure — ce que les cabinets conseil IA sous-traitent aujourd'hui à des ESN.</p>
+      <div class="divider"></div>
+      <h4>Ce qu'un tel cabinet apporte</h4>
+      <p>Accès direct aux COMEX des plus grandes entreprises françaises, 50+ consultants certifiés, moteur commercial à <strong>80% de récurrence</strong>.</p>
     </div>
   </div>
 </section>
 
-<!-- ???????????????????????????????????????????
-     ACTE III � LE MOD�LE �CONOMIQUE � Slides 08�11
-     ??????????????????????????????????????????? -->
+<!-- S9 — STRUCTURE DU GROUPE -->
+<section class="slide slide-light" id="s9">
+  <span class="slide-num">09 / 15</span>
+  <p class="act-label">Acte IV</p>
+  <p class="slide-label">Structure</p>
+  <h2 class="slide-title">Un groupe conçu pour le build-up.</h2>
+  <p class="slide-subtitle">Filiales autonomes, P&L séparés, gouvernance compatible fonds. Chaque fondateur qui rejoint garde les rênes de ce qu'il a construit.</p>
 
-<!-- S8 � LES TROIS FLUX DE VALEUR -->
-<section class="slide" id="s8">
-  <span class="slide-num">08 / 20</span>
-  <p class="act-label">Acte III</p>
-  <p class="slide-label">Mod&egrave;le &eacute;conomique</p>
-  <h2 class="slide-title">Trois flux, une trajectoire. Cash &rarr; R&eacute;current &rarr; Actif.</h2>
-  <p class="slide-subtitle">Le conseil g&eacute;n&egrave;re le cash. Le r&eacute;sultat cr&eacute;e la confiance. La plateforme construit l&rsquo;actif.</p>
+  <div class="stat-row" style="grid-template-columns: repeat(4, 1fr); margin-bottom:0.8rem">
+    <div class="stat-item">
+      <div class="stat-big"><span class="stat-highlight">17</span><span class="stat-unit">M€</span></div>
+      <div class="stat-label">CA consolidé année 1</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-big"><span class="stat-highlight">95</span><span class="stat-unit">+</span></div>
+      <div class="stat-label">effectifs totaux</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-big"><span class="stat-highlight">5</span></div>
+      <div class="stat-label">briques de capacité</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-big"><span class="stat-highlight">2</span></div>
+      <div class="stat-label">verticales sectorielles</div>
+    </div>
+  </div>
+
+  <div class="three-col">
+    <div class="card">
+      <h3>Gouvernance</h3>
+      <ul>
+        <li><strong>CEO groupe :</strong> Yvan Chabanne, ex-DG Scalian (~5 000 pers.)</li>
+        <li>Chaque BU a son propre CEO et son P&L</li>
+        <li>CEOs entrants obtiennent un siège au conseil</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Autonomie des BU</h3>
+      <p>Le groupe ajoute les synergies commerciales et les services partagés. <strong>Il ne micro-manage pas.</strong> Un fondateur qui rejoint garde son CEO, son équipe, ses clients.</p>
+    </div>
+    <div class="card card-accent">
+      <h3>BSPCE</h3>
+      <p>La Loi de Finances 2026 permet à la holding d'émettre des BSPCE aux employés de toute filiale détenue à 75%+. <strong>Equity dans la holding, avantage fiscal, vesting 4 ans.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- S10 — MODÈLE ÉCONOMIQUE -->
+<section class="slide" id="s10">
+  <span class="slide-num">10 / 15</span>
+  <p class="act-label">Acte IV</p>
+  <p class="slide-label">Modèle économique</p>
+  <h2 class="slide-title">Le conseil génère le cash. La plateforme construit l'actif.</h2>
+  <p class="slide-subtitle">Trois flux de revenus. La part récurrente détermine le multiple de valorisation.</p>
 
   <div class="timeline-row" style="grid-template-columns: repeat(3, 1fr); margin-bottom:0.8rem">
     <div class="timeline-item">
-      <div class="num">&#9312;</div>
-      <h3>Forge du groupe</h3>
-      <p>M&amp;A entit&eacute;s sous-optimis&eacute;es (multiple bas) + d&eacute;ploiement Hypsis Ops &rarr; entit&eacute;s plus rentables, scalables, porteuses d&rsquo;un corpus. <strong>Multiple conseil entr&eacute;e &rarr; multiple SaaS sortie.</strong></p>
+      <div class="num">①</div>
+      <h3>Conseil & transformation</h3>
+      <p>One-shot. Diagnostic, Master Plan, déploiement, formation. <strong>100–300K</strong> par programme. Marge ~30%.</p>
     </div>
     <div class="timeline-item">
-      <div class="num">&#9313;</div>
-      <h3>Missions IMPACT</h3>
-      <p>Upfront sur jalons contractualis&eacute;s + success fee 30% des gains mesur&eacute;s. <strong>Cash flow imm&eacute;diat.</strong> R&eacute;sidu = d&eacute;monstration auditable pour le prospect suivant.</p>
+      <div class="num">②</div>
+      <h3>Plateforme & infrastructure</h3>
+      <p>Récurrent. Hébergement, support, mises à jour, AI Builder. <strong>3–15K/mois</strong>. Marge 70–80%.</p>
     </div>
     <div class="timeline-item">
-      <div class="num">&#9314;</div>
-      <h3>Op&eacute;rations VALOR + BPO</h3>
-      <p>Agents op&egrave;rent apr&egrave;s la mission. Facturation &agrave; la valeur produite. S&rsquo;accumule sans co&ucirc;t de vente suppl&eacute;mentaire. <strong>LTV triple &agrave; chaque palier.</strong></p>
+      <div class="num">③</div>
+      <h3>Intelligence embarquée</h3>
+      <p>Récurrent. Modèles IA + algorithmes partenaires déployés sur la plateforme. Royalties reversées aux créateurs.</p>
     </div>
   </div>
 
-  <div class="statement-box">
-    <p>Le conseil g&eacute;n&egrave;re le cash. Le r&eacute;sultat cr&eacute;e la confiance. La plateforme construit l&rsquo;actif. <strong>Trois flux, un seul cap.</strong></p>
-  </div>
-</section>
-
-<!-- S9 � L'UNIT� �CONOMIQUE D'UNE MISSION -->
-<section class="slide" id="s9">
-  <span class="slide-num">09 / 20</span>
-  <p class="act-label">Acte III</p>
-  <p class="slide-label">Unit economics</p>
-  <h2 class="slide-title">Un client, trois paliers de valeur.</h2>
-  <p class="slide-subtitle">Co&ucirc;t d&rsquo;acquisition constant. LTV structurellement croissante.</p>
-
-  <div class="two-col" style="margin-bottom:0.8rem">
+  <div class="two-col">
     <div class="card">
-      <h3>Exemple&thinsp;: contr&ocirc;le de paie</h3>
-      <ul>
-        <li>Upfront mission = <span class="placeholder">&agrave; qualifier</span></li>
-        <li>VALOR ann&eacute;e 1 = <strong>23k&euro;</strong> (30% de 78k&euro; gains)</li>
-        <li>BPO augment&eacute; potentiel = <span class="placeholder">en cours</span></li>
-        <li>Net client&thinsp;: <strong>+55k&euro;/an</strong></li>
-        <li>Net Hypsis&thinsp;: r&eacute;current croissant sans co&ucirc;t de revente</li>
-      </ul>
+      <h4>Pourquoi le client reste</h4>
+      <p>La plateforme Hypsis est le socle de toutes les applications déployées. La quitter = reconstruire tout. Le client reste pour les mises à jour, les nouveaux modèles, le support — et parce que <strong>la plateforme est le canal de livraison de toute nouvelle intelligence.</strong></p>
     </div>
     <div class="card card-accent">
-      <h3>NRR &mdash; la m&eacute;trique cl&eacute;</h3>
-      <p>Un client en Mode VALOR qui monte en puissance g&eacute;n&egrave;re plus l&rsquo;ann&eacute;e 2 que l&rsquo;ann&eacute;e 1 &mdash; <strong>m&ecirc;me en l&rsquo;absence de nouvelle mission</strong>.</p>
-      <div class="divider"></div>
-      <p><strong>France 2030 IA Booster</strong> (25&thinsp;M&euro;, jusqu&rsquo;&agrave; 80% de prise en charge pour les ETIs)&thinsp;: r&eacute;duit le risque commercial sur les premi&egrave;res missions. Acc&eacute;l&egrave;re la d&eacute;cision d&rsquo;achat.</p>
+      <h4>Trajectoire du mix</h4>
+      <p>Aujourd'hui : <strong>~95% one-shot</strong> (consulting)</p>
+      <p>Objectif année 3 : <strong>~73% services / 27% récurrent</strong></p>
+      <p>Objectif année 5 : <strong>~63% services / 37% récurrent</strong></p>
+      <p style="margin-top:0.3rem; font-style:italic">Le récurrent est le multiplicateur de valorisation du groupe.</p>
     </div>
   </div>
 </section>
 
-<!-- S10 � LA LOGIQUE DE VALORISATION -->
-<section class="slide" id="s10">
-  <span class="slide-num">10 / 20</span>
-  <p class="act-label">Acte III</p>
-  <p class="slide-label">Valorisation</p>
-  <h2 class="slide-title">Multiple SaaS sur la plateforme. Multiple EBITDA sur le conseil.</h2>
-  <p class="slide-subtitle">La part r&eacute;currente op&eacute;r&eacute;e d&eacute;termine le multiple de sortie &mdash; pas la part conseil.</p>
-
-  <div class="two-col" style="margin-bottom:0.8rem">
-    <div class="card">
-      <h3>Structure holding</h3>
-      <table class="deck-table">
-        <thead><tr><th>Composante</th><th>Multiple</th></tr></thead>
-        <tbody>
-          <tr><td>Filiales conseil (EBITDA stable)</td><td><strong>6&ndash;8&times;</strong></td></tr>
-          <tr class="highlight"><td>Entit&eacute; plateforme Hypsis Ops (ARR r&eacute;current)</td><td><strong>10&ndash;20&times;</strong></td></tr>
-        </tbody>
-      </table>
-      <p style="margin-top:0.4rem">La d&eacute;cote conseil est absorb&eacute;e par la prime tech d&egrave;s que les Valors en production d&eacute;passent <strong>30% du CA</strong>.</p>
-    </div>
-    <div class="card card-accent">
-      <h3>Cr&eacute;ation de valeur</h3>
-      <p>&Agrave; 8&times; EBITDA&thinsp;:</p>
-      <ul>
-        <li>1&thinsp;M&euro; d&rsquo;&eacute;conomies g&eacute;n&eacute;r&eacute;es chez un client = <strong>8&thinsp;M&euro; de valeur d&rsquo;entreprise</strong> pour ce client</li>
-        <li>Le groupe capture 30% de cet impact = <strong>300k&euro;/client/an</strong> r&eacute;currents</li>
-      </ul>
-      <div class="divider"></div>
-      <h4>Sc&eacute;narios de sortie</h4>
-      <ul>
-        <li>Cession partielle &agrave; un ESN ou &eacute;diteur strat&eacute;gique</li>
-        <li>Introduction en bourse avec actif SaaS valoris&eacute;</li>
-        <li>Continuation en plateforme ind&eacute;pendante</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- S11 � TRAJECTOIRE FINANCI�RE -->
+<!-- S11 — TRAJECTOIRE FINANCIÈRE -->
 <section class="slide slide-light" id="s11">
-  <span class="slide-num">11 / 20</span>
-  <p class="act-label">Acte III</p>
+  <span class="slide-num">11 / 15</span>
+  <p class="act-label">Acte IV</p>
   <p class="slide-label">Trajectoire</p>
-  <h2 class="slide-title">ARR &middot; R&eacute;current / Total &middot; NRR &mdash; trois indicateurs qui prouvent la nature SaaS.</h2>
-  <p class="slide-subtitle">Les jalons sont contractualis&eacute;s. Les m&eacute;triques sont natives dans Hypsis Ops.</p>
+  <h2 class="slide-title">17M → 80M en 5 ans. 15% de croissance organique.</h2>
+  <p class="slide-subtitle">Le saut année 3 vient d'une acquisition mid-market. La marge remonte grâce à l'ARR plateforme.</p>
 
-  <div class="two-col" style="margin-bottom:0.8rem">
-    <div class="card">
-      <h3>KPIs cl&eacute;s</h3>
-      <ul>
-        <li><strong>ARR</strong> &mdash; r&eacute;currents op&eacute;r&eacute;s</li>
-        <li><strong>% r&eacute;current sur CA total</strong></li>
-        <li><strong>NRR</strong> &mdash; Net Revenue Retention</li>
-        <li><strong>CAC / LTV</strong></li>
-        <li><strong>Marge op&eacute;rationnelle</strong> par flux</li>
-      </ul>
-    </div>
-    <div class="card card-accent">
-      <h3>Trajectoire indicative 36 mois</h3>
-      <ul>
-        <li><strong>M0&ndash;M12</strong>&thinsp;: construction corpus, 1&ndash;3 clients VALOR</li>
-        <li><strong>M12&ndash;M24</strong>&thinsp;: 3&ndash;5 clients r&eacute;currents, ARR positif</li>
-        <li><strong>M24&ndash;M36</strong>&thinsp;: premier vertical SaaS en production, ARR cible</li>
-      </ul>
-      <p style="margin-top:0.4rem">Point d&rsquo;&eacute;quilibre et marge cible&thinsp;: <span class="placeholder">&agrave; construire</span></p>
-    </div>
-  </div>
+  <table class="deck-table" style="margin-bottom:0.8rem">
+    <thead>
+      <tr><th></th><th>Constitution</th><th>Année 1–2</th><th>Année 3</th><th>Année 5</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>CA groupe</strong></td><td>17M</td><td>22M</td><td>55M</td><td>80M</td></tr>
+      <tr><td><strong>EBITDA</strong></td><td>2,5M</td><td>3,5M</td><td>7M</td><td>14M</td></tr>
+      <tr><td><strong>Marge EBITDA</strong></td><td>15%</td><td>16%</td><td>13%</td><td>18%</td></tr>
+      <tr class="highlight"><td><strong>ARR plateforme Hypsis</strong></td><td>~0</td><td>2M</td><td>7M</td><td>20M</td></tr>
+      <tr><td><strong>Événement clé</strong></td><td>4 acquisitions fondatrices</td><td>Entrée fonds PE + brique RH</td><td>Acquisition mid-market (~30M CA)</td><td>Croissance organique + ARR</td></tr>
+    </tbody>
+  </table>
+
+  <p class="punchline">La marge EBITDA baisse temporairement à l'année 3 (coûts d'intégration) puis remonte grâce à la montée en charge de <strong>l'ARR plateforme — la ligne qui fait la valorisation.</strong></p>
 </section>
 
-<!-- ???????????????????????????????????????????
-     ACTE IV � LA STRAT�GIE M&A � Slides 12�14
-     ??????????????????????????????????????????? -->
-
-<!-- S12 � LA LOGIQUE M&A -->
-<section class="slide slide-light" id="s12">
-  <span class="slide-num">12 / 20</span>
-  <p class="act-label">Acte IV</p>
-  <p class="slide-label">Strat&eacute;gie M&amp;A</p>
-  <h2 class="slide-title">Acqu&eacute;rir des entreprises artisanales. Les forger. Les valoriser comme des entit&eacute;s technologiques.</h2>
-  <p class="slide-subtitle">Multiple conseil &agrave; l&rsquo;entr&eacute;e. Multiple SaaS &agrave; la sortie. La diff&eacute;rence est Hypsis Ops.</p>
+<!-- S12 — L'ÉQUIPE -->
+<section class="slide" id="s12">
+  <span class="slide-num">12 / 15</span>
+  <p class="act-label">Acte V</p>
+  <p class="slide-label">L'équipe</p>
+  <h2 class="slide-title">Une équipe qui a fait le chemin — pas une qui le théorise.</h2>
+  <p class="slide-subtitle">Construction de groupe · Transformation industrielle · R&D IA en production.</p>
 
   <div class="three-col" style="margin-bottom:0.8rem">
     <div class="card card-accent">
-      <h3>Cash flow imm&eacute;diat</h3>
-      <p>CA existant de la cible, cycles de vente &eacute;court&eacute;s par la base clients &eacute;tablie.</p>
+      <h3>Yvan Chabanne</h3>
+      <h4>CEO du groupe</h4>
+      <p>Ex-DG Scalian (ESN ~5 000 personnes). Expérience de construction et de pilotage d'un groupe multi-filiales dans le conseil tech et l'ingénierie.</p>
     </div>
-    <div class="card">
-      <h3>Corpus sectoriel initial</h3>
-      <p>Donn&eacute;es d&rsquo;entra&icirc;nement pour les agents. La cible apporte les missions, le contexte, les documents.</p>
+    <div class="card card-accent">
+      <h3>William Le Ferrand</h3>
+      <h4>CTO groupe · CEO Hypsis</h4>
+      <p>Ex-CTO Sogeclair (ETI aéronautique, 1 300 pers.). A mené la transformation digitale d'une ETI industrielle cotée. Créateur de la plateforme Hypsis.</p>
     </div>
-    <div class="card">
-      <h3>D&eacute;monstration vivante</h3>
-      <p>Post-acquisition&thinsp;: Hypsis Ops d&eacute;ploy&eacute; &rarr; l&rsquo;entit&eacute; produit mieux &rarr; ses clients sont les premiers prospects VALOR.</p>
+    <div class="card card-accent">
+      <h3>Emmanuel Benazera</h3>
+      <h4>CSO groupe · CEO Jolibrain</h4>
+      <p>10 ans de R&D IA en production. 5 PhDs, publications NeurIPS / ICML / AAAI / IJCAI. Clients : Airbus, Dassault, SNCF, CNES, Cartier. 50+ GPUs auto-hébergées.</p>
     </div>
   </div>
 
   <div class="statement-box">
-    <p>Track record&thinsp;: <strong>500&thinsp;M&euro; de transactions buy-and-build</strong> orchestr&eacute;es par l&rsquo;associ&eacute; fondateur. La discipline M&amp;A est op&eacute;rationnelle &mdash; pas th&eacute;orique.</p>
+    <p>Un CEO qui a construit un groupe de 5 000 personnes. Un CTO qui a mené une transformation de bout en bout dans une ETI industrielle. Un CSO dont l'équipe publie dans les meilleures conférences mondiales et déploie de l'IA chez Airbus depuis 10 ans. <strong>Cette équipe l'a fait — pas juste théorisé.</strong></p>
   </div>
 </section>
 
-<!-- S13 � LA CARTE DES ACQUISITIONS -->
+<!-- S13 — POSITIONNEMENT -->
 <section class="slide slide-light" id="s13">
-  <span class="slide-num">13 / 20</span>
-  <p class="act-label">Acte IV</p>
-  <p class="slide-label">Carte d&rsquo;acquisitions</p>
-  <h2 class="slide-title">Trois vagues. Quatre dimensions. Une carte de construction du groupe.</h2>
-  <p class="slide-subtitle">Chaque vague r&eacute;pond &agrave; un besoin de capacit&eacute; manquante &mdash; pas &agrave; une logique d&rsquo;arbitrage.</p>
+  <span class="slide-num">13 / 15</span>
+  <p class="act-label">Acte V</p>
+  <p class="slide-label">Positionnement</p>
+  <h2 class="slide-title">Ce que chaque acteur fait. Ce qui lui manque.</h2>
+  <p class="slide-subtitle">Nous assemblons les meilleures briques existantes plutôt que de tout construire from scratch.</p>
+
+  <table class="deck-table" style="margin-bottom:0.8rem">
+    <thead>
+      <tr><th>Acteur</th><th>Ce qu'il fait</th><th>Ce qui lui manque</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Accenture / Capgemini</td><td>Transformation IA grands groupes</td><td>Trop cher pour ETI, pas souverain, lock-in</td></tr>
+      <tr><td>ESN mid-market</td><td>Intégration tech, data</td><td>Pas de vision stratégique, pas de modèles IA propriétaires</td></tr>
+      <tr><td>Cabinets conseil (McKinsey, BCG)</td><td>Stratégie, diagnostic</td><td>Pas de déploiement, pas d'infra, partent après les slides</td></tr>
+      <tr><td>Éditeurs IA (Dataiku, Palantir)</td><td>Plateforme data/IA</td><td>Lock-in, cloud, pas d'accompagnement humain</td></tr>
+      <tr><td>Cabinets conseil Data & IA</td><td>Stratégie IA, Master Plan, CDO Office</td><td>Pas de plateforme, pas de modèles IA, dépendants d'intégrateurs</td></tr>
+      <tr class="highlight"><td><strong>Le groupe</strong></td><td><strong>Stratégie + Data + IA + Infra souveraine + Humain</strong></td><td><strong>Intégré, souverain, pas de lock-in, propriété client</strong></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- S14 — POURQUOI NOUS REJOINDRE -->
+<section class="slide" id="s14">
+  <span class="slide-num">14 / 15</span>
+  <p class="act-label">Acte VI</p>
+  <p class="slide-label">Pourquoi nous rejoindre</p>
+  <h2 class="slide-title">Vous gardez votre entreprise. Vous accédez à un groupe.</h2>
+  <p class="slide-subtitle">Ce que le groupe change pour un fondateur qui nous rejoint.</p>
 
   <div class="three-col" style="margin-bottom:0.8rem">
+    <div class="card">
+      <h3>Votre identité</h3>
+      <p>Votre CEO, votre P&L, votre équipe, vos clients. <strong>Le groupe ne réécrit pas ce qui fonctionne.</strong></p>
+    </div>
+    <div class="card">
+      <h3>Votre front commercial</h3>
+      <p>Programmes de transformation à 100–500K vendus au niveau COMEX. Vos compétences intégrées dans une offre plus large, plus visible, <strong>vendue plus cher.</strong></p>
+    </div>
     <div class="card card-accent">
-      <h3>V1 &mdash; Fondation</h3>
-      <p style="font-size:0.82rem; color:var(--ink-muted); margin-bottom:0.3rem">Capacit&eacute;s manquantes</p>
-      <ul>
-        <li>4 cibles couvrant les 4 dimensions du Diamond</li>
-        <li>Cabinets <strong>0,8&ndash;3&thinsp;M&euro; CA</strong>, plafond de croissance atteint</li>
-        <li>R&eacute;seau ETI &eacute;tabli</li>
-        <li>Tickets M&amp;A&thinsp;: <strong>1&ndash;5&thinsp;M&euro;</strong></li>
-      </ul>
+      <h3>Du conseil à l'impact</h3>
+      <p>Vous ne sous-traitez plus à des ESN. Vous gardez le contrôle de la stratégie <strong>ET</strong> vous déployez avec la plateforme, les modèles, l'infrastructure du groupe.</p>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <h3>Participation à la valeur</h3>
+      <p>BSPCE au niveau de la holding. Roll-over en equity. La croissance d'une BU bénéficie à tous. <strong>Les intérêts sont alignés.</strong></p>
     </div>
     <div class="card">
-      <h3>V2 &mdash; D&eacute;ploiement</h3>
-      <p style="font-size:0.82rem; color:var(--ink-muted); margin-bottom:0.3rem">ARR et base clients</p>
-      <ul>
-        <li>&Eacute;diteurs SaaS ETI (ARR r&eacute;current)</li>
-        <li>Int&eacute;grateurs sectoriels (base clients large)</li>
-        <li>Tickets M&amp;A&thinsp;: <strong>3&ndash;18&thinsp;M&euro;</strong></li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>V3 &mdash; Expansion</h3>
-      <p style="font-size:0.82rem; color:var(--ink-muted); margin-bottom:0.3rem">Expertise non reproductible</p>
-      <ul>
-        <li>Expertise sectorielle profonde (a&eacute;ro, pharma, industrie, finance)</li>
-        <li>R&eacute;seau C-suite ETI</li>
-        <li>Marque sectorielle publiable</li>
-        <li>Tickets M&amp;A&thinsp;: <span class="placeholder">selon opportunit&eacute;</span></li>
-      </ul>
+      <h3>Protection, pas dilution</h3>
+      <p>P&L séparés = chaque entité valorisable indépendamment. Le groupe peut se vendre « à l'appartement » ou en bloc. <strong>Les deux chemins restent ouverts.</strong></p>
     </div>
   </div>
 </section>
 
-<!-- S14 � L'INT�GRATION POST-ACQUISITION -->
-<section class="slide slide-light" id="s14">
-  <span class="slide-num">14 / 20</span>
-  <p class="act-label">Acte IV</p>
-  <p class="slide-label">Int&eacute;gration</p>
-  <h2 class="slide-title">L&rsquo;int&eacute;gration est une mission Hypsis Craft. Elle est m&eacute;thodis&eacute;e.</h2>
-  <p class="slide-subtitle">M&ecirc;me framework, m&ecirc;me plateforme, m&ecirc;mes OKRs. La cible devient une entit&eacute; du groupe &mdash; pas un satellite.</p>
-
-  <div class="two-col" style="margin-bottom:0.8rem">
-    <div class="card">
-      <h3>M&eacute;thodologie structur&eacute;e</h3>
-      <p>4 dimensions Diamond appliqu&eacute;es &agrave; la cible&thinsp;:</p>
-      <div class="flow-row" style="margin:0.5rem 0; justify-content:flex-start">
-        <div class="flow-box" style="min-width:auto; padding:0.4rem 0.8rem"><h4 style="font-size:0.82rem">Processus</h4></div>
-        <div class="flow-arrow" style="font-size:1rem">&rarr;</div>
-        <div class="flow-box" style="min-width:auto; padding:0.4rem 0.8rem"><h4 style="font-size:0.82rem">&Eacute;quipes</h4></div>
-        <div class="flow-arrow" style="font-size:1rem">&rarr;</div>
-        <div class="flow-box" style="min-width:auto; padding:0.4rem 0.8rem"><h4 style="font-size:0.82rem">Outils</h4></div>
-        <div class="flow-arrow" style="font-size:1rem">&rarr;</div>
-        <div class="flow-box" style="min-width:auto; padding:0.4rem 0.8rem"><h4 style="font-size:0.82rem">Gouvernance</h4></div>
-      </div>
-      <ul>
-        <li>Hypsis Ops d&eacute;ploy&eacute; en <strong>M+3</strong></li>
-        <li>OKRs align&eacute;s sur le BP groupe d&egrave;s l&rsquo;accord sign&eacute;</li>
-      </ul>
-    </div>
-    <div class="card card-accent">
-      <h3>Risque cl&eacute; identifi&eacute;</h3>
-      <p><strong>Concentration du r&eacute;seau client sur le fondateur de la cible.</strong></p>
-      <p style="margin-top:0.3rem">Mitigation&thinsp;:</p>
-      <ul>
-        <li>Earn-out long (<strong>3&ndash;5 ans</strong>)</li>
-        <li>Clause de non-comp&eacute;tition</li>
-        <li>Transfert actif vers la plateforme d&egrave;s <strong>M+6</strong></li>
-      </ul>
-      <p style="margin-top:0.3rem">La cible devient imm&eacute;diatement terrain de validation du corpus. Ses missions alimentent les agents. Ses r&eacute;sultats deviennent les premi&egrave;res r&eacute;f&eacute;rences commerciales.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ???????????????????????????????????????????
-     ACTE V � L'�QUIPE ET L'EX�CUTION � Slides 15�17
-     ??????????????????????????????????????????? -->
-
-<!-- S15 � LA CONVERGENCE RARE -->
+<!-- S15 — CONTACT -->
 <section class="slide" id="s15">
-  <span class="slide-num">15 / 20</span>
-  <p class="act-label">Acte V</p>
-  <p class="slide-label">&Eacute;quipe</p>
-  <h2 class="slide-title">Trois domaines rarement r&eacute;unis. Une &eacute;quipe qui les incarne.</h2>
-  <p class="slide-subtitle">Expertise m&eacute;tier de transformation &middot; Discipline M&amp;A op&eacute;rationnelle &middot; Ma&icirc;trise technique IA-native.</p>
-
-  <div class="three-col" style="margin-bottom:0.8rem">
-    <div class="card card-accent">
-      <h3>M&eacute;tier</h3>
-      <p>Sans expertise m&eacute;tier, on ne peut pas <strong>vendre aux DG d&rsquo;ETIs</strong>. Le diagnostic reste g&eacute;n&eacute;rique. La transformation ne prend pas.</p>
-    </div>
-    <div class="card card-accent">
-      <h3>M&amp;A</h3>
-      <p>Sans discipline M&amp;A, on ne peut pas <strong>int&eacute;grer post-acquisition</strong>. Le groupe reste un agr&eacute;gat. La valeur ne compose pas.</p>
-    </div>
-    <div class="card card-accent">
-      <h3>Tech IA-native</h3>
-      <p>Sans ma&icirc;trise technique, on ne peut pas <strong>d&eacute;ployer Hypsis Ops</strong>. La promesse reste un slide deck. Le r&eacute;current ne se construit pas.</p>
-    </div>
-  </div>
-
-  <div class="statement-box">
-    <p>Actif de cr&eacute;dibilit&eacute; &eacute;tabli&thinsp;: <strong>500&thinsp;M&euro; de transactions buy-and-build</strong> &middot; r&eacute;seau DAF/DRH/DG ETIs constitu&eacute; &middot; Hypsis Ops et Smart-GTA d&eacute;j&agrave; en production sur l&rsquo;API Anthropic.</p>
-  </div>
-
-  <p class="source-line"><span class="placeholder">&Agrave; compl&eacute;ter&thinsp;: bios fondateurs + profil CTO cibl&eacute;</span></p>
-</section>
-
-<!-- S16 � LES PREUVES D'EX�CUTION -->
-<section class="slide slide-light" id="s16">
-  <span class="slide-num">16 / 20</span>
-  <p class="act-label">Acte V</p>
-  <p class="slide-label">Preuves d&rsquo;ex&eacute;cution</p>
-  <h2 class="slide-title">Ce qui existe aujourd&rsquo;hui &mdash; pas des maquettes, des actifs.</h2>
-  <p class="slide-subtitle">Smart-GTA en production. PIM et WIM op&eacute;rationnels. Corpus sectoriel initial constitu&eacute;.</p>
-
-  <div class="three-col" style="margin-bottom:0.8rem">
-    <div class="card card-accent">
-      <h3>Smart-GTA v4.1</h3>
-      <p>Application de conformit&eacute; GTA/paie fran&ccedil;aise, int&eacute;gr&eacute;e API Anthropic, <strong>d&eacute;ployable en 3&ndash;4 semaines</strong> sur n&rsquo;importe quelle ETI avec SIRH. Premier actif SaS d&eacute;montrable et auditable.</p>
-    </div>
-    <div class="card">
-      <h3>PIM v0.7 + WIM v0.4</h3>
-      <p>Outils propri&eacute;taires de diagnostic (APQC PCF v7.3 &times; E/S/J pour les processus, O*NET &times; E/S/J pour les m&eacute;tiers). <strong>ROI estimable avant la premi&egrave;re mission</strong> &mdash; argument contractuel.</p>
-    </div>
-    <div class="card">
-      <h3>Rencontre fondatrice</h3>
-      <p>Co-fondateurs potentiels align&eacute;s sur la vision, dossier investisseur en pr&eacute;paration, <strong>premiers design partners identifi&eacute;s</strong>.</p>
-      <p class="source-line">Paris, 25 mars 2026</p>
-    </div>
-  </div>
-</section>
-
-<!-- S17 � LA GOUVERNANCE ET LES RISQUES -->
-<section class="slide" id="s17">
-  <span class="slide-num">17 / 20</span>
-  <p class="act-label">Acte V</p>
-  <p class="slide-label">Risques</p>
-  <h2 class="slide-title">Quatre risques identifi&eacute;s. Quatre mitigations actives.</h2>
-  <p class="slide-subtitle">Lucides sur les risques. Pr&eacute;cis sur les r&eacute;ponses.</p>
-
-  <div class="four-col" style="margin-bottom:0.8rem">
-    <div class="card risk-card">
-      <h4>Adoption interne</h4>
-      <p>Consultants acquis : positionnement comme acc&eacute;l&eacute;rateur de carri&egrave;re &middot; formation &middot; champions internes &middot; earn-out align&eacute; sur la r&eacute;ussite Hypsis Ops.</p>
-    </div>
-    <div class="card risk-card">
-      <h4>Mesure de l&rsquo;impact</h4>
-      <p>Baseline sign&eacute;e avant d&eacute;marrage &middot; KPIs natifs dans Hypsis Ops &middot; observabilit&eacute; temps r&eacute;el &middot; audit tiers si litige.</p>
-    </div>
-    <div class="card risk-card">
-      <h4>Model collapse</h4>
-      <p>Comit&eacute; de validation &middot; seuil N&ge;5 missions &middot; tests de non-r&eacute;gression &middot; versionning s&eacute;mantique &middot; rollback.</p>
-    </div>
-    <div class="card risk-card">
-      <h4>Concentration M&amp;A</h4>
-      <p>Earn-out 3&ndash;5 ans &middot; clause non-comp&eacute;tition &middot; transfert r&eacute;seau vers plateforme d&egrave;s M+6 &middot; multi-acquisitions pour diluer.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ???????????????????????????????????????????
-     ACTE VI � LE DEAL � Slides 18�20
-     ??????????????????????????????????????????? -->
-
-<!-- S18 � LES TROIS SC�NARIOS DE TICKET -->
-<section class="slide" id="s18">
-  <span class="slide-num">18 / 20</span>
+  <span class="slide-num">15 / 15</span>
   <p class="act-label">Acte VI</p>
-  <p class="slide-label">Le deal</p>
-  <h2 class="slide-title">Trois tickets. Trois vitesses. Un m&ecirc;me cap.</h2>
-  <p class="slide-subtitle">Chaque euro finance un jalon mesurable. L&rsquo;allocation varie selon le sc&eacute;nario &mdash; pas la direction.</p>
+  <p class="slide-label">Prochaine étape</p>
+  <h2 class="slide-title" style="font-size:clamp(2rem, 4vw, 3.2rem); margin-bottom:0.6rem; text-align:center">Construisons ensemble.</h2>
+  <p class="slide-subtitle" style="text-align:center; max-width:750px; margin-left:auto; margin-right:auto;">
+    Le groupe se construit maintenant. Les briques techniques existent. L'équipe est en place. La pièce manquante, c'est peut-être vous.
+  </p>
 
-  <div class="three-col" style="margin-bottom:0.8rem">
-    <div class="card ticket-card">
-      <div class="ticket-amount">3&thinsp;M&euro;</div>
-      <div class="ticket-name">Fondation</div>
-      <ul>
-        <li>Hypsis Ops MVP (DSL + 3 types d&rsquo;impacts)</li>
-        <li>Recrutement CTO</li>
-        <li>1&ndash;2 acquisitions V1</li>
-        <li>3&ndash;5 pilotes clients ETI</li>
-      </ul>
-      <p style="margin-top:0.4rem; font-style:italic; font-size:0.85rem; color:var(--gold)">Objectif 18 mois&thinsp;: premi&egrave;res preuves de r&eacute;current VALOR.</p>
-    </div>
-    <div class="card ticket-card card-accent">
-      <div class="ticket-amount">15&thinsp;M&euro;</div>
-      <div class="ticket-name">Acc&eacute;l&eacute;ration</div>
-      <ul>
-        <li>Hypsis Ops complet (IMPACT + VALOR + BPO)</li>
-        <li>4 acquisitions V1 (couverture 4D Diamond)</li>
-        <li>10+ clients</li>
-        <li>Premier vertical SaaS en production</li>
-      </ul>
-      <p style="margin-top:0.4rem; font-style:italic; font-size:0.85rem; color:var(--gold)">Objectif 18 mois&thinsp;: ARR significatif, moat corpus visible.</p>
-    </div>
-    <div class="card ticket-card">
-      <div class="ticket-amount">30&thinsp;M&euro;</div>
-      <div class="ticket-name">D&eacute;ploiement</div>
-      <ul>
-        <li>Sc&eacute;nario 15&thinsp;M&euro; + acquisitions V2</li>
-        <li>&Eacute;cosyst&egrave;me partenaires</li>
-        <li>Expansion sectorielle</li>
-        <li>ARR r&eacute;currents, base clients large</li>
-      </ul>
-      <p style="margin-top:0.4rem; font-style:italic; font-size:0.85rem; color:var(--gold)">Objectif 18 mois&thinsp;: leader segment ETI fran&ccedil;ais.</p>
-    </div>
-  </div>
-</section>
-
-<!-- S19 � LA ROADMAP DES 18 MOIS -->
-<section class="slide" id="s19">
-  <span class="slide-num">19 / 20</span>
-  <p class="act-label">Acte VI</p>
-  <p class="slide-label">Roadmap</p>
-  <h2 class="slide-title">Six jalons. Trois &agrave; v&eacute;rifier &agrave; M6. Trois &agrave; v&eacute;rifier &agrave; M18.</h2>
-  <p class="slide-subtitle">Les preuves sont dans les m&eacute;triques &mdash; natives dans Hypsis Ops, pas d&eacute;clar&eacute;es.</p>
-
-  <div class="two-col" style="margin-bottom:0.8rem">
+  <div class="three-col" style="margin-bottom:1.2rem">
     <div class="card">
-      <h3>M6</h3>
+      <h3>Ce que nous avons</h3>
       <ul>
-        <li>CTO recrut&eacute;</li>
-        <li>Hypsis Ops MVP en production interne</li>
-        <li>1&ndash;2 acquisitions V1 sign&eacute;es</li>
-        <li>1 pilote client avec ROI mesur&eacute; et audit&eacute;</li>
-        <li>Smart-GTA en production chez 2 clients</li>
+        <li>Plateforme souveraine en production</li>
+        <li>10 ans de R&D IA, modèles déployés</li>
+        <li>30 consultants data, 6M CA</li>
+        <li>CEO ex-DG d'un groupe de 5 000 pers.</li>
       </ul>
-    </div>
-    <div class="card card-accent">
-      <h3>M18</h3>
-      <ul>
-        <li>3&ndash;5 clients en Mode VALOR actif</li>
-        <li>Premier ARR r&eacute;current positif</li>
-        <li>Corpus sectoriel initial constitu&eacute; sur 2 secteurs</li>
-        <li>4 dimensions Diamond couvertes par les entit&eacute;s du groupe</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="statement-box">
-    <p><strong>KPIs de suivi&thinsp;:</strong> ARR VALOR &middot; NRR &middot; nombre de missions avec baseline contractualis&eacute;e &middot; % CA r&eacute;current / CA total &middot; corpus missions alimentant les agents.</p>
-  </div>
-</section>
-
-<!-- S20 � L'INVITATION -->
-<section class="slide" id="s20">
-  <span class="slide-num">20 / 20</span>
-  <p class="act-label">Acte VI</p>
-  <p class="slide-label">Prochaine &eacute;tape</p>
-  <h2 class="slide-title" style="font-size:clamp(2rem, 4vw, 3.2rem); margin-bottom:0.6rem">La fen&ecirc;tre est ouverte.<br>Elle ne le restera pas.</h2>
-  <p class="slide-subtitle" style="max-width:750px">Celui qui occupe cette place en premier dispose d&rsquo;un avantage de donn&eacute;es, de m&eacute;thode et de r&eacute;seau que ses successeurs ne rattraperont pas.</p>
-
-  <div class="three-col" style="margin-bottom:1rem">
-    <div class="card">
-      <h3>Pourquoi maintenant</h3>
-      <p>Les acteurs &eacute;tablis connaissent l&rsquo;IA agentique. Ils ne peuvent pas la d&eacute;ployer sans se cannibaliser. <strong>La fen&ecirc;tre est ouverte pr&eacute;cis&eacute;ment parce que Hypsis n&rsquo;a pas de legacy &agrave; prot&eacute;ger.</strong></p>
     </div>
     <div class="card">
       <h3>Ce que nous cherchons</h3>
-      <p>Exp&eacute;rience des services professionnels ou de la tech &middot; R&eacute;seau ETI / C-suite &middot; Accompagnement M&amp;A op&eacute;rationnel. <strong>Pas uniquement du capital.</strong></p>
+      <ul>
+        <li>La brique conseil stratégique Data & IA</li>
+        <li>Un accès direct aux COMEX</li>
+        <li>Une méthodologie de transformation éprouvée</li>
+        <li>Un fondateur qui veut aller plus loin</li>
+      </ul>
     </div>
     <div class="card card-accent">
-      <h3>Prochaine &eacute;tape</h3>
+      <h3>Prochaine étape</h3>
       <ul>
-        <li>Due diligence sur <strong>Smart-GTA</strong> (actif auditable)</li>
-        <li>Acc&egrave;s aux <strong>PIM / WIM</strong> (d&eacute;montrables)</li>
-        <li>Rencontre &eacute;quipe fondatrice</li>
+        <li>Échange informel entre fondateurs</li>
+        <li>Démonstration de la plateforme</li>
+        <li>Exploration des synergies</li>
       </ul>
     </div>
   </div>
 
-  <div class="divider" style="background:rgba(248,246,241,0.1); margin: 0.6rem 0"></div>
+  <div class="divider" style="background:rgba(248,246,241,0.1); margin: 0.6rem auto"></div>
 
   <div style="text-align:center">
-    <div class="wordmark" style="margin-bottom:0.6rem">Hypsis</div>
+    <div class="wordmark" style="margin-bottom:0.6rem">Groupe Hypsis</div>
     <p style="font-size:1.1rem; font-weight:500; color:var(--gold)">william@hypsis.ai</p>
     <p style="font-size:0.92rem; color:rgba(248,246,241,0.35); margin-top:0.3rem">hypsis.ai</p>
   </div>
