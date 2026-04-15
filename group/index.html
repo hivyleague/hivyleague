@@ -129,6 +129,8 @@ section.slide {
 .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
 .four-col { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.8rem; }
 .five-col { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 0.7rem; }
+.five-col > .card { display: flex; flex-direction: column; }
+.five-col > .card > p:first-of-type { flex: 1; }
 .divider { width: 80px; height: 1px; background: rgba(248,246,241,0.1); margin: 1rem 0; }
 
 .stat-row { display: grid; gap: 0; border-top: 1px solid rgba(248,246,241,0.1); border-bottom: 1px solid rgba(248,246,241,0.1); margin: 0.8rem 0; }
@@ -454,7 +456,7 @@ section.slide {
 
   <div class="five-col" style="margin-bottom:0.4rem">
     <div class="card" style="padding:0.8rem 1rem">
-      <h3>Conseil stratégique Data & IA</h3>
+      <h3>Stratégie Data & IA</h3>
       <p>COMEX, Master Plan, CDO Office, déploiement</p>
       <p style="margin-top:0.3rem"><strong>Discovery + Build</strong></p>
     </div>
