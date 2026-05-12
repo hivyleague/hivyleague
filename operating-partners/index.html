@@ -53,35 +53,6 @@
   }
 
   /* =========================================
-     TOP BAR
-     ========================================= */
-  .topbar {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    z-index: 10;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.4rem 2rem;
-  }
-  .topbar a {
-    font-family: 'Italiana', serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.45em;
-    text-transform: uppercase;
-    color: var(--bronze);
-    text-decoration: none;
-  }
-  .topbar .audience {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-  }
-
-  /* =========================================
      HERO
      ========================================= */
   .hero {
@@ -527,8 +498,6 @@
      RESPONSIVE
      ========================================= */
   @media (max-width: 880px) {
-    .topbar { padding: 1rem 1.2rem; }
-    .topbar .audience { display: none; }
     .convictions-grid,
     .platform-grid {
       grid-template-columns: 1fr;
@@ -577,15 +546,11 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <div class="topbar">
-    <a href="../">Hypsis</a>
-    <span class="audience">For Operating Partners</span>
-  </div>
   <div class="hero-bg">
     <img src="../assets/hero-fresco.png" alt="The transfer of knowledge">
   </div>
   <div class="hero-content">
-    <div class="hero-eyebrow">For Operating Partners</div>
+    <div class="hero-eyebrow">Hypsis</div>
     <h1>An AI partner<br>for operating partners</h1>
     <p class="hero-subtitle">
       A sovereign AI platform built for the way you actually work &mdash; your data, your processes, models you can&nbsp;trust.
