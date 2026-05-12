@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hypsis — An AI partner for operating partners</title>
+<meta name="description" content="A peer-grade AI companion for operating partners covering more portfolio companies than they can staff. Sovereign platform, 90-day cycle, priced per portco — under your signature.">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Italiana&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f8f6f1;
+    --paper-warm: #f0ece3;
+    --ink: #1a1a2e;
+    --ink-soft: #3d3d54;
+    --ink-muted: #7a7a8c;
+    --bronze: #7a6840;
+    --bronze-light: #a89060;
+    --bronze-dark: #5c4e30;
+    --stone: #d4cfc5;
+    --stone-light: #e8e4db;
+    --accent-faint: rgba(122,104,64,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Outfit', -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .divider {
+    width: 120px;
+    height: 1px;
+    background: var(--stone);
+    margin: 3rem auto;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 1rem;
+  }
+
+  /* =========================================
+     TOP BAR
+     ========================================= */
+  .topbar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 2rem;
+  }
+  .topbar a {
+    font-family: 'Italiana', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    text-decoration: none;
+  }
+  .topbar .audience {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  /* =========================================
+     HERO
+     ========================================= */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    padding: 2rem 2rem 5rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 28%;
+    filter: contrast(1.05) brightness(1.0);
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(248,246,241,0.1) 0%,
+      rgba(248,246,241,0.3) 25%,
+      rgba(248,246,241,0.75) 48%,
+      rgba(248,246,241,0.96) 62%,
+      var(--paper) 78%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Italiana', serif;
+    font-size: clamp(0.78rem, 1.1vw, 0.92rem);
+    letter-spacing: 0.55em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 1.4rem;
+    opacity: 0;
+    animation: fadeIn 1.4s ease 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.08;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.025em;
+    opacity: 0;
+    animation: fadeInUp 1.4s ease 0.4s forwards;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 680px;
+    margin: 0 auto 1.8rem;
+    line-height: 1.65;
+    opacity: 0;
+    animation: fadeInUp 1.4s ease 0.7s forwards;
+  }
+
+  .hero-pillars {
+    font-size: clamp(0.7rem, 1vw, 0.8rem);
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--bronze-light);
+    opacity: 0;
+    animation: fadeInUp 1.4s ease 1s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0;
+    animation: fadeIn 1.4s ease 1.5s forwards, float 3s ease-in-out infinite 1.5s;
+  }
+  .scroll-hint svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--stone);
+    stroke-width: 1.5;
+    fill: none;
+  }
+
+  /* =========================================
+     RECOGNITION (the role we know)
+     ========================================= */
+  .recognition {
+    padding: 5rem 2rem 4rem;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .recognition-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .recognition h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    max-width: 720px;
+    margin: 0 auto;
+    letter-spacing: -0.02em;
+  }
+  .recognition-lead {
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 720px;
+    margin: 1.5rem auto 0;
+    line-height: 1.7;
+  }
+  .recognition-lead em {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .recognition-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--stone);
+    border-bottom: 1px solid var(--stone);
+    margin-top: 2.5rem;
+  }
+  .reco-cell {
+    padding: 2rem 1.8rem;
+    border-right: 1px solid var(--stone);
+  }
+  .reco-cell:last-child { border-right: none; }
+  .reco-cell .num {
+    font-size: clamp(2rem, 3.5vw, 2.6rem);
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.03em;
+  }
+  .reco-cell .num .unit {
+    font-size: 0.45em;
+    font-weight: 400;
+    color: var(--ink-muted);
+  }
+  .reco-cell .label {
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .reco-cell .src {
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: var(--ink-muted);
+    margin-top: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* =========================================
+     PROPOSITION (what I'm offering)
+     ========================================= */
+  .proposition {
+    padding: 5rem 2rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .proposition-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .proposition .section-label { color: var(--bronze-light); }
+  .proposition h2 {
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+    font-weight: 700;
+    color: var(--paper);
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.02em;
+  }
+  .proposition-lead {
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    font-weight: 300;
+    color: rgba(248,246,241,0.72);
+    max-width: 760px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+  .proposition-lead strong {
+    font-weight: 500;
+    color: var(--paper);
+  }
+  .prop-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(248,246,241,0.12);
+    border-bottom: 1px solid rgba(248,246,241,0.12);
+  }
+  .prop-cell {
+    padding: 2.2rem 1.8rem;
+    border-right: 1px solid rgba(248,246,241,0.12);
+  }
+  .prop-cell:last-child { border-right: none; }
+  .prop-cell .prop-num {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    color: var(--bronze-light);
+    margin-bottom: 1rem;
+  }
+  .prop-cell h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--paper);
+    margin-bottom: 0.7rem;
+    letter-spacing: -0.01em;
+  }
+  .prop-cell p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: rgba(248,246,241,0.7);
+    line-height: 1.65;
+  }
+  .prop-cell p strong {
+    font-weight: 500;
+    color: var(--paper);
+  }
+  .proposition-aside {
+    margin-top: 2rem;
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: rgba(248,246,241,0.55);
+    font-style: italic;
+    line-height: 1.65;
+    text-align: center;
+  }
+
+  /* =========================================
+     FOUNDER (peer-to-peer)
+     ========================================= */
+  .founder {
+    padding: 5.5rem 2rem;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .founder-card {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 3rem;
+    align-items: stretch;
+  }
+  .founder-photo-wrapper {
+    position: relative;
+    width: 320px;
+    min-height: 320px;
+    overflow: hidden;
+  }
+  .founder-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 30% 15%;
+  }
+  .founder-info h2 {
+    font-size: clamp(1.6rem, 2.8vw, 2.05rem);
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+    letter-spacing: -0.01em;
+  }
+  .founder-role {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 1.3rem;
+  }
+  .founder-lead {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-bottom: 1.4rem;
+  }
+  .founder-lead strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .founder-timeline {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.4rem;
+  }
+  .founder-timeline li {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    padding: 0.35rem 0 0.35rem 1.2rem;
+    position: relative;
+  }
+  .founder-timeline li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.85rem;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--stone);
+  }
+  .founder-timeline li strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .founder-quote {
+    font-style: italic;
+    color: var(--ink-muted);
+    border-left: 2px solid var(--bronze);
+    padding-left: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  /* =========================================
+     ARRANGEMENT (how we work together)
+     ========================================= */
+  .arrangement {
+    padding: 5rem 2rem;
+    background: var(--paper-warm);
+  }
+  .arrangement-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .arrangement-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .arrangement h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    max-width: 700px;
+    margin: 0 auto;
+    letter-spacing: -0.02em;
+  }
+  .arrangement-lead {
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 700px;
+    margin: 1.2rem auto 0;
+    line-height: 1.65;
+  }
+  .arrangement-lead strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .arrangement-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--paper);
+    border: 1px solid var(--stone);
+  }
+  .arrangement-table th {
+    text-align: left;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding: 0.95rem 1.1rem;
+    border-bottom: 2px solid var(--stone);
+    background: var(--paper-warm);
+  }
+  .arrangement-table td {
+    padding: 1rem 1.1rem;
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--stone-light);
+    vertical-align: top;
+  }
+  .arrangement-table tr:last-child td { border-bottom: none; }
+  .arrangement-table tr.highlight td {
+    background: rgba(122,104,64,0.06);
+    color: var(--ink);
+    font-weight: 500;
+    border-bottom: 2px solid var(--bronze);
+  }
+  .arrangement-quote {
+    text-align: center;
+    margin-top: 2.5rem;
+    font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+    font-weight: 300;
+    color: var(--ink-soft);
+    font-style: italic;
+    line-height: 1.6;
+  }
+  .arrangement-quote strong {
+    font-weight: 600;
+    color: var(--ink);
+    font-style: normal;
+  }
+
+  /* =========================================
+     ENGAGEMENT (timeline)
+     ========================================= */
+  .engagement {
+    padding: 5.5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .engagement-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+  .engagement h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    max-width: 700px;
+    margin: 0 auto;
+    letter-spacing: -0.02em;
+  }
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--stone);
+  }
+  .timeline-step {
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--stone);
+    border-bottom: 1px solid var(--stone);
+    position: relative;
+  }
+  .timeline-step:last-child { border-right: none; }
+  .timeline-step .when {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--bronze);
+    margin-bottom: 0.6rem;
+  }
+  .timeline-step h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+  }
+  .timeline-step p {
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  /* =========================================
+     PLATFORM (the box / catalog)
+     ========================================= */
+  .platform {
+    padding: 5rem 2rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .platform-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .platform .section-label { color: var(--bronze-light); }
+  .platform h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    color: var(--paper);
+    line-height: 1.3;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.02em;
+  }
+  .platform-lead {
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    font-weight: 300;
+    color: rgba(248,246,241,0.7);
+    max-width: 720px;
+    line-height: 1.65;
+    margin-bottom: 2.5rem;
+  }
+  .platform-lead strong { font-weight: 500; color: var(--paper); }
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(248,246,241,0.12);
+    border-bottom: 1px solid rgba(248,246,241,0.12);
+  }
+  .platform-feature {
+    padding: 2rem 1.7rem;
+    border-right: 1px solid rgba(248,246,241,0.12);
+  }
+  .platform-feature:last-child { border-right: none; }
+  .platform-feature h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--paper);
+    margin-bottom: 0.8rem;
+  }
+  .platform-list {
+    list-style: none;
+    padding: 0;
+  }
+  .platform-list li {
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: rgba(248,246,241,0.62);
+    line-height: 1.55;
+    padding: 0.3rem 0 0.3rem 1rem;
+    position: relative;
+  }
+  .platform-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7rem;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--bronze-light);
+  }
+
+  /* =========================================
+     PROOF
+     ========================================= */
+  .proof {
+    padding: 5rem 2rem;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .proof-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .proof h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    max-width: 700px;
+    margin: 0 auto;
+    letter-spacing: -0.02em;
+  }
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--stone);
+    border-bottom: 1px solid var(--stone);
+  }
+  .proof-cell {
+    padding: 2rem 1.4rem;
+    border-right: 1px solid var(--stone);
+    text-align: center;
+  }
+  .proof-cell:last-child { border-right: none; }
+  .proof-cell .pn {
+    font-size: clamp(1.8rem, 3.3vw, 2.4rem);
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.45rem;
+    letter-spacing: -0.03em;
+  }
+  .proof-cell .pn .unit {
+    font-size: 0.45em;
+    font-weight: 400;
+    color: var(--ink-muted);
+  }
+  .proof-cell .pl {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .proof-context {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* =========================================
+     PRICING
+     ========================================= */
+  .pricing {
+    padding: 5rem 2rem;
+    background: var(--paper-warm);
+  }
+  .pricing-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .pricing-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .pricing h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    max-width: 700px;
+    margin: 0 auto;
+    letter-spacing: -0.02em;
+  }
+  .pricing-lead {
+    font-size: clamp(1rem, 1.5vw, 1.05rem);
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 700px;
+    margin: 1.2rem auto 0;
+    line-height: 1.65;
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .price-card {
+    background: var(--paper);
+    border: 1px solid var(--stone);
+    padding: 2rem 2rem 2.2rem;
+    position: relative;
+  }
+  .price-card .pc-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 0.8rem;
+  }
+  .price-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+  }
+  .price-card .pc-price {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    margin-bottom: 1.4rem;
+  }
+  .price-card .pc-price strong {
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .price-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+  .price-card li {
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    padding: 0.35rem 0 0.35rem 1.2rem;
+    position: relative;
+  }
+  .price-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.95rem;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--bronze-light);
+  }
+  .price-card li strong { color: var(--ink); font-weight: 500; }
+
+  /* =========================================
+     OUTCOME
+     ========================================= */
+  .outcome {
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  .outcome-text {
+    font-size: clamp(1.2rem, 2.4vw, 1.65rem);
+    font-weight: 300;
+    color: var(--ink);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.55;
+  }
+  .outcome-text strong { font-weight: 600; }
+
+  /* =========================================
+     CTA
+     ========================================= */
+  .cta {
+    padding: 4rem 2rem 6rem;
+    text-align: center;
+  }
+  .cta h2 {
+    font-size: clamp(1.6rem, 3.3vw, 2.4rem);
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.01em;
+  }
+  .cta p {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--ink-muted);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .cta-button {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.95rem 2.6rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .cta-button:hover {
+    background: var(--bronze-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(26,26,46,0.12);
+  }
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    text-decoration: none;
+    padding: 0.9rem 1.4rem;
+    transition: color 0.3s ease;
+  }
+  .cta-link:hover { color: var(--ink); }
+  .cta-link svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+
+  /* =========================================
+     FOOTER
+     ========================================= */
+  footer {
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--stone);
+  }
+  footer .wordmark {
+    font-family: 'Italiana', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.5em;
+    color: var(--bronze);
+    text-transform: uppercase;
+  }
+  footer p {
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: var(--ink-muted);
+    margin-top: 0.5rem;
+  }
+  footer a {
+    color: var(--bronze);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  footer a:hover { color: var(--ink); }
+
+  /* =========================================
+     ANIMATIONS
+     ========================================= */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(5px); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-d-1 { transition-delay: 0.1s; }
+  .reveal-d-2 { transition-delay: 0.2s; }
+  .reveal-d-3 { transition-delay: 0.3s; }
+
+  /* =========================================
+     RESPONSIVE
+     ========================================= */
+  @media (max-width: 880px) {
+    .topbar { padding: 1rem 1.2rem; }
+    .topbar .audience { display: none; }
+    .recognition-grid,
+    .prop-grid,
+    .platform-grid,
+    .proof-grid {
+      grid-template-columns: 1fr;
+    }
+    .reco-cell,
+    .prop-cell,
+    .platform-feature,
+    .proof-cell {
+      border-right: none;
+      border-bottom: 1px solid var(--stone);
+    }
+    .platform-feature,
+    .prop-cell {
+      border-bottom: 1px solid rgba(248,246,241,0.12);
+    }
+    .reco-cell:last-child,
+    .prop-cell:last-child,
+    .platform-feature:last-child,
+    .proof-cell:last-child { border-bottom: none; }
+
+    .timeline {
+      grid-template-columns: 1fr;
+      border-top: 1px solid var(--stone);
+    }
+    .timeline-step {
+      border-right: none;
+      border-bottom: 1px solid var(--stone);
+    }
+    .timeline-step:last-child { border-bottom: none; }
+
+    .founder-card {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .founder-photo-wrapper {
+      width: 100%;
+      height: 280px;
+      min-height: auto;
+    }
+    .founder-photo-wrapper img {
+      object-position: 30% 10%;
+    }
+
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .arrangement-table {
+      font-size: 0.82rem;
+    }
+    .arrangement-table th,
+    .arrangement-table td {
+      padding: 0.7rem 0.6rem;
+    }
+
+    .hero {
+      justify-content: flex-end;
+      padding-bottom: 3.5rem;
+    }
+    .hero-bg::after {
+      background: linear-gradient(
+        180deg,
+        rgba(248,246,241,0.06) 0%,
+        rgba(248,246,241,0.42) 30%,
+        rgba(248,246,241,0.92) 50%,
+        var(--paper) 62%
+      );
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="topbar">
+    <a href="../">Hypsis</a>
+    <span class="audience">For Operating Partners</span>
+  </div>
+  <div class="hero-bg">
+    <img src="../assets/hero-fresco.png" alt="The transfer of knowledge">
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">For Operating Partners</div>
+    <h1>An AI partner<br>for operating partners.</h1>
+    <p class="hero-subtitle">
+      Cover more portfolio companies than you can staff. I bring a sovereign AI platform and a 100&#8209;day method &mdash; you keep the relationship, the credit, and the board.
+    </p>
+    <p class="hero-pillars">Bandwidth &nbsp;&middot;&nbsp; Method &nbsp;&middot;&nbsp; Sovereignty</p>
+  </div>
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ============ RECOGNITION ============ -->
+<section class="recognition">
+  <div class="recognition-header reveal">
+    <p class="section-label">The seat you sit in</p>
+    <h2>One operating partner. A dozen portfolio companies. Eighteen months to the&nbsp;exit.</h2>
+    <p class="recognition-lead">
+      You signed up to industrialise value creation across the portfolio. In practice you spend Monday on a board pack, Tuesday firefighting an ERP migration at PortCo&nbsp;3, Wednesday on a CFO succession at PortCo&nbsp;7, and Thursday convincing a CEO that <em>yes</em>, this AI thing is real and <em>no</em>, the ChatGPT subscription is not the answer.
+    </p>
+  </div>
+  <div class="recognition-grid reveal">
+    <div class="reco-cell">
+      <div class="num">10&ndash;12<span class="unit">%</span></div>
+      <div class="label">Annual EBITDA growth now required for a 2.5&times; return &mdash; double a decade ago</div>
+      <div class="src">Bain Global PE Report 2025</div>
+    </div>
+    <div class="reco-cell">
+      <div class="num">5.7<span class="unit"> yr</span></div>
+      <div class="label">Median European hold period, up from 4.7 &mdash; longer windows, more value creation cycles per portco</div>
+      <div class="src">Gain.ai H1&nbsp;2026</div>
+    </div>
+    <div class="reco-cell">
+      <div class="num">47<span class="unit">%</span></div>
+      <div class="label">Of PE professionals postponed 2025 exits &mdash; the operating partner is now the lever, not the exit</div>
+      <div class="src">DealSuite 2026</div>
+    </div>
+  </div>
+  <p class="recognition-lead reveal" style="margin-top: 2.5rem;">
+    The capital is there. The thesis is there. <em>You</em> are there. What&rsquo;s missing is the <strong style="color:var(--ink);">tenth pair of hands</strong> &mdash; engineers, data, software, the unglamorous machinery that turns a value creation plan into a working tool inside a&nbsp;portco.
+  </p>
+</section>
+
+<!-- ============ PROPOSITION ============ -->
+<section class="proposition">
+  <div class="proposition-inner">
+    <div class="reveal">
+      <p class="section-label">What I&rsquo;m offering</p>
+      <h2>Not a consultant. Not a deck. A&nbsp;platform that operates with&nbsp;you.</h2>
+      <p class="proposition-lead">
+        Hypsis is a productised AI capability built for the way an operating partner actually works: <strong>per portco, per quarter, against a value creation plan</strong>. I bring the platform, the method, and the engineering muscle. You bring the mandate, the priorities, and the relationship with the&nbsp;CEO.
+      </p>
+    </div>
+    <div class="prop-grid">
+      <div class="prop-cell reveal reveal-d-1">
+        <div class="prop-num">01</div>
+        <h3>Bandwidth, in software</h3>
+        <p>An <strong>on-prem AI box</strong> racked at the portco in week&nbsp;1, then ten to twenty custom apps shipped in the first 90&nbsp;days &mdash; VCP trackers, supplier monitors, NCR pipelines, procurement anomaly detection &mdash; whatever your value creation thesis requires. The CEO sees outputs in week&nbsp;2, not month&nbsp;6.</p>
+      </div>
+      <div class="prop-cell reveal reveal-d-2">
+        <div class="prop-num">02</div>
+        <h3>An AI angle that holds up at IC</h3>
+        <p>When the LP asks <em>&ldquo;what&rsquo;s your AI playbook on this fund?&rdquo;</em> you answer with <strong>deployed software in production</strong>, a per-portco roadmap, and a measurable productivity delta &mdash; not a slide on &ldquo;Gen AI strategy&rdquo;. The platform compounds: each engagement adds a reusable SKU to your fund&rsquo;s catalogue.</p>
+      </div>
+      <div class="prop-cell reveal reveal-d-3">
+        <div class="prop-num">03</div>
+        <h3>Sovereign by default</h3>
+        <p>The model runs <strong>on the portco&rsquo;s premises</strong>. No data egress, no SaaS lock-in, no US cloud dependency. NIS2, GDPR, ITAR-compatible out of the box. Your IT director says yes in 30&nbsp;minutes. Defence, aero, and dual-use portcos in the portfolio remain investable.</p>
+      </div>
+    </div>
+    <p class="proposition-aside">A peer working with you on three to ten portcos &mdash; for less than the loaded cost of one analyst.</p>
+  </div>
+</section>
+
+<!-- ============ FOUNDER ============ -->
+<section class="founder">
+  <div class="founder-card reveal">
+    <div class="founder-photo-wrapper">
+      <img src="../assets/william_orange.png" alt="William Le Ferrand">
+    </div>
+    <div class="founder-info">
+      <h2>William Le Ferrand</h2>
+      <p class="founder-role">Founder &middot; Built this from the operator&rsquo;s seat</p>
+      <p class="founder-lead">
+        I&rsquo;m not pitching this from a consulting deck. I built it because I needed it &mdash; from the <strong>Comex of a publicly-listed industrial mid-cap</strong>, with too many transformation initiatives, too few engineers, and a board that wanted answers every quarter.
+      </p>
+      <ul class="founder-timeline">
+        <li><strong>Software engineer in Silicon Valley</strong> &mdash; 7&nbsp;years building products and engineering teams across three continents.</li>
+        <li><strong>Startup founder</strong> &mdash; took over an industrial robotics company. Learned the hard way what works and what doesn&rsquo;t in an SME.</li>
+        <li><strong>Chief Transformation Officer, Comex member</strong> of a &euro;160M&nbsp;listed aerospace group, 1,200&nbsp;people. Wrote the transformation plan, deployed a company-wide ontology, set up data governance and cloud migration, built the operating handbook and a team of&nbsp;12 to carry it forward.</li>
+        <li><strong>Hypsis</strong> &mdash; the platform I wish I had had as a CTO. In production at industrial SMEs today, ~30 apps live on the box at the lead client.</li>
+      </ul>
+      <p class="founder-quote">
+        I know what a Monday-morning operating partner agenda looks like. I know what a value creation plan reads like at 11&nbsp;PM the night before the board. And I know what is missing between the deck and the&nbsp;P&amp;L&nbsp;impact.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARRANGEMENT ============ -->
+<section class="arrangement">
+  <div class="arrangement-inner">
+    <div class="arrangement-header reveal">
+      <p class="section-label">How we work together</p>
+      <h2>You stay the operating partner. I stay invisible behind the&nbsp;platform.</h2>
+      <p class="arrangement-lead">
+        I&rsquo;m not trying to build a brand inside your portfolio. I&rsquo;m the <strong>capability you bring</strong> &mdash; like a banker who introduces the right product from his bank. The CEO sees you. The board hears you. The platform does the&nbsp;work.
+      </p>
+    </div>
+    <table class="arrangement-table reveal">
+      <thead>
+        <tr>
+          <th>Option</th>
+          <th>Cost / portco</th>
+          <th>Time to first output</th>
+          <th>Who owns the relationship</th>
+          <th>What stays after</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tier-1 consulting team</td>
+          <td>&euro;300&ndash;800K</td>
+          <td>3&ndash;6 months</td>
+          <td>The consulting partner</td>
+          <td>A binder</td>
+        </tr>
+        <tr>
+          <td>SaaS / low-code platform</td>
+          <td>&euro;50&ndash;200K&nbsp;/&nbsp;yr</td>
+          <td>3&ndash;9 months</td>
+          <td>The vendor</td>
+          <td>A subscription &amp; cloud dependency</td>
+        </tr>
+        <tr>
+          <td>Internal hire (CDO / Head of Data)</td>
+          <td>&euro;150K+&nbsp;/&nbsp;yr loaded</td>
+          <td>9&ndash;18 months</td>
+          <td>The portco</td>
+          <td>One person, one company</td>
+        </tr>
+        <tr class="highlight">
+          <td><strong>Hypsis (with you)</strong></td>
+          <td><strong>&euro;60K + &euro;4K&nbsp;/&nbsp;mo</strong></td>
+          <td><strong>2&ndash;4 weeks</strong></td>
+          <td><strong>You</strong></td>
+          <td><strong>Working software, on-site, owned by the portco</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="arrangement-quote">
+      &ldquo;The CEO sees you. The board hears you. <strong>The platform does the&nbsp;work.</strong>&rdquo;
+    </p>
+  </div>
+</section>
+
+<!-- ============ ENGAGEMENT ============ -->
+<section class="engagement">
+  <div class="engagement-header reveal">
+    <p class="section-label">One engagement</p>
+    <h2>From a 90-minute call to working software in&nbsp;week&nbsp;two.</h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-step reveal reveal-d-1">
+      <div class="when">DAY 0</div>
+      <h3>The intake call</h3>
+      <p>90&nbsp;minutes between you and me. We pick one portco from your sheet, one priority KPI from the value creation plan, and one painful workflow the CEO already wants to fix. No procurement, no RFP.</p>
+    </div>
+    <div class="timeline-step reveal reveal-d-2">
+      <div class="when">WEEK 1</div>
+      <h3>Box on-site</h3>
+      <p>The Hypsis Box is racked at the portco. One network cable, one IP address &mdash; that&rsquo;s all IT provides. The ontology is seeded with the company&rsquo;s data: org, products, suppliers, sites, P&amp;L lines.</p>
+    </div>
+    <div class="timeline-step reveal reveal-d-3">
+      <div class="when">WEEKS 2&ndash;4</div>
+      <h3>First app live</h3>
+      <p>The first working tool ships &mdash; usually a value-creation tracker linking the VCP&rsquo;s initiatives to live operational data. The CEO uses it in his Monday meeting. You forward the dashboard URL to the&nbsp;board.</p>
+    </div>
+    <div class="timeline-step reveal reveal-d-3">
+      <div class="when">MONTHS 2&ndash;3</div>
+      <h3>Ten to twenty apps</h3>
+      <p>We build out the operating stack &mdash; supplier monitor, quality NCR pipeline, procurement anomaly detection, ESG/CSRD collector &mdash; whatever the value creation thesis needs. Internal champions are trained to keep building.</p>
+    </div>
+    <div class="timeline-step reveal" style="grid-column: 1 / -1; border-right: none; background: var(--paper-warm);">
+      <div class="when">MONTH 3 ONWARDS &middot; RUN</div>
+      <h3>The platform compounds &mdash; for you and for the next portco</h3>
+      <p>The portco keeps building on the box on its own. You get a monthly sync where we add what the next quarter requires. Every reusable component is added to your <em>fund-wide catalogue</em>: portco&nbsp;N+1 starts at week&nbsp;0 with half the stack already&nbsp;deployed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLATFORM ============ -->
+<section class="platform">
+  <div class="platform-inner">
+    <div class="reveal">
+      <p class="section-label">The platform</p>
+      <h2>A physical AI server that stays in the&nbsp;building.</h2>
+      <p class="platform-lead">
+        Every engagement ships with a dedicated appliance racked at the portco. It runs a <strong>35B-parameter local model</strong>, hosts every app built during the engagement, and stores the company&rsquo;s operational ontology. It is the portco&rsquo;s property. A subscription keeps the model, the platform and the catalogue current as the technology&nbsp;evolves.
+      </p>
+    </div>
+    <div class="platform-grid reveal">
+      <div class="platform-feature">
+        <h3>It works</h3>
+        <ul class="platform-list">
+          <li>Operational from day one &mdash; no IT project to start</li>
+          <li>~30 apps already in production at the lead client today</li>
+          <li>Full AI Builder &mdash; the team keeps shipping after we leave</li>
+          <li>Subscription includes model upgrades, security patches, hardware refresh</li>
+        </ul>
+      </div>
+      <div class="platform-feature">
+        <h3>It&rsquo;s sovereign</h3>
+        <ul class="platform-list">
+          <li>No data ever leaves the portco&rsquo;s network</li>
+          <li>No inbound ports, no cloud dependency, no US-stack risk</li>
+          <li>NIS2, GDPR, ITAR-compatible out of the box</li>
+          <li>Defence, aero, dual-use portcos remain investable</li>
+        </ul>
+      </div>
+      <div class="platform-feature">
+        <h3>It&rsquo;s adopted, not imposed</h3>
+        <ul class="platform-list">
+          <li>One cable, one IP &mdash; that&rsquo;s all IT provides</li>
+          <li>IT keeps admin access and full monitoring from day one</li>
+          <li>Apps are co-built with the operators who will use them</li>
+          <li>Deployed across the fund, not just one portco</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROOF ============ -->
+<section class="proof">
+  <div class="proof-header reveal">
+    <p class="section-label">Track record</p>
+    <h2>What a 90-day engagement actually&nbsp;delivers.</h2>
+  </div>
+  <div class="proof-grid reveal">
+    <div class="proof-cell">
+      <div class="pn">~30</div>
+      <div class="pl">Apps in production at the lead industrial client today</div>
+    </div>
+    <div class="proof-cell">
+      <div class="pn">2&ndash;4<span class="unit"> wk</span></div>
+      <div class="pl">From the kickoff call to the first tool used by the CEO</div>
+    </div>
+    <div class="proof-cell">
+      <div class="pn">26</div>
+      <div class="pl">Entity types in the industrial-SME ontology &mdash; the backbone reused across portcos</div>
+    </div>
+    <div class="proof-cell">
+      <div class="pn">&lt;6<span class="unit"> mo</span></div>
+      <div class="pl">Typical payback on the full engagement, conservatively measured against P&amp;L impact</div>
+    </div>
+  </div>
+  <p class="proof-context">
+    Today: a &euro;160M-turnover aerospace group running its operating handbook on the platform; deal-team workspaces and supply-chain monitoring in pilot; a partnership pipeline with a leading aero-defence consulting firm and a tier-1 turnaround practice. References available under&nbsp;NDA.
+  </p>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="pricing">
+  <div class="pricing-inner">
+    <div class="pricing-header reveal">
+      <p class="section-label">Pricing</p>
+      <h2>Designed to fit under your signature.</h2>
+      <p class="pricing-lead">
+        No procurement gymnastics, no day-rate negotiation, no &ldquo;let&rsquo;s call legal&rdquo;. The pricing is public, the contract is two pages, and the first portco can be in motion before the next investment&nbsp;committee.
+      </p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal reveal-d-1">
+        <div class="pc-eyebrow">Per portco</div>
+        <h3>One portfolio company</h3>
+        <p class="pc-price"><strong>&euro;60K</strong> one-shot &nbsp;&middot;&nbsp; <strong>&euro;4K&nbsp;/&nbsp;mo</strong> run</p>
+        <ul>
+          <li>Hypsis Box installed on-site</li>
+          <li>10&ndash;20 custom apps shipped in 90&nbsp;days, mapped to the VCP</li>
+          <li>Ontology seeded with the portco&rsquo;s operational data</li>
+          <li>Monthly OP sync, quarterly board read-out</li>
+          <li><strong>Under any operating partner&rsquo;s signature authority</strong></li>
+        </ul>
+      </div>
+      <div class="price-card reveal reveal-d-2">
+        <div class="pc-eyebrow">Fund-wide</div>
+        <h3>Three to ten portcos</h3>
+        <p class="pc-price"><strong>Bespoke</strong> &mdash; per-portco pricing, fund-wide catalogue, dedicated&nbsp;sync</p>
+        <ul>
+          <li>Shared SKU library &mdash; portco N+1 starts pre-loaded</li>
+          <li>Quarterly fund-level review on AI / data maturity</li>
+          <li>OP-grade reporting for IC and LP communications</li>
+          <li>Priority engineering bandwidth across the portfolio</li>
+          <li><strong>Your fund&rsquo;s AI playbook &mdash; in production, not on a slide</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUTCOME ============ -->
+<section class="outcome">
+  <div class="divider"></div>
+  <div class="reveal">
+    <p class="outcome-text">
+      You walk into the next IC with <strong>three more portcos under proactive coverage</strong>, a deployed AI angle on the value creation plan, and <strong>no new line on your headcount&nbsp;budget</strong>.
+    </p>
+  </div>
+  <div class="divider"></div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="reveal">
+    <h2>Thirty minutes. One portco on the&nbsp;table.</h2>
+    <p>
+      Pick the portco where the value creation plan is stuck on execution. We&rsquo;ll spend 30&nbsp;minutes scoping where the platform would land first &mdash; and what the first 90&nbsp;days would&nbsp;look&nbsp;like.
+    </p>
+    <div class="cta-buttons">
+      <a href="mailto:william@hypsis.ai?subject=Operating%20partner%20%E2%80%94%20intro%20call" class="cta-button">Book the intro call</a>
+      <a href="https://linkedin.com/in/williamleferrand" target="_blank" rel="noopener" class="cta-link">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        William on LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wordmark">Hypsis</div>
+  <p>An AI partner for operating partners &nbsp;&middot;&nbsp; <a href="mailto:william@hypsis.ai">william@hypsis.ai</a> &nbsp;&middot;&nbsp; <a href="../">hypsis.ai</a></p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
