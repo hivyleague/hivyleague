@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hypsis — An AI companion for operating partners</title>
-<meta name="description" content="A sovereign AI platform built for operating partners. Your data, your processes, models you can trust.">
+<meta name="description" content="I built the AI platform I needed as a Chief Transformation Officer. Sovereign, auditable, yours to keep.">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,8 +76,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 28%;
-    filter: contrast(1.05) brightness(1.0);
+    object-position: 30% 15%;
+    filter: contrast(1.02) brightness(1.05);
   }
   .hero-bg::after {
     content: '';
@@ -85,11 +85,11 @@
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(248,246,241,0.1) 0%,
-      rgba(248,246,241,0.3) 25%,
-      rgba(248,246,241,0.75) 48%,
-      rgba(248,246,241,0.96) 62%,
-      var(--paper) 78%
+      rgba(248,246,241,0.05) 0%,
+      rgba(248,246,241,0.25) 20%,
+      rgba(248,246,241,0.7) 42%,
+      rgba(248,246,241,0.95) 58%,
+      var(--paper) 72%
     );
   }
 
@@ -111,9 +111,9 @@
   }
 
   .hero h1 {
-    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
     font-weight: 700;
-    line-height: 1.08;
+    line-height: 1.12;
     color: var(--ink);
     margin-bottom: 1.5rem;
     letter-spacing: -0.025em;
@@ -160,18 +160,49 @@
   }
 
   /* =========================================
-     CONVICTIONS
+     STORY
      ========================================= */
-  .convictions {
+  .story {
+    padding: 6rem 2rem;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .story h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  .story-body p {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 1.2rem;
+  }
+  .story-body p strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .story-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* =========================================
+     WHAT I BRING
+     ========================================= */
+  .bring {
     padding: 6rem 2rem;
     max-width: 1100px;
     margin: 0 auto;
   }
-  .convictions-header {
+  .bring-header {
     text-align: center;
     margin-bottom: 3.5rem;
   }
-  .convictions h2 {
+  .bring h2 {
     font-size: clamp(1.6rem, 3vw, 2.2rem);
     font-weight: 600;
     color: var(--ink);
@@ -180,39 +211,39 @@
     margin: 0 auto;
     letter-spacing: -0.02em;
   }
-  .convictions-grid {
+  .bring-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0;
     border-top: 1px solid var(--stone);
     border-bottom: 1px solid var(--stone);
   }
-  .conviction {
+  .bring-item {
     padding: 2.6rem 2rem;
     border-right: 1px solid var(--stone);
   }
-  .conviction:last-child { border-right: none; }
-  .conviction .num {
+  .bring-item:last-child { border-right: none; }
+  .bring-item .num {
     font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.35em;
     color: var(--bronze);
     margin-bottom: 1rem;
   }
-  .conviction h3 {
+  .bring-item h3 {
     font-size: 1.15rem;
     font-weight: 600;
     color: var(--ink);
     margin-bottom: 0.7rem;
     letter-spacing: -0.01em;
   }
-  .conviction p {
+  .bring-item p {
     font-size: 0.95rem;
     font-weight: 300;
     color: var(--ink-soft);
     line-height: 1.65;
   }
-  .conviction p strong {
+  .bring-item p strong {
     font-weight: 500;
     color: var(--ink);
   }
@@ -286,86 +317,6 @@
     height: 4px;
     border-radius: 50%;
     background: var(--bronze-light);
-  }
-
-  /* =========================================
-     FOUNDER
-     ========================================= */
-  .founder {
-    padding: 6rem 2rem;
-    max-width: 980px;
-    margin: 0 auto;
-  }
-  .founder-card {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 3rem;
-    align-items: stretch;
-  }
-  .founder-photo-wrapper {
-    position: relative;
-    width: 320px;
-    min-height: 320px;
-    overflow: hidden;
-  }
-  .founder-photo-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 30% 15%;
-  }
-  .founder-info h2 {
-    font-size: clamp(1.6rem, 2.8vw, 2.05rem);
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 0.2rem;
-    letter-spacing: -0.01em;
-  }
-  .founder-role {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--bronze);
-    margin-bottom: 1.3rem;
-  }
-  .founder-lead {
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--ink-soft);
-    line-height: 1.7;
-    margin-bottom: 1.4rem;
-  }
-  .founder-lead strong {
-    font-weight: 500;
-    color: var(--ink);
-  }
-  .founder-timeline {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 1rem;
-  }
-  .founder-timeline li {
-    font-size: 0.95rem;
-    font-weight: 300;
-    color: var(--ink-soft);
-    line-height: 1.65;
-    padding: 0.35rem 0 0.35rem 1.2rem;
-    position: relative;
-  }
-  .founder-timeline li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.85rem;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--stone);
-  }
-  .founder-timeline li strong {
-    font-weight: 500;
-    color: var(--ink);
   }
 
   /* =========================================
@@ -498,11 +449,11 @@
      RESPONSIVE
      ========================================= */
   @media (max-width: 880px) {
-    .convictions-grid,
+    .bring-grid,
     .platform-grid {
       grid-template-columns: 1fr;
     }
-    .conviction,
+    .bring-item,
     .platform-feature {
       border-right: none;
       border-bottom: 1px solid var(--stone);
@@ -510,21 +461,8 @@
     .platform-feature {
       border-bottom: 1px solid rgba(248,246,241,0.12);
     }
-    .conviction:last-child,
+    .bring-item:last-child,
     .platform-feature:last-child { border-bottom: none; }
-
-    .founder-card {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-    .founder-photo-wrapper {
-      width: 100%;
-      height: 280px;
-      min-height: auto;
-    }
-    .founder-photo-wrapper img {
-      object-position: 30% 10%;
-    }
 
     .hero {
       justify-content: flex-end;
@@ -534,9 +472,9 @@
       background: linear-gradient(
         180deg,
         rgba(248,246,241,0.06) 0%,
-        rgba(248,246,241,0.42) 30%,
-        rgba(248,246,241,0.92) 50%,
-        var(--paper) 62%
+        rgba(248,246,241,0.42) 25%,
+        rgba(248,246,241,0.88) 45%,
+        var(--paper) 58%
       );
     }
   }
@@ -547,42 +485,64 @@
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="hero-bg">
-    <img src="assets/hero-fresco.png" alt="The transfer of knowledge">
+    <img src="assets/william_orange.png" alt="William Le Ferrand">
   </div>
   <div class="hero-content">
-    <div class="hero-eyebrow">Hypsis</div>
-    <h1>An AI companion<br>for operating partners</h1>
+    <div class="hero-eyebrow">HYPSIS</div>
+    <h1>Human first.<br>AI&nbsp;native.</h1>
     <p class="hero-subtitle">
-      A sovereign AI platform built for the way you actually work &mdash; your data, your processes, models you can&nbsp;trust.
+      I&rsquo;ve sat on the executive committee of a listed industrial company. I know what transformation costs &mdash; the politics, the resistance, the reporting that never ends. Hypsis is the AI companion I built for the people doing that&nbsp;work.
     </p>
-    <p class="hero-pillars">Sovereignty &nbsp;&middot;&nbsp; Autonomy &nbsp;&middot;&nbsp; Scientific Excellence</p>
+    <p class="hero-pillars">Empathy &nbsp;&middot;&nbsp; Sovereignty &nbsp;&middot;&nbsp; Excellence</p>
   </div>
   <div class="scroll-hint">
     <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
   </div>
 </section>
 
-<!-- ============ CONVICTIONS ============ -->
-<section class="convictions">
-  <div class="convictions-header reveal">
-    <p class="section-label">Convictions</p>
-    <h2>Three non-negotiables for putting AI inside a real&nbsp;business.</h2>
+<!-- ============ STORY ============ -->
+<section class="story">
+  <div class="reveal">
+    <p class="section-label">The short version</p>
+    <h2>From building software to running the&nbsp;transformation.</h2>
   </div>
-  <div class="convictions-grid">
-    <div class="conviction reveal reveal-d-1">
+  <div class="story-body reveal">
+    <p>
+      I started as a <strong>software engineer in Silicon Valley</strong> &mdash; seven years building products and engineering teams across three continents.
+    </p>
+    <p>
+      Then I took over an <strong>industrial robotics company</strong>. Learned the hard way what works inside a real business &mdash; and what doesn&rsquo;t survive contact with a factory floor.
+    </p>
+    <p>
+      I joined the <strong>executive committee of a &euro;160M listed aerospace company</strong>, 1,200&nbsp;people. As Chief Transformation Officer, I deployed a company-wide ontology, then built the practical tools on top of it &mdash; customer service, quality tracking, cost control &mdash; with a team of&nbsp;twelve.
+    </p>
+    <p>
+      <strong>Hypsis is the platform I wish I had had</strong> &mdash; a sovereign AI companion that sits inside the company, speaks the language of operations, and makes the transformation team faster without adding&nbsp;headcount.
+    </p>
+  </div>
+</section>
+
+<!-- ============ WHAT I BRING ============ -->
+<section class="bring">
+  <div class="bring-header reveal">
+    <p class="section-label">What I bring</p>
+    <h2>Three commitments I make to every company I&nbsp;work&nbsp;with.</h2>
+  </div>
+  <div class="bring-grid">
+    <div class="bring-item reveal reveal-d-1">
       <div class="num">01</div>
-      <h3>Sovereignty</h3>
-      <p>Your <strong>data</strong> never leaves the building. Your <strong>processes</strong> are not redrawn to fit a vendor&rsquo;s template. The model runs on-premise, and the ontology describes your business as it actually is &mdash; not as a software template decided&nbsp;abroad.</p>
+      <h3>Your data stays yours</h3>
+      <p>I design systems where <strong>nothing leaves the building</strong>. Your processes are not redrawn to fit a vendor&rsquo;s template. The model runs on your premises, and the ontology describes your business as it actually is &mdash; not as a software template decided&nbsp;abroad.</p>
     </div>
-    <div class="conviction reveal reveal-d-2">
+    <div class="bring-item reveal reveal-d-2">
       <div class="num">02</div>
-      <h3>Autonomy</h3>
-      <p>No vendor lock-in, no cloud dependency, no cancellation that breaks operations. The platform belongs to the company that uses it. <strong>If we leave, the system keeps running</strong> &mdash; and the team can keep building on&nbsp;it.</p>
+      <h3>The team keeps running without&nbsp;me</h3>
+      <p>No vendor lock-in, no cloud dependency, no cancellation that breaks operations. I build so the platform <strong>belongs to the company that uses it</strong>. If I leave, the system keeps running &mdash; and the team can keep building on&nbsp;it.</p>
     </div>
-    <div class="conviction reveal reveal-d-3">
+    <div class="bring-item reveal reveal-d-3">
       <div class="num">03</div>
-      <h3>Scientific excellence</h3>
-      <p>You can only trust a model if you understand <strong>how it was trained</strong>, on what data, with which biases. We work with open, auditable models &mdash; not black boxes. That is what makes a serious answer possible when the question gets&nbsp;serious.</p>
+      <h3>Models you can audit</h3>
+      <p>You can only trust a model if you understand <strong>how it was trained</strong>, on what data, with which biases. I work with open, auditable models &mdash; not black boxes. That is what makes a serious answer possible when the question gets&nbsp;serious.</p>
     </div>
   </div>
 </section>
@@ -591,61 +551,37 @@
 <section class="platform">
   <div class="platform-inner">
     <div class="reveal">
-      <p class="section-label">The platform</p>
-      <h2>A physical AI server racked inside the&nbsp;company.</h2>
+      <p class="section-label">The instrument</p>
+      <h2>A physical AI server I rack inside your&nbsp;company.</h2>
       <p class="platform-lead">
-        A dedicated appliance running a <strong>35-billion-parameter local model</strong>, an industrial ontology, and the kind of applications a real business actually needs &mdash; performance trackers, supplier monitors, quality pipelines, anomaly detection. The company owns the box. We keep it&nbsp;current.
+        A dedicated appliance running a <strong>35-billion-parameter local model</strong>, an industrial ontology, and the applications your business actually needs &mdash; performance trackers, supplier monitors, quality pipelines, anomaly detection. You own the box. I keep it&nbsp;current.
       </p>
     </div>
     <div class="platform-grid reveal">
       <div class="platform-feature">
-        <h3>It works</h3>
+        <h3>Operational from day&nbsp;one</h3>
         <ul class="platform-list">
-          <li>Operational from day one &mdash; no IT project to start</li>
-          <li>Built so the team can keep building on it after we leave</li>
+          <li>No IT project required to start</li>
+          <li>One cable, one IP address &mdash; that&rsquo;s all IT provides</li>
           <li>The subscription covers the model, security, and hardware refresh</li>
         </ul>
       </div>
       <div class="platform-feature">
-        <h3>It&rsquo;s sovereign</h3>
+        <h3>Sovereign by&nbsp;design</h3>
         <ul class="platform-list">
           <li>No data ever leaves the company&rsquo;s network</li>
-          <li>No inbound ports, no cloud, no foreign-stack dependency</li>
+          <li>No cloud, no foreign-stack dependency</li>
           <li>Compatible with GDPR and NIS2 out of the box</li>
-          <li>Designed for regulated environments &mdash; defence, aerospace, healthcare</li>
         </ul>
       </div>
       <div class="platform-feature">
-        <h3>It&rsquo;s adopted, not imposed</h3>
+        <h3>Adopted, not&nbsp;imposed</h3>
         <ul class="platform-list">
-          <li>One cable, one IP address &mdash; that&rsquo;s all IT provides</li>
           <li>IT keeps administrator access from day one</li>
           <li>Applications are co-built with the people who use them</li>
           <li>Reusable from one company to the next</li>
         </ul>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FOUNDER ============ -->
-<section class="founder">
-  <div class="founder-card reveal">
-    <div class="founder-photo-wrapper">
-      <img src="assets/william_orange.png" alt="William Le Ferrand">
-    </div>
-    <div class="founder-info">
-      <h2>William Le Ferrand</h2>
-      <p class="founder-role">Founder &middot; Built this from the operator&rsquo;s seat</p>
-      <p class="founder-lead">
-        I built Hypsis because I needed it &mdash; from the <strong>executive committee of a publicly listed industrial company</strong>, with too many transformation projects, too few engineers, and a board that wanted answers every quarter.
-      </p>
-      <ul class="founder-timeline">
-        <li><strong>Software engineer in Silicon Valley</strong> &mdash; seven years building products and engineering teams across three continents.</li>
-        <li><strong>Founder</strong> &mdash; took over an industrial robotics company. Learned the hard way what works inside a real business.</li>
-        <li><strong>Chief Transformation Officer, executive committee member</strong> of a &euro;160M listed aerospace company, 1,200&nbsp;people. Built the operating handbook, deployed a company-wide ontology, set up data governance and cloud migration, hired and led a team of&nbsp;twelve.</li>
-        <li><strong>Hypsis</strong> &mdash; the platform I wish I had had as a Chief Transformation Officer.</li>
-      </ul>
     </div>
   </div>
 </section>
