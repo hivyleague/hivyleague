@@ -485,7 +485,7 @@
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="hero-bg">
-    <img src="assets/william_orange.png" alt="William Le Ferrand">
+    <img id="hero-img" src="assets/william_orange.png" alt="William Le Ferrand">
   </div>
   <div class="hero-content">
     <div class="hero-eyebrow">HYPSIS</div>
@@ -611,6 +611,16 @@
 </footer>
 
 <script>
+  const heroes = [
+    { src: 'assets/william_orange.png', alt: 'William Le Ferrand', pos: '30% 15%' },
+    { src: 'assets/hero-fresco.png',    alt: 'The transfer of knowledge', pos: 'center 28%' }
+  ];
+  const pick = heroes[Math.random() < 0.5 ? 0 : 1];
+  const img = document.getElementById('hero-img');
+  img.src = pick.src;
+  img.alt = pick.alt;
+  img.style.objectPosition = pick.pos;
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('visible');
