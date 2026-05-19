@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hypsis — An AI companion for operating partners</title>
 <meta name="description" content="I built the AI platform I needed as a Chief Transformation Officer. Sovereign, auditable, yours to keep.">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Italiana&display=swap" rel="stylesheet">
@@ -485,7 +485,7 @@
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="hero-bg">
-    <img id="hero-img" src="assets/william_orange.png" alt="William Le Ferrand">
+    <img src="../assets/william_orange.png" alt="William Le Ferrand">
   </div>
   <div class="hero-content">
     <div class="hero-eyebrow">HYPSIS</div>
@@ -608,20 +608,9 @@
 <footer>
   <div class="wordmark">Hypsis</div>
   <p>An AI companion for operating partners &nbsp;&middot;&nbsp; <a href="mailto:william@hypsis.ai">william@hypsis.ai</a></p>
-  <p><a href="legal-notice/">Legal notice</a></p>
 </footer>
 
 <script>
-  const heroes = [
-    { src: 'assets/william_orange.png', alt: 'William Le Ferrand', pos: '30% 15%' },
-    { src: 'assets/hero-fresco.png',    alt: 'The transfer of knowledge', pos: 'center 28%' }
-  ];
-  const pick = heroes[Math.random() < 0.5 ? 0 : 1];
-  const img = document.getElementById('hero-img');
-  img.src = pick.src;
-  img.alt = pick.alt;
-  img.style.objectPosition = pick.pos;
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('visible');
