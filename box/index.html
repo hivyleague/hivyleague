@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hypsis Box — Your AI, on your network</title>
+<meta name="description" content="A GPU workstation that sits on your network. Runs local AI models, structures your operational data, and serves custom applications your team builds and owns.">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Italiana&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f8f6f1;
+    --paper-warm: #f0ece3;
+    --ink: #1a1a2e;
+    --ink-soft: #3d3d54;
+    --ink-muted: #7a7a8c;
+    --bronze: #7a6840;
+    --bronze-light: #a89060;
+    --bronze-dark: #5c4e30;
+    --stone: #d4cfc5;
+    --stone-light: #e8e4db;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Outfit', -apple-system, sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a { color: var(--bronze); text-decoration: none; transition: color 0.2s; }
+  a:hover { color: var(--ink); }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+  }
+
+  .wordmark {
+    font-family: 'Italiana', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.5em;
+    color: var(--bronze);
+    text-transform: uppercase;
+    margin-bottom: 4rem;
+  }
+
+  .wordmark a { color: inherit; }
+
+  h1 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    margin-bottom: 4rem;
+    max-width: 600px;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 1rem;
+  }
+
+  .divider {
+    width: 80px;
+    height: 1px;
+    background: var(--stone);
+    margin: 3.5rem 0;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  p, li {
+    font-weight: 300;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  ul {
+    padding-left: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  li { margin-bottom: 0.6rem; }
+  li strong { font-weight: 500; color: var(--ink); }
+
+  .layers {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin: 2rem 0 3rem;
+  }
+
+  .layer-card {
+    padding: 1.8rem;
+    background: var(--paper-warm);
+    border: 1px solid var(--stone-light);
+    border-radius: 4px;
+  }
+
+  .layer-card h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+
+  .layer-card p {
+    font-size: 0.92rem;
+    margin-bottom: 0;
+  }
+
+  .layer-number {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--bronze);
+    background: rgba(122, 104, 64, 0.1);
+    padding: 0.2rem 0.55rem;
+    border-radius: 2px;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.05em;
+  }
+
+  .cta-section {
+    margin-top: 3rem;
+    padding: 2.5rem;
+    background: var(--paper-warm);
+    border: 1px solid var(--stone-light);
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .cta-section p {
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--bronze);
+    padding: 0.9rem 2rem;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .cta-btn:hover {
+    background: var(--bronze-dark);
+    color: var(--paper);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(92, 78, 48, 0.15);
+  }
+
+  .footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--stone-light);
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+  }
+
+  .discover-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--bronze);
+    background: rgba(122, 104, 64, 0.06);
+    border: 1px solid var(--stone-light);
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    margin-bottom: 2rem;
+  }
+
+  .discover-badge .dot {
+    width: 6px;
+    height: 6px;
+    background: #3d7a40;
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  @media (max-width: 640px) {
+    .page { padding: 3rem 1.5rem 3rem; }
+    .wordmark { margin-bottom: 3rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="wordmark"><a href="https://hypsis.ai">Hypsis</a></div>
+
+  <div class="discover-badge">
+    <span class="dot"></span>
+    This page is served from a Hypsis Box
+  </div>
+
+  <h1>The Hypsis Box</h1>
+  <p class="subtitle">
+    A GPU workstation that sits on your network — running AI models, structuring
+    your operational data, and serving custom applications your team builds and
+    owns. No cloud. No vendor lock-in. Yours to keep.
+  </p>
+
+  <div class="divider"></div>
+
+  <p class="section-label">What's inside</p>
+
+  <div class="layers">
+    <div class="layer-card">
+      <span class="layer-number">Layer 1</span>
+      <h3>Local inference engine</h3>
+      <p>
+        Ships a current-generation open-weight AI model with enough GPU memory to
+        run it locally. Serves both data extraction and end-user applications.
+        Models swap in and out as the open-source landscape evolves — zero lock-in
+        to any foundation model vendor.
+      </p>
+    </div>
+
+    <div class="layer-card">
+      <span class="layer-number">Layer 2</span>
+      <h3>Operational ontology</h3>
+      <p>
+        A structured, machine-readable model of your operational reality:
+        organizational units, processes, assets, suppliers, KPIs, contracts,
+        and the relationships between them. Not a data lake, not a dashboard —
+        a formal description of how your business works, maintained as it evolves.
+        Your operating memory, queryable by both humans and AI.
+      </p>
+    </div>
+
+    <div class="layer-card">
+      <span class="layer-number">Layer 3</span>
+      <h3>Upstream pipelines</h3>
+      <p>
+        ETL pipelines that ingest raw enterprise data — ERP exports, spreadsheets,
+        PDFs, scanned documents, sensor feeds, legacy databases — and transform
+        it into ontology-conformant records. Works with whatever format you
+        already export today. No API integration required to start.
+      </p>
+    </div>
+
+    <div class="layer-card">
+      <span class="layer-number">Layer 4</span>
+      <h3>Downstream applications</h3>
+      <p>
+        Self-hosted web applications that exploit the ontology for real operational
+        decisions. Built rapidly, iterated with your team, deployed on the same
+        appliance. These are the tools your people use every day — scheduling,
+        quality control, procurement, risk monitoring, whatever the domain demands.
+      </p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <p class="section-label">What makes it different</p>
+
+  <h2>You keep everything</h2>
+  <ul>
+    <li><strong>The box is yours.</strong> Hardware, code, data, models — all on your premises, under your governance.</li>
+    <li><strong>Your team keeps building.</strong> After initial deployment, domain experts build new applications on the same platform. Several customers already do this without Hypsis involvement.</li>
+    <li><strong>No recurring dependency.</strong> No SaaS subscription, no API key that can be revoked, no data held hostage. An optional support retainer covers model updates.</li>
+    <li><strong>Governance built in.</strong> Structured logs, audit trails, validation gates, observability dashboards. Designed for regulated environments from day one.</li>
+    <li><strong>Hardware-agnostic.</strong> Starts on a desk unit; moves to rack infrastructure, private cloud, or air-gapped enclave without re-architecture.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <p class="section-label">How it starts</p>
+
+  <h2>Weeks, not months</h2>
+  <p>
+    A typical first deployment takes 2–3 weeks and about 40 hours of Hypsis
+    engineering time. You export a file you already have, we build a working tool
+    on that data. You see results on screen before any IT integration is required.
+  </p>
+  <p>
+    The progressive path: export → automate → connect. Value is proven before
+    IT involvement is justified. The scope grows only when it earns the right to.
+  </p>
+
+  <div class="cta-section">
+    <p>
+      Describe your challenge and see what a solution looks like — generated
+      entirely on a Hypsis Box, in minutes.
+    </p>
+    <a href="https://discover-dgx.hypsis.ai" class="cta-btn">Try Discover</a>
+  </div>
+
+  <div class="footer">
+    <p>
+      <a href="https://hypsis.ai">hypsis.ai</a> ·
+      <a href="https://discover-dgx.hypsis.ai">Discover</a>
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
