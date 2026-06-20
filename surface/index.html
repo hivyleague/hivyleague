@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hypsis Surface — Find where AI actually pays off</title>
-<meta name="description" content="An AI portal that surfaces the work wasting your teams' week, grounded in a sovereign knowledge graph of your operations, ranked by where a fix pays off first. A Hypsis application, with Jolibrain inside.">
+<meta name="description" content="A sovereign AI portal that sources actionable AI initiatives from your operational teams, ranked by impact. The Hypsis Box, on your premises. In partnership with Jolibrain.">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -139,185 +139,73 @@
   }
   .scroll-hint svg { width: 18px; height: 18px; stroke: var(--stone); stroke-width: 1.5; fill: none; }
 
-  /* ============ METHOD ============ */
-  .method { padding: 6rem 2rem; max-width: 1080px; margin: 0 auto; }
-  .method-header { text-align: center; margin-bottom: 3.4rem; }
-  .method h2 {
+  /* ============ PICTURE ============ */
+  .picture { padding: 6rem 2rem; max-width: 1120px; margin: 0 auto; text-align: center; }
+  .picture h2 {
     font-size: clamp(1.6rem, 3vw, 2.2rem);
     font-weight: 600;
     color: var(--ink);
     line-height: 1.3;
     max-width: 720px;
-    margin: 0 auto;
+    margin: 0 auto 0.9rem;
     letter-spacing: -0.02em;
   }
-  .flow {
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
+  .picture-lead {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin: 0 auto 2.8rem;
+    line-height: 1.6;
+  }
+  .picture figure { margin: 0; }
+  .picture img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+  }
+
+  /* ============ METRICS ============ */
+  .metrics { background: var(--paper-warm); padding: 4.5rem 2rem; }
+  .metrics-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 0;
     border-top: 1px solid var(--stone);
     border-bottom: 1px solid var(--stone);
   }
-  .stage {
-    flex: 1 1 0;
-    padding: 2.4rem 1.8rem;
-    border-right: 1px solid var(--stone);
-    position: relative;
-  }
-  .stage:last-child { border-right: none; }
-  .stage .st-num {
+  .metric { padding: 2.4rem 1.6rem; text-align: center; border-right: 1px solid var(--stone); }
+  .metric:last-child { border-right: none; }
+  .metric .figure {
     font-family: 'Italiana', serif;
-    font-size: 0.9rem;
-    letter-spacing: 0.2em;
-    color: var(--bronze);
-    margin-bottom: 0.8rem;
-  }
-  .stage h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: clamp(2.4rem, 5vw, 3.2rem);
     color: var(--ink);
-    margin-bottom: 0.6rem;
-    letter-spacing: -0.01em;
+    line-height: 1;
+    margin-bottom: 0.7rem;
   }
-  .stage p { font-size: 0.95rem; font-weight: 300; color: var(--ink-soft); line-height: 1.6; }
-  .stage.now { background: var(--paper-warm); }
-  .stage.now::before {
-    content: 'You are here';
-    position: absolute;
-    top: -1px; left: -1px;
-    font-size: 0.6rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--paper);
-    background: var(--bronze);
-    padding: 0.3rem 0.7rem;
+  .metric .figure .unit { color: var(--bronze); }
+  .metric .cap {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.5;
   }
-  .stage.now .st-num { margin-top: 0.9rem; }
-  .method-foot {
+  .metric .cap strong { font-weight: 600; color: var(--ink); display: block; margin-bottom: 0.2rem; letter-spacing: 0.02em; }
+  .metrics-note {
+    max-width: 980px;
+    margin: 1.6rem auto 0;
     text-align: center;
-    margin-top: 2.4rem;
-    font-size: 0.98rem;
+    font-size: 0.82rem;
     font-weight: 300;
     color: var(--ink-muted);
     font-style: italic;
   }
 
-  /* ============ SHOWCASE ============ */
-  .showcase { padding: 5rem 2rem; max-width: 1180px; margin: 0 auto; }
-  .showcase-header { text-align: center; margin-bottom: 3.2rem; }
-  .showcase h2 {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 600;
-    color: var(--ink);
-    line-height: 1.3;
-    max-width: 700px;
-    margin: 0 auto 0.9rem;
-    letter-spacing: -0.02em;
-  }
-  .showcase-lead {
-    font-size: 1.05rem;
-    font-weight: 300;
-    color: var(--ink-soft);
-    max-width: 620px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-  .showcase-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.6rem;
-    align-items: center;
-  }
-  figure { margin: 0; }
-  .box-photo img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 10px;
-    box-shadow: 0 22px 60px rgba(26,26,46,0.16);
-  }
-  .browser {
-    border: 1px solid var(--stone);
-    border-radius: 10px;
-    overflow: hidden;
-    background: var(--paper);
-    box-shadow: 0 22px 60px rgba(26,26,46,0.14);
-  }
-  .browser-bar {
-    background: var(--paper-warm);
-    padding: 0.65rem 0.9rem;
-    border-bottom: 1px solid var(--stone);
-    display: flex;
-    gap: 0.45rem;
-    align-items: center;
-  }
-  .browser-bar span { width: 10px; height: 10px; border-radius: 50%; background: var(--stone); }
-  .browser img { width: 100%; height: auto; display: block; }
-  figcaption {
-    margin-top: 1rem;
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    color: var(--ink-muted);
-    text-align: center;
-  }
-  figcaption strong { color: var(--ink); font-weight: 600; }
-
-  /* ============ TECH (dark) ============ */
-  .tech { padding: 6rem 2rem; background: var(--ink); color: var(--paper); }
-  .tech-inner { max-width: 1000px; margin: 0 auto; }
-  .tech-head { text-align: center; margin-bottom: 3rem; }
-  .tech .section-label { color: var(--bronze-light); }
-  .tech .lockup {
-    font-family: 'Italiana', serif;
-    font-size: clamp(1.5rem, 3.4vw, 2.3rem);
-    letter-spacing: 0.14em;
-    color: var(--paper);
-    margin: 0.4rem 0 1.4rem;
-  }
-  .tech .lockup .x { color: var(--bronze-light); margin: 0 0.45em; font-style: normal; }
-  .tech-lead {
-    font-size: clamp(1.05rem, 1.7vw, 1.2rem);
-    font-weight: 300;
-    color: rgba(248,246,241,0.82);
-    line-height: 1.6;
-    max-width: 680px;
-    margin: 0 auto;
-    letter-spacing: -0.01em;
-  }
-  .tech-lead strong { font-weight: 500; color: var(--paper); }
-  .tech-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border-top: 1px solid rgba(248,246,241,0.12);
-    border-bottom: 1px solid rgba(248,246,241,0.12);
-  }
-  .tech-item { padding: 2.2rem 1.7rem; border-right: 1px solid rgba(248,246,241,0.12); }
-  .tech-item:last-child { border-right: none; }
-  .tech-item h3 { font-size: 1.02rem; font-weight: 600; color: var(--paper); margin-bottom: 0.7rem; }
-  .tech-item p { font-size: 0.9rem; font-weight: 300; color: rgba(248,246,241,0.64); line-height: 1.6; }
-  .tech-foot { text-align: center; margin-top: 2.6rem; }
-  .tech-foot a {
-    color: var(--bronze-light);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(168,144,96,0.4);
-    font-weight: 400;
-  }
-  .tech-foot a:hover { color: var(--paper); }
-  .tech-tags {
-    margin-top: 1rem;
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--bronze-light);
-  }
-
   /* ============ CTA ============ */
-  .cta { padding: 5rem 2rem 6rem; text-align: center; }
+  .cta { padding: 5.5rem 2rem 6rem; text-align: center; }
   .cta h2 {
     font-size: clamp(1.6rem, 3.3vw, 2.4rem);
     font-weight: 600;
@@ -330,7 +218,7 @@
     font-weight: 300;
     color: var(--ink-muted);
     margin-bottom: 2rem;
-    max-width: 580px;
+    max-width: 560px;
     margin-left: auto;
     margin-right: auto;
     line-height: 1.6;
@@ -350,21 +238,14 @@
     transition: all 0.3s ease;
   }
   .cta-button:hover { background: var(--bronze-dark); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(26,26,46,0.12); }
-  .cta-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--bronze);
-    text-decoration: none;
-    padding: 0.9rem 1.4rem;
-    transition: color 0.3s ease;
+  .cta-email {
+    margin-top: 1.6rem;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--ink-muted);
   }
-  .cta-link:hover { color: var(--ink); }
+  .cta-email a { color: var(--bronze); text-decoration: none; font-weight: 500; border-bottom: 1px solid var(--stone); }
+  .cta-email a:hover { color: var(--ink); }
 
   /* ============ FOOTER ============ */
   footer { padding: 2.5rem 2rem; text-align: center; border-top: 1px solid var(--stone); }
@@ -391,17 +272,12 @@
   .reveal.visible { opacity: 1; transform: translateY(0); }
   .reveal-d-1 { transition-delay: 0.1s; }
   .reveal-d-2 { transition-delay: 0.2s; }
-  .reveal-d-3 { transition-delay: 0.3s; }
 
   /* ============ RESPONSIVE ============ */
-  @media (max-width: 880px) {
-    .flow { flex-direction: column; }
-    .stage { border-right: none; border-bottom: 1px solid var(--stone); }
-    .stage:last-child { border-bottom: none; }
-    .showcase-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .tech-grid { grid-template-columns: 1fr; }
-    .tech-item { border-right: none; border-bottom: 1px solid rgba(248,246,241,0.12); }
-    .tech-item:last-child { border-bottom: none; }
+  @media (max-width: 760px) {
+    .metrics-inner { grid-template-columns: 1fr; }
+    .metric { border-right: none; border-bottom: 1px solid var(--stone); }
+    .metric:last-child { border-bottom: none; }
   }
 </style>
 </head>
@@ -438,7 +314,7 @@
     <div class="hero-eyebrow">Hypsis Surface &nbsp;&middot;&nbsp; in partnership with Jolibrain</div>
     <h1>Find where AI actually pays off,<br>before you build anything.</h1>
     <p class="hero-subtitle">
-      An AI portal that lets your teams surface the work that wastes their week &mdash; refined by AI, grounded in a sovereign knowledge graph of your operations, ranked by where a fix pays off first. Nothing leaves your&nbsp;network.
+      A sovereign AI portal that sources actionable initiatives from the people who do the work &mdash; refined into reasoned proposals, ranked by impact. On a box inside your network. Nothing leaves the&nbsp;building.
     </p>
     <p class="hero-pillars">Bottom-up &nbsp;&middot;&nbsp; Sovereign &nbsp;&middot;&nbsp; Owned</p>
     <div class="hero-cta">
@@ -451,97 +327,51 @@
   </div>
 </section>
 
-<!-- ============ METHOD ============ -->
-<section class="method">
-  <div class="method-header reveal">
-    <p class="section-label">The method</p>
-    <h2>One method, three stages. Surface is where it&nbsp;starts.</h2>
+<!-- ============ PICTURE ============ -->
+<section class="picture">
+  <div class="reveal">
+    <p class="section-label">The method, in one picture</p>
+    <h2>From the operational floor to the COMEX.</h2>
+    <p class="picture-lead">
+      Your teams surface the work that wastes their week. An AI assistant on the box refines each one into a reasoned proposal, ranked by impact for the central team. The method, and its implementation, in&nbsp;one&nbsp;loop.
+    </p>
   </div>
-  <div class="flow">
-    <div class="stage now reveal reveal-d-1">
-      <div class="st-num">Stage 01</div>
-      <h3>Surface</h3>
-      <p>Your teams expose the work that wastes their week. AI refines each pain point and ranks them by where a fix pays off&nbsp;first.</p>
-    </div>
-    <div class="stage reveal reveal-d-2">
-      <div class="st-num">Stage 02</div>
-      <h3>Build</h3>
-      <p>Forward-deployed engineers &mdash; and your own people &mdash; turn the top pain points into working tools, on your box, in&nbsp;weeks.</p>
-    </div>
-    <div class="stage reveal reveal-d-3">
-      <div class="st-num">Stage 03</div>
-      <h3>Factorize</h3>
-      <p>The best tools become shared, multi-user applications on one knowledge graph. Capability compounds across the&nbsp;company.</p>
-    </div>
-  </div>
-  <p class="method-foot reveal">Every stage feeds the next &mdash; and the knowledge graph gets richer each time.</p>
+  <figure class="reveal reveal-d-1">
+    <img src="../assets/surface-sketchnote.png" alt="Hypsis Surface: operational teams surface pain points into a Surface portal; an AI assistant and a knowledge graph inside the Hypsis Box turn them into reasoned proposals, ranked by a central AI transformation team that reports to the COMEX.">
+  </figure>
 </section>
 
-<!-- ============ SHOWCASE ============ -->
-<section class="showcase">
-  <div class="showcase-header reveal">
-    <p class="section-label">Tangible</p>
-    <h2>A box on your network. A portal your teams&nbsp;open.</h2>
-    <p class="showcase-lead">No cloud, no project. The appliance sits in your server room; the portal runs on it. Everything stays inside your&nbsp;perimeter.</p>
-  </div>
-  <div class="showcase-grid">
-    <figure class="box-photo reveal reveal-d-1">
-      <img src="../assets/surface-box.png" alt="The Hypsis Box — a compact on-premise AI appliance">
-      <figcaption><strong>The Hypsis Box</strong> &mdash; a sovereign AI appliance, on your premises</figcaption>
-    </figure>
-    <figure class="reveal reveal-d-2">
-      <div class="browser">
-        <div class="browser-bar"><span></span><span></span><span></span></div>
-        <img src="../assets/hypsis-platform-screenshot.png" alt="The Surface portal running on the Hypsis platform">
-      </div>
-      <figcaption><strong>The Surface portal</strong> &mdash; where your teams describe and refine the work</figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- ============ TECH (Jolibrain) ============ -->
-<section class="tech">
-  <div class="tech-inner">
-    <div class="tech-head reveal">
-      <p class="section-label">The intelligence inside</p>
-      <p class="lockup">Hypsis <span class="x">&times;</span> Jolibrain</p>
-      <p class="tech-lead">
-        Surface understands your company because it reads a <strong>sovereign knowledge graph</strong> of your operations &mdash; the engine built with Jolibrain. A Hypsis application, with <strong>Jolibrain&nbsp;inside.</strong>
-      </p>
+<!-- ============ METRICS ============ -->
+<section class="metrics">
+  <div class="metrics-inner reveal">
+    <div class="metric">
+      <div class="figure"><span class="unit">&euro;</span>15k</div>
+      <p class="cap"><strong>The Hypsis Box</strong> a sovereign AI appliance, yours to keep</p>
     </div>
-    <div class="tech-grid">
-      <div class="tech-item reveal reveal-d-1">
-        <h3>Local, open models</h3>
-        <p>Inference runs on your box, on open-weight models you can audit. No cloud, no foreign stack, no data leaving the&nbsp;perimeter.</p>
-      </div>
-      <div class="tech-item reveal reveal-d-2">
-        <h3>A living knowledge graph</h3>
-        <p>Jolibrain&rsquo;s engine maps your systems, data, and processes. The AI queries the graph for context &mdash; so it never interrogates your people about&nbsp;IT.</p>
-      </div>
-      <div class="tech-item reveal reveal-d-3">
-        <h3>Production, not proofs</h3>
-        <p>Jolibrain is a Toulouse AI lab &mdash; makers of open-source DeepDetect, with ~100 on-premise deployments across aerospace, defense, and&nbsp;industry.</p>
-      </div>
+    <div class="metric">
+      <div class="figure"><span class="unit">&euro;</span>15k</div>
+      <p class="cap"><strong>Setup</strong> knowledge graph seeded, portal live on your network</p>
     </div>
-    <div class="tech-foot reveal">
-      <a href="https://www.jolibrain.com/" target="_blank" rel="noopener">jolibrain.com</a>
-      <p class="tech-tags">On-prem &nbsp;&middot;&nbsp; Open-source &nbsp;&middot;&nbsp; Sovereign by design</p>
+    <div class="metric">
+      <div class="figure">2<span class="unit"> wks</span></div>
+      <p class="cap"><strong>From unboxing to proposals</strong> your first ranked initiatives in two weeks</p>
     </div>
   </div>
+  <p class="metrics-note reveal">One-time. No per-seat licence, no cloud subscription, no data leaving your premises.</p>
 </section>
 
 <!-- ============ CTA ============ -->
 <section class="cta">
   <div class="reveal">
     <div class="divider" style="margin-top: 0;"></div>
-    <h2>See it work on your own&nbsp;challenge.</h2>
+    <h2>See it on your own&nbsp;challenge.</h2>
     <p>
-      Describe where the work gets stuck &mdash; in your own words, with your own documents. The AI reads your situation and drafts a concrete answer. No login, no commitment, nothing leaves the&nbsp;box.
+      Describe where the work gets stuck &mdash; in your own words, with your own documents. The AI reads your situation and drafts a concrete proposal. No login, no commitment.
     </p>
     <div class="cta-buttons">
       <a href="https://discover-dgx.hypsis.ai" class="cta-button">Try the demo</a>
-      <a href="mailto:william@hypsis.ai" class="cta-link">Talk to us</a>
     </div>
+    <p class="cta-email">Or talk to us &mdash; <a href="mailto:william@hypsis.ai">william@hypsis.ai</a></p>
   </div>
 </section>
 
