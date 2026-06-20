@@ -136,9 +136,9 @@
   }
   .metrics {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 0;
-    max-width: 880px;
+    max-width: 1040px;
     margin: 0 auto;
     border-top: 1px solid var(--stone);
     border-bottom: 1px solid var(--stone);
@@ -146,8 +146,10 @@
   .metric { padding: 1.9rem 1.4rem; border-right: 1px solid var(--stone); }
   .metric:last-child { border-right: none; }
   .metric .figure {
-    font-family: 'Italiana', serif;
-    font-size: clamp(2.2rem, 4.6vw, 3rem);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.9rem, 3.8vw, 2.5rem);
+    letter-spacing: -0.02em;
     color: var(--ink);
     line-height: 1;
     margin-bottom: 0.6rem;
@@ -346,6 +348,10 @@
           <div class="metric">
             <div class="figure">2<span class="unit"> wks</span></div>
             <p class="cap"><strong>To first proposals</strong> from unboxing to ranked initiatives</p>
+          </div>
+          <div class="metric">
+            <div class="figure"><span class="unit">&check;</span></div>
+            <p class="cap"><strong>Seamless integration</strong> plugs into your existing IT systems</p>
           </div>
         </div>
         <p class="metrics-note">One-time. No per-seat licence, no cloud subscription, no data leaving your premises.</p>
