@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hypsis Surface — Find where AI actually pays off</title>
+<meta name="description" content="An AI portal that surfaces the work wasting your teams' week, grounded in a sovereign knowledge graph of your operations, ranked by where a fix pays off first. A Hypsis application, with Jolibrain inside.">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Italiana&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f8f6f1;
+    --paper-warm: #f0ece3;
+    --ink: #1a1a2e;
+    --ink-soft: #3d3d54;
+    --ink-muted: #7a7a8c;
+    --bronze: #7a6840;
+    --bronze-light: #a89060;
+    --bronze-dark: #5c4e30;
+    --stone: #d4cfc5;
+    --stone-light: #e8e4db;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Outfit', -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .divider {
+    width: 120px;
+    height: 1px;
+    background: var(--stone);
+    margin: 3rem auto;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 1rem;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 5rem;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%, var(--stone-light) 0%, rgba(248,246,241,0) 60%),
+      var(--paper);
+  }
+  .hero-graph {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+  }
+  .hero-eyebrow {
+    font-family: 'Italiana', serif;
+    font-size: clamp(0.74rem, 1.1vw, 0.9rem);
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 1.6rem;
+    opacity: 0;
+    animation: fadeIn 1.4s ease 0.2s forwards;
+  }
+  .hero h1 {
+    font-size: clamp(2.1rem, 5vw, 3.7rem);
+    font-weight: 700;
+    line-height: 1.12;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.025em;
+    opacity: 0;
+    animation: fadeInUp 1.4s ease 0.4s forwards;
+  }
+  .hero-subtitle {
+    font-size: clamp(1.05rem, 1.7vw, 1.22rem);
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 680px;
+    margin: 0 auto 1.8rem;
+    line-height: 1.65;
+    opacity: 0;
+    animation: fadeInUp 1.4s ease 0.7s forwards;
+  }
+  .hero-pillars {
+    font-size: clamp(0.7rem, 1vw, 0.8rem);
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--bronze-light);
+    opacity: 0;
+    animation: fadeInUp 1.4s ease 1s forwards;
+  }
+  .hero-cta {
+    margin-top: 2.2rem;
+    opacity: 0;
+    animation: fadeInUp 1.4s ease 1.3s forwards;
+  }
+  .hero-cta a {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.9rem 2.4rem;
+    text-decoration: none;
+    transition: all 0.35s ease;
+  }
+  .hero-cta a:hover {
+    background: var(--bronze-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 24px rgba(26,26,46,0.14);
+  }
+  .hero-cta-sub {
+    margin-top: 0.7rem;
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: var(--ink-muted);
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0;
+    animation: fadeIn 1.4s ease 1.6s forwards, float 3s ease-in-out infinite 1.6s;
+  }
+  .scroll-hint svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--stone);
+    stroke-width: 1.5;
+    fill: none;
+  }
+
+  /* ============ WEDGE / PROBLEM ============ */
+  .wedge {
+    padding: 6rem 2rem;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .wedge h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  .wedge-body p {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 1.2rem;
+  }
+  .wedge-body p strong { font-weight: 500; color: var(--ink); }
+  .fail-list {
+    list-style: none;
+    margin: 1.8rem 0 0.4rem;
+    padding: 0;
+  }
+  .fail-list li {
+    font-size: 0.98rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    padding: 0.85rem 0 0.85rem 1.6rem;
+    border-top: 1px solid var(--stone);
+    position: relative;
+  }
+  .fail-list li:last-child { border-bottom: 1px solid var(--stone); }
+  .fail-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1.35rem;
+    width: 7px;
+    height: 7px;
+    background: var(--bronze-light);
+    transform: rotate(45deg);
+  }
+  .fail-list strong { font-weight: 600; color: var(--ink); }
+
+  /* ============ HOW IT WORKS ============ */
+  .how {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .how-header { text-align: center; margin-bottom: 3.5rem; }
+  .how h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    max-width: 720px;
+    margin: 0 auto;
+    letter-spacing: -0.02em;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--stone);
+    border-bottom: 1px solid var(--stone);
+  }
+  .step {
+    padding: 2.4rem 1.6rem;
+    border-right: 1px solid var(--stone);
+  }
+  .step:last-child { border-right: none; }
+  .step .num {
+    font-family: 'Italiana', serif;
+    font-size: 1.6rem;
+    color: var(--bronze);
+    margin-bottom: 0.9rem;
+    line-height: 1;
+  }
+  .step h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+  }
+  .step p {
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .step p strong { font-weight: 500; color: var(--ink); }
+  .how-foot {
+    text-align: center;
+    margin-top: 2.6rem;
+    font-size: 0.98rem;
+    font-weight: 300;
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+
+  /* ============ PILLARS ============ */
+  .pillars {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .pillars-header { text-align: center; margin-bottom: 3.5rem; }
+  .pillars h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    max-width: 700px;
+    margin: 0 auto;
+    letter-spacing: -0.02em;
+  }
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--stone);
+    border-bottom: 1px solid var(--stone);
+  }
+  .pillar {
+    padding: 2.6rem 2rem;
+    border-right: 1px solid var(--stone);
+  }
+  .pillar:last-child { border-right: none; }
+  .pillar .label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 1rem;
+  }
+  .pillar h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.7rem;
+    letter-spacing: -0.01em;
+  }
+  .pillar p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+  .pillar p strong { font-weight: 500; color: var(--ink); }
+
+  /* ============ JOLIBRAIN (dark) ============ */
+  .joli {
+    padding: 6rem 2rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .joli-inner { max-width: 860px; margin: 0 auto; text-align: center; }
+  .joli .section-label { color: var(--bronze-light); }
+  .joli .lockup {
+    font-family: 'Italiana', serif;
+    font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+    letter-spacing: 0.14em;
+    color: var(--paper);
+    margin: 0.4rem 0 1.8rem;
+  }
+  .joli .lockup .x {
+    color: var(--bronze-light);
+    margin: 0 0.5em;
+    font-style: normal;
+  }
+  .joli-lead {
+    font-size: clamp(1.05rem, 1.7vw, 1.22rem);
+    font-weight: 300;
+    color: var(--paper);
+    line-height: 1.6;
+    margin-bottom: 1.4rem;
+    letter-spacing: -0.01em;
+  }
+  .joli-lead strong { font-weight: 500; }
+  .joli-body {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(248,246,241,0.7);
+    line-height: 1.75;
+    max-width: 700px;
+    margin: 0 auto 1.1rem;
+  }
+  .joli-body a { color: var(--bronze-light); text-decoration: none; border-bottom: 1px solid rgba(168,144,96,0.4); }
+  .joli-body a:hover { color: var(--paper); }
+  .joli-tags {
+    margin-top: 2.2rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--bronze-light);
+  }
+
+  /* ============ KEEP ============ */
+  .keep {
+    padding: 6rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .keep-header { text-align: center; margin-bottom: 3rem; }
+  .keep h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+  }
+  .keep-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.4rem;
+  }
+  .keep-card {
+    padding: 2rem 1.6rem;
+    background: var(--paper-warm);
+    border: 1px solid var(--stone);
+  }
+  .keep-card .num {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    color: var(--bronze);
+    margin-bottom: 0.9rem;
+  }
+  .keep-card h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .keep-card p {
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  /* ============ CTA ============ */
+  .cta {
+    padding: 5rem 2rem 6rem;
+    text-align: center;
+  }
+  .cta h2 {
+    font-size: clamp(1.6rem, 3.3vw, 2.4rem);
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.01em;
+  }
+  .cta p {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--ink-muted);
+    margin-bottom: 2rem;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .cta-button {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.95rem 2.6rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .cta-button:hover {
+    background: var(--bronze-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(26,26,46,0.12);
+  }
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    text-decoration: none;
+    padding: 0.9rem 1.4rem;
+    transition: color 0.3s ease;
+  }
+  .cta-link:hover { color: var(--ink); }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--stone);
+  }
+  footer .wordmark {
+    font-family: 'Italiana', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.4em;
+    color: var(--bronze);
+    text-transform: uppercase;
+  }
+  footer .wordmark .x { color: var(--ink-muted); margin: 0 0.4em; }
+  footer p {
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: var(--ink-muted);
+    margin-top: 0.5rem;
+  }
+  footer a { color: var(--bronze); text-decoration: none; transition: color 0.3s ease; }
+  footer a:hover { color: var(--ink); }
+
+  /* ============ ANIMATIONS ============ */
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(5px); }
+  }
+  @keyframes drawIn { from { opacity: 0; } to { opacity: 0.5; } }
+  .reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-d-1 { transition-delay: 0.1s; }
+  .reveal-d-2 { transition-delay: 0.2s; }
+  .reveal-d-3 { transition-delay: 0.3s; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 880px) {
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .step:nth-child(2) { border-right: none; }
+    .step:nth-child(1), .step:nth-child(2) { border-bottom: 1px solid var(--stone); }
+    .pillars-grid, .keep-list { grid-template-columns: 1fr; }
+    .pillar { border-right: none; border-bottom: 1px solid var(--stone); }
+    .pillar:last-child { border-bottom: none; }
+  }
+  @media (max-width: 520px) {
+    .steps { grid-template-columns: 1fr; }
+    .step { border-right: none; border-bottom: 1px solid var(--stone); }
+    .step:last-child { border-bottom: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-graph" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#a89060" stroke-width="1" opacity="0.35">
+      <line x1="220" y1="180" x2="430" y2="300"/>
+      <line x1="430" y1="300" x2="300" y2="520"/>
+      <line x1="430" y1="300" x2="660" y2="240"/>
+      <line x1="660" y1="240" x2="900" y2="360"/>
+      <line x1="900" y1="360" x2="1180" y2="260"/>
+      <line x1="900" y1="360" x2="1020" y2="600"/>
+      <line x1="300" y1="520" x2="560" y2="660"/>
+      <line x1="560" y1="660" x2="1020" y2="600"/>
+      <line x1="1180" y1="260" x2="1280" y2="480"/>
+    </g>
+    <g fill="#7a6840" opacity="0.55">
+      <circle cx="220" cy="180" r="5"/>
+      <circle cx="430" cy="300" r="7"/>
+      <circle cx="660" cy="240" r="5"/>
+      <circle cx="900" cy="360" r="8"/>
+      <circle cx="1180" cy="260" r="6"/>
+      <circle cx="300" cy="520" r="6"/>
+      <circle cx="560" cy="660" r="7"/>
+      <circle cx="1020" cy="600" r="5"/>
+      <circle cx="1280" cy="480" r="5"/>
+    </g>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Hypsis Surface &nbsp;&middot;&nbsp; in partnership with Jolibrain</div>
+    <h1>Find where AI actually pays off,<br>before you build anything.</h1>
+    <p class="hero-subtitle">
+      An AI portal that lets your teams surface the work that wastes their week &mdash; refined by AI, grounded in a sovereign knowledge graph of your operations, ranked by where a fix pays off first. Nothing leaves your&nbsp;network.
+    </p>
+    <p class="hero-pillars">Bottom-up &nbsp;&middot;&nbsp; Sovereign &nbsp;&middot;&nbsp; Owned</p>
+    <div class="hero-cta">
+      <a href="https://discover-dgx.hypsis.ai">Try the demo</a>
+      <p class="hero-cta-sub">Describe a challenge in your own words &mdash; no login, nothing leaves the&nbsp;box.</p>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ============ WEDGE ============ -->
+<section class="wedge">
+  <div class="reveal">
+    <p class="section-label">The question no one can answer</p>
+    <h2>Everyone knows they should be using AI. Almost no one knows where to start &mdash; with&nbsp;evidence.</h2>
+  </div>
+  <div class="wedge-body reveal">
+    <p>
+      The gap is not access to AI models. <strong>The gap is knowing which problem to solve first</strong> &mdash; with proof, from the people who live it, without your data ever leaving the building. The usual answers all&nbsp;fail:
+    </p>
+    <ul class="fail-list">
+      <li><strong>Top-down strategy decks</strong> pick use cases in a boardroom, far from where the work actually hurts. They look good and rarely ship.</li>
+      <li><strong>Consultants</strong> run interviews, hand over a slide pack, and leave. The knowledge walks out with them; nothing is owned, nothing runs.</li>
+      <li><strong>Scattered enthusiasm</strong> &mdash; a few teams playing with chatbots &mdash; produces disconnected experiments that rot and leak data.</li>
+    </ul>
+    <p style="margin-top:1.6rem;">
+      Hypsis Surface produces the missing answer: <strong>a ranked, evidence-backed map of where AI will pay off in your company</strong>, sourced from your own people and grounded in your own operations.
+    </p>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="how">
+  <div class="how-header reveal">
+    <p class="section-label">How it works</p>
+    <h2>Four moves. One loop that gets smarter every&nbsp;time.</h2>
+  </div>
+  <div class="steps">
+    <div class="step reveal reveal-d-1">
+      <div class="num">I</div>
+      <h3>Anyone describes a pain point</h3>
+      <p>Free text, a document, a screenshot. No form, no jargon. <strong>&ldquo;Closing the month takes me three days of copy-paste.&rdquo;</strong></p>
+    </div>
+    <div class="step reveal reveal-d-1">
+      <div class="num">II</div>
+      <h3>The AI refines it</h3>
+      <p>It asks only the follow-ups <strong>you</strong> can answer &mdash; not which ERP issues the invoices or where the data lives.</p>
+    </div>
+    <div class="step reveal reveal-d-2">
+      <div class="num">III</div>
+      <h3>The knowledge graph answers the rest</h3>
+      <p>Questions about systems and process are answered from a <strong>sovereign company knowledge graph</strong>. What it doesn&rsquo;t know yet, it learns &mdash; once, forever.</p>
+    </div>
+    <div class="step reveal reveal-d-3">
+      <div class="num">IV</div>
+      <h3>The opportunities are ranked</h3>
+      <p>Each pain point is scored on <strong>breadth, intensity, and buildability</strong>. The result is a map: act&nbsp;here&nbsp;first.</p>
+    </div>
+  </div>
+  <p class="how-foot reveal">The more your organization uses it, the richer the knowledge graph &mdash; and the sharper the next ranking.</p>
+</section>
+
+<!-- ============ PILLARS ============ -->
+<section class="pillars">
+  <div class="pillars-header reveal">
+    <p class="section-label">Why it&rsquo;s different</p>
+    <h2>Bottom-up. Sovereign. Owned.</h2>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar reveal reveal-d-1">
+      <div class="label">Bottom-up</div>
+      <h3>Priorities from the floor, not the&nbsp;boardroom</h3>
+      <p>The opportunities come from the people who feel the pain &mdash; refined by AI and ranked by evidence, not guessed from a&nbsp;deck.</p>
+    </div>
+    <div class="pillar reveal reveal-d-2">
+      <div class="label">Sovereign</div>
+      <h3>Nothing leaves your&nbsp;network</h3>
+      <p>Your pain points, your operations, your knowledge graph &mdash; all of it stays on a box inside your perimeter. On-prem, open models, GDPR&nbsp;&amp;&nbsp;NIS2-aligned.</p>
+    </div>
+    <div class="pillar reveal reveal-d-3">
+      <div class="label">Owned</div>
+      <h3>You keep what we&nbsp;build</h3>
+      <p>Surface leaves a ranked map, a seeded knowledge graph, and a running portal &mdash; all yours, all reusable. No lock-in, no data held&nbsp;hostage.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOLIBRAIN ============ -->
+<section class="joli">
+  <div class="joli-inner">
+    <div class="reveal">
+      <p class="section-label">The intelligence inside</p>
+      <p class="lockup">Hypsis <span class="x">&times;</span> Jolibrain</p>
+      <p class="joli-lead">
+        The engine that lets Surface understand your company &mdash; the <strong>knowledge graph</strong> &mdash; is built with Jolibrain. A Hypsis application, with <strong>Jolibrain&nbsp;inside.</strong>
+      </p>
+    </div>
+    <div class="reveal">
+      <p class="joli-body">
+        <a href="https://www.jolibrain.com/" target="_blank" rel="noopener">Jolibrain</a> is a Toulouse AI lab &mdash; makers of the open-source DeepDetect, JoliGEN, and Wheatley, with around a hundred production AI projects delivered across aerospace, defense, manufacturing, and cybersecurity.
+      </p>
+      <p class="joli-body">
+        They build real production software, open-source, and migrate everything onto the customer&rsquo;s premises once it&rsquo;s ready. That is the Hypsis thesis, independently held. The partnership is a fit of principles, not a logo: <strong style="color:var(--paper);font-weight:500;">two French engineering teams, one sovereign appliance, zero dependency on a foreign cloud.</strong>
+      </p>
+    </div>
+    <p class="joli-tags reveal">On-prem &nbsp;&middot;&nbsp; Open-source &nbsp;&middot;&nbsp; Production, not proofs</p>
+  </div>
+</section>
+
+<!-- ============ KEEP ============ -->
+<section class="keep">
+  <div class="keep-header reveal">
+    <p class="section-label">What you keep</p>
+    <h2>Weeks, not quarters &mdash; and three owned assets&nbsp;remain.</h2>
+  </div>
+  <div class="keep-list">
+    <div class="keep-card reveal reveal-d-1">
+      <div class="num">01</div>
+      <h3>A ranked opportunity map</h3>
+      <p>The prioritized pain points, each with its evidence and a buildability score. An executive view of where the organization actually bleeds&nbsp;time.</p>
+    </div>
+    <div class="keep-card reveal reveal-d-2">
+      <div class="num">02</div>
+      <h3>A sovereign knowledge graph</h3>
+      <p>A structured model of your operations &mdash; org, systems, data, process &mdash; that didn&rsquo;t exist before, and that every future AI initiative will&nbsp;reuse.</p>
+    </div>
+    <div class="keep-card reveal reveal-d-3">
+      <div class="num">03</div>
+      <h3>A running portal</h3>
+      <p>On your Hypsis Box: a permanent, sovereign channel for the organization to keep surfacing and refining pain points after we&nbsp;leave.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="reveal">
+    <div class="divider" style="margin-top: 0;"></div>
+    <h2>See it work on your own&nbsp;challenge.</h2>
+    <p>
+      Describe where the work gets stuck &mdash; in your own words, with your own documents. The AI reads your situation and drafts a concrete answer. No login, no commitment, nothing leaves the&nbsp;box.
+    </p>
+    <div class="cta-buttons">
+      <a href="https://discover-dgx.hypsis.ai" class="cta-button">Try the demo</a>
+      <a href="mailto:william@hypsis.ai" class="cta-link">Talk to us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wordmark">Hypsis <span class="x">&times;</span> Jolibrain</div>
+  <p>Hypsis Surface &nbsp;&middot;&nbsp; a sovereign AI offering &nbsp;&middot;&nbsp; <a href="mailto:william@hypsis.ai">william@hypsis.ai</a></p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
