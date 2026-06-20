@@ -222,6 +222,24 @@
   .nav[disabled] { opacity: 0.28; cursor: default; pointer-events: none; }
 
   /* ============ DOTS ============ */
+  .deck-footer {
+    position: fixed;
+    bottom: 1.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+  }
+  .deck-footer a {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s ease;
+  }
+  .deck-footer a:hover { border-bottom-color: var(--bronze); }
+
   .dots {
     position: fixed;
     top: 1.5rem;
@@ -293,7 +311,6 @@
     <!-- ===== Slide 1 — METHOD ===== -->
     <section class="slide active">
       <div class="inner">
-        <p class="kicker">01 &middot; Method</p>
         <img class="draw-img" src="../assets/surface-sketchnote.png" alt="Hypsis Surface: operational teams surface pain points into the Surface portal; an AI assistant and a knowledge graph inside the Hypsis Box turn them into reasoned proposals, ranked by a central AI transformation team that reports to the COMEX.">
         <p class="draw-cap">
           <strong>Real AI transformation starts with your operational teams.</strong> So we give them a safe, sovereign space to express and challenge their ideas &mdash; with AI &mdash; until each becomes a proposal your central team can act&nbsp;on.
@@ -304,7 +321,6 @@
     <!-- ===== Slide 2 — VALUE PROPOSITION ===== -->
     <section class="slide">
       <div class="inner">
-        <p class="kicker">02 &middot; Value proposition</p>
         <h1>Find where AI actually pays off,<br>before you build anything.</h1>
         <p class="lead">
           A sovereign AI portal that turns the work wasting your teams&rsquo; week into reasoned proposals, ranked by impact &mdash; on a box inside your network. Nothing leaves the&nbsp;building.
@@ -331,7 +347,6 @@
     <!-- ===== Slide 3 — TRY FOR YOURSELF ===== -->
     <section class="slide">
       <div class="inner">
-        <p class="kicker">03 &middot; Try for yourself</p>
         <h1>See it on your own&nbsp;challenge.</h1>
         <p class="lead">
           Describe where the work gets stuck &mdash; in your own words, with your own documents. The AI reads your situation and drafts a concrete proposal. No login, no commitment.
@@ -349,6 +364,10 @@
     <button class="dot" data-i="1">Value</button>
     <button class="dot" data-i="2">Try it</button>
   </div>
+
+  <footer class="deck-footer">
+    <a href="mailto:sales@hypsis.ai">sales@hypsis.ai</a>
+  </footer>
 </div>
 
 <script>
