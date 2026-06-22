@@ -115,6 +115,13 @@
   .step p { font-size: 0.9rem; font-weight: 300; color: var(--ink-soft); line-height: 1.55; }
   .step p strong { font-weight: 500; color: var(--ink); }
 
+  /* ---- SKETCHNOTE ---- */
+  .sketch {
+    display: block; width: 100%; max-width: 900px; height: auto;
+    margin: 0.6rem auto 0; border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(26,26,46,0.08);
+  }
+
   /* ---- DELIVERABLE ---- */
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; text-align: left; margin-top: 0.4rem; }
   .card {
@@ -264,28 +271,10 @@
 
     <!-- ===== 2 — MÉTHODE ===== -->
     <section class="slide">
-      <div class="inner">
+      <div class="inner wide">
         <div class="eyebrow">Comment ça marche</div>
-        <h2 class="section-title">Du terrain à la roadmap, en une boucle.</h2>
-        <p class="lead">Une collecte large et automatisée, puis le travail d'analyse Hypsis&nbsp;&times;&nbsp;Jolibrain.</p>
-        <div class="steps">
-          <div class="step">
-            <div class="n">01</div><h3>On collecte</h3>
-            <p>Chacun décrit, dans ses mots, ce qui lui coûte sa semaine. Une <strong>automatisation</strong> assure une couverture large.</p>
-          </div>
-          <div class="step">
-            <div class="n">02</div><h3>On factorise</h3>
-            <p>Les besoins sont regroupés en <strong>grandes familles d'usages</strong> &mdash; du bruit aux chantiers lisibles.</p>
-          </div>
-          <div class="step">
-            <div class="n">03</div><h3>On note</h3>
-            <p>Chaque famille est évaluée en <strong>faisabilité, TRL, délai, ROI</strong>, avec ses prérequis.</p>
-          </div>
-          <div class="step">
-            <div class="n">04</div><h3>On priorise</h3>
-            <p>Le résultat : une <strong>roadmap éclairée</strong>, à s'approprier et à défendre. Agir ici d'abord.</p>
-          </div>
-        </div>
+        <h2 class="section-title">Un engagement type, du terrain à la roadmap.</h2>
+        <img class="sketch" src="../assets/engagement-sketchnote.png" alt="Sketchnote d'un engagement type en 3 mois : temps client (acculturation IA puis collecte des cas d'usage via le guichet IA sur la Hypsis Box DGX Spark) et temps interne (raffinement et tri en familles d'usages notées faisabilité, TRL, délai, ROI ; restitution de la feuille de route).">
       </div>
     </section>
 
