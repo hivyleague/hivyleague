@@ -197,6 +197,9 @@
   .p-name { font-size: 0.96rem; font-weight: 600; color: var(--ink); line-height: 1.2; letter-spacing: -0.01em; }
   .p-role { font-size: 0.76rem; font-weight: 500; color: var(--bronze); margin: 0.18rem 0 0.5rem; }
   .p-bio { font-size: 0.8rem; font-weight: 300; color: var(--ink-soft); line-height: 1.5; }
+  .p-li { display: inline-flex; align-self: flex-start; margin-top: auto; padding-top: 0.75rem; color: #0a66c2; opacity: 0.62; transition: opacity 0.25s ease, transform 0.25s ease; }
+  .p-li:hover { opacity: 1; transform: translateY(-1px); }
+  .p-li svg { width: 17px; height: 17px; fill: currentColor; display: block; }
 
   /* ============ CHROME ============ */
   .brandmark {
@@ -353,15 +356,14 @@
     <!-- ===== 5 — CRÉDIBILITÉ / ÉQUIPES ===== -->
     <section class="slide">
       <div class="inner wide">
-        <h2 class="section-title">L'équipe.</h2>
         <div class="union">
           <div class="union-logos">
             <img class="logo-hypsis" src="../assets/hypsis-logo.png" alt="Hypsis">
             <span class="union-x">&times;</span>
             <img class="logo-jolibrain" src="../assets/jolibrain-logo.png" alt="Jolibrain">
           </div>
-          <p class="union-line">Deux maisons d'ingénierie françaises unissent leurs forces &mdash; et n'avancent que comme <strong>une seule équipe</strong> sur votre projet.</p>
-          <p class="union-sub"><strong>Hypsis</strong> &mdash; plateforme, méthode, livraison. &nbsp;·&nbsp; <strong>Jolibrain</strong> &mdash; laboratoire d'IA toulousain : DeepDetect, ~100 projets en production pour Airbus, Dassault, SNCF, CNES.</p>
+          <p class="union-line">Deux sociétés d'ingénierie logicielle françaises unissent leurs forces pour soutenir votre transformation.</p>
+          <p class="union-sub"><strong>Jolibrain</strong> &mdash; laboratoire d'IA toulousain &nbsp;·&nbsp; <strong>Hypsis</strong> &mdash; plateforme IA pour la transformation des entreprises.</p> 
         </div>
         <div class="team-people">
           <div class="person">
@@ -369,48 +371,56 @@
             <div class="p-name">Antoine Jacquet</div>
             <div class="p-role">AI Applications Developer</div>
             <p class="p-bio">Top 3 mondial CodinGame · contributeur noyau Linux</p>
+            <a class="p-li" href="https://www.linkedin.com/in/royale/" target="_blank" rel="noopener" aria-label="LinkedIn — Antoine Jacquet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .78 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .78 23.2 0 22.22 0z"/></svg></a>
           </div>
           <div class="person">
             <img class="p-avatar" src="../assets/jb-emmanuel.jpeg" alt="Emmanuel Benazera">
             <div class="p-name">Emmanuel Benazera</div>
             <div class="p-role">CEO &amp; fondateur, Jolibrain</div>
             <p class="p-bio">Docteur en IA · ex-NASA, CNRS, CNES · créateur de DeepDetect</p>
+            <a class="p-li" href="https://www.linkedin.com/in/emmanuel-benazera-49ab0034/" target="_blank" rel="noopener" aria-label="LinkedIn — Emmanuel Benazera"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .78 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .78 23.2 0 22.22 0z"/></svg></a>
           </div>
           <div class="person">
             <img class="p-avatar" src="../assets/jb-frederic.jpeg" alt="Frédéric Jourdan">
             <div class="p-name">Frédéric Jourdan</div>
             <div class="p-role">Business Development</div>
             <p class="p-bio">Cofondateur Snootlab (IoT open source) · cybersécurité</p>
+            <a class="p-li" href="https://www.linkedin.com/in/fredericjourdan/" target="_blank" rel="noopener" aria-label="LinkedIn — Frédéric Jourdan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .78 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .78 23.2 0 22.22 0z"/></svg></a>
           </div>
           <div class="person">
             <img class="p-avatar" src="../assets/jb-guillaume.jpeg" alt="Guillaume Infantes">
             <div class="p-name">Guillaume Infantes</div>
             <div class="p-role">Chercheur</div>
             <p class="p-bio">Docteur · 10 ans à l'ONERA · apprentissage par renforcement</p>
+            <a class="p-li" href="https://www.linkedin.com/in/guillaumeinfantes/" target="_blank" rel="noopener" aria-label="LinkedIn — Guillaume Infantes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .78 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .78 23.2 0 22.22 0z"/></svg></a>
           </div>
           <div class="person">
             <img class="p-avatar" src="../assets/jb-hayat.jpeg" alt="Hayat Cheballah">
             <div class="p-name">Hayat Cheballah</div>
             <div class="p-role">VP AI Services</div>
             <p class="p-bio">Docteure maths &amp; informatique · ex-recherche cryptographie</p>
+            <a class="p-li" href="https://www.linkedin.com/in/hayat-cheballah-754b9583/" target="_blank" rel="noopener" aria-label="LinkedIn — Hayat Cheballah"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .78 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .78 23.2 0 22.22 0z"/></svg></a>
           </div>
           <div class="person">
             <img class="p-avatar" src="../assets/jb-luiz.jpeg" alt="Luiz de Jesus">
             <div class="p-name">Luiz de Jesus</div>
             <div class="p-role">Ingénieur R&amp;D senior</div>
             <p class="p-bio">Doctorant en IA · mentor ANITI · ex-OVHcloud</p>
+            <a class="p-li" href="https://www.linkedin.com/in/lcjr86/" target="_blank" rel="noopener" aria-label="LinkedIn — Luiz de Jesus"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .78 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .78 23.2 0 22.22 0z"/></svg></a>
           </div>
           <div class="person">
             <img class="p-avatar" src="../assets/jb-ru.jpeg" alt="Ru Wang">
             <div class="p-name">Ru Wang</div>
             <div class="p-role">Ingénieur R&amp;D — ML</div>
             <p class="p-bio">Docteur en physique · deep learning, graphes de connaissance</p>
+            <a class="p-li" href="https://www.linkedin.com/in/wr0124/" target="_blank" rel="noopener" aria-label="LinkedIn — Ru Wang"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .78 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .78 23.2 0 22.22 0z"/></svg></a>
           </div>
           <div class="person">
             <img class="p-avatar" src="../assets/william_orange.png" alt="William Le Ferrand">
             <div class="p-name">William Le Ferrand</div>
             <div class="p-role">Fondateur, Hypsis</div>
             <p class="p-bio">Ex-Chief Transformation Officer (SOGECLAIR, 157&nbsp;M&euro;) · 10 ans d'ingénierie en Silicon Valley</p>
+            <a class="p-li" href="https://www.linkedin.com/in/williamleferrand/" target="_blank" rel="noopener" aria-label="LinkedIn — William Le Ferrand"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .78 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .78 23.2 0 22.22 0z"/></svg></a>
           </div>
         </div>
       </div>
@@ -436,7 +446,7 @@
     <button class="dot" data-i="1">Méthode</button>
     <button class="dot" data-i="2">Livrable</button>
     <button class="dot" data-i="3">Engagement</button>
-    <button class="dot" data-i="4">Équipes</button>
+    <button class="dot" data-i="4">Équipe</button>
     <button class="dot" data-i="5">Essayer</button>
   </div>
 
