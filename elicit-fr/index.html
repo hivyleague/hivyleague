@@ -204,9 +204,16 @@
   .dot.active { color: var(--ink); }
   .dot.active::after { transform: scaleX(1); }
 
-  .deck-footer { position: fixed; bottom: 1.4rem; left: 50%; transform: translateX(-50%); z-index: 5; text-align: center; }
-  .deck-footer .partner { font-family: 'Italiana', serif; font-size: 0.74rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--bronze); }
-  .deck-footer .partner .x { color: var(--ink-muted); margin: 0 0.35em; }
+  .deck-footer { position: fixed; bottom: 1.3rem; left: 50%; transform: translateX(-50%); z-index: 5; text-align: center; }
+  .lockup { display: flex; align-items: center; gap: 0.95rem; }
+  .lockup img.logo-hypsis { height: 19px; width: auto; display: block; }
+  .lockup img.logo-jolibrain { height: 38px; width: auto; display: block; }
+  .lockup .x { color: var(--ink-muted); font-size: 0.85rem; font-weight: 300; }
+
+  /* co-brand inside team tags */
+  .team-tag-logo { height: 30px; width: auto; display: block; margin-bottom: 0.9rem; }
+  .team-tag-logo.logo-hypsis { height: 17px; }
+  .team-tag .sub { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--bronze); }
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 900px) {
@@ -340,7 +347,10 @@
         <div class="teams">
           <!-- Hypsis -->
           <div class="team-col">
-            <div class="team-tag">Hypsis — plateforme, méthode, livraison</div>
+            <div class="team-tag">
+              <img class="team-tag-logo logo-hypsis" src="../assets/hypsis-logo.png" alt="Hypsis">
+              <span class="sub">Plateforme, méthode, livraison</span>
+            </div>
             <div class="lead-person">
               <img class="lead-avatar" src="../assets/william_orange.png" alt="William Le Ferrand">
               <div>
@@ -352,7 +362,10 @@
           </div>
           <!-- Jolibrain -->
           <div class="team-col">
-            <div class="team-tag">Jolibrain — laboratoire d'IA, Toulouse</div>
+            <div class="team-tag">
+              <img class="team-tag-logo logo-jolibrain" src="../assets/jolibrain-logo.png" alt="Jolibrain">
+              <span class="sub">Laboratoire d'IA, Toulouse</span>
+            </div>
             <p class="team-blurb">
               Fondé en 2016. Logiciels open source <strong>DeepDetect, JoliGEN, Wheatley, Colette</strong>. ~100 projets IA livrés en production &mdash; <strong>Airbus, Dassault, SNCF, CNES</strong>.
             </p>
@@ -448,7 +461,11 @@
   </div>
 
   <footer class="deck-footer">
-    <div class="partner">Hypsis <span class="x">&times;</span> Jolibrain</div>
+    <div class="lockup">
+      <img class="logo-hypsis" src="../assets/hypsis-logo.png" alt="Hypsis">
+      <span class="x">&times;</span>
+      <img class="logo-jolibrain" src="../assets/jolibrain-logo.png" alt="Jolibrain">
+    </div>
   </footer>
 </div>
 
