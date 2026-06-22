@@ -123,8 +123,6 @@
     text-decoration: none; border-bottom: 1px solid var(--stone);
   }
   .cta-secondary:hover { color: var(--ink); }
-  .legal-link { display: inline-block; margin-top: 2.4rem; font-size: 0.72rem; font-weight: 300; letter-spacing: 0.08em; color: var(--ink-muted); text-decoration: none; }
-  .legal-link:hover { color: var(--bronze); }
 
   /* ---- METHOD (4 steps) ---- */
   .steps {
@@ -235,6 +233,12 @@
     position: fixed; top: 1.3rem; left: 1.9rem; z-index: 5;
     display: flex; align-items: center; gap: 0.75rem; text-decoration: none;
   }
+  .legal-fixed {
+    position: fixed; bottom: 0.95rem; left: 50%; transform: translateX(-50%); z-index: 5;
+    font-size: 0.7rem; font-weight: 300; letter-spacing: 0.08em;
+    color: var(--ink-muted); text-decoration: none; transition: color 0.3s ease;
+  }
+  .legal-fixed:hover { color: var(--bronze); }
   .brandmark img.logo-hypsis { height: 16px; width: auto; display: block; }
   .brandmark img.logo-jolibrain { height: 33px; width: auto; display: block; }
   .brandmark .x { color: var(--ink-muted); font-size: 0.82rem; font-weight: 300; }
@@ -492,11 +496,12 @@
         <a href="https://discover-dgx.hypsis.ai" class="cta-button">Essayez la démo</a>
         <br>
         <a href="mailto:sales@hypsis.ai" class="cta-secondary">Parler à l'équipe &rarr;</a>
-        <div><a href="../legal-notice/" class="legal-link">Mentions légales</a></div>
       </div>
     </section>
 
   </div>
+
+  <a class="legal-fixed" href="../legal-notice/">Mentions légales</a>
 
   <div class="dots" id="dots">
     <button class="dot active" data-i="0">Valeur</button>
