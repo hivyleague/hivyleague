@@ -25,514 +25,482 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
+  html, body { height: 100%; }
   body {
     background: var(--paper);
     color: var(--ink);
     font-family: 'Outfit', -apple-system, sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-
-  .divider { width: 120px; height: 1px; background: var(--stone); margin: 3rem auto; }
-
-  .section-label {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--bronze);
-    margin-bottom: 1rem;
-  }
-
-  /* ============ BRANDMARK ============ */
-  .brandmark {
-    position: fixed;
-    top: 1.5rem;
-    left: 1.9rem;
-    z-index: 20;
-    font-family: 'Italiana', serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--bronze);
-    text-decoration: none;
-  }
-
-  /* ============ HERO ============ */
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 6rem 2rem 5rem;
     overflow: hidden;
   }
-  .hero-bg {
+
+  /* ============ DECK ============ */
+  .deck { position: fixed; inset: 0; overflow: hidden; }
+  .deck-bg {
     position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background: radial-gradient(ellipse 70% 55% at 50% 18%, var(--stone-light) 0%, rgba(248,246,241,0) 62%), var(--paper);
+    background: radial-gradient(ellipse 75% 60% at 50% 8%, var(--stone-light) 0%, rgba(248,246,241,0) 60%), var(--paper);
   }
-  .hero-content { position: relative; z-index: 1; max-width: 880px; }
+  .track {
+    display: flex; height: 100%; width: 100%; position: relative; z-index: 1;
+    transition: transform 0.68s cubic-bezier(0.66, 0, 0.2, 1);
+    will-change: transform;
+  }
+  .slide {
+    flex: 0 0 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 6rem 2.4rem 6rem; overflow-y: auto;
+  }
+  .slide .inner {
+    max-width: 880px; width: 100%;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.7s ease 0.12s, transform 0.7s ease 0.12s;
+  }
+  .slide .inner.wide { max-width: 1140px; }
+  .slide.active .inner { opacity: 1; transform: translateY(0); }
 
-  .hero-eyebrow {
+  .eyebrow {
     font-family: 'Italiana', serif;
-    font-size: clamp(0.74rem, 1.1vw, 0.9rem);
-    letter-spacing: 0.42em;
-    text-transform: uppercase;
-    color: var(--bronze);
-    margin-bottom: 1.6rem;
-    opacity: 0;
-    animation: fadeIn 1.4s ease 0.2s forwards;
+    font-size: clamp(0.72rem, 1vw, 0.86rem);
+    letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--bronze); margin-bottom: 1.5rem;
   }
-  .hero h1 {
-    font-size: clamp(2.2rem, 5vw, 3.7rem);
-    font-weight: 700;
-    line-height: 1.12;
-    color: var(--ink);
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.025em;
-    opacity: 0;
-    animation: fadeInUp 1.4s ease 0.4s forwards;
+  .slide h1 {
+    font-size: clamp(2rem, 4.4vw, 3.35rem);
+    font-weight: 700; line-height: 1.12; color: var(--ink);
+    letter-spacing: -0.028em; margin-bottom: 1.4rem;
   }
-  .hero-subtitle {
-    font-size: clamp(1.05rem, 1.7vw, 1.22rem);
-    font-weight: 300;
-    color: var(--ink-soft);
-    max-width: 660px;
-    margin: 0 auto 1.8rem;
-    line-height: 1.65;
-    opacity: 0;
-    animation: fadeInUp 1.4s ease 0.7s forwards;
+  .slide .section-title {
+    font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+    font-weight: 600; line-height: 1.18; color: var(--ink);
+    letter-spacing: -0.025em; margin-bottom: 1rem;
   }
-  .hero-pillars {
-    font-size: clamp(0.7rem, 1vw, 0.8rem);
-    font-weight: 500;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--bronze-light);
-    opacity: 0;
-    animation: fadeInUp 1.4s ease 1s forwards;
+  .slide .lead {
+    font-size: clamp(1.02rem, 1.6vw, 1.2rem); font-weight: 300;
+    color: var(--ink-soft); max-width: 660px; margin: 0 auto 2.4rem; line-height: 1.65;
   }
-  .hero-cta { margin-top: 2.3rem; opacity: 0; animation: fadeInUp 1.4s ease 1.3s forwards; }
-  .hero-cta a {
-    display: inline-block;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--paper);
-    background: var(--ink);
-    padding: 0.95rem 2.6rem;
-    text-decoration: none;
-    transition: all 0.35s ease;
+  .slide .lead strong { font-weight: 500; color: var(--ink); }
+  .pillars {
+    font-size: clamp(0.7rem, 1vw, 0.78rem); font-weight: 500;
+    letter-spacing: 0.32em; text-transform: uppercase; color: var(--bronze-light);
+    margin-top: 2.2rem;
   }
-  .hero-cta a:hover { background: var(--bronze-dark); transform: translateY(-1px); box-shadow: 0 4px 24px rgba(26,26,46,0.14); }
-  .hero-cta-sub { margin-top: 0.7rem; font-size: 0.82rem; font-weight: 300; color: var(--ink-muted); }
 
-  .scroll-hint {
-    position: absolute; bottom: 1.6rem; left: 50%; transform: translateX(-50%); z-index: 1;
-    opacity: 0; animation: fadeIn 1.4s ease 1.6s forwards, float 3s ease-in-out infinite 1.6s;
-  }
-  .scroll-hint svg { width: 18px; height: 18px; stroke: var(--stone); stroke-width: 1.5; fill: none; }
-
-  /* ============ WEDGE / PROBLEM ============ */
-  .wedge { padding: 6rem 2rem; max-width: 780px; margin: 0 auto; }
-  .wedge h2 {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 600; color: var(--ink); line-height: 1.3;
-    margin-bottom: 1.5rem; letter-spacing: -0.02em;
-  }
-  .wedge-body p { font-size: 1.05rem; font-weight: 300; color: var(--ink-soft); line-height: 1.75; margin-bottom: 1.2rem; }
-  .wedge-body p strong { font-weight: 500; color: var(--ink); }
-  .wedge-body p:last-child { margin-bottom: 0; }
-
-  /* ============ LOOP / HOW ============ */
-  .loop { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
-  .loop-header { text-align: center; margin-bottom: 3.5rem; }
-  .loop h2 {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 600; color: var(--ink); line-height: 1.3;
-    max-width: 720px; margin: 0 auto; letter-spacing: -0.02em;
-  }
-  .loop-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
-    border-top: 1px solid var(--stone); border-bottom: 1px solid var(--stone);
-  }
-  .loop-item { padding: 2.4rem 1.6rem; border-right: 1px solid var(--stone); }
-  .loop-item:last-child { border-right: none; }
-  .loop-item .num { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.35em; color: var(--bronze); margin-bottom: 1rem; }
-  .loop-item h3 { font-size: 1.08rem; font-weight: 600; color: var(--ink); margin-bottom: 0.7rem; letter-spacing: -0.01em; }
-  .loop-item p { font-size: 0.93rem; font-weight: 300; color: var(--ink-soft); line-height: 1.6; }
-  .loop-item p strong { font-weight: 500; color: var(--ink); }
-
-  /* ============ DELIVERABLE ============ */
-  .deliver { padding: 6rem 2rem; background: var(--ink); color: var(--paper); }
-  .deliver-inner { max-width: 1000px; margin: 0 auto; }
-  .deliver .section-label { color: var(--bronze-light); }
-  .deliver h2 {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 600; color: var(--paper); line-height: 1.3;
-    margin-bottom: 0.8rem; letter-spacing: -0.02em;
-  }
-  .deliver-lead {
-    font-size: clamp(1rem, 1.5vw, 1.1rem); font-weight: 300;
-    color: rgba(248,246,241,0.7); max-width: 720px; line-height: 1.7; margin-bottom: 2.5rem;
-  }
-  .deliver-lead strong { font-weight: 500; color: var(--paper); }
-  .deliver-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
-    border-top: 1px solid rgba(248,246,241,0.12); border-bottom: 1px solid rgba(248,246,241,0.12);
-  }
-  .deliver-feature { padding: 2rem 1.7rem; border-right: 1px solid rgba(248,246,241,0.12); }
-  .deliver-feature:last-child { border-right: none; }
-  .deliver-feature h3 { font-size: 1rem; font-weight: 600; color: var(--paper); margin-bottom: 0.7rem; }
-  .deliver-feature p { font-size: 0.9rem; font-weight: 300; color: rgba(248,246,241,0.62); line-height: 1.6; }
-  .deliver-note { margin-top: 1.6rem; font-size: 0.85rem; font-weight: 300; color: rgba(248,246,241,0.5); font-style: italic; }
-
-  /* ============ ENGAGEMENT ============ */
-  .engage { padding: 6rem 2rem; max-width: 880px; margin: 0 auto; text-align: center; }
-  .engage h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 600; color: var(--ink); margin-bottom: 1rem; letter-spacing: -0.02em; }
-  .engage-lead { font-size: 1.05rem; font-weight: 300; color: var(--ink-soft); max-width: 620px; margin: 0 auto 2.6rem; line-height: 1.7; }
-  .engage-lead strong { font-weight: 500; color: var(--ink); }
-  .engage-metrics {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
-    max-width: 760px; margin: 0 auto;
-    border-top: 1px solid var(--stone); border-bottom: 1px solid var(--stone);
-  }
-  .engage-metric { padding: 1.9rem 1.2rem; border-right: 1px solid var(--stone); }
-  .engage-metric:last-child { border-right: none; }
-  .engage-metric .figure {
-    font-weight: 600; font-size: clamp(1.7rem, 3.4vw, 2.3rem);
-    letter-spacing: -0.02em; color: var(--ink); line-height: 1; margin-bottom: 0.6rem;
-  }
-  .engage-metric .figure .unit { color: var(--bronze); }
-  .engage-metric .cap { font-size: 0.86rem; font-weight: 300; color: var(--ink-soft); line-height: 1.5; }
-  .engage-metric .cap strong { font-weight: 600; color: var(--ink); display: block; margin-bottom: 0.2rem; }
-
-  /* ============ CREDIBILITY / TEAMS ============ */
-  .teams { padding: 6rem 2rem; max-width: 1080px; margin: 0 auto; }
-  .teams-header { text-align: center; margin-bottom: 3.5rem; }
-  .teams h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 600; color: var(--ink); line-height: 1.3; max-width: 720px; margin: 0 auto 1rem; letter-spacing: -0.02em; }
-  .teams-sub { font-size: 1.02rem; font-weight: 300; color: var(--ink-soft); max-width: 640px; margin: 0 auto; line-height: 1.65; }
-  .teams-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.2rem; }
-  .team-card {
-    background: var(--paper-warm);
-    border: 1px solid var(--stone);
-    border-radius: 4px;
-    padding: 2.4rem 2.2rem;
-  }
-  .team-card .badge {
-    display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;
-  }
-  .team-card .avatar {
-    width: 58px; height: 58px; border-radius: 50%;
-    object-fit: cover; object-position: 50% 25%;
-    border: 1px solid var(--stone); flex-shrink: 0;
-  }
-  .team-card .monogram {
-    width: 58px; height: 58px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    background: var(--ink); color: var(--paper);
-    font-family: 'Italiana', serif; font-size: 1.2rem; letter-spacing: 0.04em;
-    flex-shrink: 0;
-  }
-  .team-card .badge-text .name { font-size: 1.15rem; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
-  .team-card .badge-text .role { font-size: 0.82rem; font-weight: 400; color: var(--bronze); letter-spacing: 0.04em; }
-  .team-card p { font-size: 0.95rem; font-weight: 300; color: var(--ink-soft); line-height: 1.7; margin-bottom: 1rem; }
-  .team-card p:last-of-type { margin-bottom: 0; }
-  .team-card p strong { font-weight: 500; color: var(--ink); }
-  .team-card .facts {
-    list-style: none; padding: 1.3rem 0 0; margin-top: 1.3rem;
-    border-top: 1px solid var(--stone);
-  }
-  .team-card .facts li {
-    font-size: 0.86rem; font-weight: 300; color: var(--ink-soft);
-    line-height: 1.5; padding: 0.28rem 0 0.28rem 1rem; position: relative;
-  }
-  .team-card .facts li::before {
-    content: ''; position: absolute; left: 0; top: 0.62rem;
-    width: 4px; height: 4px; border-radius: 50%; background: var(--bronze-light);
-  }
-  .team-card .facts li strong { font-weight: 600; color: var(--ink); }
-  .teams-fit {
-    margin-top: 2.6rem; text-align: center;
-    font-size: 1rem; font-weight: 300; color: var(--ink-soft);
-    max-width: 720px; margin-left: auto; margin-right: auto; line-height: 1.7;
-  }
-  .teams-fit strong { font-weight: 500; color: var(--ink); }
-
-  /* ============ CTA ============ */
-  .cta { padding: 5rem 2rem 6rem; text-align: center; }
-  .cta h2 { font-size: clamp(1.6rem, 3.3vw, 2.4rem); font-weight: 600; color: var(--ink); margin-bottom: 0.8rem; letter-spacing: -0.01em; }
-  .cta p { font-size: 1rem; font-weight: 300; color: var(--ink-muted); margin: 0 auto 2rem; max-width: 560px; line-height: 1.6; }
-  .cta-buttons { display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap; }
+  /* ---- CTA ---- */
   .cta-button {
     display: inline-block; font-family: 'Outfit', sans-serif;
     font-size: 0.8rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--paper); background: var(--ink); padding: 0.95rem 2.6rem;
+    color: var(--paper); background: var(--ink); padding: 1rem 2.8rem;
     text-decoration: none; transition: all 0.3s ease;
   }
-  .cta-button:hover { background: var(--bronze-dark); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(26,26,46,0.12); }
-  .cta-link {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 500;
-    letter-spacing: 0.15em; text-transform: uppercase; color: var(--bronze);
-    text-decoration: none; padding: 0.9rem 1.4rem; transition: color 0.3s ease;
+  .cta-button:hover { background: var(--bronze-dark); transform: translateY(-1px); box-shadow: 0 4px 22px rgba(26,26,46,0.14); }
+  .cta-sub { margin-top: 0.9rem; font-size: 0.86rem; font-weight: 300; color: var(--ink-muted); }
+  .cta-secondary {
+    display: inline-block; margin-top: 1.6rem;
+    font-size: 0.9rem; font-weight: 400; color: var(--bronze);
+    text-decoration: none; border-bottom: 1px solid var(--stone);
   }
-  .cta-link:hover { color: var(--ink); }
+  .cta-secondary:hover { color: var(--ink); }
 
-  /* ============ FOOTER ============ */
-  footer { padding: 2.5rem 2rem; text-align: center; border-top: 1px solid var(--stone); }
-  footer .partner {
-    font-family: 'Italiana', serif; font-size: 0.8rem;
-    letter-spacing: 0.36em; text-transform: uppercase; color: var(--bronze);
+  /* ---- METHOD (4 steps) ---- */
+  .steps {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border-top: 1px solid var(--stone); border-bottom: 1px solid var(--stone);
+    text-align: left; margin-top: 0.6rem;
   }
-  footer .partner .x { color: var(--ink-muted); margin: 0 0.4em; }
-  footer p { font-size: 0.78rem; font-weight: 300; color: var(--ink-muted); margin-top: 0.6rem; }
-  footer a { color: var(--bronze); text-decoration: none; transition: color 0.3s ease; }
-  footer a:hover { color: var(--ink); }
+  .step { padding: 1.9rem 1.5rem; border-right: 1px solid var(--stone); }
+  .step:last-child { border-right: none; }
+  .step .n { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.3em; color: var(--bronze); margin-bottom: 0.9rem; }
+  .step h3 { font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: 0.55rem; }
+  .step p { font-size: 0.9rem; font-weight: 300; color: var(--ink-soft); line-height: 1.55; }
+  .step p strong { font-weight: 500; color: var(--ink); }
 
-  /* ============ ANIMATIONS ============ */
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes float { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(5px); } }
-  .reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-d-1 { transition-delay: 0.1s; }
-  .reveal-d-2 { transition-delay: 0.2s; }
-  .reveal-d-3 { transition-delay: 0.3s; }
+  /* ---- DELIVERABLE ---- */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; text-align: left; margin-top: 0.4rem; }
+  .card {
+    background: var(--paper-warm); border: 1px solid var(--stone); border-radius: 3px; padding: 1.9rem 1.7rem;
+  }
+  .card .tag { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--bronze); margin-bottom: 0.9rem; }
+  .card h3 { font-size: 1.08rem; font-weight: 600; color: var(--ink); margin-bottom: 0.6rem; letter-spacing: -0.01em; }
+  .card p { font-size: 0.9rem; font-weight: 300; color: var(--ink-soft); line-height: 1.6; }
+  .note { margin-top: 1.7rem; font-size: 0.85rem; font-weight: 300; color: var(--ink-muted); font-style: italic; }
+
+  /* ---- ENGAGEMENT ---- */
+  .metrics {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; max-width: 760px; margin: 0.6rem auto 0;
+    border-top: 1px solid var(--stone); border-bottom: 1px solid var(--stone);
+  }
+  .metric { padding: 2rem 1.4rem; border-right: 1px solid var(--stone); }
+  .metric:last-child { border-right: none; }
+  .metric .figure { font-weight: 600; font-size: clamp(1.9rem, 3.8vw, 2.5rem); letter-spacing: -0.02em; color: var(--ink); line-height: 1; margin-bottom: 0.6rem; }
+  .metric .figure .unit { color: var(--bronze); }
+  .metric .cap { font-size: 0.86rem; font-weight: 300; color: var(--ink-soft); line-height: 1.5; }
+  .metric .cap strong { font-weight: 600; color: var(--ink); display: block; margin-bottom: 0.2rem; }
+
+  /* ---- TEAMS / CREDIBILITY ---- */
+  .teams { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 2.2rem; text-align: left; margin-top: 0.4rem; }
+  .team-col { display: flex; flex-direction: column; }
+  .team-tag {
+    font-size: 0.66rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--bronze); padding-bottom: 0.9rem; margin-bottom: 1.4rem; border-bottom: 1px solid var(--stone);
+  }
+  .lead-person { display: flex; gap: 1.2rem; align-items: flex-start; }
+  .lead-avatar {
+    width: 84px; height: 84px; border-radius: 50%; object-fit: cover; object-position: 50% 22%;
+    border: 1px solid var(--stone); flex-shrink: 0;
+  }
+  .person-name { font-size: 1.15rem; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
+  .person-role { font-size: 0.82rem; font-weight: 500; color: var(--bronze); margin-bottom: 0.5rem; }
+  .person-bio { font-size: 0.92rem; font-weight: 300; color: var(--ink-soft); line-height: 1.6; }
+  .team-blurb { font-size: 0.92rem; font-weight: 300; color: var(--ink-soft); line-height: 1.6; margin-bottom: 1.3rem; }
+  .team-blurb strong { font-weight: 500; color: var(--ink); }
+
+  .members { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.4rem; }
+  .member { display: flex; gap: 0.8rem; align-items: flex-start; }
+  .mono {
+    width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--stone-light); border: 1px solid var(--stone);
+    font-family: 'Italiana', serif; font-size: 0.82rem; color: var(--bronze-dark); letter-spacing: 0.02em;
+  }
+  .m-name { font-size: 0.92rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
+  .m-role { font-size: 0.76rem; font-weight: 500; color: var(--bronze); margin-bottom: 0.15rem; }
+  .m-bio { font-size: 0.78rem; font-weight: 300; color: var(--ink-soft); line-height: 1.45; }
+  .teams-fit { margin-top: 2rem; font-size: 0.95rem; font-weight: 300; color: var(--ink-soft); line-height: 1.6; }
+  .teams-fit strong { font-weight: 500; color: var(--ink); }
+
+  /* ============ CHROME ============ */
+  .brandmark {
+    position: fixed; top: 1.5rem; left: 1.9rem; z-index: 5;
+    font-family: 'Italiana', serif; font-size: 0.8rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--bronze); text-decoration: none;
+  }
+  .nav {
+    position: fixed; top: 50%; transform: translateY(-50%); z-index: 5;
+    width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--stone);
+    background: rgba(248,246,241,0.7); backdrop-filter: blur(4px); cursor: pointer;
+    display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
+  }
+  .nav:hover { background: var(--ink); border-color: var(--ink); }
+  .nav:hover svg { stroke: var(--paper); }
+  .nav svg { width: 18px; height: 18px; stroke: var(--ink); stroke-width: 1.6; fill: none; }
+  .nav.prev { left: 1.6rem; }
+  .nav.next { right: 1.6rem; }
+  .nav[disabled] { opacity: 0.26; cursor: default; pointer-events: none; }
+
+  .dots {
+    position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 5;
+    display: flex; gap: 1.7rem; align-items: center;
+  }
+  .dot {
+    background: none; border: none; cursor: pointer; font-family: 'Outfit', sans-serif;
+    font-size: 0.66rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-muted); padding: 0.4rem 0; position: relative; transition: color 0.3s ease;
+  }
+  .dot::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px;
+    background: var(--bronze); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease;
+  }
+  .dot:hover { color: var(--ink); }
+  .dot.active { color: var(--ink); }
+  .dot.active::after { transform: scaleX(1); }
+
+  .deck-footer { position: fixed; bottom: 1.4rem; left: 50%; transform: translateX(-50%); z-index: 5; text-align: center; }
+  .deck-footer .partner { font-family: 'Italiana', serif; font-size: 0.74rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--bronze); }
+  .deck-footer .partner .x { color: var(--ink-muted); margin: 0 0.35em; }
 
   /* ============ RESPONSIVE ============ */
-  @media (max-width: 880px) {
-    .loop-grid { grid-template-columns: 1fr 1fr; }
-    .deliver-grid { grid-template-columns: 1fr; }
-    .deliver-feature { border-right: none; border-bottom: 1px solid rgba(248,246,241,0.12); }
-    .deliver-feature:last-child { border-bottom: none; }
-    .teams-grid { grid-template-columns: 1fr; }
+  @media (max-width: 900px) {
+    .steps { grid-template-columns: 1fr 1fr; }
+    .cards { grid-template-columns: 1fr; }
+    .teams { grid-template-columns: 1fr; gap: 2.4rem; }
+    .members { grid-template-columns: 1fr 1fr; }
   }
-  @media (max-width: 560px) {
-    .loop-grid { grid-template-columns: 1fr; }
-    .loop-item { border-right: none; border-bottom: 1px solid var(--stone); }
-    .loop-item:last-child { border-bottom: none; }
-    .engage-metrics { grid-template-columns: 1fr; }
-    .engage-metric { border-right: none; border-bottom: 1px solid var(--stone); }
-    .engage-metric:last-child { border-bottom: none; }
+  @media (max-width: 640px) {
+    .slide { padding: 4.8rem 1.4rem 5.4rem; }
+    .steps, .metrics { grid-template-columns: 1fr; }
+    .step, .metric { border-right: none; border-bottom: 1px solid var(--stone); }
+    .step:last-child, .metric:last-child { border-bottom: none; }
+    .members { grid-template-columns: 1fr; }
+    .nav { width: 40px; height: 40px; }
+    .nav.prev { left: 0.7rem; } .nav.next { right: 0.7rem; }
+    .dots { gap: 1rem; } .dot { font-size: 0.6rem; letter-spacing: 0.14em; }
   }
 </style>
 </head>
 <body>
 
-<a class="brandmark" href="/">Hypsis Elicit</a>
+<div class="deck">
+  <div class="deck-bg"></div>
+  <a class="brandmark" href="/">Hypsis Elicit</a>
 
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">Hypsis Elicit &middot; en partenariat avec Jolibrain</div>
-    <h1>Trouvez où l'IA rapporte vraiment,<br>avant de construire quoi que ce&nbsp;soit.</h1>
-    <p class="hero-subtitle">
-      Un portail IA qui laisse vos équipes faire remonter le travail qui leur gâche la semaine &mdash; affiné par l'IA, ancré dans une connaissance souveraine de vos opérations, et priorisé là où une solution paie en premier. <strong>Rien ne sort de votre&nbsp;réseau.</strong>
-    </p>
-    <p class="hero-pillars">Du terrain &nbsp;&middot;&nbsp; Souverain &nbsp;&middot;&nbsp; Possédé</p>
-    <div class="hero-cta">
-      <a href="https://discover-dgx.hypsis.ai">Essayez la démo</a>
-      <p class="hero-cta-sub">Décrivez votre situation &mdash; sans compte, sans engagement.</p>
-    </div>
-  </div>
-  <div class="scroll-hint">
-    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-  </div>
-</section>
+  <button class="nav prev" id="prev" aria-label="Précédent">
+    <svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
+  </button>
+  <button class="nav next" id="next" aria-label="Suivant">
+    <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+  </button>
 
-<!-- ============ WEDGE ============ -->
-<section class="wedge">
-  <div class="reveal">
-    <p class="section-label">Le vrai problème</p>
-    <h2>« On devrait faire plus d'IA. » D'accord &mdash; mais par où, et pourquoi&nbsp;là&nbsp;?</h2>
-  </div>
-  <div class="wedge-body reveal">
-    <p>
-      Tous les comités de direction l'ont entendu. Presque aucun n'a de réponse crédible et priorisée. Les <strong>stratégies descendantes</strong> choisissent des cas d'usage loin du terrain ; les <strong>cabinets</strong> livrent un slide et repartent avec la connaissance ; <strong>l'enthousiasme spontané</strong> produit des expériences dispersées qui fuient les données.
-    </p>
-    <p>
-      Le manque n'est pas l'accès aux modèles. <strong>Le manque, c'est de savoir quel problème résoudre en premier</strong> &mdash; avec des preuves, depuis ceux qui le vivent, sans que vos données ne quittent vos&nbsp;murs.
-    </p>
-  </div>
-</section>
+  <div class="track" id="track">
 
-<!-- ============ LOOP ============ -->
-<section class="loop">
-  <div class="loop-header reveal">
-    <p class="section-label">Comment ça marche</p>
-    <h2>Une boucle simple, à large couverture &mdash; du terrain à la roadmap.</h2>
-  </div>
-  <div class="loop-grid">
-    <div class="loop-item reveal reveal-d-1">
-      <div class="num">01</div>
-      <h3>On collecte</h3>
-      <p>Chacun décrit, dans ses mots, le travail qui lui coûte sa semaine. Texte libre, document, capture. Une <strong>automatisation</strong> assure une couverture large, sans atelier interminable.</p>
-    </div>
-    <div class="loop-item reveal reveal-d-2">
-      <div class="num">02</div>
-      <h3>On factorise</h3>
-      <p>Les besoins terrain sont regroupés en <strong>grandes familles d'usages</strong> &mdash; on passe du bruit à des chantiers lisibles.</p>
-    </div>
-    <div class="loop-item reveal reveal-d-3">
-      <div class="num">03</div>
-      <h3>On note</h3>
-      <p>Chaque famille est évaluée en <strong>faisabilité, TRL, délai et ROI</strong>, avec ses prérequis &mdash; sur des données que vous avez déjà.</p>
-    </div>
-    <div class="loop-item reveal reveal-d-3">
-      <div class="num">04</div>
-      <h3>On priorise</h3>
-      <p>Le résultat est une <strong>roadmap éclairée</strong> que vos équipes peuvent s'approprier et défendre. Agir ici d'abord.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ DELIVERABLE ============ -->
-<section class="deliver">
-  <div class="deliver-inner">
-    <div class="reveal">
-      <p class="section-label">Ce que vous gardez</p>
-      <h2>Pas un slide. Pas un diagnostic. Des artefacts directement utilisables.</h2>
-      <p class="deliver-lead">
-        L'engagement laisse derrière lui des livrables <strong>possédés par le client</strong> &mdash; et un portail souverain qui continue de faire remonter les irritants après la mission.
-      </p>
-    </div>
-    <div class="deliver-grid reveal">
-      <div class="deliver-feature">
-        <h3>Une roadmap dynamique</h3>
-        <p>Des familles d'usages notées en faisabilité, TRL, délai et ROI, dans un outil qui permet d'ajuster les priorités, d'estimer la charge et les coûts &mdash; et de cristalliser un plan crédible et actionnable.</p>
+    <!-- ===== 1 — PROPOSITION DE VALEUR ===== -->
+    <section class="slide">
+      <div class="inner">
+        <div class="eyebrow">Hypsis Elicit &middot; en partenariat avec Jolibrain</div>
+        <h1>Trouvez où l'IA rapporte vraiment,<br>avant de construire quoi que ce&nbsp;soit.</h1>
+        <p class="lead">
+          Un portail IA qui laisse vos équipes faire remonter le travail qui leur gâche la semaine, le factorise en familles d'usages, et le priorise là où une solution paie en premier. <strong>Rien ne sort de votre réseau.</strong>
+        </p>
+        <a href="https://discover-dgx.hypsis.ai" class="cta-button">Essayez la démo</a>
+        <p class="cta-sub">Décrivez votre situation &mdash; sans compte, sans engagement.</p>
+        <p class="pillars">Du terrain &nbsp;&middot;&nbsp; Souverain &nbsp;&middot;&nbsp; Possédé</p>
       </div>
-      <div class="deliver-feature">
-        <h3>Un support collaborateurs</h3>
-        <p>Une restitution du paysage découvert pendant la collecte, pour valoriser la contribution des équipes et amorcer l'adhésion.</p>
-      </div>
-      <div class="deliver-feature">
-        <h3>Un support COMEX</h3>
-        <p>Prêt à l'emploi pour appuyer une décision budgétaire, avec les éléments techniques qui crédibilisent le chemin vers un POC, un MVP, puis la production.</p>
-      </div>
-    </div>
-    <p class="deliver-note">On cadre et on priorise. On s'arrête avant le build &mdash; porté ensuite par Jolibrain ou des partenaires dédiés.</p>
-  </div>
-</section>
+    </section>
 
-<!-- ============ ENGAGEMENT ============ -->
-<section class="engage">
-  <div class="reveal">
-    <p class="section-label">L'engagement</p>
-    <h2>Un format unique : prix fixe, durée fixe, phasage net.</h2>
-    <p class="engage-lead">
-      <strong>Acculturation, collecte, raffinement, restitution.</strong> Vous savez dès le départ ce que vous payez, ce que vous recevez, et quand. Possible parce qu'une partie de la collecte est automatisée.
-    </p>
-  </div>
-  <div class="engage-metrics reveal">
-    <div class="engage-metric">
-      <div class="figure">45<span class="unit">&nbsp;k&euro;</span></div>
-      <p class="cap"><strong>Prix fixe</strong>pas de régie, pas de scope qui dérive</p>
-    </div>
-    <div class="engage-metric">
-      <div class="figure">3<span class="unit">&nbsp;mois</span></div>
-      <p class="cap"><strong>Durée fixe</strong>2 mois de collecte, 1 mois de synthèse</p>
-    </div>
-    <div class="engage-metric">
-      <div class="figure"><span class="unit">&check;</span></div>
-      <p class="cap"><strong>Souverain</strong>sur la Hypsis Box, dans votre réseau</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CREDIBILITY / TEAMS ============ -->
-<section class="teams">
-  <div class="teams-header reveal">
-    <p class="section-label">Qui porte le projet</p>
-    <h2>Le sérieux du sujet est dans les équipes.</h2>
-    <p class="teams-sub">
-      Elicit n'est pas une démo. C'est la rencontre de deux équipes d'ingénierie françaises qui construisent du logiciel de production, ouvert, déployé chez le client.
-    </p>
-  </div>
-  <div class="teams-grid">
-    <!-- Hypsis -->
-    <div class="team-card reveal reveal-d-1">
-      <div class="badge">
-        <img class="avatar" src="../assets/william_orange.png" alt="William Le Ferrand, fondateur d'Hypsis">
-        <div class="badge-text">
-          <div class="name">Hypsis</div>
-          <div class="role">La plateforme, la méthode, la livraison</div>
+    <!-- ===== 2 — MÉTHODE ===== -->
+    <section class="slide">
+      <div class="inner">
+        <div class="eyebrow">Comment ça marche</div>
+        <h2 class="section-title">Du terrain à la roadmap, en une boucle.</h2>
+        <p class="lead">Une collecte large et automatisée, puis le travail d'analyse Hypsis&nbsp;&times;&nbsp;Jolibrain.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="n">01</div><h3>On collecte</h3>
+            <p>Chacun décrit, dans ses mots, ce qui lui coûte sa semaine. Une <strong>automatisation</strong> assure une couverture large.</p>
+          </div>
+          <div class="step">
+            <div class="n">02</div><h3>On factorise</h3>
+            <p>Les besoins sont regroupés en <strong>grandes familles d'usages</strong> &mdash; du bruit aux chantiers lisibles.</p>
+          </div>
+          <div class="step">
+            <div class="n">03</div><h3>On note</h3>
+            <p>Chaque famille est évaluée en <strong>faisabilité, TRL, délai, ROI</strong>, avec ses prérequis.</p>
+          </div>
+          <div class="step">
+            <div class="n">04</div><h3>On priorise</h3>
+            <p>Le résultat : une <strong>roadmap éclairée</strong>, à s'approprier et à défendre. Agir ici d'abord.</p>
+          </div>
         </div>
       </div>
-      <p>
-        Fondé par <strong>William Le Ferrand</strong> &mdash; sept ans d'ingénierie logicielle dans la Silicon Valley, puis la direction d'une société de robotique industrielle.
-      </p>
-      <p>
-        Ensuite <strong>Chief Transformation Officer d'un groupe aéronautique coté (160&nbsp;M&euro;, 1&nbsp;200 personnes)</strong>, où il a déployé une ontologie d'entreprise et les outils opérationnels au-dessus. Hypsis est la plateforme qu'il aurait voulu avoir.
-      </p>
-      <ul class="facts">
-        <li>La <strong>Hypsis Box</strong> fait tourner 80+ applications, inférence locale, couche ontologique</li>
-        <li>Pensé par quelqu'un qui a <strong>vécu la transformation de l'intérieur</strong></li>
-      </ul>
-    </div>
-    <!-- Jolibrain -->
-    <div class="team-card reveal reveal-d-2">
-      <div class="badge">
-        <div class="monogram">JB</div>
-        <div class="badge-text">
-          <div class="name">Jolibrain</div>
-          <div class="role">Le laboratoire d'IA &mdash; Toulouse</div>
+    </section>
+
+    <!-- ===== 3 — LIVRABLE ===== -->
+    <section class="slide">
+      <div class="inner wide">
+        <div class="eyebrow">Le livrable</div>
+        <h2 class="section-title">Pas un slide. Pas un diagnostic. Des artefacts utilisables.</h2>
+        <div class="cards">
+          <div class="card">
+            <div class="tag">01 · Roadmap</div>
+            <h3>Une roadmap dynamique</h3>
+            <p>Des familles d'usages notées (faisabilité, TRL, délai, ROI) dans un outil qui ajuste les priorités, estime charge et coûts, et cristallise un plan actionnable.</p>
+          </div>
+          <div class="card">
+            <div class="tag">02 · Adhésion</div>
+            <h3>Un support collaborateurs</h3>
+            <p>Une restitution du paysage découvert pendant la collecte, pour valoriser la contribution des équipes et amorcer l'adhésion.</p>
+          </div>
+          <div class="card">
+            <div class="tag">03 · Décision</div>
+            <h3>Un support COMEX</h3>
+            <p>Prêt à l'emploi pour appuyer une décision budgétaire, avec les éléments techniques qui crédibilisent le chemin vers le POC, le MVP, puis la production.</p>
+          </div>
+        </div>
+        <p class="note">On cadre et on priorise. On s'arrête avant le build &mdash; porté ensuite par Jolibrain ou des partenaires dédiés.</p>
+      </div>
+    </section>
+
+    <!-- ===== 4 — ENGAGEMENT ===== -->
+    <section class="slide">
+      <div class="inner">
+        <div class="eyebrow">L'engagement</div>
+        <h2 class="section-title">Prix fixe, durée fixe, phasage net.</h2>
+        <p class="lead">Acculturation, collecte, raffinement, restitution. Vous savez dès le départ ce que vous payez, ce que vous recevez, et quand.</p>
+        <div class="metrics">
+          <div class="metric">
+            <div class="figure">45<span class="unit">&nbsp;k&euro;</span></div>
+            <p class="cap"><strong>Prix fixe</strong>pas de régie, pas de scope qui dérive</p>
+          </div>
+          <div class="metric">
+            <div class="figure">3<span class="unit">&nbsp;mois</span></div>
+            <p class="cap"><strong>Durée fixe</strong>2 mois de collecte, 1 mois de synthèse</p>
+          </div>
+          <div class="metric">
+            <div class="figure"><span class="unit">&check;</span></div>
+            <p class="cap"><strong>Souverain</strong>sur la Hypsis Box, dans votre réseau</p>
+          </div>
         </div>
       </div>
-      <p>
-        Un <strong>vrai laboratoire d'IA</strong>, pas un wrapper : une équipe de haut niveau (5&nbsp;docteurs, 20+&nbsp;ans d'expérience) et les auteurs des logiciels open source <strong>DeepDetect, JoliGEN, Wheatley et Colette</strong>.
-      </p>
-      <p>
-        ~100 projets IA livrés en production en 2025 &mdash; aérospatial, défense, industrie, supply chain, cybersécurité. Battle-tested, sur les serveurs du client.
-      </p>
-      <ul class="facts">
-        <li>Ils ont livré pour <strong>Airbus, Dassault, SNCF, CNES</strong></li>
-        <li>Mêmes principes qu'Hypsis : <strong>production, open source, on-premise</strong></li>
-      </ul>
-    </div>
-  </div>
-  <p class="teams-fit reveal">
-    Hypsis cartographie les processus. Jolibrain apporte la solution, sur mesure. <strong>Une application Hypsis, avec Jolibrain inside</strong> &mdash; zéro dépendance à un cloud étranger.
-  </p>
-</section>
+    </section>
 
-<!-- ============ CTA ============ -->
-<section class="cta">
-  <div class="reveal">
-    <div class="divider" style="margin-top: 0;"></div>
-    <h2>Voyez-le sur votre propre&nbsp;sujet.</h2>
-    <p>
-      Décrivez où le travail se bloque &mdash; dans vos mots, avec vos documents. L'IA lit votre situation et esquisse une proposition concrète. Sans compte, sans engagement, rien ne sort de la&nbsp;box.
-    </p>
-    <div class="cta-buttons">
-      <a href="https://discover-dgx.hypsis.ai" class="cta-button">Essayez la démo</a>
-      <a href="mailto:william@hypsis.ai" class="cta-link">Parler à l'équipe</a>
-    </div>
-  </div>
-</section>
+    <!-- ===== 5 — CRÉDIBILITÉ / ÉQUIPES ===== -->
+    <section class="slide">
+      <div class="inner wide">
+        <div class="eyebrow">Crédibilité</div>
+        <h2 class="section-title">Le sérieux du projet est dans les équipes.</h2>
+        <div class="teams">
+          <!-- Hypsis -->
+          <div class="team-col">
+            <div class="team-tag">Hypsis — plateforme, méthode, livraison</div>
+            <div class="lead-person">
+              <img class="lead-avatar" src="../assets/william_orange.png" alt="William Le Ferrand">
+              <div>
+                <div class="person-name">William Le Ferrand</div>
+                <div class="person-role">Fondateur</div>
+                <p class="person-bio">Chief Transformation Officer d'un groupe aéronautique (SOGECLAIR, 157&nbsp;M&euro;), où il a déployé une ontologie d'entreprise. 10+ ans d'ingénierie logicielle dans la Silicon Valley (Sumo Logic, LogicHub, Lantern&nbsp;YC).</p>
+              </div>
+            </div>
+          </div>
+          <!-- Jolibrain -->
+          <div class="team-col">
+            <div class="team-tag">Jolibrain — laboratoire d'IA, Toulouse</div>
+            <p class="team-blurb">
+              Fondé en 2016. Logiciels open source <strong>DeepDetect, JoliGEN, Wheatley, Colette</strong>. ~100 projets IA livrés en production &mdash; <strong>Airbus, Dassault, SNCF, CNES</strong>.
+            </p>
+            <div class="members">
+              <div class="member">
+                <span class="mono">EB</span>
+                <div>
+                  <div class="m-role">CEO &amp; fondateur</div>
+                  <div class="m-name">Emmanuel Benazera</div>
+                  <div class="m-bio">Docteur en IA · ex-NASA, CNRS, CNES · créateur de DeepDetect</div>
+                </div>
+              </div>
+              <div class="member">
+                <span class="mono">HC</span>
+                <div>
+                  <div class="m-role">VP AI Services</div>
+                  <div class="m-name">Hayat Cheballah</div>
+                  <div class="m-bio">Docteure maths &amp; informatique · ex-recherche cryptographie</div>
+                </div>
+              </div>
+              <div class="member">
+                <span class="mono">GI</span>
+                <div>
+                  <div class="m-role">Chercheur</div>
+                  <div class="m-name">Guillaume Infantes</div>
+                  <div class="m-bio">Docteur · 10 ans à l'ONERA · apprentissage par renforcement</div>
+                </div>
+              </div>
+              <div class="member">
+                <span class="mono">LJ</span>
+                <div>
+                  <div class="m-role">Ingénieur R&amp;D senior</div>
+                  <div class="m-name">Luiz de Jesus</div>
+                  <div class="m-bio">Doctorant en IA · mentor ANITI · ex-OVHcloud</div>
+                </div>
+              </div>
+              <div class="member">
+                <span class="mono">AJ</span>
+                <div>
+                  <div class="m-role">AI Applications Developer</div>
+                  <div class="m-name">Antoine Jacquet</div>
+                  <div class="m-bio">Top 3 mondial CodinGame · contributeur noyau Linux</div>
+                </div>
+              </div>
+              <div class="member">
+                <span class="mono">RW</span>
+                <div>
+                  <div class="m-role">Ingénieur R&amp;D — ML</div>
+                  <div class="m-name">Ru Wang</div>
+                  <div class="m-bio">Docteur en physique · deep learning, graphes de connaissance</div>
+                </div>
+              </div>
+              <div class="member">
+                <span class="mono">FJ</span>
+                <div>
+                  <div class="m-role">Business Development</div>
+                  <div class="m-name">Frédéric Jourdan</div>
+                  <div class="m-bio">Cofondateur Snootlab (IoT open source) · cybersécurité</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="teams-fit">
+          Hypsis cartographie les processus. Jolibrain apporte la solution, sur mesure. <strong>Une application Hypsis, avec Jolibrain inside</strong> &mdash; deux maisons d'ingénierie françaises, zéro dépendance à un cloud étranger.
+        </p>
+      </div>
+    </section>
 
-<!-- ============ FOOTER ============ -->
-<footer>
-  <div class="partner">Hypsis <span class="x">&times;</span> Jolibrain</div>
-  <p>Deux équipes d'ingénierie françaises. Une appliance souveraine. &nbsp;&middot;&nbsp; <a href="mailto:william@hypsis.ai">william@hypsis.ai</a></p>
-</footer>
+    <!-- ===== 6 — ESSAYER ===== -->
+    <section class="slide">
+      <div class="inner">
+        <div class="eyebrow">Passez à l'acte</div>
+        <h1>Voyez-le sur votre propre&nbsp;sujet.</h1>
+        <p class="lead">
+          Décrivez où le travail se bloque &mdash; dans vos mots, avec vos documents. L'IA lit votre situation et esquisse une proposition concrète. Sans compte, sans engagement, rien ne sort de la&nbsp;box.
+        </p>
+        <a href="https://discover-dgx.hypsis.ai" class="cta-button">Essayez la démo</a>
+        <br>
+        <a href="mailto:william@hypsis.ai" class="cta-secondary">Parler à l'équipe &rarr;</a>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="dots" id="dots">
+    <button class="dot active" data-i="0">Valeur</button>
+    <button class="dot" data-i="1">Méthode</button>
+    <button class="dot" data-i="2">Livrable</button>
+    <button class="dot" data-i="3">Engagement</button>
+    <button class="dot" data-i="4">Équipes</button>
+    <button class="dot" data-i="5">Essayer</button>
+  </div>
+
+  <footer class="deck-footer">
+    <div class="partner">Hypsis <span class="x">&times;</span> Jolibrain</div>
+  </footer>
+</div>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  const track = document.getElementById('track');
+  const slides = Array.from(track.children);
+  const dots = Array.from(document.getElementById('dots').children);
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  const n = slides.length;
+  let i = 0;
+
+  function go(target) {
+    i = Math.max(0, Math.min(n - 1, target));
+    track.style.transform = 'translateX(' + (-i * 100) + '%)';
+    slides.forEach((s, k) => s.classList.toggle('active', k === i));
+    dots.forEach((d, k) => d.classList.toggle('active', k === i));
+    prev.disabled = (i === 0);
+    next.disabled = (i === n - 1);
+  }
+
+  prev.addEventListener('click', () => go(i - 1));
+  next.addEventListener('click', () => go(i + 1));
+  dots.forEach(d => d.addEventListener('click', () => go(parseInt(d.dataset.i, 10))));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') go(i + 1);
+    else if (e.key === 'ArrowLeft') go(i - 1);
+  });
+
+  let x0 = null;
+  track.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50) go(dx < 0 ? i + 1 : i - 1);
+    x0 = null;
+  }, { passive: true });
+
+  let lock = false;
+  window.addEventListener('wheel', (e) => {
+    const target = e.target.closest('.slide');
+    if (target && target.scrollHeight > target.clientHeight && Math.abs(e.deltaY) > Math.abs(e.deltaX)) return;
+    const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    if (Math.abs(d) < 24 || lock) return;
+    lock = true;
+    go(d > 0 ? i + 1 : i - 1);
+    setTimeout(() => { lock = false; }, 800);
+  }, { passive: true });
+
+  go(0);
 </script>
 </body>
 </html>
