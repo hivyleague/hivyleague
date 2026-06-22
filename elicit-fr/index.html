@@ -48,8 +48,9 @@
   }
   .slide {
     flex: 0 0 100%; height: 100%;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: safe center;
     text-align: center; padding: 6rem 2.4rem 6rem; overflow-y: auto;
+    touch-action: pan-y; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
   }
   .slide .inner {
     max-width: 880px; width: 100%;
@@ -241,20 +242,48 @@
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 900px) {
+    .slide { padding: 5.4rem 1.9rem 5.8rem; }
     .steps { grid-template-columns: 1fr 1fr; }
     .cards { grid-template-columns: 1fr; }
-    .deliver { grid-template-columns: 1fr; gap: 2rem; }
-    .team-people { grid-template-columns: repeat(2, 1fr); gap: 1.8rem 1.5rem; }
+    .deliver { grid-template-columns: 1fr; gap: 1.8rem; }
+    .team-people { grid-template-columns: repeat(3, 1fr); gap: 1.8rem 1.4rem; }
   }
   @media (max-width: 640px) {
-    .slide { padding: 4.8rem 1.4rem 5.4rem; }
-    .steps, .metrics { grid-template-columns: 1fr; }
-    .step, .metric { border-right: none; border-bottom: 1px solid var(--stone); }
+    .slide { padding: 4.4rem 1.3rem 5.6rem; }
+    .slide .inner, .slide .inner.wide { max-width: 100%; }
+    .slide .lead { margin-bottom: 1.8rem; }
+    .steps, .metrics { grid-template-columns: 1fr; max-width: 420px; }
+    .step, .metric { border-right: none; border-bottom: 1px solid var(--stone); padding: 1.5rem 0.4rem; }
     .step:last-child, .metric:last-child { border-bottom: none; }
-    .members { grid-template-columns: 1fr; }
-    .nav { width: 40px; height: 40px; }
-    .nav.prev { left: 0.7rem; } .nav.next { right: 0.7rem; }
-    .dots { gap: 1rem; } .dot { font-size: 0.6rem; letter-spacing: 0.14em; }
+    .team-people { grid-template-columns: repeat(2, 1fr); gap: 1.6rem 1.3rem; }
+    .union { margin-bottom: 1.9rem; }
+    .union-logos .logo-jolibrain { height: 36px; }
+    .union-logos .logo-hypsis { height: 18px; }
+    .dgx-img { max-width: 220px; }
+    .shot-bar span { display: none; }
+    .stair-box { padding: 1rem 1.15rem 1.05rem; }
+
+    /* header chrome */
+    .brandmark { top: 1rem; left: 1.1rem; gap: 0.5rem; }
+    .brandmark img.logo-hypsis { height: 13px; }
+    .brandmark img.logo-jolibrain { height: 26px; }
+    .nav { width: 38px; height: 38px; background: rgba(248,246,241,0.82); }
+    .nav.prev { left: 0.45rem; }
+    .nav.next { right: 0.45rem; }
+
+    /* dots become bottom-centered indicators */
+    .dots { top: auto; bottom: 1rem; gap: 0.55rem; }
+    .dot { font-size: 0; width: 24px; height: 24px; padding: 0; }
+    .dot::after {
+      content: ''; left: 50%; top: 50%; right: auto; bottom: auto;
+      width: 7px; height: 7px; border-radius: 50%; background: var(--stone);
+      transform: translate(-50%, -50%);
+    }
+    .dot:hover::after { background: var(--bronze-light); }
+    .dot.active::after { background: var(--bronze); transform: translate(-50%, -50%); }
+  }
+  @media (max-width: 360px) {
+    .team-people { gap: 1.4rem 1rem; }
   }
 </style>
 </head>
@@ -479,13 +508,19 @@
     else if (e.key === 'ArrowLeft') go(i - 1);
   });
 
-  let x0 = null;
-  track.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  let x0 = null, y0 = null;
+  track.addEventListener('touchstart', (e) => {
+    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+  }, { passive: true });
   track.addEventListener('touchend', (e) => {
     if (x0 === null) return;
     const dx = e.changedTouches[0].clientX - x0;
-    if (Math.abs(dx) > 50) go(dx < 0 ? i + 1 : i - 1);
-    x0 = null;
+    const dy = e.changedTouches[0].clientY - y0;
+    // only navigate on a clearly horizontal swipe (lets vertical scroll work)
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.3) {
+      go(dx < 0 ? i + 1 : i - 1);
+    }
+    x0 = y0 = null;
   }, { passive: true });
 
   let lock = false;
