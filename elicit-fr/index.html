@@ -152,18 +152,11 @@
   .stair { display: flex; flex-direction: column; gap: 0.95rem; }
   .stair-box {
     background: var(--paper-warm); border: 1px solid var(--stone); border-radius: 4px;
-    padding: 1.15rem 1.35rem 1.2rem; position: relative;
+    padding: 1.15rem 1.35rem 1.2rem;
   }
-  .stair-box:nth-child(2) { margin-left: 2.3rem; }
-  .stair-box:nth-child(3) { margin-left: 4.6rem; }
   .stair-box .tag { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--bronze); margin-bottom: 0.5rem; }
   .stair-box h3 { font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.35rem; letter-spacing: -0.01em; }
   .stair-box p { font-size: 0.84rem; font-weight: 300; color: var(--ink-soft); line-height: 1.5; }
-  .stair-box::before {
-    content: ""; position: absolute; left: -1.35rem; top: 1.55rem;
-    width: 1.05rem; height: 1px; background: var(--bronze-light);
-  }
-  .stair-box:first-child::before { display: none; }
 
   /* ---- ENGAGEMENT ---- */
   .metrics {
@@ -314,14 +307,14 @@
     <section class="slide">
       <div class="inner wide">
         <div class="eyebrow">Le livrable</div>
-        <h2 class="section-title">Pas un slide. Pas un diagnostic. Des artefacts utilisables.</h2>
+        <h2 class="section-title">Un appui à la décision.</h2>
         <div class="deliver">
           <div class="shot-wrap">
             <div class="shot">
-              <div class="shot-bar"><i></i><i></i><i></i><span>roadmap-ia · simulateur de priorisation</span></div>
-              <img src="../assets/deliverable-simulator.png?v=1" alt="Simulateur de priorisation : tableau de bord d'une roadmap IA dynamique — charge en jours-homme, mix de valeur, effort par site et top projets.">
+              <div class="shot-bar"><i></i><i></i><i></i><span>roadmap-ia · familles d'usages &amp; impact EBITDA</span></div>
+              <img src="../assets/hypsis-platform-screenshot.png?v=1" alt="Plateforme Hypsis : familles d'usages présentées en leviers notés (impact EBITDA, investissement, délai, friction) avec un panneau d'hypothèses recalculant l'impact en direct.">
             </div>
-            <p class="shot-cap">Un exemple : le simulateur de priorisation livré à un industriel &mdash; charge, mix de valeur et arbitrages, ajustables en direct.</p>
+            <p class="shot-cap">Un exemple : la plateforme de priorisation &mdash; familles d'usages notées en impact, investissement et délai, recalculées en direct.</p>
           </div>
           <div class="stair">
             <div class="stair-box">
