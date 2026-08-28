@@ -62,13 +62,13 @@
      ========================================= */
   .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 86vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     text-align: center;
-    padding: clamp(4rem, 12vh, 9rem) 2rem 5rem;
+    padding: clamp(3.5rem, 10vh, 7rem) 2rem 4rem;
     overflow: hidden;
   }
   .hero-frame {
@@ -133,9 +133,10 @@
   .hero-subtitle {
     font-size: clamp(1.05rem, 1.7vw, 1.28rem);
     font-weight: 300;
+    font-style: italic;
     color: rgba(255,255,255,0.94);
     text-shadow: 0 1px 18px rgba(29,49,64,0.6);
-    max-width: 660px;
+    max-width: 620px;
     margin: 0 auto 2.2rem;
     line-height: 1.7;
     opacity: 0;
@@ -184,24 +185,6 @@
     stroke-width: 1.5;
     fill: none;
   }
-
-  /* =========================================
-     LA LIGNE DE CRÊTE (interstitiel)
-     ========================================= */
-  .crete-zone {
-    padding: 4.5rem 2rem 3rem;
-    text-align: center;
-  }
-  .crete-zone .crete {
-    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-    font-weight: 400;
-    color: var(--ink);
-    font-style: italic;
-    max-width: 620px;
-    margin: 1.8rem auto 0;
-    line-height: 1.65;
-  }
-  .crete-zone .crete strong { font-style: normal; color: var(--pine); font-weight: 500; }
 
   .divider-zone { padding: 1.5rem 0; }
 
@@ -643,7 +626,7 @@
     <p class="hero-eyebrow">Hypsis</p>
     <h1>Débloquer<br>la&nbsp;décision.</h1>
     <p class="hero-subtitle">
-      hypsis réunit des maisons indépendantes — opérateurs seniors et ingénieurs de l&rsquo;IA — autour des décisions qui bloquent&nbsp;: données dispersées, scénarios innombrables, enjeux trop lourds pour trancher à l&rsquo;intuition.
+      Une décision se marche comme une ligne de crête&nbsp;: la vue porte loin des deux côtés, mais l&rsquo;appui est étroit — et il faut avancer.
     </p>
     <div class="hero-cta">
       <a href="mailto:team@hypsis.ai">Apportez-nous une décision bloquée</a>
@@ -653,17 +636,6 @@
   <div class="scroll-hint">
     <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
   </div>
-</section>
-
-<!-- ============ LA LIGNE DE CRÊTE ============ -->
-<section class="crete-zone reveal">
-  <svg class="ridge-divider" viewBox="0 0 420 40" aria-hidden="true">
-    <polyline points="0,34 60,22 105,28 160,10 215,24 265,16 320,30 370,20 420,26"/>
-    <circle class="peak-dot" cx="160" cy="10" r="2.5"/>
-  </svg>
-  <p class="crete">
-    Une décision se marche comme une <strong>ligne de crête</strong>&nbsp;: la vue porte loin des deux côtés, mais l&rsquo;appui est étroit — et il faut avancer.
-  </p>
 </section>
 
 <!-- ============ LA CONSTELLATION ============ -->
