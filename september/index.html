@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hypsis — Débloquer la décision</title>
+<meta name="description" content="hypsis réunit des maisons indépendantes — augmentées par l'IA — autour des décisions qui bloquent. Souverain, auditable, sur site.">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=Italiana&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f8f6f1;
+    --paper-warm: #f0ece3;
+    --ink: #1a1a2e;
+    --ink-soft: #3d3d54;
+    --ink-muted: #7a7a8c;
+    --bronze: #7a6840;
+    --bronze-light: #a89060;
+    --bronze-dark: #5c4e30;
+    --stone: #d4cfc5;
+    --stone-light: #e8e4db;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Outfit', -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 1rem;
+  }
+
+  .divider {
+    width: 120px;
+    height: 1px;
+    background: var(--stone);
+    margin: 0 auto 3rem;
+  }
+
+  /* =========================================
+     HERO
+     ========================================= */
+  .hero {
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem 5rem;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Italiana', serif;
+    font-size: clamp(0.78rem, 1.1vw, 0.92rem);
+    letter-spacing: 0.55em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 1.6rem;
+    opacity: 0;
+    animation: fadeIn 1.4s ease 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.6rem;
+    opacity: 0;
+    animation: fadeInUp 1.4s ease 0.4s forwards;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 680px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeInUp 1.4s ease 0.7s forwards;
+  }
+
+  .hero-cta {
+    opacity: 0;
+    animation: fadeInUp 1.4s ease 1s forwards;
+  }
+  .hero-cta a {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.95rem 2.5rem;
+    text-decoration: none;
+    transition: all 0.35s ease;
+  }
+  .hero-cta a:hover {
+    background: var(--bronze-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 24px rgba(26,26,46,0.14);
+  }
+  .hero-cta-sub {
+    margin-top: 0.8rem;
+    font-size: 0.84rem;
+    font-weight: 300;
+    color: var(--ink-muted);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 1.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: fadeIn 1.4s ease 1.5s forwards, float 3s ease-in-out infinite 1.5s;
+  }
+  .scroll-hint svg {
+    width: 18px; height: 18px;
+    stroke: var(--stone);
+    stroke-width: 1.5;
+    fill: none;
+  }
+
+  /* =========================================
+     LE CONSTAT
+     ========================================= */
+  .constat {
+    padding: 6rem 2rem;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .constat h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .constat p {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 1.2rem;
+  }
+  .constat p strong { font-weight: 500; color: var(--ink); }
+  .constat p:last-child { margin-bottom: 0; }
+
+  /* =========================================
+     LA MÉTHODE
+     ========================================= */
+  .methode {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .methode-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+  .methode h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .methode-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--stone);
+    border-bottom: 1px solid var(--stone);
+  }
+  .methode-item {
+    padding: 2.6rem 2rem;
+    border-right: 1px solid var(--stone);
+  }
+  .methode-item:last-child { border-right: none; }
+  .methode-item .num {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    color: var(--bronze);
+    margin-bottom: 1rem;
+  }
+  .methode-item h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+    letter-spacing: -0.01em;
+  }
+  .methode-item p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+  .methode-closing {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .methode-closing em {
+    font-style: normal;
+    color: var(--bronze-dark);
+    font-weight: 500;
+  }
+
+  /* =========================================
+     LA CONSTELLATION
+     ========================================= */
+  .constellation {
+    padding: 6rem 2rem;
+    background: var(--paper-warm);
+  }
+  .constellation-inner {
+    max-width: 1050px;
+    margin: 0 auto;
+  }
+  .constellation-header {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .constellation h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    max-width: 720px;
+    margin: 0 auto 1rem;
+  }
+  .constellation-lead {
+    font-size: 1.02rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin: 0 auto 3.5rem;
+    text-align: center;
+    line-height: 1.7;
+  }
+
+  .constellation-stage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  /* --- the orbital diagram --- */
+  .orbit {
+    position: relative;
+    aspect-ratio: 1;
+    max-width: 440px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .orbit svg.orbit-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .orbit svg.orbit-lines line {
+    stroke: var(--stone);
+    stroke-width: 1;
+  }
+  .orbit svg.orbit-lines circle.ring {
+    fill: none;
+    stroke: var(--stone);
+    stroke-width: 1;
+    stroke-dasharray: 2 6;
+  }
+
+  .node {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid var(--stone);
+    background: var(--paper);
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    padding: 0.6rem;
+  }
+  .node:hover, .node:focus-visible, .node[aria-expanded="true"] {
+    border-color: var(--bronze);
+    box-shadow: 0 6px 30px rgba(122,104,64,0.18);
+    outline: none;
+  }
+  .node .node-name {
+    font-family: 'Italiana', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  .node .node-dim {
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-top: 0.3rem;
+    line-height: 1.35;
+  }
+
+  .node-center {
+    left: 50%; top: 50%;
+    width: 42%;
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  .node-center .node-name { color: var(--paper); font-size: clamp(1rem, 2vw, 1.35rem); letter-spacing: 0.3em; }
+  .node-center .node-dim { color: var(--bronze-light); }
+  .node-center:hover, .node-center:focus-visible, .node-center[aria-expanded="true"] {
+    border-color: var(--bronze-light);
+  }
+
+  .node-sat { width: 34%; }
+  .node-sat .node-name { font-size: clamp(0.62rem, 1.3vw, 0.8rem); }
+  .node-oceanbridge { left: 16%; top: 16%; }
+  .node-jolibrain  { left: 84%; top: 78%; }
+
+  .orbit-hint {
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: var(--ink-muted);
+    margin-top: 1.2rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* --- the bio panel --- */
+  .bio-panel { min-height: 320px; }
+  .bio {
+    display: none;
+    animation: fadeIn 0.45s ease;
+  }
+  .bio.active { display: block; }
+  .bio .bio-house {
+    font-family: 'Italiana', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 0.4rem;
+  }
+  .bio .bio-dim {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 1.4rem;
+  }
+  .bio h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.2rem;
+  }
+  .bio .bio-title {
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: var(--bronze-dark);
+    margin-bottom: 1.1rem;
+  }
+  .bio p {
+    font-size: 0.98rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .bio p strong { font-weight: 500; color: var(--ink); }
+  .bio a.bio-link {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    text-decoration: none;
+    border-bottom: 1px solid var(--stone);
+    padding-bottom: 2px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+  .bio a.bio-link:hover { color: var(--ink); border-color: var(--bronze); }
+
+  /* =========================================
+     LA GARANTIE
+     ========================================= */
+  .garantie {
+    padding: 6rem 2rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .garantie-inner { max-width: 1000px; margin: 0 auto; }
+  .garantie .section-label { color: var(--bronze-light); }
+  .garantie h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.8rem;
+  }
+  .garantie-lead {
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    font-weight: 300;
+    color: rgba(248,246,241,0.7);
+    max-width: 720px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+  .garantie-lead strong { font-weight: 500; color: var(--paper); }
+  .garantie-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid rgba(248,246,241,0.12);
+    border-bottom: 1px solid rgba(248,246,241,0.12);
+  }
+  .garantie-feature {
+    padding: 2rem 1.7rem;
+    border-right: 1px solid rgba(248,246,241,0.12);
+  }
+  .garantie-feature:last-child { border-right: none; }
+  .garantie-feature h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+  .garantie-list { list-style: none; }
+  .garantie-list li {
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: rgba(248,246,241,0.62);
+    line-height: 1.55;
+    padding: 0.3rem 0 0.3rem 1rem;
+    position: relative;
+  }
+  .garantie-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.7rem;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--bronze-light);
+  }
+
+  /* =========================================
+     PRESCRIPTEURS
+     ========================================= */
+  .prescripteurs {
+    padding: 4.5rem 2rem;
+    text-align: center;
+  }
+  .prescripteurs p {
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .prescripteurs p strong { font-weight: 500; color: var(--ink); }
+
+  /* =========================================
+     CTA
+     ========================================= */
+  .cta {
+    padding: 4rem 2rem 6rem;
+    text-align: center;
+  }
+  .cta h2 {
+    font-size: clamp(1.6rem, 3.3vw, 2.4rem);
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.01em;
+  }
+  .cta p {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--ink-muted);
+    margin: 0 auto 2rem;
+    max-width: 560px;
+    line-height: 1.6;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .cta-button {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.95rem 2.6rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .cta-button:hover {
+    background: var(--bronze-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(26,26,46,0.12);
+  }
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    text-decoration: none;
+    padding: 0.9rem 1.4rem;
+    transition: color 0.3s ease;
+  }
+  .cta-link:hover { color: var(--ink); }
+
+  /* =========================================
+     FOOTER
+     ========================================= */
+  footer {
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--stone);
+  }
+  footer .wordmark {
+    font-family: 'Italiana', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.5em;
+    color: var(--bronze);
+    text-transform: uppercase;
+  }
+  footer p {
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: var(--ink-muted);
+    margin-top: 0.5rem;
+  }
+  footer a { color: var(--bronze); text-decoration: none; transition: color 0.3s ease; }
+  footer a:hover { color: var(--ink); }
+
+  /* =========================================
+     ANIMATIONS & REVEAL
+     ========================================= */
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(5px); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-d-1 { transition-delay: 0.1s; }
+  .reveal-d-2 { transition-delay: 0.2s; }
+  .reveal-d-3 { transition-delay: 0.3s; }
+
+  /* =========================================
+     RESPONSIVE
+     ========================================= */
+  @media (max-width: 880px) {
+    .methode-grid, .garantie-grid { grid-template-columns: 1fr; }
+    .methode-item {
+      border-right: none;
+      border-bottom: 1px solid var(--stone);
+    }
+    .methode-item:last-child { border-bottom: none; }
+    .garantie-feature {
+      border-right: none;
+      border-bottom: 1px solid rgba(248,246,241,0.12);
+    }
+    .garantie-feature:last-child { border-bottom: none; }
+
+    .constellation-stage {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .orbit { max-width: 340px; }
+    .bio-panel { min-height: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div>
+    <p class="hero-eyebrow">Hypsis</p>
+    <h1>Débloquer<br>la&nbsp;décision.</h1>
+    <p class="hero-subtitle">
+      hypsis réunit des maisons indépendantes — opérateurs seniors et ingénieurs de l&rsquo;IA — autour des décisions qui bloquent&nbsp;: données dispersées, scénarios innombrables, enjeux trop lourds pour trancher à l&rsquo;intuition.
+    </p>
+    <div class="hero-cta">
+      <a href="mailto:team@hypsis.ai">Apportez-nous une décision bloquée</a>
+      <p class="hero-cta-sub">Décrivez-la avec vos mots — nous revenons avec un angle d&rsquo;attaque.</p>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ============ LE CONSTAT ============ -->
+<section class="constat">
+  <div class="reveal">
+    <p class="section-label">Le constat</p>
+    <h2>Les organisations ne manquent pas d&rsquo;analyses. Elles manquent de&nbsp;tranchant.</h2>
+  </div>
+  <div class="reveal">
+    <p>
+      Les comités s&rsquo;enlisent. Les données existent, mais dispersées — dans l&rsquo;ERP, les tableurs, les mails, la tête des équipes. Les scénarios sont trop nombreux pour être joués à la main. Et personne ne tient ensemble <strong>la stratégie, l&rsquo;opérationnel et les données</strong>.
+    </p>
+    <p>
+      Pendant ce temps, la décision attend. Et chaque semaine d&rsquo;attente coûte plus cher que l&rsquo;étude qui devait la&nbsp;justifier.
+    </p>
+  </div>
+</section>
+
+<!-- ============ LA MÉTHODE ============ -->
+<section class="methode">
+  <div class="methode-header reveal">
+    <p class="section-label">La méthode</p>
+    <h2>L&rsquo;IA comme instrument de la décision — trois usages&nbsp;précis.</h2>
+  </div>
+  <div class="methode-grid">
+    <div class="methode-item reveal reveal-d-1">
+      <div class="num">01 — Asseoir</div>
+      <h3>Ancrer la décision dans vos données</h3>
+      <p>Chaque recommandation repose sur les données réelles de l&rsquo;entreprise, sous quelque forme qu&rsquo;elles existent — ERP, documents, tableurs, historiques. Pas d&rsquo;opinion hors-sol.</p>
+    </div>
+    <div class="methode-item reveal reveal-d-2">
+      <div class="num">02 — Explorer</div>
+      <h3>Jouer les scénarios impossibles à la main</h3>
+      <p>Des milliers de scénarios, des dimensions inaccessibles à l&rsquo;analyse manuelle. L&rsquo;espace de la décision est parcouru en entier — pas seulement les trois options du consensus.</p>
+    </div>
+    <div class="methode-item reveal reveal-d-3">
+      <div class="num">03 — Restituer</div>
+      <h3>Rendre le tout intelligible</h3>
+      <p>Les tenants et les aboutissants, restitués pour ceux qui décident. Pas un rapport de quatre-vingts pages — ce qu&rsquo;il faut savoir pour trancher, et pourquoi.</p>
+    </div>
+  </div>
+  <p class="methode-closing reveal">Le livrable n&rsquo;est pas un rapport. <em>C&rsquo;est une décision prise.</em></p>
+</section>
+
+<!-- ============ LA CONSTELLATION ============ -->
+<section class="constellation">
+  <div class="constellation-inner">
+    <div class="constellation-header reveal">
+      <p class="section-label">Le partenariat</p>
+      <h2>hypsis est un partenariat de maisons&nbsp;indépendantes.</h2>
+      <p class="constellation-lead">
+        Chaque maison est garante d&rsquo;une dimension de la décision. Personne n&rsquo;est le sous-traitant de personne — et une seule signature porte la&nbsp;mission.
+      </p>
+    </div>
+
+    <div class="constellation-stage reveal">
+      <div>
+        <div class="orbit">
+          <svg class="orbit-lines" viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="ring" cx="50" cy="50" r="46"/>
+            <line x1="50" y1="50" x2="16" y2="16"/>
+            <line x1="50" y1="50" x2="84" y2="78"/>
+          </svg>
+          <button class="node node-center" data-bio="hypsis" aria-expanded="true" aria-controls="bio-hypsis">
+            <span class="node-name">Hypsis</span>
+            <span class="node-dim">La mission</span>
+          </button>
+          <button class="node node-sat node-oceanbridge" data-bio="oceanbridge" aria-expanded="false" aria-controls="bio-oceanbridge">
+            <span class="node-name">Oceanbridge<br>Partners</span>
+            <span class="node-dim">La décision</span>
+          </button>
+          <button class="node node-sat node-jolibrain" data-bio="jolibrain" aria-expanded="false" aria-controls="bio-jolibrain">
+            <span class="node-name">Jolibrain</span>
+            <span class="node-dim">L&rsquo;état de l&rsquo;art IA</span>
+          </button>
+        </div>
+        <p class="orbit-hint">Survolez ou touchez chaque maison pour rencontrer ses&nbsp;visages.</p>
+      </div>
+
+      <div class="bio-panel">
+        <article class="bio active" id="bio-hypsis">
+          <p class="bio-house">Hypsis</p>
+          <p class="bio-dim">Le nom du partenariat — la signature de la mission</p>
+          <h3>William Le Ferrand</h3>
+          <p class="bio-title">Fondateur &amp; Managing Partner</p>
+          <p>
+            Ingénieur logiciel dans la Silicon Valley, repreneur d&rsquo;une société de robotique industrielle, puis membre du comité exécutif d&rsquo;un groupe aéronautique coté (160&nbsp;M&euro;, 1&nbsp;200&nbsp;personnes) en tant que Chief Transformation Officer.
+          </p>
+          <p>
+            <strong>&laquo;&nbsp;J&rsquo;ai réuni les maisons que j&rsquo;aurais voulu avoir autour de la table.&nbsp;&raquo;</strong>
+          </p>
+        </article>
+
+        <article class="bio" id="bio-oceanbridge">
+          <p class="bio-house">Oceanbridge Partners</p>
+          <p class="bio-dim">Garant de la décision</p>
+          <h3>Philippe Robert</h3>
+          <p class="bio-title">Partner</p>
+          <p>
+            Opérateur transverse — du comité de direction à l&rsquo;implémentation opérationnelle. Le jugement senior qui tient ensemble la stratégie et le&nbsp;terrain.
+          </p>
+        </article>
+
+        <article class="bio" id="bio-jolibrain">
+          <p class="bio-house">Jolibrain</p>
+          <p class="bio-dim">Garant de l&rsquo;état de l&rsquo;art IA / ML</p>
+          <h3>Emmanuel Benazera</h3>
+          <p class="bio-title">Fondateur</p>
+          <p>
+            Dix ans d&rsquo;ingénierie IA au service de l&rsquo;aéronautique, de la défense et de la cybersécurité. À l&rsquo;origine des plateformes open source DeepDetect, JoliGEN et Wheatley — du code publié, vérifiable, qui tourne sur site chez de très grands&nbsp;groupes.
+          </p>
+          <p><a class="bio-link" href="https://www.jolibrain.com/" target="_blank" rel="noopener">jolibrain.com</a></p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LA GARANTIE ============ -->
+<section class="garantie">
+  <div class="garantie-inner">
+    <div class="reveal">
+      <p class="section-label">La garantie</p>
+      <h2>Vos données ne quittent pas votre&nbsp;réseau.</h2>
+      <p class="garantie-lead">
+        Nous travaillons sur vos données les plus sensibles parce que <strong>notre infrastructure tourne chez vous</strong> — c&rsquo;est ce qui nous donne accès aux problèmes que d&rsquo;autres ne peuvent même pas regarder.
+      </p>
+    </div>
+    <div class="garantie-grid reveal">
+      <div class="garantie-feature">
+        <h3>Souverain par conception</h3>
+        <ul class="garantie-list">
+          <li>Aucune donnée ne sort du réseau de l&rsquo;entreprise</li>
+          <li>Pas de cloud, pas de dépendance à une pile étrangère</li>
+          <li>Compatible RGPD et NIS2 d&rsquo;origine</li>
+        </ul>
+      </div>
+      <div class="garantie-feature">
+        <h3>Des modèles auditables</h3>
+        <ul class="garantie-list">
+          <li>Des modèles ouverts, pas des boîtes noires</li>
+          <li>Une ingénierie qui publie son travail en open source</li>
+          <li>Vous savez comment c&rsquo;est entraîné, sur quoi, avec quels biais</li>
+        </ul>
+      </div>
+      <div class="garantie-feature">
+        <h3>Vous restez maîtres</h3>
+        <ul class="garantie-list">
+          <li>Pas de dépendance à un fournisseur</li>
+          <li>Votre DSI garde la main dès le premier jour</li>
+          <li>Le système continue de tourner — et de servir — sans nous</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRESCRIPTEURS ============ -->
+<section class="prescripteurs">
+  <p class="reveal">
+    Nous intervenons le plus souvent aux côtés de <strong>cabinets de conseil</strong> et de <strong>fonds d&rsquo;investissement</strong>, qui nous confient les décisions bloquées de leurs clients et de leurs&nbsp;participations.
+  </p>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="reveal">
+    <div class="divider"></div>
+    <h2>Apportez-nous une décision&nbsp;bloquée.</h2>
+    <p>
+      Décrivez-la en quelques lignes, avec vos mots. Nous revenons avec un angle d&rsquo;attaque.
+    </p>
+    <div class="cta-buttons">
+      <a href="mailto:team@hypsis.ai" class="cta-button">team@hypsis.ai</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wordmark">Hypsis</div>
+  <p>Le partenariat de la décision &nbsp;&middot;&nbsp; <a href="mailto:team@hypsis.ai">team@hypsis.ai</a></p>
+  <p><a href="../legal-notice/">Mentions légales</a></p>
+</footer>
+
+<script>
+  // Constellation: hover (desktop) and tap (mobile) reveal each house's bio.
+  const nodes = document.querySelectorAll('.node');
+  const bios = document.querySelectorAll('.bio');
+
+  function showBio(key) {
+    bios.forEach(b => b.classList.toggle('active', b.id === 'bio-' + key));
+    nodes.forEach(n => n.setAttribute('aria-expanded', String(n.dataset.bio === key)));
+  }
+
+  nodes.forEach(node => {
+    node.addEventListener('mouseenter', () => showBio(node.dataset.bio));
+    node.addEventListener('focus', () => showBio(node.dataset.bio));
+    node.addEventListener('click', () => showBio(node.dataset.bio));
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
