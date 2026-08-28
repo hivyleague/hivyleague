@@ -494,6 +494,9 @@
     node.addEventListener('focus', () => showBio(node.dataset.bio));
     node.addEventListener('click', () => showBio(node.dataset.bio));
   });
+
+  // Au chargement, mettre en avant un partenaire ou la plateforme au hasard.
+  showBio(nodes[Math.floor(Math.random() * nodes.length)].dataset.bio);
 </script>
 </body>
 </html>
