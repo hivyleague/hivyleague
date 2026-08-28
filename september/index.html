@@ -186,108 +186,24 @@
   }
 
   /* =========================================
-     LE CONSTAT
+     LA LIGNE DE CRÊTE (interstitiel)
      ========================================= */
-  .constat {
-    padding: 6rem 2rem 5rem;
-    max-width: 760px;
-    margin: 0 auto;
+  .crete-zone {
+    padding: 4.5rem 2rem 3rem;
+    text-align: center;
   }
-  .constat h2 {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 600;
-    line-height: 1.3;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
-  }
-  .constat p {
-    font-size: 1.05rem;
-    font-weight: 300;
-    color: var(--ink-soft);
-    line-height: 1.75;
-    margin-bottom: 1.2rem;
-  }
-  .constat p strong { font-weight: 500; color: var(--ink); }
-  .constat .crete {
-    margin-top: 2rem;
-    padding-left: 1.4rem;
-    border-left: 2px solid var(--sage);
-    font-size: 1.12rem;
+  .crete-zone .crete {
+    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
     font-weight: 400;
     color: var(--ink);
     font-style: italic;
-  }
-  .constat .crete strong { font-style: normal; color: var(--pine); font-weight: 500; }
-
-  .divider-zone { padding: 1.5rem 0; }
-
-  /* =========================================
-     LA MÉTHODE
-     ========================================= */
-  .methode {
-    padding: 5rem 2rem 6rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .methode-header {
-    text-align: center;
-    margin-bottom: 3.5rem;
-  }
-  .methode h2 {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 600;
-    line-height: 1.3;
-    letter-spacing: -0.02em;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-  .methode-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .methode-item {
-    padding: 2.6rem 2rem;
-    border-right: 1px solid var(--line);
-  }
-  .methode-item:last-child { border-right: none; }
-  .methode-item .num {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--moss);
-    margin-bottom: 1rem;
-  }
-  .methode-item h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.7rem;
-    letter-spacing: -0.01em;
-  }
-  .methode-item p {
-    font-size: 0.95rem;
-    font-weight: 300;
-    color: var(--ink-soft);
+    max-width: 620px;
+    margin: 1.8rem auto 0;
     line-height: 1.65;
   }
-  .methode-item p strong { font-weight: 500; color: var(--ink); }
-  .methode-closing {
-    text-align: center;
-    margin-top: 3rem;
-    font-size: clamp(1.1rem, 1.8vw, 1.3rem);
-    font-weight: 400;
-    color: var(--ink);
-    max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .methode-closing em {
-    font-style: normal;
-    color: var(--pine);
-    font-weight: 500;
-  }
+  .crete-zone .crete strong { font-style: normal; color: var(--pine); font-weight: 500; }
+
+  .divider-zone { padding: 1.5rem 0; }
 
   /* =========================================
      LA CONSTELLATION
@@ -484,6 +400,36 @@
     margin-bottom: 1rem;
   }
   .bio p strong { font-weight: 500; color: var(--ink); }
+  .bio-uses {
+    list-style: none;
+    margin-bottom: 1.1rem;
+  }
+  .bio-uses li {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    padding: 0.35rem 0 0.35rem 1.1rem;
+    position: relative;
+  }
+  .bio-uses li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.95rem;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--moss);
+  }
+  .bio-uses li strong { font-weight: 500; color: var(--pine); }
+  .bio-sign {
+    margin-top: 1.4rem;
+    margin-bottom: 0;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--line);
+  }
+  .bio-sign img { width: 64px; height: 64px; }
+  .bio-sign h3 { font-size: 1.05rem; }
+  .bio-sign .bio-title { font-size: 0.8rem; }
   .bio a.bio-link {
     font-size: 0.78rem;
     font-weight: 500;
@@ -709,56 +655,15 @@
   </div>
 </section>
 
-<!-- ============ LE CONSTAT ============ -->
-<section class="constat">
-  <div class="reveal">
-    <p class="section-label">Le constat</p>
-    <h2>Les organisations ne manquent pas d&rsquo;analyses. Elles manquent de&nbsp;tranchant.</h2>
-  </div>
-  <div class="reveal">
-    <p>
-      Les comités s&rsquo;enlisent. Les données existent, mais dispersées — dans l&rsquo;ERP, les tableurs, les mails, la tête des équipes. Les scénarios sont trop nombreux pour être joués à la main. Et personne ne tient ensemble <strong>la stratégie, l&rsquo;opérationnel et les données</strong>.
-    </p>
-    <p>
-      Pendant ce temps, la décision attend. Et chaque semaine d&rsquo;attente coûte plus cher que l&rsquo;étude qui devait la&nbsp;justifier.
-    </p>
-    <p class="crete">
-      Une décision se marche comme une <strong>ligne de crête</strong>&nbsp;: la vue porte loin des deux côtés, mais l&rsquo;appui est étroit — et il faut avancer.
-    </p>
-  </div>
-</section>
-
-<div class="divider-zone reveal">
+<!-- ============ LA LIGNE DE CRÊTE ============ -->
+<section class="crete-zone reveal">
   <svg class="ridge-divider" viewBox="0 0 420 40" aria-hidden="true">
     <polyline points="0,34 60,22 105,28 160,10 215,24 265,16 320,30 370,20 420,26"/>
     <circle class="peak-dot" cx="160" cy="10" r="2.5"/>
   </svg>
-</div>
-
-<!-- ============ LA MÉTHODE ============ -->
-<section class="methode">
-  <div class="methode-header reveal">
-    <p class="section-label">La méthode</p>
-    <h2>L&rsquo;IA comme instrument de la décision — trois usages&nbsp;précis.</h2>
-  </div>
-  <div class="methode-grid">
-    <div class="methode-item reveal reveal-d-1">
-      <div class="num">01 — Asseoir</div>
-      <h3>Ancrer la décision dans vos données</h3>
-      <p>Chaque recommandation repose sur les données réelles de l&rsquo;entreprise, sous quelque forme qu&rsquo;elles existent — ERP, documents, tableurs, historiques. Pas d&rsquo;opinion hors-sol.</p>
-    </div>
-    <div class="methode-item reveal reveal-d-2">
-      <div class="num">02 — Explorer</div>
-      <h3>Jouer les scénarios impossibles à la main</h3>
-      <p>Des milliers de scénarios, des dimensions inaccessibles à l&rsquo;analyse manuelle. L&rsquo;espace de la décision est parcouru en entier — pas seulement les trois options du consensus.</p>
-    </div>
-    <div class="methode-item reveal reveal-d-3">
-      <div class="num">03 — Restituer</div>
-      <h3>Rendre le tout intelligible — et durable</h3>
-      <p>Les tenants et les aboutissants, restitués pour ceux qui décident — pas un rapport de quatre-vingts pages. Et quand la décision doit vivre dans le temps, la restitution devient <strong>un modèle d&rsquo;IA ou un outil sur mesure, déployé sur votre réseau</strong>.</p>
-    </div>
-  </div>
-  <p class="methode-closing reveal">Le livrable n&rsquo;est pas un rapport. <em>C&rsquo;est une décision prise — et l&rsquo;instrument qui la fait vivre.</em></p>
+  <p class="crete">
+    Une décision se marche comme une <strong>ligne de crête</strong>&nbsp;: la vue porte loin des deux côtés, mais l&rsquo;appui est étroit — et il faut avancer.
+  </p>
 </section>
 
 <!-- ============ LA CONSTELLATION ============ -->
@@ -767,9 +672,9 @@
   <div class="constellation-inner">
     <div class="constellation-header reveal">
       <p class="section-label">Le partenariat</p>
-      <h2>hypsis est un partenariat de maisons&nbsp;indépendantes.</h2>
+      <h2>Des maisons indépendantes, réunies pour débloquer les&nbsp;décisions.</h2>
       <p class="constellation-lead">
-        Chaque maison est garante d&rsquo;une dimension de la décision. Personne n&rsquo;est le sous-traitant de personne — et une seule signature porte la&nbsp;mission.
+        Au centre, la plateforme qui matérialise la décision. Autour, les maisons qui la garantissent — chacune sur sa dimension, aucune sous-traitante d&rsquo;une autre. Une seule signature porte la&nbsp;mission.
       </p>
     </div>
 
@@ -783,7 +688,7 @@
           </svg>
           <button class="node node-center" data-bio="hypsis" aria-expanded="true" aria-controls="bio-hypsis">
             <span class="node-name">Hypsis</span>
-            <span class="node-dim">La mission</span>
+            <span class="node-dim">La plateforme</span>
           </button>
           <button class="node node-sat node-oceanbridge" data-bio="oceanbridge" aria-expanded="false" aria-controls="bio-oceanbridge">
             <span class="node-name">Oceanbridge<br>Partners</span>
@@ -800,20 +705,22 @@
       <div class="bio-panel">
         <article class="bio active" id="bio-hypsis">
           <p class="bio-house">Hypsis</p>
-          <p class="bio-dim">Le nom du partenariat — la signature de la mission</p>
-          <div class="bio-head">
+          <p class="bio-dim">La plateforme qui matérialise la décision — IA native</p>
+          <ul class="bio-uses">
+            <li><strong>Asseoir</strong> — chaque recommandation ancrée dans vos données réelles, quelle que soit leur forme.</li>
+            <li><strong>Explorer</strong> — des milliers de scénarios, au-delà de ce qu&rsquo;aucune équipe ne peut jouer à la main.</li>
+            <li><strong>Restituer</strong> — l&rsquo;essentiel pour trancher ; et quand la décision doit vivre, un modèle d&rsquo;IA ou un outil sur mesure, déployé sur votre réseau.</li>
+          </ul>
+          <p>
+            <strong>Le livrable n&rsquo;est pas un rapport&nbsp;: une décision prise — et l&rsquo;instrument qui la fait vivre.</strong>
+          </p>
+          <div class="bio-head bio-sign">
             <img src="../assets/bio-william.jpg" alt="William Le Ferrand">
             <div>
               <h3>William Le Ferrand</h3>
-              <p class="bio-title">Fondateur &amp; Managing Partner</p>
+              <p class="bio-title">Fondateur &amp; Managing Partner — la signature de la mission</p>
             </div>
           </div>
-          <p>
-            Ingénieur logiciel dans la Silicon Valley, repreneur d&rsquo;une société de robotique industrielle, puis membre du comité exécutif d&rsquo;un groupe aéronautique coté (160&nbsp;M&euro;, 1&nbsp;200&nbsp;personnes) en tant que Chief Transformation Officer.
-          </p>
-          <p>
-            <strong>&laquo;&nbsp;J&rsquo;ai réuni les maisons que j&rsquo;aurais voulu avoir autour de la table.&nbsp;&raquo;</strong>
-          </p>
         </article>
 
         <article class="bio" id="bio-oceanbridge">
