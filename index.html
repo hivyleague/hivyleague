@@ -172,6 +172,7 @@
     font-family: 'Italiana', serif;
     text-transform: uppercase;
     letter-spacing: 0.18em;
+    padding-left: 0.18em; /* compense le blanc du letter-spacing après la dernière lettre */
     color: var(--ink);
     line-height: 1.25;
   }
@@ -179,6 +180,7 @@
     font-size: 0.58rem;
     font-weight: 600;
     letter-spacing: 0.14em;
+    padding-left: 0.14em;
     text-transform: uppercase;
     color: var(--pine);
     margin-top: 0.3rem;
@@ -190,7 +192,7 @@
     background: var(--ink);
     border-color: var(--ink);
   }
-  .node-center .node-name { color: var(--paper); font-size: clamp(1rem, 2vw, 1.35rem); letter-spacing: 0.3em; }
+  .node-center .node-name { color: var(--paper); font-size: clamp(1rem, 2vw, 1.35rem); letter-spacing: 0.3em; padding-left: 0.3em; }
   .node-center .node-dim { color: var(--sage); }
   .node-center:hover, .node-center:focus-visible, .node-center[aria-expanded="true"] {
     border-color: var(--moss);
