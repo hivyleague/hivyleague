@@ -139,15 +139,6 @@
     stroke: var(--sage);
     stroke-width: 1;
   }
-  .orbit svg.orbit-lines path.spiral {
-    fill: none;
-    stroke: var(--moss);
-    stroke-opacity: 0.55;
-    stroke-width: 1;
-    stroke-dasharray: 2 6;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
   .node {
     position: absolute;
     transform: translate(-50%, -50%);
@@ -191,7 +182,7 @@
   }
   .node-center {
     left: 50%; top: 50%;
-    width: 34%;
+    width: 36%;
     background: var(--ink);
     border-color: var(--ink);
   }
@@ -201,13 +192,13 @@
     border-color: var(--moss);
     box-shadow: 0 8px 36px rgba(29,49,64,0.35);
   }
-  .node-sat { width: 28%; }
-  .node-sat .node-name { font-size: clamp(0.58rem, 1.2vw, 0.76rem); letter-spacing: 0.12em; padding-left: 0.12em; }
-  /* Golden spiral: radius × φ each full turn, nodes 85° apart so the figure is not a square. */
-  .node-oceanbridge { left: 32.9%; top: 20.4%; }
-  .node-cylad      { left: 81.4%; top: 28.0%; }
-  .node-jolibrain  { left: 77.6%; top: 82.9%; }
-  .node-raphael    { left: 16.0%; top: 84.0%; }
+  .node-sat { width: 30%; }
+  .node-sat .node-name { font-size: clamp(0.6rem, 1.25vw, 0.78rem); }
+  /* Irregular kite around the hub: unequal angles and distances — Hypsis links, no square. */
+  .node-oceanbridge { left: 20%; top: 30%; }
+  .node-cylad      { left: 78%; top: 18%; }
+  .node-jolibrain  { left: 63%; top: 83%; }
+  .node-raphael    { left: 18%; top: 72%; }
   .orbit-hint {
     text-align: center;
     font-size: 0.78rem;
@@ -380,7 +371,7 @@
       grid-template-columns: 1fr;
       gap: 2rem;
     }
-    .orbit { max-width: 360px; }
+    .orbit { max-width: 340px; }
     .bio-panel { min-height: 0; }
     main { padding-top: 2rem; }
     .headline { margin-bottom: 2.2rem; }
@@ -407,11 +398,10 @@
     <div>
       <div class="orbit">
         <svg class="orbit-lines" viewBox="0 0 100 100" aria-hidden="true">
-          <path class="spiral" d="M25.92,26.75 L27.08,25.42 L28.31,24.15 L29.61,22.94 L30.98,21.80 L32.41,20.72 L33.90,19.72 L35.45,18.80 L37.05,17.95 L38.70,17.18 L40.40,16.50 L42.13,15.91 L43.90,15.41 L45.70,15.00 L47.53,14.68 L49.38,14.45 L51.25,14.33 L53.12,14.30 L55.01,14.37 L56.89,14.54 L58.77,14.81 L60.65,15.17 L62.51,15.64 L64.34,16.21 L66.16,16.87 L67.94,17.63 L69.69,18.49 L71.40,19.44 L73.06,20.49 L74.67,21.62 L76.23,22.84 L77.72,24.15 L79.16,25.54 L80.52,27.00 L81.81,28.55 L83.02,30.16 L84.15,31.84 L85.19,33.59 L86.15,35.40 L87.01,37.26 L87.78,39.17 L88.45,41.12 L89.02,43.12 L89.48,45.15 L89.84,47.21 L90.09,49.30 L90.23,51.40 L90.27,53.52 L90.19,55.65 L90.00,57.77 L89.69,59.90 L89.28,62.01 L88.75,64.10 L88.11,66.18 L87.36,68.22 L86.50,70.23 L85.54,72.21 L84.46,74.13 L83.29,76.01 L82.01,77.82 L80.63,79.58 L79.16,81.27 L77.59,82.88 L75.94,84.42 L74.20,85.87 L72.38,87.24 L70.48,88.51 L68.51,89.69 L66.47,90.77 L64.37,91.74 L62.22,92.61 L60.01,93.36 L57.76,94.00 L55.47,94.53 L53.14,94.93 L50.79,95.22 L48.42,95.38 L46.03,95.41 L43.63,95.32 L41.23,95.11 L38.84,94.77 L36.46,94.30 L34.09,93.71 L31.75,92.98 L29.45,92.14 L27.18,91.17 L24.95,90.08 L22.78,88.87 L20.67,87.54 L18.62,86.10 L16.64,84.55 L14.73,82.89 L12.91,81.12 L11.18,79.25 L9.54,77.29 L8.00,75.24"/>
-          <line x1="50" y1="50" x2="32.9" y2="20.4"/>
-          <line x1="50" y1="50" x2="81.4" y2="28.0"/>
-          <line x1="50" y1="50" x2="77.6" y2="82.9"/>
-          <line x1="50" y1="50" x2="16.0" y2="84.0"/>
+          <line x1="50" y1="50" x2="20" y2="30"/>
+          <line x1="50" y1="50" x2="78" y2="18"/>
+          <line x1="50" y1="50" x2="63" y2="83"/>
+          <line x1="50" y1="50" x2="18" y2="72"/>
         </svg>
         <button class="node node-center" data-bio="hypsis" aria-expanded="true" aria-controls="bio-hypsis">
           <span class="node-name">Hypsis</span>
