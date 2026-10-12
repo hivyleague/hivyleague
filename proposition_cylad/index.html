@@ -204,6 +204,7 @@
   .node-oceanbridge { left: 16%; top: 16%; }
   .node-cylad      { left: 84%; top: 16%; }
   .node-jolibrain  { left: 84%; top: 78%; }
+  .node-raphael    { left: 16%; top: 78%; }
   .orbit-hint {
     text-align: center;
     font-size: 0.78rem;
@@ -407,6 +408,7 @@
           <line x1="50" y1="50" x2="16" y2="16"/>
           <line x1="50" y1="50" x2="84" y2="16"/>
           <line x1="50" y1="50" x2="84" y2="78"/>
+          <line x1="50" y1="50" x2="16" y2="78"/>
         </svg>
         <button class="node node-center" data-bio="hypsis" aria-expanded="true" aria-controls="bio-hypsis">
           <span class="node-name">Hypsis</span>
@@ -423,6 +425,10 @@
         <button class="node node-sat node-jolibrain" data-bio="jolibrain" aria-expanded="false" aria-controls="bio-jolibrain">
           <span class="node-name">Jolibrain</span>
           <span class="node-dim">L&rsquo;état de l&rsquo;art IA</span>
+        </button>
+        <button class="node node-sat node-raphael" data-bio="raphael" aria-expanded="false" aria-controls="bio-raphael">
+          <span class="node-name">Raphaël<br>Ducasse</span>
+          <span class="node-dim">L&rsquo;expertise</span>
         </button>
       </div>
       <p class="orbit-hint">Survolez ou touchez chaque partenaire pour en découvrir les&nbsp;visages.</p>
@@ -492,6 +498,22 @@
         </p>
         <p><a class="bio-link" href="https://www.jolibrain.com/" target="_blank" rel="noopener">jolibrain.com</a></p>
       </article>
+
+      <article class="bio" id="bio-raphael">
+        <p class="bio-house">Raphaël Ducasse</p>
+        <p class="bio-dim">Garant de l&rsquo;expertise</p>
+        <div class="bio-head">
+          <img src="../assets/raphael.jpeg" alt="Raphaël Ducasse">
+          <div>
+            <h3>Raphaël Ducasse</h3>
+            <p class="bio-title">Ancien Partner, BCG</p>
+          </div>
+        </div>
+        <p>
+          Une expérience approfondie du retail.
+        </p>
+        <p><a class="bio-link" href="https://www.linkedin.com/in/raphaelducasse/" target="_blank" rel="noopener">LinkedIn</a></p>
+      </article>
     </div>
   </div>
 
@@ -522,8 +544,12 @@
     node.addEventListener('click', () => showBio(node.dataset.bio));
   });
 
-  // Au chargement, mettre en avant un partenaire ou la plateforme au hasard.
-  showBio(nodes[Math.floor(Math.random() * nodes.length)].dataset.bio);
+  // Au chargement, un partenaire au hasard, ou celui demandé via ?bio=
+  const requested = new URLSearchParams(location.search).get('bio');
+  const initial = requested && document.getElementById('bio-' + requested)
+    ? requested
+    : nodes[Math.floor(Math.random() * nodes.length)].dataset.bio;
+  showBio(initial);
 </script>
 </body>
 </html>
