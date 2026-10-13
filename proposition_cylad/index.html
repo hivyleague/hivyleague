@@ -182,22 +182,23 @@
   }
   .node-center {
     left: 50%; top: 50%;
-    width: 36%;
+    width: 34%;
     background: var(--ink);
     border-color: var(--ink);
   }
-  .node-center .node-name { color: var(--paper); font-size: clamp(1rem, 2vw, 1.35rem); letter-spacing: 0.3em; padding-left: 0.3em; }
+  .node-center .node-name { color: var(--paper); font-size: clamp(0.95rem, 1.9vw, 1.25rem); letter-spacing: 0.3em; padding-left: 0.3em; }
   .node-center .node-dim { color: var(--sage); }
   .node-center:hover, .node-center:focus-visible, .node-center[aria-expanded="true"] {
     border-color: var(--moss);
     box-shadow: 0 8px 36px rgba(29,49,64,0.35);
   }
-  .node-sat { width: 30%; }
-  .node-sat .node-name { font-size: clamp(0.6rem, 1.25vw, 0.78rem); }
-  /* Irregular kite around the hub: unequal angles and distances — Hypsis links, no square. */
+  .node-sat { width: 26%; }
+  .node-sat .node-name { font-size: clamp(0.55rem, 1.15vw, 0.72rem); }
+  /* Irregular constellation around the hub: unequal angles and distances — Hypsis links. */
   .node-oceanbridge { left: 20%; top: 30%; }
-  .node-cylad      { left: 78%; top: 18%; }
-  .node-jolibrain  { left: 63%; top: 83%; }
+  .node-cylad      { left: 76%; top: 16%; }
+  .node-hugues     { left: 84%; top: 49%; }
+  .node-jolibrain  { left: 58%; top: 84%; }
   .node-raphael    { left: 18%; top: 72%; }
   .orbit-hint {
     text-align: center;
@@ -399,8 +400,9 @@
       <div class="orbit">
         <svg class="orbit-lines" viewBox="0 0 100 100" aria-hidden="true">
           <line x1="50" y1="50" x2="20" y2="30"/>
-          <line x1="50" y1="50" x2="78" y2="18"/>
-          <line x1="50" y1="50" x2="63" y2="83"/>
+          <line x1="50" y1="50" x2="76" y2="16"/>
+          <line x1="50" y1="50" x2="84" y2="49"/>
+          <line x1="50" y1="50" x2="58" y2="84"/>
           <line x1="50" y1="50" x2="18" y2="72"/>
         </svg>
         <button class="node node-center" data-bio="hypsis" aria-expanded="true" aria-controls="bio-hypsis">
@@ -414,6 +416,10 @@
         <button class="node node-sat node-cylad" data-bio="cylad" aria-expanded="false" aria-controls="bio-cylad">
           <span class="node-name">Cylad</span>
           <span class="node-dim">La transformation</span>
+        </button>
+        <button class="node node-sat node-hugues" data-bio="hugues" aria-expanded="false" aria-controls="bio-hugues">
+          <span class="node-name">Hugues<br>Derogis</span>
+          <span class="node-dim">L&rsquo;expertise</span>
         </button>
         <button class="node node-sat node-jolibrain" data-bio="jolibrain" aria-expanded="false" aria-controls="bio-jolibrain">
           <span class="node-name">Jolibrain</span>
@@ -506,6 +512,21 @@
           Une expérience approfondie du retail.
         </p>
         <p><a class="bio-link" href="https://www.linkedin.com/in/raphaelducasse/" target="_blank" rel="noopener">LinkedIn</a></p>
+      </article>
+
+      <article class="bio" id="bio-hugues">
+        <p class="bio-house">Hugues Derogis</p>
+        <p class="bio-dim">Garant de l&rsquo;expertise</p>
+        <div class="bio-head">
+          <img src="../assets/hugues.jpeg" alt="Hugues Derogis">
+          <div>
+            <h3>Hugues Derogis</h3>
+            <p class="bio-title">Ancien dirigeant de PME</p>
+          </div>
+        </div>
+        <p>
+          Ancien dirigeant de PME, diplômé de Polytechnique et du master MVA, bilingue métier-IA.
+        </p>
       </article>
     </div>
   </div>
