@@ -123,7 +123,7 @@
   .orbit {
     position: relative;
     aspect-ratio: 1;
-    max-width: 430px;
+    max-width: 460px;
     margin: 0 auto;
     width: 100%;
   }
@@ -137,13 +137,6 @@
   .orbit svg.orbit-lines line {
     stroke: var(--sage);
     stroke-width: 1;
-  }
-  .orbit svg.orbit-lines circle.ring {
-    fill: none;
-    stroke: var(--moss);
-    stroke-opacity: 0.55;
-    stroke-width: 1;
-    stroke-dasharray: 2 6;
   }
   .node {
     position: absolute;
@@ -160,7 +153,7 @@
     cursor: pointer;
     font-family: 'Outfit', sans-serif;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    padding: 0.6rem;
+    padding: 0.5rem;
     -webkit-tap-highlight-color: transparent;
   }
   .node:hover, .node:focus-visible, .node[aria-expanded="true"] {
@@ -188,20 +181,24 @@
   }
   .node-center {
     left: 50%; top: 50%;
-    width: 42%;
+    width: 34%;
     background: var(--ink);
     border-color: var(--ink);
   }
-  .node-center .node-name { color: var(--paper); font-size: clamp(1rem, 2vw, 1.35rem); letter-spacing: 0.3em; padding-left: 0.3em; }
+  .node-center .node-name { color: var(--paper); font-size: clamp(0.95rem, 1.9vw, 1.25rem); letter-spacing: 0.3em; padding-left: 0.3em; }
   .node-center .node-dim { color: var(--sage); }
   .node-center:hover, .node-center:focus-visible, .node-center[aria-expanded="true"] {
     border-color: var(--moss);
     box-shadow: 0 8px 36px rgba(29,49,64,0.35);
   }
-  .node-sat { width: 34%; }
-  .node-sat .node-name { font-size: clamp(0.62rem, 1.3vw, 0.8rem); }
-  .node-oceanbridge { left: 16%; top: 16%; }
-  .node-jolibrain  { left: 84%; top: 78%; }
+  .node-sat { width: 26%; }
+  .node-sat .node-name { font-size: clamp(0.55rem, 1.15vw, 0.72rem); }
+  /* Irregular constellation around the hub: unequal angles and distances — Hypsis links. */
+  .node-oceanbridge { left: 20%; top: 30%; }
+  .node-cylad      { left: 76%; top: 16%; }
+  .node-hugues     { left: 84%; top: 49%; }
+  .node-jolibrain  { left: 58%; top: 84%; }
+  .node-raphael    { left: 18%; top: 72%; }
   .orbit-hint {
     text-align: center;
     font-size: 0.78rem;
@@ -317,6 +314,13 @@
     transition: color 0.3s ease, border-color 0.3s ease;
   }
   .bio a.bio-link:hover { color: var(--ink); border-color: var(--pine); }
+  .bio-logo {
+    display: block;
+    height: 46px;
+    width: auto;
+    margin-bottom: 1.1rem;
+    mix-blend-mode: multiply;
+  }
 
   /* --- CTA row --- */
   .cta-row {
@@ -360,18 +364,112 @@
   }
 
   /* =========================================
-     RESPONSIVE
+     RESPONSIVE — carousel of circles on mobile
      ========================================= */
   @media (max-width: 880px) {
     .stage {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 1.6rem;
+      align-items: start;
     }
-    .orbit { max-width: 320px; }
     .bio-panel { min-height: 0; }
-    main { padding-top: 2rem; }
-    .headline { margin-bottom: 2.2rem; }
+    main { padding: 2rem 1.25rem 2.5rem; }
+    .headline { margin-bottom: 1.8rem; }
+    .headline h1 { font-size: clamp(1.45rem, 6vw, 1.85rem); }
+
+    .orbit {
+      aspect-ratio: auto;
+      max-width: none;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: calc(50vw - 5.6rem);
+      padding: 0.8rem calc(50vw - 5.6rem) 0.4rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      overscroll-behavior-x: contain;
+    }
+    .orbit::-webkit-scrollbar { display: none; }
+    .orbit svg.orbit-lines { display: none; }
+
+    .node {
+      position: relative;
+      left: auto !important;
+      top: auto !important;
+      transform: none;
+      flex: 0 0 11.2rem;
+      width: 11.2rem;
+      height: 11.2rem;
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+      padding: 0.85rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.35s ease;
+    }
+    .node-center,
+    .node-sat {
+      width: 11.2rem;
+    }
+    .node[aria-expanded="true"] {
+      transform: scale(1.07);
+      border-color: var(--pine);
+      box-shadow: 0 8px 28px rgba(78,107,61,0.22);
+    }
+    .node-center[aria-expanded="true"] {
+      border-color: var(--moss);
+      box-shadow: 0 8px 32px rgba(29,49,64,0.3);
+    }
+    .node-center .node-name {
+      font-size: 1.15rem;
+      letter-spacing: 0.28em;
+      padding-left: 0.28em;
+    }
+    .node-center .node-dim { font-size: 0.62rem; }
+    .node-sat .node-name {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      padding-left: 0.14em;
+    }
+    .node-sat .node-dim { font-size: 0.6rem; }
+
+    .orbit-hint {
+      margin-top: 0.85rem;
+      font-size: 0.74rem;
+    }
+    .orbit-hint .hint-desktop { display: none; }
+    .orbit-hint .hint-mobile { display: inline; }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.45rem;
+      margin-top: 0.85rem;
+    }
+    .carousel-dots button {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: none;
+      padding: 0;
+      background: var(--sage);
+      opacity: 0.55;
+      cursor: pointer;
+      transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease;
+    }
+    .carousel-dots button[aria-current="true"] {
+      opacity: 1;
+      background: var(--pine);
+      transform: scale(1.25);
+    }
   }
+
+  .orbit-hint .hint-mobile { display: none; }
+  .carousel-dots { display: none; }
 </style>
 </head>
 <body>
@@ -386,7 +484,7 @@
   <div class="headline">
     <h1>Un partenariat d&rsquo;experts qui débloquent les décisions, grâce à leur <em>expérience cumulée</em>, <em>décuplée par l&rsquo;IA</em>.</h1>
     <p class="lead">
-      Au centre, la plateforme qui matérialise la décision. Autour, des partenaires indépendants, chacun garant d&rsquo;une dimension. Un interlocuteur&nbsp;unique.
+      Un problème, un interlocuteur, une&nbsp;solution.
     </p>
   </div>
 
@@ -394,9 +492,11 @@
     <div>
       <div class="orbit">
         <svg class="orbit-lines" viewBox="0 0 100 100" aria-hidden="true">
-          <circle class="ring" cx="50" cy="50" r="46"/>
-          <line x1="50" y1="50" x2="16" y2="16"/>
-          <line x1="50" y1="50" x2="84" y2="78"/>
+          <line x1="50" y1="50" x2="20" y2="30"/>
+          <line x1="50" y1="50" x2="76" y2="16"/>
+          <line x1="50" y1="50" x2="84" y2="49"/>
+          <line x1="50" y1="50" x2="58" y2="84"/>
+          <line x1="50" y1="50" x2="18" y2="72"/>
         </svg>
         <button class="node node-center" data-bio="hypsis" aria-expanded="true" aria-controls="bio-hypsis">
           <span class="node-name">Hypsis</span>
@@ -404,14 +504,30 @@
         </button>
         <button class="node node-sat node-oceanbridge" data-bio="oceanbridge" aria-expanded="false" aria-controls="bio-oceanbridge">
           <span class="node-name">Oceanbridge<br>Partners</span>
-          <span class="node-dim">La stratégie</span>
+          <span class="node-dim">Stratégie</span>
+        </button>
+        <button class="node node-sat node-cylad" data-bio="cylad" aria-expanded="false" aria-controls="bio-cylad">
+          <span class="node-name">Cylad</span>
+          <span class="node-dim">Transfo OPS</span>
+        </button>
+        <button class="node node-sat node-hugues" data-bio="hugues" aria-expanded="false" aria-controls="bio-hugues">
+          <span class="node-name">Hugues<br>Derogis</span>
+          <span class="node-dim">Transfo IA</span>
         </button>
         <button class="node node-sat node-jolibrain" data-bio="jolibrain" aria-expanded="false" aria-controls="bio-jolibrain">
           <span class="node-name">Jolibrain</span>
-          <span class="node-dim">L&rsquo;état de l&rsquo;art IA</span>
+          <span class="node-dim">LAB IA</span>
+        </button>
+        <button class="node node-sat node-raphael" data-bio="raphael" aria-expanded="false" aria-controls="bio-raphael">
+          <span class="node-name">Raphaël<br>Ducasse</span>
+          <span class="node-dim">Transfo IA</span>
         </button>
       </div>
-      <p class="orbit-hint">Survolez ou touchez chaque partenaire pour en découvrir les&nbsp;visages.</p>
+      <div class="carousel-dots" role="tablist" aria-label="Partenaires"></div>
+      <p class="orbit-hint">
+        <span class="hint-desktop">Survolez ou touchez chaque partenaire pour en découvrir les&nbsp;visages.</span>
+        <span class="hint-mobile">Faites glisser les cercles pour découvrir chaque&nbsp;partenaire.</span>
+      </p>
     </div>
 
     <div class="bio-panel">
@@ -436,11 +552,12 @@
             <p class="bio-title">Fondateur</p>
           </div>
         </div>
+        <p><a class="bio-link" href="https://www.linkedin.com/in/williamleferrand/" target="_blank" rel="noopener">LinkedIn</a></p>
       </article>
 
       <article class="bio" id="bio-oceanbridge">
         <p class="bio-house">Oceanbridge Partners</p>
-        <p class="bio-dim">Garant de la stratégie et de la création de valeur</p>
+        <p class="bio-dim">Garant de la stratégie</p>
         <div class="bio-head">
           <img src="assets/bio-philippe.jpg" alt="Philippe Robert">
           <div>
@@ -453,9 +570,19 @@
         </p>
       </article>
 
+      <article class="bio" id="bio-cylad">
+        <p class="bio-house">Cylad</p>
+        <p class="bio-dim">Garant de la transfo OPS</p>
+        <img class="bio-logo" src="assets/cylad-logo.png" alt="Cylad">
+        <p>
+          Cabinet de conseil indépendant, CYLAD s&rsquo;appuie sur une connaissance approfondie des secteurs de l&rsquo;aéronautique et de la défense, ainsi que sur une expertise du pilotage de programmes industriels complexes. Ses équipes conçoivent des solutions adaptées aux contraintes et aux besoins spécifiques de chaque client, en intégrant les meilleures pratiques du secteur. CYLAD accompagne les transformations au plus près des équipes opérationnelles, avec une approche concrète et impliquée, de la définition de la stratégie à leur mise en œuvre.
+        </p>
+        <p><a class="bio-link" href="https://cylad.com/" target="_blank" rel="noopener">cylad.com</a></p>
+      </article>
+
       <article class="bio" id="bio-jolibrain">
         <p class="bio-house">Jolibrain</p>
-        <p class="bio-dim">Garant de l&rsquo;état de l&rsquo;art IA / ML</p>
+        <p class="bio-dim">Garant du LAB IA</p>
         <div class="bio-head">
           <img src="assets/bio-emmanuel.jpg" alt="Emmanuel Benazera">
           <div>
@@ -467,6 +594,38 @@
           Dix ans d&rsquo;ingénierie en IA au service de l&rsquo;aéronautique, de la défense et de la cybersécurité. À l&rsquo;origine des plateformes open source DeepDetect, JoliGEN et Wheatley&nbsp;: un code publié, vérifiable, qui tourne sur site chez de très grands&nbsp;groupes.
         </p>
         <p><a class="bio-link" href="https://www.jolibrain.com/" target="_blank" rel="noopener">jolibrain.com</a></p>
+      </article>
+
+      <article class="bio" id="bio-raphael">
+        <p class="bio-house">Raphaël Ducasse</p>
+        <p class="bio-dim">Garant de la transfo IA</p>
+        <div class="bio-head">
+          <img src="assets/raphael.jpeg" alt="Raphaël Ducasse">
+          <div>
+            <h3>Raphaël Ducasse</h3>
+            <p class="bio-title">Ancien Partner, BCG</p>
+          </div>
+        </div>
+        <p>
+          Une expérience approfondie du retail.
+        </p>
+        <p><a class="bio-link" href="https://www.linkedin.com/in/raphaelducasse/" target="_blank" rel="noopener">LinkedIn</a></p>
+      </article>
+
+      <article class="bio" id="bio-hugues">
+        <p class="bio-house">Hugues Derogis</p>
+        <p class="bio-dim">Garant de la transfo IA</p>
+        <div class="bio-head">
+          <img src="assets/hugues.jpeg" alt="Hugues Derogis">
+          <div>
+            <h3>Hugues Derogis</h3>
+            <p class="bio-title">Ancien dirigeant de PME</p>
+          </div>
+        </div>
+        <p>
+          Ancien dirigeant de PME, diplômé de Polytechnique et du master MVA, bilingue métier-IA.
+        </p>
+        <p><a class="bio-link" href="https://www.linkedin.com/in/huguesderogis/" target="_blank" rel="noopener">LinkedIn</a></p>
       </article>
     </div>
   </div>
@@ -483,23 +642,87 @@
 </footer>
 
 <script>
-  // Constellation: hover (desktop) and tap (mobile) reveal each house's bio.
-  const nodes = document.querySelectorAll('.node');
+  // Desktop: constellation. Mobile: snap carousel of the same circles.
+  const orbit = document.querySelector('.orbit');
+  const nodes = [...document.querySelectorAll('.node')];
   const bios = document.querySelectorAll('.bio');
+  const dotsRoot = document.querySelector('.carousel-dots');
+  const mobileQuery = window.matchMedia('(max-width: 880px)');
 
-  function showBio(key) {
+  function isMobile() {
+    return mobileQuery.matches;
+  }
+
+  const dots = nodes.map((node) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', node.querySelector('.node-name').textContent.replace(/\s+/g, ' ').trim());
+    dot.addEventListener('click', () => showBio(node.dataset.bio, { scroll: true }));
+    dotsRoot.appendChild(dot);
+    return dot;
+  });
+
+  function showBio(key, { scroll = true } = {}) {
     bios.forEach(b => b.classList.toggle('active', b.id === 'bio-' + key));
-    nodes.forEach(n => n.setAttribute('aria-expanded', String(n.dataset.bio === key)));
+    nodes.forEach((n, i) => {
+      const on = n.dataset.bio === key;
+      n.setAttribute('aria-expanded', String(on));
+      dots[i].setAttribute('aria-current', on ? 'true' : 'false');
+    });
+    if (scroll && isMobile()) {
+      const node = nodes.find(n => n.dataset.bio === key);
+      if (node) {
+        node.scrollIntoView({
+          behavior: document.readyState === 'complete' ? 'smooth' : 'instant',
+          inline: 'center',
+          block: 'nearest'
+        });
+      }
+    }
   }
 
   nodes.forEach(node => {
-    node.addEventListener('mouseenter', () => showBio(node.dataset.bio));
-    node.addEventListener('focus', () => showBio(node.dataset.bio));
-    node.addEventListener('click', () => showBio(node.dataset.bio));
+    node.addEventListener('mouseenter', () => {
+      if (!isMobile()) showBio(node.dataset.bio, { scroll: false });
+    });
+    node.addEventListener('focus', () => showBio(node.dataset.bio, { scroll: true }));
+    node.addEventListener('click', () => showBio(node.dataset.bio, { scroll: true }));
   });
 
-  // Au chargement, mettre en avant un partenaire ou la plateforme au hasard.
-  showBio(nodes[Math.floor(Math.random() * nodes.length)].dataset.bio);
+  let scrollTimer = 0;
+  function syncBioFromScroll() {
+    if (!isMobile()) return;
+    const mid = orbit.getBoundingClientRect().left + orbit.clientWidth / 2;
+    let best = nodes[0];
+    let bestDist = Infinity;
+    nodes.forEach(node => {
+      const rect = node.getBoundingClientRect();
+      const dist = Math.abs(rect.left + rect.width / 2 - mid);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = node;
+      }
+    });
+    if (best) showBio(best.dataset.bio, { scroll: false });
+  }
+
+  orbit.addEventListener('scroll', () => {
+    window.clearTimeout(scrollTimer);
+    scrollTimer = window.setTimeout(syncBioFromScroll, 60);
+  }, { passive: true });
+
+  // Au chargement, un partenaire au hasard, ou celui demandé via ?bio=
+  const requested = new URLSearchParams(location.search).get('bio');
+  const initial = requested && document.getElementById('bio-' + requested)
+    ? requested
+    : nodes[Math.floor(Math.random() * nodes.length)].dataset.bio;
+
+  showBio(initial, { scroll: false });
+  // After layout, center the initial circle on mobile.
+  requestAnimationFrame(() => {
+    showBio(initial, { scroll: true });
+  });
 </script>
 </body>
 </html>
