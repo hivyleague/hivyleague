@@ -194,11 +194,12 @@
   .node-sat { width: 26%; }
   .node-sat .node-name { font-size: clamp(0.55rem, 1.15vw, 0.72rem); }
   /* Irregular constellation around the hub: unequal angles and distances — Hypsis links. */
-  .node-oceanbridge { left: 20%; top: 30%; }
-  .node-cylad      { left: 76%; top: 16%; }
-  .node-hugues     { left: 84%; top: 49%; }
-  .node-jolibrain  { left: 58%; top: 84%; }
-  .node-raphael    { left: 18%; top: 72%; }
+  .node-oceanbridge { left: 18%; top: 28%; }
+  .node-cylad      { left: 72%; top: 14%; }
+  .node-hugues     { left: 88%; top: 42%; }
+  .node-william    { left: 78%; top: 76%; }
+  .node-jolibrain  { left: 42%; top: 88%; }
+  .node-raphael    { left: 14%; top: 68%; }
   .orbit-hint {
     text-align: center;
     font-size: 0.78rem;
@@ -492,11 +493,12 @@
     <div>
       <div class="orbit">
         <svg class="orbit-lines" viewBox="0 0 100 100" aria-hidden="true">
-          <line x1="50" y1="50" x2="20" y2="30"/>
-          <line x1="50" y1="50" x2="76" y2="16"/>
-          <line x1="50" y1="50" x2="84" y2="49"/>
-          <line x1="50" y1="50" x2="58" y2="84"/>
-          <line x1="50" y1="50" x2="18" y2="72"/>
+          <line x1="50" y1="50" x2="18" y2="28"/>
+          <line x1="50" y1="50" x2="72" y2="14"/>
+          <line x1="50" y1="50" x2="88" y2="42"/>
+          <line x1="50" y1="50" x2="78" y2="76"/>
+          <line x1="50" y1="50" x2="42" y2="88"/>
+          <line x1="50" y1="50" x2="14" y2="68"/>
         </svg>
         <button class="node node-center" data-bio="hypsis" aria-expanded="true" aria-controls="bio-hypsis">
           <span class="node-name">Hypsis</span>
@@ -512,6 +514,10 @@
         </button>
         <button class="node node-sat node-hugues" data-bio="hugues" aria-expanded="false" aria-controls="bio-hugues">
           <span class="node-name">Hugues<br>Derogis</span>
+          <span class="node-dim">Transfo IA</span>
+        </button>
+        <button class="node node-sat node-william" data-bio="william" aria-expanded="false" aria-controls="bio-william">
+          <span class="node-name">William<br>Le Ferrand</span>
           <span class="node-dim">Transfo IA</span>
         </button>
         <button class="node node-sat node-jolibrain" data-bio="jolibrain" aria-expanded="false" aria-controls="bio-jolibrain">
@@ -545,13 +551,24 @@
         <p>
           <strong>Nous livrons une décision et l&rsquo;instrument qui la fait vivre.</strong>
         </p>
-        <div class="bio-head bio-sign">
+      </article>
+
+      <article class="bio" id="bio-william">
+        <p class="bio-house">William Le Ferrand</p>
+        <p class="bio-dim">Garant de la transfo IA</p>
+        <div class="bio-head">
           <img src="assets/bio-william.jpg" alt="William Le Ferrand">
           <div>
             <h3>William Le Ferrand</h3>
             <p class="bio-title">Fondateur</p>
           </div>
         </div>
+        <p>
+          Diplômé de l&rsquo;École Polytechnique en&nbsp;2006, puis sept ans dans la Silicon Valley comme ingénieur software big&nbsp;data (Sumo&nbsp;Logic, IPO&nbsp;2021), avant de diriger de petites&nbsp;startups.
+        </p>
+        <p>
+          De&nbsp;2024 à&nbsp;2026, il a animé la transformation digitale de&nbsp;SOGECLAIR&nbsp;— l&rsquo;occasion de faire mûrir la méthodologie pragmatique que propose Hypsis, qu&rsquo;il a fondée en juin&nbsp;2026.
+        </p>
         <p><a class="bio-link" href="https://www.linkedin.com/in/williamleferrand/" target="_blank" rel="noopener">LinkedIn</a></p>
       </article>
 
