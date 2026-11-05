@@ -578,6 +578,31 @@
         <p><a class="bio-link" href="https://www.linkedin.com/in/williamleferrand/" target="_blank" rel="noopener">LinkedIn</a></p>
       </article>
 
+      <article class="bio" id="bio-william-en" lang="en">
+        <p class="bio-house">William Le Ferrand</p>
+        <p class="bio-dim">AI Transformation</p>
+        <div class="bio-head">
+          <img src="assets/bio-william.jpg" alt="William Le Ferrand">
+          <div>
+            <h3>William Le Ferrand</h3>
+            <p class="bio-title">Founder</p>
+          </div>
+        </div>
+        <p>
+          A graduate of École Polytechnique (2006), William spent seven years in Silicon Valley as a big-data software engineer (Sumo&nbsp;Logic, IPO&nbsp;2021).
+        </p>
+        <p>
+          Back in France, he coordinated international software engineering teams before taking the helm of industrial robotics startup&nbsp;Wyca.
+        </p>
+        <p>
+          From&nbsp;2024 to&nbsp;2026, he led the digital transformation of&nbsp;SOGECLAIR, an industrial mid-cap with 1,200 employees and highly diversified operations.
+        </p>
+        <p>
+          That experience shaped the pragmatic methodology Hypsis now offers, a company he founded in June&nbsp;2026.
+        </p>
+        <p><a class="bio-link" href="https://www.linkedin.com/in/williamleferrand/" target="_blank" rel="noopener">LinkedIn</a></p>
+      </article>
+
       <article class="bio" id="bio-oceanbridge">
         <p class="bio-house">Oceanbridge Partners</p>
         <p class="bio-dim">Garant de la stratégie</p>
@@ -689,8 +714,17 @@
     return dot;
   });
 
+  const params = new URLSearchParams(location.search);
+  const bioLang = params.get('lang');
+
+  function bioElementId(key) {
+    if (key === 'william' && bioLang === 'en') return 'bio-william-en';
+    return 'bio-' + key;
+  }
+
   function showBio(key, { scroll = true } = {}) {
-    bios.forEach(b => b.classList.toggle('active', b.id === 'bio-' + key));
+    const activeId = bioElementId(key);
+    bios.forEach(b => b.classList.toggle('active', b.id === activeId));
     nodes.forEach((n, i) => {
       const on = n.dataset.bio === key;
       n.setAttribute('aria-expanded', String(on));
@@ -738,9 +772,9 @@
     scrollTimer = window.setTimeout(syncBioFromScroll, 60);
   }, { passive: true });
 
-  // Au chargement, un partenaire au hasard, ou celui demandé via ?bio=
-  const requested = new URLSearchParams(location.search).get('bio');
-  const initial = requested && document.getElementById('bio-' + requested)
+  // Au chargement, un partenaire au hasard, ou celui demandé via ?bio= (&lang=en pour William)
+  const requested = params.get('bio');
+  const initial = requested && document.getElementById(bioElementId(requested))
     ? requested
     : nodes[Math.floor(Math.random() * nodes.length)].dataset.bio;
 
